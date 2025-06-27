@@ -1,0 +1,79 @@
+@use './partials/flex-row-items-centered-mixin';
+@use './partials/svg-icon-button-size';
+@use './partials/variables';
+@use './partials/main-toolbar-css-mixin';
+@use './partials/centered-toolbar-group-mixin';
+@use './partials/caption-followed-by-input';
+@use './partials/horizontal-children-separator';
+
+:host {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    overflow: clip;
+    height: 100%;
+    flex: 1 1 0;
+    // min-height: 0;
+    // width: 100%;
+}
+
+#mainSection {
+    flex: 1 1 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .captionFollowedByInput {
+        @include caption-followed-by-input.captionFollowedByInputMixin;
+    }
+
+    > #mainToolbarSection {
+        @include main-toolbar-css-mixin.mainToolbarCssMixin;
+        flex: 0 0 auto;
+
+        > #searchSection {
+            @include centered-toolbar-group-mixin.centeredToolbarGroupMixin;
+            margin-left: variables.$toolbar-button-group-separation;
+        }
+
+        > #columnButtonsSection {
+            @include centered-toolbar-group-mixin.centeredToolbarGroupMixin;
+            @include svg-icon-button-size.toolbarDescendantMixin;
+            margin-left: variables.$toolbar-button-group-separation;
+        }
+    }
+
+    > #categorySection {
+        @include flex-row-items-centered-mixin.flexRowItemsCenteredMixin;
+        @include horizontal-children-separator.horizontalChildrenSeparatorMixin;
+    }
+
+    > #resultsSection {
+        padding-top: .8em;
+        height: 100%;
+
+        > #resultsHeading {
+            @include flex-row-items-centered-mixin.flexRowItemsCenteredMixin;
+            @include horizontal-children-separator.horizontalChildrenSeparatorMixin;
+            > #searchDescriptionLabel {
+                font-style: italic;
+            }
+        }
+
+        > #grid {
+            // required because MotifGrid component uses ViewEncapsulation.None
+            flex: 1 1 auto;
+            height: 100%;
+            position: relative;
+            min-height: 0;
+            display: block;
+            overflow-y: clip;
+        }
+    }
+}
+
+#layoutEditorDiv {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}

@@ -1,0 +1,9 @@
+@mixin horizontalChildrenSeparatorMixin {
+    > :not(:first-child) {
+        margin-left: 1.2em;
+    }
+}
+
+.horizontalChildrenSeparator {
+    @include horizontalChildrenSeparatorMixin;
+}

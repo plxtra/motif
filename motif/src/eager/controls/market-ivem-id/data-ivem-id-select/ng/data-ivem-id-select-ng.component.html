@@ -1,0 +1,30 @@
+<div id="rootDiv">
+    <ng-select #ngSelect
+        id="ngSelect"
+        bindLabel="idDisplay"
+        [items]="items | async"
+        [typeahead]="typeahead"
+        [trackByFn]="trackByFn"
+        typeToSearchText="Search for code or name"
+        [virtualScroll]="false"
+        [labelForId]="inputId"
+        [readonly]="readonly"
+        [title]="title"
+        [loading]="loading"
+        [clearable]="false"
+        [editableSearchTerm]="dropDownEditableSearchTerm"
+        [clearSearchOnAdd]="false"
+        [placeholder]="placeholderText"
+        [(ngModel)]="selected"
+        (change)="handleSelectChangeEvent($event)"
+        (open)="handleSelectOpenEvent()"
+        spellCheck="false"
+    >
+        <ng-template ng-option-tmp let-item="item">
+            <span [title]="generateTitle(item, false)">
+                <span class="ngSelectBoldFirstColumn">{{item.idDisplay}}</span><span>{{item.description}}</span>
+            </span>
+        </ng-template>
+    </ng-select>
+    <app-svg-button #searchTermNotExchangedMarketProcessedToggleButton></app-svg-button>
+</div>

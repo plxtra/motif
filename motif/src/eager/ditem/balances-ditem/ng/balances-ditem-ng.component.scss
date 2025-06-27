@@ -1,0 +1,46 @@
+@use './partials/variables';
+@use './partials/svg-icon-button-size';
+@use './partials/main-toolbar-css-mixin';
+@use './partials/centered-toolbar-group-mixin';
+
+:host {
+    display: block;
+    position: absolute;
+    overflow: hidden;
+    height: 100%;
+
+    > #mainDiv {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+
+        > #mainToolbarDiv {
+            @include main-toolbar-css-mixin.mainToolbarCssMixin;
+
+            > #accountGroupInput {
+                width: 8em;
+            }
+
+            > #columnButtonsDiv {
+                @include centered-toolbar-group-mixin.centeredToolbarGroupMixin;
+                @include svg-icon-button-size.toolbarChildMixin;
+                margin-left: variables.$toolbar-button-group-separation;
+            }
+
+            > #linkButtonsDiv {
+                @include centered-toolbar-group-mixin.centeredToolbarGroupMixin;
+                @include svg-icon-button-size.toolbarChildMixin;
+                margin-left: variables.$toolbar-button-group-separation;
+            }
+        }
+
+        > #balances {
+            flex-grow: 1;
+        }
+    }
+
+    > #dialogDiv {
+        height: 100%;
+        width: 100%;
+    }
+}

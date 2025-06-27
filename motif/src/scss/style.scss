@@ -1,0 +1,21 @@
+@use './partials/normalize';
+@use './partials/app';
+@use './partials/golden-layout/goldenlayout-var-theme';
+@use './partials/revgrid';
+// @use './partials/toastify';
+
+@import "toastify-js/src/toastify.css";
+
+@include revgrid.scroller;
+
+// fonts - check out https://fonts.google.com/ for more
+@import url('https://fonts.googleapis.com/css?family=Archivo+Narrow');
+@import url('https://fonts.googleapis.com/css?family=Asap');
+@import url('https://fonts.googleapis.com/css?family=Barlow');
+@import url('https://fonts.googleapis.com/css?family=Cabin');
+@import url('https://fonts.googleapis.com/css?family=Heebo');
+@import url('https://fonts.googleapis.com/css?family=Ropa+Sans');
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css?family=Rubik');
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+@import url('https://fonts.googleapis.com/css?family=Unica+One');

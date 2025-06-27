@@ -1,0 +1,22 @@
+<ng-select #ngSelect
+    id="ngSelect"
+    [items]="namedGroups"
+    [virtualScroll]="true"
+    [labelForId]="inputId()"
+    [readonly]="readonly"
+    [title]="title"
+    [loading]="loading"
+    bindLabel="idDisplay"
+    [clearable]="false"
+    [editableSearchTerm]="dropDownEditableSearchTerm"
+    [placeholder]="placeholderText"
+    [searchFn]="customSearchFtn"
+    [(ngModel)]="selected"
+    (change)="handleSelectChangeEvent($event)"
+    (search)="handleSelectSearchEvent($event)"
+    (open)="handleSelectOpenEvent()"
+>
+    <ng-template ng-option-tmp let-item="item">
+        <span class="ngSelectBoldFirstColumn">{{item.idDisplay}}</span>{{item.name}}
+    </ng-template>
+</ng-select>

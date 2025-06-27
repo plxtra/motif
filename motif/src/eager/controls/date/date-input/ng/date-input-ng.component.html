@@ -1,0 +1,15 @@
+<input #dateInput
+    type="date"
+    [id]="inputId()"
+    [size]="size()"
+    [title]="title"
+    [disabled]="disabled === true ? true : null"
+    [readonly]="readonly === true ? true : null"
+    [ngStyle]="{'background-color': bkgdColor, 'color': foreColor}"
+    [value]="dateAsStr"
+    [placeholder]="placeholderText"
+    (input)="onInput(dateInput.value)"
+    (change)="onChange(dateInput.value)"
+    (keydown.enter)="onEnterKeyDown(dateInput.value)"
+    (blur)="onBlur(dateInput.value)"
+>

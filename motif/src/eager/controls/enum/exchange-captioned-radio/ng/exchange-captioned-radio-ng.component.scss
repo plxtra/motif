@@ -1,0 +1,5 @@
+@use './partials/radio-followed-by-caption';
+
+:host {
+    @include radio-followed-by-caption.radioFollowedByCaptionMixin;
+}

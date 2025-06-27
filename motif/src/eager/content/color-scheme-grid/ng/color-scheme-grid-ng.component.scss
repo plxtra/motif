@@ -1,0 +1,7 @@
+@use './partials/revgrid';
+
+:host {
+    display: flex;
+    flex-direction: column;
+    @include revgrid.hostAsColumnFlexItem;
+}

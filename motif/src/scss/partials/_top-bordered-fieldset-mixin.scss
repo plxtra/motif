@@ -1,0 +1,8 @@
+@mixin topBorderedFieldsetMixin {
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-top-color: dimgray; // should be set by color scheme
+}

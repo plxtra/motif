@@ -1,0 +1,16 @@
+<div id="content" [style.display]="dialogActive ? 'none' : null">
+    <div id="mainToolBar">
+        <div id="lists">
+            <app-integer-captioned-radio #knownListControl id="knownListControl" inputId="knownListRadio" [name]="listRadioName"></app-integer-captioned-radio>
+            <app-integer-captioned-radio #unknownListControl id="unknownListControl" inputId="unknownListRadio" [name]="listRadioName"></app-integer-captioned-radio>
+        </div>
+        <div id="columnButtons">
+            <app-svg-button #autoSizeColumnWidthsButton></app-svg-button>
+            <app-svg-button #columnsButton></app-svg-button>
+        </div>
+    </div>
+<app-exchange-environments-grid #grid id="grid"></app-exchange-environments-grid>
+</div>
+<div id="dialog" [style.display]="dialogActive ? null : 'none'">
+    <ng-container #dialogContainer></ng-container>
+</div>

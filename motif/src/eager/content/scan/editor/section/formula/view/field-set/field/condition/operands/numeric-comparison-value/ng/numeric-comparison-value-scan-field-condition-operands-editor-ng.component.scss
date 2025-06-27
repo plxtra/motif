@@ -1,0 +1,18 @@
+@use './partials/caption-followed-by-input';
+@use './partials/scan-field-condition-operands-exclamation-icon';
+
+:host {
+    flex: 1 1 auto;
+
+    display: flex;
+    align-items: center;
+    gap: 1em;
+
+    #exclamationIcon {
+        @include scan-field-condition-operands-exclamation-icon.size;
+    }
+
+    #operatorControl {
+        width: 5em;
+    }
+}

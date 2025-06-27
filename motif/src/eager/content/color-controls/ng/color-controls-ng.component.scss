@@ -1,0 +1,60 @@
+@use './partials/flex-row-items-centered-mixin';
+@use './partials/svg-icon-button-size';
+@use './partials/caption-followed-by-input';
+@use './partials/horizontal-radio-separator';
+
+@mixin flexRowColorControlsCenteredMixin {
+    @include flex-row-items-centered-mixin.flexRowItemsCenteredMixin;
+
+    > *:not(:first-child) {
+        margin-left: 0.7em;
+    }
+}
+
+:host {
+    display: flex;
+    overflow: clip;
+    gap: .5em;
+}
+
+#typeSection {
+    @include horizontal-radio-separator.horizontalRadioSeparatorMixin;
+}
+
+#hexAndHideSection {
+    @include flex-row-items-centered-mixin.flexRowItemsCenteredMixin;
+
+    #hexControl {
+        width: 10em;
+    }
+    #hideInPickerControl {
+        margin-left: 2em;
+    }
+}
+
+#buttonsSection {
+    display: flex;
+    @include svg-icon-button-size.toolbarChildMixin;
+}
+
+#hsvControlsSection {
+    @include flexRowColorControlsCenteredMixin;
+    app-number-input {
+        width: 4em;
+    }
+}
+
+#rgbControlsSection {
+    @include flexRowColorControlsCenteredMixin;
+    app-integer-text-input {
+        width: 4em;
+    }
+}
+
+.captionFollowedByInput {
+    @include caption-followed-by-input.captionFollowedByInputMixin;
+}
+
+#headingLabel {
+    font-size: larger;
+}

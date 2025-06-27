@@ -1,0 +1,11 @@
+<input
+    #radioInput
+    type="radio"
+    [id]="inputId()"
+    [name]="name()"
+    [title]="itemTitle"
+    [checked]="checked()"
+    [disabled]="radioDisabled"
+    [ngStyle]="{'background-color': bkgdColor, 'color': foreColor}"
+    (change)="onChange(radioInput.checked)"
+>

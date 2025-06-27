@@ -1,0 +1,74 @@
+<section id="mainSection" [style.display]="isMainMode() ? null : 'none'">
+    <section id="mainToolbarSection">
+        <app-svg-button #toolbarExecuteButton></app-svg-button>
+        <section id="firstIconSet">
+            <app-svg-button #symbolLinkButton></app-svg-button>
+            <app-svg-button #columnsButton></app-svg-button>
+        </section>
+    </section>
+
+    <section id="parametersSection">
+        <app-caption-label #exchangeLabel for="exchangeInput"></app-caption-label>
+        <section id="exchangeSection">
+            <app-exchange-captioned-radio #defaultExchangeControl inputId="defaultExchangeRadio" [name]="exchangeRadioName"></app-exchange-captioned-radio>
+            <app-exchange-select-item #exchangeControl inputId="exchangeInput"></app-exchange-select-item>
+        </section>
+        <app-caption-label #marketsLabel for="marketsInput"></app-caption-label>
+        <section id="marketsSection">
+            <app-data-market-captioned-items-checkbox #defaultMarketControl inputId="defaultMarketCheckbox"></app-data-market-captioned-items-checkbox>
+            <app-data-market-select-items #marketsControl inputId="marketsInput" inputSize="4em"></app-data-market-select-items>
+        </section>
+        <app-caption-label #cfiLabel for="cfiInput"></app-caption-label>
+        <app-text-input #cfiControl id="cfiControl" inputId="cfiInput" size="8"></app-text-input>
+        <app-caption-label #fieldsLabel for="fieldsInput"></app-caption-label>
+        <section id="fieldsSection">
+            <app-integer-captioned-items-checkbox #codeControl inputId="codeCheckbox"></app-integer-captioned-items-checkbox>
+            <app-integer-captioned-items-checkbox #nameControl inputId="nameCheckbox"></app-integer-captioned-items-checkbox>
+            <app-enum-array-input #fieldsControl inputId="fieldsInput" inputSize="3em"></app-enum-array-input>
+        </section>
+        <app-caption-label #indicesLabel for="includeIndicesRadio"></app-caption-label>
+        <section id="indicesSection">
+            <app-integer-captioned-radio #excludeIndicesControl inputId="excludeIndicesRadio" [name]="indicesRadioName"></app-integer-captioned-radio>
+            <app-integer-captioned-radio #includeIndicesControl inputId="includeIndicesRadio" [name]="indicesRadioName"></app-integer-captioned-radio>
+            <app-integer-captioned-radio #onlyIndicesControl inputId="onlyIndicesRadio" [name]="indicesRadioName"></app-integer-captioned-radio>
+        </section>
+        <app-caption-label #optionsLabel></app-caption-label>
+        <section id="optionsSection">
+            <app-captioned-checkbox #partialControl inputId="partialCheckbox"></app-captioned-checkbox>
+            <app-captioned-checkbox #preferExactControl inputId="preferExactCheckbox"></app-captioned-checkbox>
+            <app-captioned-checkbox #showFullControl inputId="showFullCheckbox"></app-captioned-checkbox>
+        </section>
+        <app-caption-label #searchTextLabel for="searchTextInput"></app-caption-label>
+        <section id="searchSection">
+            <section id="searchTextSection">
+                <app-text-input #searchTextControl id="searchTextControl" inputId="searchTextInput" size="10"></app-text-input>
+                <app-svg-button #searchTextButton></app-svg-button>
+            </section>
+            <section id="pageSizeSection">
+                <app-caption-label #pageSizeLabel for="pageSizeInput"></app-caption-label>
+                <app-integer-text-input #pageSizeControl id="pageSizeControl" inputId="pageSizeInput" spellCheck="false" size="4"></app-integer-text-input>
+            </section>
+        </section>
+    </section>
+    <section id="resultSection">
+        <app-caption-label #descriptionLabel id="descriptionLabel"></app-caption-label>
+        <section id="topPageSection">
+            <app-caption-label #topPageLabel [style.display]="paginationActive ? null : 'none'"></app-caption-label>
+            <app-integer-label #topPageNumberLabel [style.display]="paginationActive ? null : 'none'"></app-integer-label>
+            <app-caption-label #topOfLabel [style.display]="paginationActive ? null : 'none'"></app-caption-label>
+            <app-integer-label #topPageCountLabel [style.display]="paginationActive ? null : 'none'"></app-integer-label>
+            <app-button-input #topNextButton [style.display]="paginationActive ? null : 'none'"></app-button-input>
+        </section>
+        <app-search-symbols #searchSymbols id="searchSymbols"></app-search-symbols>
+        <section id="bottomPageSection">
+            <app-caption-label #bottomPageLabel [style.display]="paginationActive ? null : 'none'"></app-caption-label>
+            <app-integer-label #bottomPageNumberLabel [style.display]="paginationActive ? null : 'none'"></app-integer-label>
+            <app-caption-label #bottomOfLabel [style.display]="paginationActive ? null : 'none'"></app-caption-label>
+            <app-integer-label #bottomPageCountLabel [style.display]="paginationActive ? null : 'none'"></app-integer-label>
+            <app-button-input #bottomNextButton [style.display]="paginationActive ? null : 'none'"></app-button-input>
+        </section>
+    </section>
+</section>
+<section id="layoutEditorSection" [style.display]="isLayoutEditorMode() ? null : 'none'">
+    <ng-template #layoutEditorContainer></ng-template>
+</section>

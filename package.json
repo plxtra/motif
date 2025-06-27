@@ -1,0 +1,24 @@
+{
+  "name": "motif-workspaces",
+  "private": true,
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/plxtra/motif.git"
+  },
+  "bugs": {
+    "url": "https://github.com/plxtra/motif/issues"
+  },
+  "homepage": "https://plxtra.org/architecture/components/frontend/motif/",
+  "scripts": {
+    "create": "Docker-Create.ps1",
+    "params": "Docker-Params.ps1",
+    "publish": "Docker-Publish.ps1"
+  },
+  "workspaces": [
+    "motif",
+    "extensions/highcharts",
+    "extensions/tstest",
+    "extensions/website-embed"
+  ]
+}

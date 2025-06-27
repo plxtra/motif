@@ -1,0 +1,19 @@
+<div id="topDiv">
+    <div id="inputDiv" [style.display]="!isInputMode() ? 'none' : null">
+        <div id="mainToolbarDiv">
+            <app-data-ivem-id-select #symbolInput id="symbolInput"></app-data-ivem-id-select>
+            <div id="toolButtonsDiv">
+                <app-svg-button #symbolButton id="symbolButton"></app-svg-button>
+                <div id="columnButtonsDiv">
+                    <app-svg-button #columnsButton></app-svg-button>
+                    <app-svg-button #autoSizeColumnWidthsButton></app-svg-button>
+                </div>
+            </div>
+        </div>
+        <!-- <app-grid-source id="watchGridSource" #watchGridSource></app-grid-source> -->
+        <!-- <app-grid-source id="callPutGridSource" #callPutGridSource></app-grid-source> -->
+    </div>
+    <div id="layoutEditorDiv" [style.display]="!isLayoutEditorMode() ? 'none' : null">
+        <app-grid-layout-editor #layoutEditor></app-grid-layout-editor>
+    </div>
+</div>

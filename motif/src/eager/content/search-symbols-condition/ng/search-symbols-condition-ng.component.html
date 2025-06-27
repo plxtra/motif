@@ -1,0 +1,20 @@
+<app-caption-label #groupLabel for="groupInput" />
+<app-text-input #groupControl id="groupControl" inputId="groupInput" size="10" />
+<app-caption-label #fieldsLabel for="fieldsInput" />
+<section id="fieldsSection">
+    <app-integer-captioned-items-checkbox #codeControl inputId="codeCheckbox"></app-integer-captioned-items-checkbox>
+    <app-integer-captioned-items-checkbox #nameControl inputId="nameCheckbox"></app-integer-captioned-items-checkbox>
+    <app-enum-array-input #fieldsControl inputId="fieldsInput" inputSize="3em"></app-enum-array-input>
+</section>
+<app-caption-label #optionsLabel />
+<section id="optionsSection">
+    <app-captioned-checkbox #caseSensitiveControl inputId="caseSensitiveCheckbox"></app-captioned-checkbox>
+    <app-integer-captioned-items-checkbox #matchExactControl inputId="matchExactCheckbox"></app-integer-captioned-items-checkbox>
+    <app-integer-captioned-items-checkbox #matchFromStartControl inputId="matchFromStartCheckbox"></app-integer-captioned-items-checkbox>
+    <app-integer-captioned-items-checkbox #matchFromEndControl inputId="matchFromEndCheckbox"></app-integer-captioned-items-checkbox>
+</section>
+<app-caption-label #textLabel for="textInput" />
+<section id="textSection">
+    <app-text-input #textControl id="textControl" inputId="textInput" size="10"></app-text-input>
+    <app-svg-button #searchTextButton></app-svg-button>
+</section>

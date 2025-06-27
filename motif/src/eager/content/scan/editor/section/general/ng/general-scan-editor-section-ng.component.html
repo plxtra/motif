@@ -1,0 +1,24 @@
+<app-expandable-collapsible-lined-heading #sectionHeading [headingText]="sectionHeadingText" />
+
+<section id="content">
+    <section id="propertyControls">
+        <app-caption-label #enabledLabel for="enabledCheckbox"></app-caption-label>
+        <div id="enabledControls">
+            <app-checkbox-input #enabledControl id="enabledControl" inputId="enabledCheckbox" [style.display]="deletingOrDeleted ? 'none' : null"></app-checkbox-input>
+            <span [style.display]="deletingOrDeleted ? null : 'none'">{{"deletedText"}}</span>
+        </div>
+        <app-caption-label #nameLabel for="nameInput"></app-caption-label>
+        <app-text-input #nameControl id="nameControl" inputId="nameInput" spellCheck="false"></app-text-input>
+        <app-caption-label #descriptionLabel for="descriptionInput"></app-caption-label>
+        <app-text-input #descriptionControl id="descriptionControl" inputId="descriptionInput" spellCheck="false"></app-text-input>
+        <!-- <app-caption-label #typeLabel for="typeInput"></app-caption-label>
+        <app-integer-enum-input #typeControl id="typeControl" inputId="typeInput"></app-integer-enum-input> -->
+        <span>{{targetsRowHeading}}</span>
+        <app-scan-editor-targets #targetsComponent id="targetsComponent"></app-scan-editor-targets>
+        <app-caption-label #symbolListLabel for="symbolListCheckbox"></app-caption-label>
+        <div id="symbolListControls">
+            <app-checkbox-input #symbolListControl id="symbolListControl" inputId="symbolListCheckbox"></app-checkbox-input>
+            <app-captioned-checkbox #showRankControl id="showRankControl" inputId="showRankCheckbox"></app-captioned-checkbox>
+        </div>
+    </section>
+</section>

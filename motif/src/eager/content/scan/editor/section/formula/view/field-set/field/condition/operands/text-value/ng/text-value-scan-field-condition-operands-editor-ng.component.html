@@ -1,0 +1,9 @@
+<svg-icon id="exclamationIcon" name="Exclamation" [svgStyle]="{ 'fill': exclamationColor }" [style.visibility]="valid ? 'hidden' : 'visible'" />
+<app-captioned-checkbox #notControl id="notControl" />
+<div id="affirmativeOperatorDisplayLines">
+  @for (line of affirmativeOperatorDisplayLines; track line) {
+    <span id="affirmativeOperatorDisplayLine">{{line}}</span>
+  }
+</div>
+<app-caption-label #valueLabel id="valueLabel" />
+<app-text-input #valueControl id="valueControl" />

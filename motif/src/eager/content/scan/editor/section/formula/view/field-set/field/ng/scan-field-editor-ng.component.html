@@ -1,0 +1,23 @@
+<div id="fieldAndConditions">
+    <div id="field">
+        <div id="properties">
+            <span id="fieldNameLabel" [style.color]="labelColor">{{fieldNameLabel}}</span>
+            <span id="fieldName">{{fieldName}}</span>
+            <app-caption-label #requiresLabel></app-caption-label>
+            <div id="requires">
+                <app-integer-captioned-radio #requiresAllControl inputId="requiresAllRadio" [name]="requiresRadioName"></app-integer-captioned-radio>
+                <app-integer-captioned-radio #requiresAnyControl inputId="requiresAnyRadio" [name]="requiresRadioName"></app-integer-captioned-radio>
+                <app-integer-captioned-radio #requiresExactly1Of2Control inputId="requiresExactly1of2Radio" [name]="requiresRadioName"></app-integer-captioned-radio>
+            </div>
+            <span id="conditionsLabel" [style.color]="labelColor">{{conditionsLabel}}</span>
+            <app-integer-enum-input #addConditionControl id="addConditionControl"></app-integer-enum-input>
+        </div>
+        <app-svg-button #deleteMeControl id="deleteMeControl" [style.display]="frameUndefined ? 'none' : null"></app-svg-button>
+    </div>
+    <div id="conditionsContainer">
+        <ng-container #conditionsContainer></ng-container>
+    </div>
+</div>
+<div id="errorBar" [style.display]="valid || frameUndefined ? 'none' : null">
+    <span id="errorText">{{errorText}}</span>
+</div>

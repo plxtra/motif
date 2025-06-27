@@ -1,0 +1,30 @@
+@use './partials/svg-icon-button-size';
+
+:host {
+    display: flex;
+    flex-direction: column;
+    padding-block-start: 4em;
+    gap: 1.2em;
+
+    #moveFieldsUpControls {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: .5em;
+        @include svg-icon-button-size.toolbarChildMixin;
+    }
+
+    #insertRemoveFieldsControls {
+        display: flex;
+        gap: .2em;
+        @include svg-icon-button-size.toolbarChildMixin;
+    }
+
+    #moveFieldsDownControls {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: .5em;
+        @include svg-icon-button-size.toolbarChildMixin;
+    }
+}

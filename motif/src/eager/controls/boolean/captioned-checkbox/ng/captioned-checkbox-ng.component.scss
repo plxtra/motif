@@ -1,0 +1,5 @@
+@use './partials/checkbox-followed-by-caption';
+
+:host {
+    @include checkbox-followed-by-caption.checkboxFollowedByCaptionMixin;
+}

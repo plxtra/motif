@@ -1,0 +1,16 @@
+<input
+    #textInput
+    type="text"
+    [id]="inputId()"
+    [title]="title"
+    [disabled]="disabled === true ? true : null"
+    [readonly]="readonly === true ? true : null"
+    [size]="size()"
+    [ngStyle]="{'background-color': bkgdColor, 'color': foreColor}"
+    [value]="displayValue"
+    [placeholder]="placeholderText"
+    (input)="onInput(textInput.value)"
+    (keydown.enter)="onEnterKeyDown(textInput.value)"
+    (keydown.esc)="onEscKeyDown()"
+    (blur)="onBlur(textInput.value)"
+>

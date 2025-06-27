@@ -1,0 +1,18 @@
+<div id="mainDiv" [style.display]="isDialogActive() ? 'none' : null">
+    <div id="mainToolbarDiv">
+        <app-brokerage-account-group-input #accountGroupInput id="accountGroupInput" inputId="accountGroupInput"></app-brokerage-account-group-input>
+
+        <div id="columnButtonsDiv">
+            <app-svg-button #autoSizeColumnWidthsButton></app-svg-button>
+            <app-svg-button #columnsButton></app-svg-button>
+        </div>
+
+        <div id="linkButtonsDiv">
+            <app-svg-button #accountLinkButton></app-svg-button>
+        </div>
+    </div>
+    <app-balances #balances id="balances"></app-balances>
+</div>
+<div id="dialogDiv" [style.display]="isDialogActive() ? null : 'none'">
+    <ng-container #dialogContainer></ng-container>
+</div>

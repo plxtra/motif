@@ -1,0 +1,23 @@
+@if (environmentDisplayVisible) {
+    <app-desktop-banner #environmentDisplay />
+}
+<section id="bar" [style.color]="barForeColor" [style.background-color]="barBkgdColor">
+    <section id="leftControls">
+        <!-- <svg #svg id="svg" role="img" aria-hidden="true" ariaLabelledBy="null" ariaTitle="null" focusable="false">
+            <use href="/config/splash.svg"/>
+        </svg> -->
+        @if (barLeftImageExists) {
+            <img [src]="barLeftImageUrl" style="height: 1.7em; width: auto" alt="Bar left image" />
+        }
+        <app-menu-bar-root-menu #menuBarRootMenu id="menuBarRootMenu"></app-menu-bar-root-menu>
+        @if (advertisingEnabled) {
+            <app-button-input #aboutAdvertisingButton></app-button-input>
+        }
+        <app-command-bar #commandBar id="commandBar"></app-command-bar>
+    </section>
+    <section id="rightControls">
+        <app-button-input #signOutButton id="signOutButton"></app-button-input>
+    </section>
+</section>
+
+<app-golden-layout-host #layoutHost id="layout-host" />

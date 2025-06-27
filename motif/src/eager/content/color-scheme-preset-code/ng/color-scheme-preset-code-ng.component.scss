@@ -1,0 +1,20 @@
+@use './partials/svg-icon-button-size';
+
+#rootDiv {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+#toolBarDiv {
+    display: flex;
+    @include svg-icon-button-size.toolbarChildMixin;
+}
+
+#presetCodeTextArea {
+    height: 100%;
+    width: 100%;
+    resize: none;
+    display: inline-block;
+    box-sizing: border-box;
+}

@@ -1,0 +1,13 @@
+<section id="headerSection">
+    <section id="readabilitySection">
+        <app-caption-label #readabilityLabel for="readabilityInput"></app-caption-label>
+        <app-number-input #readabilityControl id="readabilityControl" inputId="readabilityInput"></app-number-input>
+    </section>
+    <section id="pickerTypeSection">
+        <app-integer-captioned-radio #hueSaturationRadio></app-integer-captioned-radio>
+        <app-integer-captioned-radio #valueSaturationRadio></app-integer-captioned-radio>
+    </section>
+</section>
+<app-color-controls #bkgdControls id="bkgdControls" [style.visibility]="hasBkgd ? 'visible' : 'hidden'" />
+<app-multi-color-picker #multiPicker id="multiPicker" />
+<app-color-controls #foreControls id="foreControls" [style.visibility]="hasFore ? 'visible' : 'hidden'" />

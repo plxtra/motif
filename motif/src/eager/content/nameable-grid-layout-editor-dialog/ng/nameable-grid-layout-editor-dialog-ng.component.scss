@@ -1,0 +1,21 @@
+@use './partials/flex-row-items-centered-mixin';
+@use './partials/svg-icon-button-size';
+
+:host {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    #toolbar {
+        @include flex-row-items-centered-mixin.flexRowItemsCenteredMixin;
+
+        #okCancelReturnButtons {
+            @include svg-icon-button-size.okCancelReturnMixin;
+        }
+    }
+
+    #editor {
+        flex-grow: 1;
+        min-height: 0;
+    }
+}

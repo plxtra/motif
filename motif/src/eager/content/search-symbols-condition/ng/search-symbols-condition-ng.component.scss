@@ -1,0 +1,9 @@
+@use './partials/svg-icon-button-size';
+
+:host {
+    display: block;
+
+    #textSection {
+        @include svg-icon-button-size.toolbarChildMixin;
+    }
+}

@@ -1,0 +1,104 @@
+@use './partials/flex-row-items-centered-mixin';
+@use './partials/svg-icon-button-size';
+@use './partials/horizontal-children-separator';
+@use './partials/horizontal-radio-separator';
+@use './partials/control-followed-by-icon';
+@use './partials/caption-followed-by-input';
+
+:host {
+    display: block;
+    position: absolute;
+    overflow: hidden;
+    height: 100%;
+}
+
+#mainSection {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    #mainToolbarSection {
+        flex: 0 0 auto;
+
+        @include flex-row-items-centered-mixin.flexRowItemsCenteredMixin;
+        @include svg-icon-button-size.toolbarDescendantMixin;
+
+        #firstIconSet {
+            @include flex-row-items-centered-mixin.flexRowItemsCenteredMixin;
+            margin-left: 2em;
+        }
+    }
+
+    #parametersSection {
+        flex: 0 0 auto;
+        display: grid;
+        grid-template-columns: max-content max-content;
+        column-gap: 0.8rem;
+        row-gap: 0.5rem;
+        align-items: center;
+
+        #exchangeSection {
+            @include flex-row-items-centered-mixin.flexRowItemsCenteredMixin;
+            @include horizontal-children-separator.horizontalChildrenSeparatorMixin;
+        }
+
+        #marketsSection {
+            @include flex-row-items-centered-mixin.flexRowItemsCenteredMixin;
+            @include horizontal-children-separator.horizontalChildrenSeparatorMixin;
+        }
+
+        #cfiControl {
+            width: 6em;
+        }
+
+        #fieldsSection {
+            @include flex-row-items-centered-mixin.flexRowItemsCenteredMixin;
+            @include horizontal-children-separator.horizontalChildrenSeparatorMixin;
+        }
+
+        #indicesSection {
+            @include flex-row-items-centered-mixin.flexRowItemsCenteredMixin;
+            @include horizontal-children-separator.horizontalChildrenSeparatorMixin;
+        }
+
+        #optionsSection {
+            @include flex-row-items-centered-mixin.flexRowItemsCenteredMixin;
+            @include horizontal-children-separator.horizontalChildrenSeparatorMixin;
+        }
+
+        #searchSection {
+            @include flex-row-items-centered-mixin.flexRowItemsCenteredMixin;
+            @include horizontal-children-separator.horizontalChildrenSeparatorMixin;
+
+            #searchTextSection {
+                @include control-followed-by-icon.controlFollowedByIconMixin;
+                @include svg-icon-button-size.toolbarChildMixin;
+            }
+
+            #pageSizeSection {
+                @include caption-followed-by-input.captionFollowedByInputMixin;
+            }
+        }
+    }
+
+    #resultSection {
+        flex: 1 1 auto;
+
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+
+        #descriptionLabel {
+            flex: 0 0 auto;
+        }
+
+        #searchSymbols {
+            flex: 1 1 0;
+            min-height: 0;
+        }
+    }
+}
+
+#layoutEditorSection {
+    height: 100%;
+}

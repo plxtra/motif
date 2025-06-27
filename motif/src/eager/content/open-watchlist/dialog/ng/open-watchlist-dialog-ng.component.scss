@@ -1,0 +1,38 @@
+@use './partials/flex-row-items-centered-mixin';
+@use './partials/svg-icon-button-size';
+@use './partials/centered-toolbar-group-mixin';
+
+:host {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    #toolbar {
+        @include centered-toolbar-group-mixin.centeredToolbarGroupMixin;
+        flex: 0 0 auto;
+
+        #okCancelReturnButtons {
+            @include svg-icon-button-size.okCancelReturnMixin;
+        }
+    }
+
+    #existingLists {
+        flex: 1 1 0;
+    }
+
+    #selectedBar {
+        flex: 0 0 auto;
+        display: flex;
+        gap: 3em;
+
+        #listName {
+            display: flex;
+            gap: 0.5em;
+            flex: 1 1 0;
+
+            #listNameControl {
+                flex: 1 1 0;
+            }
+        }
+    }
+}

@@ -1,0 +1,42 @@
+{
+  "name": "motif-highcharts",
+  "version": "0.0.4",
+  "description": "Highcharts Motif extension",
+  "license": "MIT",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/plxtra/motif.git",
+    "directory": "extensions/highcharts"
+  },
+  "homepage": "https://plxtra.org",
+  "author": "Plxtra contributors",
+  "bugs": {
+    "url": "https://github.com/plxtra/motif/issues"
+  },
+  "main": "index.ts",
+  "scripts": {
+    "build": "webpack --mode development --config ./webpack.config.js",
+    "lint": "eslint"
+  },
+  "dependencies": {
+    "@pbkware/js-utils": "^0.8.2",
+    "highcharts": "^12.2.0",
+    "motif": "file:../../motif"
+  },
+  "devDependencies": {
+    "css-loader": "^7.1.2",
+    "eslint": "^9.29.0",
+    "eslint-import-resolver-typescript": "^4.4.3",
+    "eslint-plugin-import-x": "^4.15.2",
+    "sass": "^1.89.2",
+    "sass-loader": "^16.0.5",
+    "source-map-loader": "^5.0.0",
+    "style-loader": "^4.0.0",
+    "ts-loader": "^9.5.2",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.34.1",
+    "webpack": "^5.99.9",
+    "webpack-cli": "^6.0.1"
+  }
+}

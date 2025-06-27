@@ -1,0 +1,10 @@
+<input
+    #checkboxInput
+    type="checkbox"
+    [id]="inputId()"
+    [title]="title"
+    [checked]="checked()"
+    [disabled]="disabled"
+    [ngStyle]="{'background-color': bkgdColor, 'color': foreColor}"
+    (change)="onChange(checkboxInput.checked)"
+>

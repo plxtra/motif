@@ -1,0 +1,21 @@
+<app-expandable-collapsible-lined-heading
+    #sectionHeading
+    [headingText]="sectionHeadingText"
+    [genericSelectorWidth]="genericSelectorWidth"
+    [genericSelectorCaption]="genericSelectorCaption"
+/>
+
+<section id="content">
+    @switch (formulaField()) {
+        @case ('Criteria') {
+            <app-criteria-zenith-scan-formula-view #zenithCriteriaView
+                [style.display]="isZenithView() ? null : 'none'"></app-criteria-zenith-scan-formula-view>
+            <app-condition-set-scan-formula-view #conditionSetCriteriaView
+                [style.display]="isConditionSetView() ? null : 'none'"></app-condition-set-scan-formula-view>
+            <app-scan-field-set-editor #scanFieldSetEditor [style.display]="isFieldSetView() ? null : 'none'"></app-scan-field-set-editor>
+        }
+        @case ('Rank') {
+            <app-rank-zenith-scan-formula-view #rankView></app-rank-zenith-scan-formula-view>
+        }
+    }
+</section>

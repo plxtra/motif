@@ -1,0 +1,24 @@
+<section id="mainSection" [style.display]="isMainMode ? null : 'none'">
+    <section id="mainToolbarSection">
+        <app-data-ivem-id-select #symbolInput id="symbolInput"></app-data-ivem-id-select>
+        <app-svg-button #symbolButton id="symbolButton"></app-svg-button>
+
+        <section id="filterSection">
+            <app-text-input #filterInput></app-text-input>
+        </section>
+
+        <section id="columnButtonsSection">
+            <app-svg-button #autoSizeColumnWidthsButton></app-svg-button>
+            <app-svg-button #columnsButton></app-svg-button>
+        </section>
+
+        <section id="linkButtonsSection">
+            <app-svg-button #symbolLinkButton></app-svg-button>
+        </section>
+    </section>
+
+    <app-row-data-array-grid #grid id="grid"></app-row-data-array-grid>
+</section>
+<section id="layoutEditorSection" [style.display]="isLayoutEditorMode ? null : 'none'">
+    <ng-template #layoutEditorContainer></ng-template>
+</section>

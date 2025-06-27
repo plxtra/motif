@@ -1,0 +1,13 @@
+@use './partials/flex-row-items-centered-mixin';
+
+@mixin horizontalRadioSeparatorMixin {
+    @include flex-row-items-centered-mixin.flexRowItemsCenteredMixin;
+
+    > :not(:first-child) {
+        margin-left: 1em;
+    }
+}
+
+.horizontalRadioSeparator {
+    @include horizontalRadioSeparatorMixin;
+}

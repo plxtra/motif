@@ -1,0 +1,25 @@
+:host {
+    font-family: monospace;
+    font-size: 13px;
+    height: 100%;
+    // background-position: top center;
+    // background-size: contain;
+    // display: flex;
+    // flex-direction: column;
+}
+
+// #kickedOffDiv {
+//     text-align: center;
+//     background-color: red;
+//     margin-bottom: 2px;
+//     color: gray;
+//     font-weight: 700;
+// }
+
+#logTextArea {
+    height: 100%;
+    width: 100%;
+    resize: none;
+    display: inline-block;
+    box-sizing: border-box;
+}

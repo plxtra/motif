@@ -1,0 +1,76 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ES2022",
+    "resolveJsonModule": true,
+    "importHelpers": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "noImplicitOverride": true,
+    "strictBindCallApply": true,
+    "alwaysStrict": true,
+    "noImplicitReturns": true,
+    "strictFunctionTypes": true,
+    "noFallthroughCasesInSwitch": false,
+    "forceConsistentCasingInFileNames": true,
+    "strictPropertyInitialization": false,
+    "noUnusedLocals": false,
+    "esModuleInterop": true,
+    "baseUrl": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "declarationMap": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "typeRoots": [
+      "node_modules/@types",
+      "src/@types"
+    ],
+    "lib": [
+      "ES2022",
+      "dom"
+    ],
+    "rootDir": ".",
+    "paths": {
+      // "@plxtra/motif-core": ["../motif-core/src/code/public-api"], // for debugging only
+      "third-party-internal-api": ["src/third-party/internal-api"],
+      "generated-internal-api": ["src/generated/internal-api"],
+      "component-internal-api": ["src/eager/component/internal-api"],
+      "component-ng-api": ["src/eager/component/ng-api"],
+      "component-services-internal-api": ["src/eager/component-services/internal-api"],
+      "component-services-ng-api": ["src/eager/component-services/ng-api"],
+      "controls-internal-api": ["src/eager/controls/internal-api"],
+      "controls-ng-api": ["src/eager/controls/ng-api"],
+      "content-internal-api": ["src/eager/content/internal-api"],
+      "content-ng-api": ["src/eager/content/ng-api"],
+      "ditem-internal-api": ["src/eager/ditem/internal-api"],
+      "ditem-ng-api": ["src/eager/ditem/ng-api"],
+      "desktop-internal-api": ["src/eager/desktop/internal-api"],
+      "desktop-ng-api": ["src/eager/desktop/ng-api"],
+      "workspace-internal-api": ["src/eager/workspace/internal-api"],
+      "workspace-ng-api": ["src/eager/workspace/ng-api"],
+      "extensions-internal-api": ["src/eager/extensions/internal-api"],
+      "extensions-ng-api": ["src/eager/extensions/ng-api"],
+      "overlay-ng-api": ["src/eager/overlay/ng-api"],
+      "root-ng-api": ["src/eager/root/ng-api"],
+      "diagnostics-ng-api": ["src/lazy/diagnostics/ng-api"],
+      "code-mirror-ng-api": ["src/lazy/code-mirror-module/ng-api"],
+      // "code-mirror-component": ["src/lazy/code-mirror-module/code-mirror/ng/code-mirror-ng.component"],
+    },
+    "useDefineForClassFields": false
+    // "traceResolution": true, // can use this to debug paths below
+  },
+  "exclude": [
+    "custom_modules",
+    "lib/**/*"
+  ],
+  "angularCompilerOptions": {
+    "fullTemplateTypeCheck": true,
+    "strictTemplates": true,
+    "strictInjectionParameters": true
+  }
+}

@@ -1,0 +1,10 @@
+@use './partials/variables';
+@mixin centeredToolbarGroupsMixin {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    :not(:first-child) {
+        margin-left: variables.$toolbar-button-group-separation;
+    }
+}

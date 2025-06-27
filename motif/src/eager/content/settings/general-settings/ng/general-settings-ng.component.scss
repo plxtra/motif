@@ -1,0 +1,76 @@
+@use './partials/flex-row-items-centered-mixin';
+@use './partials/horizontal-children-separator';
+@use './partials/horizontal-radio-separator';
+
+:host {
+    display: block;
+}
+
+.fieldsetGrid {
+    display: grid;
+    grid-template-columns: max-content max-content;
+    column-gap: 2rem;
+    row-gap: 0.5rem;
+    align-items: center;
+
+    app-caption-label {
+        grid-column: 1;
+    }
+    app-text-input {
+        grid-column: 2;
+    }
+
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-top-color: dimgray; // should be set by color scheme
+}
+
+.fieldSetLegend {
+    font-size: larger;
+}
+
+#general {
+    #fontFamilyControl {
+        width: 30em;
+    }
+
+    #fontSizeControl {
+        width: 12em;
+    }
+
+    #defaultExchangeControl {
+        width: 14em;
+    }
+
+    #minimumPriceFractionDigitsCountControl {
+        width: 12em;
+    }
+
+    #dateTimeTimezoneMode {
+        @include horizontal-radio-separator.horizontalRadioSeparatorMixin;
+    }
+}
+
+#symbols {
+    #exchangeHideModeControl {
+        width: 14em;
+    }
+
+    #explicitSearchFields {
+        @include flex-row-items-centered-mixin.flexRowItemsCenteredMixin;
+        @include horizontal-children-separator.horizontalChildrenSeparatorMixin;
+    }
+}
+
+#testSettingsValue {
+    @include flex-row-items-centered-mixin.flexRowItemsCenteredMixin;
+    @include horizontal-children-separator.horizontalChildrenSeparatorMixin;
+}
+
+#operatorDefaultExchangeEnvironmentSpecificSettingsValue {
+    @include flex-row-items-centered-mixin.flexRowItemsCenteredMixin;
+    @include horizontal-children-separator.horizontalChildrenSeparatorMixin;
+}

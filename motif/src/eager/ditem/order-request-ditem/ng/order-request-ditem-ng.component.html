@@ -1,0 +1,40 @@
+<div #pad id="pad">
+    @switch (stepId) {
+        @case (StepId.Pad) {
+            <app-pad-order-request-step #padStep></app-pad-order-request-step>
+        }
+        @case (StepId.Review) {
+            <app-review-order-request-step #reviewStep></app-review-order-request-step>
+        }
+        @case (StepId.Result) {
+            <app-result-order-request-step #resultStep></app-result-order-request-step>
+        }
+    }
+    <div id="stepperDiv" [style.border-top-color]="panelDividerColor">
+        <div id="linkButtonsDiv">
+            <app-svg-button #primaryButton></app-svg-button>
+            <app-svg-button #symbolLinkButton [noneDisplayOverrideActive]="!linkButtonDisplayed"></app-svg-button>
+            <app-svg-button #accountLinkButton [noneDisplayOverrideActive]="!linkButtonDisplayed"></app-svg-button>
+            <app-captioned-checkbox #reviewMessageCheckBox [noneDisplayOverrideActive]="!reviewMessageCheckboxDisplayed"></app-captioned-checkbox>
+        </div>
+        <div id="stepButtonsDiv">
+            <app-button-input #sendButton></app-button-input>
+            <section
+                #reviewBackSection
+                id="reviewBackSection"
+                [style.display]="reviewBackSectionDisplayed ? '' : 'none'"
+                [style.width]="reviewBackSectionWidth"
+            >
+                <app-button-input #reviewButton id="reviewButton" [noneDisplayOverrideActive]="!reviewButtonInitDisplayed"></app-button-input>
+                <app-button-input #backButton id="backButton" [noneDisplayOverrideActive]="true"></app-button-input>
+            </section>
+            <section id="newSection">
+                <app-button-input #newButton></app-button-input>
+                <span
+                    id="newAmendRequestPossibleSpan"
+                    [style.visibility]="newAmendRequestPossibleFlagVisibility">{{newAmendRequestPossibleFlagChar}}
+                </span>
+            </section>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,217 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "npm",
+      "script": "build:dev",
+      "problemMatcher": [
+        {
+          "owner": "angular",
+          "source": "ng",
+          "pattern": [
+            {
+              "regexp": "^[X▲] \\[(.*)\\] (.*)$",
+              "severity": 1,
+              "message": 2
+            },
+            {
+              "regexp": "^$|[\\s\\d]*[╷│╵].*$"
+            },
+            {
+              "regexp": "^\\s*(.*)[\\s:](\\d+):(\\d+).*$",
+              "file": 1,
+              "line": 2,
+              "column": 3
+            }
+          ],
+          "background": {
+            "activeOnStart": true,
+            "beginsPattern": {
+              "regexp": "Changes detected\\. Rebuilding\\.\\.\\."
+            },
+            "endsPattern": {
+              "regexp": "Application bundle generation (complete|failed)"
+            }
+          }
+        },
+        {
+          "owner": "angular",
+          "source": "sass",
+          "pattern": [
+            {
+              "regexp": "^[X▲] \\[(.*)\\] (.*)$",
+              "severity": 1,
+              "message": 2
+            },
+            {
+              "regexp": "^$|[\\s\\d]*[╷│╵].*$"
+            },
+            {
+              "regexp": "^$|[\\s\\d]*[╷│╵].*$"
+            },
+            {
+              "regexp": "^$|[\\s\\d]*[╷│╵].*$"
+            },
+            {
+              "regexp": "^$|[\\s\\d]*[╷│╵].*$"
+            },
+            {
+              "regexp": "^\\s*(.*)[\\s:](\\d+):(\\d+).*$",
+              "file": 1,
+              "line": 2,
+              "column": 3,
+              "loop": true,
+            }
+          ],
+          "background": {
+            "activeOnStart": true,
+            "beginsPattern": {
+              "regexp": "Changes detected\\. Rebuilding\\.\\.\\."
+            },
+            "endsPattern": {
+              "regexp": "Application bundle generation (complete|failed)"
+            }
+          }
+        }
+      ],
+
+      // "problemMatcher": {
+      //   "pattern": [
+      //     {
+      //       "regexp": "^X \\[(ERROR)\\] ((TS|NG)\\d+): (.*)$",
+      //       "severity": 1,
+      //       "code": 2,
+      //       "message": 4
+      //     },
+      //     {
+      //       "regexp": ""
+      //     },
+      //     {
+      //       "regexp": "^\\s*(.*):(\\d+):(\\d+):$",
+      //       "file": 1,
+      //       "line": 2,
+      //       "column": 3
+      //     }
+      //   ],
+      //   "background": {
+      //     "activeOnStart": true,
+      //     "beginsPattern": {
+      //       "regexp": "Changes detected\\. Rebuilding\\.\\.\\."
+      //     },
+      //     "endsPattern": {
+      //       "regexp": "Application bundle generation (complete|failed)"
+      //     }
+      //   }
+      // }
+      // "problemMatcher": {
+      //   "name": "ts-esbuild",
+      //   "owner": "typescript",
+      //   "source": "ts",
+      //   "applyTo": "closedDocuments",
+      //   "fileLocation": [
+      //       "relative",
+      //       "${workspaceFolder}"
+      //   ],
+      //   "severity": "error",
+      //   "pattern": [
+      //       {
+      //           "regexp": "^\\s*✘\\s*\\[ERROR\\]\\s*(.+)$",
+      //           "message": 1
+      //       },
+      //       {
+      //           "regexp": "^\\s*$"
+      //       },
+      //       {
+      //           "regexp": "^\\s*(.+):(\\d+):(\\d+):$",
+      //           "file": 1,
+      //           "line": 2,
+      //           "column": 3
+      //       }
+      //   ]
+      // }
+      // "problemMatcher": [
+      //   {
+      //     "base": "$tsc",
+      //     "pattern": {
+      //       "regexp": "^(Error: )?([^\\s].*)[\\(:](\\d+)[,:](\\d+)(?:\\):\\s+|\\s+-\\s+)(error|warning|info)\\s+TS(\\d+)\\s*:\\s*(.*)$",
+      //       "file": 2,
+      //       "line": 3,
+      //       "column": 4,
+      //       "severity": 5,
+      //       "code": 6,
+      //       "message": 7
+      //     }
+      //   }
+      // ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "label": "npm: build:dev",
+      // "detail": "npm run file:info && ng build -c=development"
+    },
+    {
+      "type": "npm",
+      "script": "build:dev:vscode-recipe",
+      "isBackground": true,
+      "presentation": {
+        "focus": true,
+        "panel": "dedicated"
+      },
+      "problemMatcher": {
+        "owner": "typescript",
+        "source": "ts",
+        "applyTo": "closedDocuments",
+        "fileLocation": [
+          "relative",
+          "${cwd}"
+        ],
+        "pattern": "$tsc",
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": {
+            "regexp": "(.*?)"
+          },
+          "endsPattern": {
+            "regexp": "Compiled |Failed to compile."
+          }
+        }
+      }
+    },
+    {
+      "type": "npm",
+      "script": "lint",
+      "problemMatcher": "$eslint-stylish",
+      "label": "npm: lint"
+    },
+    {
+      "type": "typescript",
+      "tsconfig": "tsconfig.app.json",
+      "problemMatcher": [
+        "$tsc"
+      ],
+      "group": "build",
+      "label": "tsc: build - tsconfig.app.json"
+    },
+    {
+      "type": "npm",
+      "script": "api",
+      "problemMatcher": [],
+      "label": "npm: api",
+      "detail": "npm run lib && npm run rollup"
+    },
+    {
+      "type": "npm",
+      "script": "build:prod",
+      "problemMatcher": [
+        "$ts-checker-webpack-watch"
+      ],
+      "group": "build",
+      "label": "npm: build:prod",
+      "detail": "npm run file:info && node --max-old-space-size=4096 ./node_modules/@angular/cli/bin/ng build",
+      "isBackground": true
+    },
+  ]
+}

@@ -1,0 +1,25 @@
+<app-delayed-badness #delayedBadness />
+@if (displayRecords.length === 0) {
+  <span class='alert alert-warning'>No markets available.</span>
+} @else {
+  <div id="markets">
+    <span class="tableHeading">Market</span>
+    <span class="tableHeading">Status</span>
+    <span class="tableHeading">Reason</span>
+    <span class="tableHeading">Allows</span>
+    <span class="tableHeading">Feed</span>
+    <span class="tableHeading">Trading Date</span>
+    <span class="tableHeading">Market Time</span>
+    @for (record of displayRecords; track record) {
+      <span [ngClass]="record.board ? 'marketBoardName' : 'marketName'">{{ record.name }}</span>
+      <span class="marketCell">{{ record.status }}</span>
+      <span class="marketCell">{{ record.reason }}</span>
+      <span class="marketCell">{{ record.allows }}</span>
+      <span class="marketCell">{{ record.feedStatus }}</span>
+      <span class="marketCell">{{ record.tradingDate }}</span>
+      <span class="marketCell">{{ record.marketTime }}</span>
+    }
+  </div>
+}
+
+

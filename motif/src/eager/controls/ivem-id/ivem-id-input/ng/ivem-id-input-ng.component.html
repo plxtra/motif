@@ -1,0 +1,14 @@
+<input #ivemidInput
+    type="text"
+    spellCheck="false"
+    [id]="inputId()"
+    [title]="title"
+    [disabled]="disabled === true ? true : null"
+    [readonly]="readonly === true ? true : null"
+    [ngStyle]="{'background-color': bkgdColor, 'color': foreColor}"
+    [value]="symbol"
+    [placeholder]="placeholderText"
+    (input)="onInput(ivemidInput.value)"
+    (keydown.enter)="onEnterKeyDown(ivemidInput.value)"
+    (blur)="onBlur(ivemidInput.value)"
+>

@@ -1,0 +1,111 @@
+{
+  "configFormatVersion": "2",
+  "configComment": "Do NOT use!!  Template only",
+  "service": {
+    "name": "Paritech Staging",
+    "description": "Paritech Staging",
+    "operator": "Paritech"
+  },
+  "environment": {
+    "defaultDataEnvironment": "demo",
+    "bannerOverrideDataEnvironment": ""
+  },
+  "exchange": {
+    "defaultDefault": "Ptx",
+    "options": []
+  },
+  "endpoints": {
+    "motifServices": [
+      "https://motif-services.paritech.com"
+    ],
+    "zenith": [
+      "wss://websocket-staging.paritech.com/Zenith?version=2.0"
+    ]
+  },
+  "openId": {
+    "authority": "https://passport.paritech.com",
+    "clientId": "MotifStaging$Web",
+    "redirectUri": "http://localhost:4200/auth-callback",
+    "silentRedirectUri": "http://localhost:4200/silent-refresh.html",
+    "scope": "openid profile roles Zenith/Trading Zenith/Market Zenith/News Zenith/OrderPad MotifSvc/RestAPI"
+  },
+  "defaultLayout": {
+    "internalName": "",
+    "instanceName": "Default",
+    "linkedSymbol": {
+      "code": "BHP",
+      "market": "AsxTradeMatch"
+    },
+    "watchlist": [
+      {
+        "code": "BHP",
+        "market": "AsxTradeMatch"
+      },
+      {
+        "code": "QAN",
+        "market": "AsxTradeMatch"
+      },
+      {
+        "code": "NAB",
+        "market": "AsxTradeMatch"
+      }
+    ]
+  },
+  "bundledExtensions": [
+    {
+      "info": {
+        "publisherType": "Organisation",
+        "publisherName": "Paritech",
+        "name": "TsDemo",
+        "version": "0.0.1",
+        "apiVersion": "1",
+        "shortDescription": "TypeScript Demo",
+        "longDescription": "Example extension demonstrating how an Extension is written with TypeScript",
+        "urlPath": "/extensions/tstest/tsdemo.js"
+      },
+      "install": true
+    }
+  ],
+  "diagnostics": {
+    "telemetry": {
+      "enabled": true,
+      "itemsPerMinute": 3,
+      "maxErrorCount": 1,
+      "itemIgnores": [
+        {
+          "typeId": "Message",
+          "message": "^Error TRDLLFJI33858"
+        },
+        {
+          "typeId": "Message",
+          "message": "^ResizeObserver loop limit exceeded"
+        },
+        {
+          "typeId": "Message",
+          "message": "^Zenith Publisher: Abnormal closure (1006)"
+        },
+        {
+          "typeId": "Message",
+          "message": "^Zenith Reconnection: "
+        }
+      ]
+    },
+    "toolsEnabled": false,
+    "fullDepthDebugLoggingEnabled": false,
+    "fullDepthConsistencyCheckingEnabled": false,
+    "zenithLogLevel": "off",
+    "appNotifyErrors": true,
+    "dataSubscriptionCachingDisabled": false,
+    "motifServicesBypass": {
+      "useLocalStateStorage": false
+    }
+  },
+  "features": {
+    "preview": false,
+    "advertising": false
+  },
+  "branding": {
+    "startupSplashWebPageUrl": "https://plxtra.org",
+    "desktopBarLeftImageUrl": "branding/images/desktop-bar-left-icon.svg"
+  }
+}

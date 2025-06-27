@@ -1,0 +1,9 @@
+@use './partials/flex-row-items-centered-mixin';
+
+@mixin captionFollowedByInputMixin {
+    @include flex-row-items-centered-mixin.flexRowItemsCenteredMixin;
+
+    > :nth-child(2) {
+        margin-left: 0.4em;
+    }
+}

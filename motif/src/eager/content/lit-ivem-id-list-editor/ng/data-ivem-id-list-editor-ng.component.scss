@@ -1,0 +1,32 @@
+@use './partials/revgrid';
+@use './partials/centered-toolbar-group-mixin';
+@use './partials/svg-icon-button-size';
+
+:host {
+    display: flex;
+    width: 100%;
+    gap: 0.8em;
+
+    #controls {
+        display: flex;
+        flex-direction: column;
+
+        #addDataIvemIdControl {
+            width: 100%;
+        }
+
+        #toolbar {
+            @include centered-toolbar-group-mixin.centeredToolbarGroupMixin;
+            @include svg-icon-button-size.toolbarChildMixin;
+            #filterControl {
+                width: 6em;
+                visibility: hidden;
+            }
+        }
+    }
+
+    #grid {
+        @include revgrid.hostAsRowFlexItem;
+        flex: 1 1 0;
+    }
+}

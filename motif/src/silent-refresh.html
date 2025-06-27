@@ -1,0 +1,13 @@
+<head>
+    <title></title>
+</head>
+
+<body>
+    <script src="./oidc-client-ts.min.js"></script>
+    <script>
+        var mgr = new oidc.UserManager({ response_mode: 'query' });
+        mgr.signinSilentCallback().catch(error => {
+            console.error(error);
+        });
+    </script>
+</body>

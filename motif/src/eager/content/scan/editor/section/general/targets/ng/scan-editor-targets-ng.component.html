@@ -1,0 +1,26 @@
+<div id="targetSubTypes">
+    <div id="targetSubTypeSelector">
+        <app-integer-captioned-radio #singleSymbolTargetSubTypeControl id="singleSymbolTargetSubTypeControl" inputId="singleSymbolTargetSubTypeRadio" [name]="targetSubTypeRadioName"></app-integer-captioned-radio>
+        <app-integer-captioned-radio #multiSymbolTargetSubTypeControl id="multiSymbolTargetSubTypeControl" inputId="multiSymbolTargetSubTypeRadio" [name]="targetSubTypeRadioName"></app-integer-captioned-radio>
+        <app-integer-captioned-radio #singleMarketTargetSubTypeControl id="singleMarketTargetSubTypeControl" inputId="singleMarketTargetSubTypeRadio" [name]="targetSubTypeRadioName"></app-integer-captioned-radio>
+        <app-integer-captioned-radio #multiMarketTargetSubTypeControl id="multiMarketTargetSubTypeControl" inputId="multiMarketTargetSubTypeRadio" [name]="targetSubTypeRadioName"></app-integer-captioned-radio>
+    </div>
+    <div id="targetSubTypeControls">
+        <div id="singleSymbolSubTargetType" [style.display]="isSingleSymbolSubTargetType() ? null : 'none'">
+            <app-data-ivem-id-select #singleSymbolControl id="singleSymbolControl"></app-data-ivem-id-select>
+        </div>
+        <div id="multiSymbolSubTargetType" [style.display]="isMultiSymbolSubTargetType() ? null : 'none'">
+            <app-data-ivem-id-list-editor #multiSymbolEditor id="multiSymbolEditor"></app-data-ivem-id-list-editor>
+        </div>
+        <div class="marketSubTargetType" [style.display]="isSingleMarketSubTargetType() ? null : 'none'">
+            <app-integer-enum-input #singleMarketControl id="singleMarketControl"></app-integer-enum-input>
+        </div>
+        <div class="marketSubTargetType" [style.display]="isMultiMarketSubTargetType() ? null : 'none'">
+            <app-enum-array-input #multiMarketControl id="multiMarketControl"></app-enum-array-input>
+        </div>
+    </div>
+</div>
+<div id="maxMatchCount">
+    <app-caption-label #maxMatchCountLabel for="maxMatchCountInput"></app-caption-label>
+    <app-integer-text-input #maxMatchCountControl inputId="maxMatchCountInput"></app-integer-text-input>
+</div>

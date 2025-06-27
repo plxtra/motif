@@ -1,0 +1,15 @@
+@use './partials/svg-icon-button-size';
+@use "./partials/ng-select/_ng-select-id-element";
+
+#rootDiv {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    @include svg-icon-button-size.toolbarChildMixin;
+
+    > ng-select {
+        display: inline-block!important;
+        width: 100%;
+    }
+}

@@ -1,0 +1,31 @@
+<section id="summarySection">
+  <section id="nameSection">
+    <span id="nameSpan">{{name}}</span>
+  </section>
+  <section id="publisherStatsVersionSection">
+    <span id="publisherSpan">{{publisherName}} ({{publisherTypeDisplay}})</span>
+    <span class="separator">|</span>
+    <span id="versionSpan">{{version}}</span>
+  </section>
+  <section id="shortDescriptionSection">
+    <span id="shortDescriptionSpan">{{shortDescription}}</span>
+  </section>
+  <section id="controlsSection">
+    @if (isInstallable) {
+      <button (click)="handleInstallClick()">{{installCaption}}</button>
+    }
+    @if (isDisabled) {
+      <button (click)="handleEnableClick()">{{enableCaption}}</button>
+    }
+    @if (isEnabled) {
+      <button (click)="handleDisableClick()">{{disableCaption}}</button>
+    }
+    @if (isInstalled) {
+      <button (click)="handleUninstallClick()">{{uninstallCaption}}</button>
+    }
+  </section>
+</section>
+<section id="detailSection" [style.border-top-color]="detailSectionBorderTypeColor">
+  <span id="longDescription">{{longDescription}}</span>
+</section>
+

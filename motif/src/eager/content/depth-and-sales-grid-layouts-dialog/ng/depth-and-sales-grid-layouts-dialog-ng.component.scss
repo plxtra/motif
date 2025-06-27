@@ -1,0 +1,22 @@
+@use './partials/centered-toolbar-group-mixin';
+@use './partials/svg-icon-button-size';
+
+:host {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    #toolbar {
+        @include centered-toolbar-group-mixin.centeredToolbarGroupMixin;
+        @include svg-icon-button-size.toolbarChildMixin;
+
+        #cancelButton {
+            height: 1em;
+        }
+    }
+
+    #editor {
+        flex-grow: 1;
+        min-height: 0;
+    }
+}

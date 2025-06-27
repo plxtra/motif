@@ -1,0 +1,49 @@
+@use './partials/section-content-left-margin-mixin';
+@use './partials/sub-property-control-left-margin-mixin';
+
+:host {
+    display: flex;
+    flex-direction: column;
+
+    #content {
+        @include section-content-left-margin-mixin.sectionContentLeftMarginMixin;
+
+        #propertyControls {
+            display: grid;
+            grid-template-columns: max-content 1fr;
+            column-gap: 2rem;
+            row-gap: 0.5rem;
+            align-items: center;
+
+            app-caption-label {
+                grid-column: 1;
+            }
+
+            #nameControl {
+                width: 20em;
+            }
+
+            #descriptionControl {
+                width: 30em;
+            }
+
+            #symbolListMaxCountLabel {
+                @include sub-property-control-left-margin-mixin.subPropertyControlLeftMarginMixin;
+            }
+
+            #symbolListMaxCountControl {
+                width: 6em;
+            }
+
+            #symbolListControls {
+                display: flex;
+                gap: 2em;
+
+                #showRankControl {
+                    margin-left: 2em;
+                }
+            }
+        }
+    }
+}
+

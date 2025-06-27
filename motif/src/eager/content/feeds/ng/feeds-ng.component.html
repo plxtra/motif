@@ -1,0 +1,12 @@
+<div id="content" [style.display]="dialogActive ? 'none' : null">
+    <div id="mainToolBar">
+        <div id="columnButtons">
+            <app-svg-button #autoSizeColumnWidthsButton></app-svg-button>
+            <app-svg-button #columnsButton></app-svg-button>
+        </div>
+    </div>
+    <app-feeds-grid #grid id="grid"></app-feeds-grid>
+</div>
+<div id="dialog" [style.display]="dialogActive ? null : 'none'">
+    <ng-container #dialogContainer></ng-container>
+</div>

@@ -1,0 +1,24 @@
+@use './partials/svg-icon-button-size';
+@use './partials/main-toolbar-css-mixin';
+
+:host {
+    display: block;
+    position: absolute;
+    overflow: hidden;
+    height: 100%;
+}
+
+#mainDiv {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+#mainToolbarDiv {
+    @include main-toolbar-css-mixin.mainToolbarCssMixin;
+    @include svg-icon-button-size.toolbarChildMixin;
+}
+
+#brokerage-accounts {
+    flex-grow: 1;
+}

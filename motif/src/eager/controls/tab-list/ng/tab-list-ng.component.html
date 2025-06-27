@@ -1,0 +1,12 @@
+@for (tab of tabs; track tab) {
+  <ng-container id="list">
+    <button
+      role="tab"
+      [attr.aria-selected]="tab.active"
+      [ngStyle]="{'background-color': tab.bkgdColor, 'color': tab.foreColor, 'border-style': tab.borderStyle, 'border-color': borderColor }"
+      (click)="tab.clickEventer($event)"
+      >
+      {{tab.caption}}
+    </button>
+  </ng-container>
+}

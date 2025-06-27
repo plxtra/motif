@@ -1,0 +1,19 @@
+@mixin row {
+    display: flex;
+
+    // > [role="tab"]:not(:first-of-type) {
+    //     margin-left: 1.2em;
+    // }
+
+    > [role="tab"] {
+        border-style: none;
+
+        &:not(:first-of-type) {
+            margin-left: 1.2em;
+        }
+
+        &.selected {
+            color: blue;
+        }
+    }
+}

@@ -1,0 +1,21 @@
+<div id="sectionsAndTest">
+    <as-split unit="pixel" direction="horizontal" [gutterSize]="splitterGutterSize" (dragEnd)="handleSplitterDragEnd()">
+        <as-split-area [size]="sectionsSize" [minSize]="sectionsMinSize">
+            <div id="sections">
+                <app-general-scan-editor-section #generalSection></app-general-scan-editor-section>
+                <app-formula-scan-editor-section #criteriaSection [formulaField]="'Criteria'"></app-formula-scan-editor-section>
+                <app-formula-scan-editor-section #rankSection [formulaField]="'Rank'" [style.display]="rankDisplayed ? null : 'none'"></app-formula-scan-editor-section>
+                <app-scan-editor-attached-notification-channels #notificationChannelsSection></app-scan-editor-attached-notification-channels>
+            </div>
+        </as-split-area>
+        <as-split-area [size]="testSize"> <!-- was size="*"-->
+            <app-scan-test #test id="test"></app-scan-test>
+        </as-split-area>
+    </as-split>
+</div>
+<div id="editButtons">
+    <app-button-input #applyButton></app-button-input>
+    <app-button-input #revertButton></app-button-input>
+    <app-button-input #deleteButton></app-button-input>
+    <app-button-input #testButton></app-button-input>
+</div>

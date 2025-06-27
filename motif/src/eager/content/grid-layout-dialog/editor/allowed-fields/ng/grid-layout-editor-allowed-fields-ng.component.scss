@@ -1,0 +1,22 @@
+@use './partials/revgrid';
+
+:host {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    #header {
+        display: flex;
+        align-items: center;
+        gap: 0.8em;
+
+        #heading {
+            font-size: larger;
+        }
+    }
+
+    #gridHost {
+        @include revgrid.hostAsColumnFlexItem;
+        flex: 1 1 0;
+    }
+}

@@ -1,0 +1,58 @@
+@use './partials/svg-icon-button-size';
+@use './partials/variables';
+@use './partials/centered-toolbar-group-mixin';
+@use './partials/main-toolbar-css-mixin';
+
+:host {
+    display: block;
+    position: absolute;
+    overflow: hidden;
+    height: 100%;
+}
+
+#inputDiv {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    #mainToolbarDiv {
+        @include main-toolbar-css-mixin.mainToolbarCssMixin;
+        @include svg-icon-button-size.toolbarDescendantMixin;
+
+        #symbolInput {
+            margin-left: variables.$toolbar-button-group-separation;
+            width: 12em;
+        }
+
+        #rollUpDownButtonSection {
+            @include centered-toolbar-group-mixin.centeredToolbarGroupMixin;
+            margin-left: variables.$toolbar-button-group-separation;
+        }
+
+        #filterSection {
+            @include centered-toolbar-group-mixin.centeredToolbarGroupMixin;
+            margin-left: variables.$toolbar-button-group-separation;
+        }
+
+        #columnButtonsSection {
+            @include centered-toolbar-group-mixin.centeredToolbarGroupMixin;
+            margin-left: variables.$toolbar-button-group-separation;
+        }
+
+        #linkButtonsSection {
+            @include centered-toolbar-group-mixin.centeredToolbarGroupMixin;
+            margin-left: variables.$toolbar-button-group-separation;
+        }
+    }
+}
+
+#depthContent {
+    flex-grow: 1;
+    min-height: 0;
+}
+
+#layoutEditorDiv {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}

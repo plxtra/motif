@@ -1,0 +1,61 @@
+<fieldset id="general" class="fieldsetGrid">
+    <legend class="fieldSetLegend">{{generalFieldsetLegend}}</legend>
+    <app-caption-label #fontFamilyLabel for="fontFamilyInput"></app-caption-label>
+    <app-text-input #fontFamilyControl id="fontFamilyControl" inputId="fontFamilyInput" spellCheck="false"></app-text-input>
+    <app-caption-label #fontSizeLabel for="fontSizeInput"></app-caption-label>
+    <app-text-input #fontSizeControl id="fontSizeControl" inputId="fontSizeInput" spellCheck="false"></app-text-input>
+    <app-caption-label #defaultExchangeLabel for="defaultExchangeInput"></app-caption-label>
+    <app-exchange-select-item #defaultExchangeControl id="defaultExchangeControl" inputId="defaultExchangeInput"></app-exchange-select-item>
+    <app-caption-label #dropDownEditableSearchTermLabel for="dropDownEditableSearchTermCheckbox"></app-caption-label>
+    <app-checkbox-input #dropDownEditableSearchTermControl id="dropDownEditableSearchTermControl" inputId="dropDownEditableSearchTermCheckbox"></app-checkbox-input>
+    <app-caption-label #numberGroupingActiveLabel for="numberGroupingActiveCheckbox"></app-caption-label>
+    <app-checkbox-input #numberGroupingActiveControl id="numberGroupingActiveControl" inputId="numberGroupingActiveCheckbox"></app-checkbox-input>
+    <app-caption-label #minimumPriceFractionDigitsCountLabel for="minimumPriceFractionDigitsCountInput"></app-caption-label>
+    <app-integer-text-input #minimumPriceFractionDigitsCountControl id="minimumPriceFractionDigitsCountControl"
+        inputId="minimumPriceFractionDigitsCountInput" spellCheck="false"></app-integer-text-input>
+    <app-caption-label #24HourLabel for="24HourControlCheckbox"></app-caption-label>
+    <app-checkbox-input #24HourControl id="24HourControl" inputId="24HourControlCheckbox"></app-checkbox-input>
+    <app-caption-label #dateTimeTimezoneModeLabel for="sourceDateTimeTimezoneModeRadio"></app-caption-label>
+    <div id="dateTimeTimezoneMode">
+        <app-integer-captioned-radio #sourceDateTimeTimezoneModeControl id="sourceDateTimeTimezoneModeControl" inputId="sourceDateTimeTimezoneModeRadio" [name]="dateTimeTimezoneModeRadioName"></app-integer-captioned-radio>
+        <app-integer-captioned-radio #localDateTimeTimezoneModeControl id="localDateTimeTimezoneModeControl" inputId="localDateTimeTimezoneModeRadio" [name]="dateTimeTimezoneModeRadioName"></app-integer-captioned-radio>
+        <app-integer-captioned-radio #utcDateTimeTimezoneModeControl id="utcDateTimeTimezoneModeControl" inputId="utcDateTimeTimezoneModeRadio" [name]="dateTimeTimezoneModeRadioName"></app-integer-captioned-radio>
+    </div>
+</fieldset>
+<fieldset id="symbols" class="fieldsetGrid">
+    <legend class="fieldSetLegend">{{symbolsFieldsetLegend}}</legend>
+    <app-caption-label #exchangeHideModeLabel for="exchangeHideModeSelect"></app-caption-label>
+    <app-integer-enum-input #exchangeHideModeControl id="exchangeHideModeControl" inputId="exchangeHideModeSelect"></app-integer-enum-input>
+    <app-caption-label #defaultMarketHiddenLabel for="defaultMarketHiddenCheckbox"></app-caption-label>
+    <app-checkbox-input #defaultMarketHiddenControl id="defaultMarketHiddenControl" inputId="defaultMarketHiddenCheckbox"></app-checkbox-input>
+    <app-caption-label #marketCodeAsLocalWheneverPossibleLabel for="marketCodeAsLocalWheneverPossibleCheckbox"></app-caption-label>
+    <app-checkbox-input #marketCodeAsLocalWheneverPossibleControl id="marketCodeAsLocalWheneverPossibleControl" inputId="marketCodeAsLocalWheneverPossibleCheckbox"></app-checkbox-input>
+    <app-caption-label #zenithSymbologySupportLevelLabel for="zenithSymbologySupportLevelSelect"></app-caption-label>
+    <app-integer-enum-input #zenithSymbologySupportLevelControl id="zenithSymbologySupportLevelControl" inputId="zenithSymbologySupportLevelSelect"></app-integer-enum-input>
+    <app-caption-label #symbol_ExplicitSearchFieldsLabel for="symbol_ExplicitSearchFieldsInput"></app-caption-label>
+    <section id="explicitSearchFields">
+        <app-checkbox-input #symbol_ExplicitSearchFieldsEnabledControl id="symbol_ExplicitSearchFieldsEnabledControl" inputId="symbol_ExplicitSearchFieldsEnabledCheckbox"></app-checkbox-input>
+        <app-enum-array-input #symbol_ExplicitSearchFieldsControl id="symbol_ExplicitSearchFieldsControl" inputId="symbol_ExplicitSearchFieldsInput" inputSize="6em"></app-enum-array-input>
+    </section>
+</fieldset>
+<fieldset id="profile" class="fieldsetGrid">
+    <legend class="fieldSetLegend">{{profileFieldsetLegend}}</legend>
+    <app-caption-label #testSettingsLabel for="testSettingsSelect"></app-caption-label>
+    <div id="testSettingsValue">
+        <app-checkbox-input #testSettingsControl id="testSettingsControl" inputId="testSettingsSelect"></app-checkbox-input>
+        <span >
+            {{requiresRestartText}}
+        </span>
+    </div>
+    <app-caption-label #operatorDefaultExchangeEnvironmentSpecificSettingsLabel for="operatorDefaultExchangeEnvironmentSpecificSettingsSelect"></app-caption-label>
+    <div id="operatorDefaultExchangeEnvironmentSpecificSettingsValue">
+        <app-checkbox-input
+            #operatorDefaultExchangeEnvironmentSpecificSettingsControl
+            id="operatorDefaultExchangeEnvironmentSpecificSettingsControl"
+            inputId="operatorDefaultExchangeEnvironmentSpecificSettingsSelect"
+        ></app-checkbox-input>
+        <span>
+            {{requiresRestartText}}
+        </span>
+    </div>
+</fieldset>

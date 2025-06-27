@@ -1,0 +1,16 @@
+@for (menuItem of menuItems; track menuItem) {
+  <ng-container id="menu" [style.top]="top" [style.left]="left">
+    @switch (menuItem.typeId) {
+      @case (MenuItemTypeId.Command) {
+        <app-menu-bar-overlay-command-item [menuItemId]="menuItem.id" />
+      }
+      @case (MenuItemTypeId.ChildMenu) {
+        <app-menu-bar-overlay-child-item [menuItemId]="menuItem.id" />
+      }
+      @case (MenuItemTypeId.Divider) {
+        <app-menu-bar-overlay-divider-item />
+      }
+    }
+  </ng-container>
+}
+

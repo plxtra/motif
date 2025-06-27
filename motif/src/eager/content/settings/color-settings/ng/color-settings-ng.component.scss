@@ -1,0 +1,56 @@
+@use './partials/svg-icon-button-size';
+
+:host {
+    height: 100%;
+}
+
+#leftAndRightDiv {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+
+#leftDiv {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%
+}
+
+#presetCodeDiv {
+    height: 100%;
+}
+
+#loadSaveDiv {
+    display: flex;
+    @include svg-icon-button-size.toolbarChildMixin;
+
+    #loadSelect {
+        flex-grow: 1;
+    }
+
+    #saveSchemeButton {
+        box-sizing: border-box;
+    }
+}
+
+#bkgdDiv {
+    display: flex;
+    flex-direction: column;
+}
+
+#foreDiv {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+}
+
+#bkgdColorHeadingLabel {
+    display: block;
+    font-size: larger;
+}
+
+#foreColorHeadingLabel {
+    display: block;
+    font-size: larger;
+}

@@ -1,0 +1,17 @@
+<ng-select #ngSelect
+    id="ngSelect"
+    [addTag]="true"
+    [items]="[]"
+    [labelForId]="inputId()"
+    [readonly]="readonly"
+    [title]="title"
+    [loading]="waiting"
+    [selectOnTab]="true"
+    [multiple]="true"
+    [isOpen]="isOpen()"
+    [clearable]="true"
+    [placeholder]="placeholderText"
+    (change)="handleSelectChangeEvent($event)"
+    (search)="handleSelectSearchEvent($event)"
+    (open)="handleSelectOpenEvent()"
+ />

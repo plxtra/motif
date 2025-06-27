@@ -1,0 +1,16 @@
+// :host {
+//     display: block;
+//     position: absolute;
+//     overflow: hidden;
+//     height: 100%;
+// }
+
+#splitter {
+    .as-split-gutter {
+        background-color: var(--splitter-background-color);
+    }
+
+    .as-split-gutter-icon {
+        background-image: none;
+    }
+}

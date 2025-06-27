@@ -1,0 +1,22 @@
+@use './partials/flex-row-items-centered-mixin';
+@use './partials/svg-icon-button-size';
+
+:host {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+#toolBarDiv {
+    @include flex-row-items-centered-mixin.flexRowItemsCenteredMixin;
+
+    #okCancelReturnButtons {
+        @include svg-icon-button-size.okCancelReturnMixin;
+    }
+}
+
+#subDialogDiv {
+    flex-grow: 1;
+    height: 100%;
+    min-height: 0;
+}

@@ -1,0 +1,37 @@
+@use 'partials/variables';
+@use './partials/revgrid';
+@use './partials/main-toolbar-css-mixin';
+@use './partials/centered-toolbar-group-mixin';
+@use './partials/svg-icon-button-size';
+
+:host {
+    display: block;
+    height: 100%;
+
+    #content {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+
+        #mainToolBar {
+            @include main-toolbar-css-mixin.mainToolbarCssMixin;
+            @include svg-icon-button-size.toolbarDescendantMixin;
+
+            > #columnButtons {
+                @include centered-toolbar-group-mixin.centeredToolbarGroupMixin;
+                margin-left: variables.$toolbar-button-group-separation;
+            }
+        }
+
+        #grid {
+            @include revgrid.hostAsColumnFlexItem;
+            flex: 1 1 0;
+        }
+    }
+
+    #dialog {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+    }
+}

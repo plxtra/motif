@@ -1,0 +1,23 @@
+:host {
+    display: block;
+    position: absolute;
+    overflow: hidden;
+    height: 100%;
+}
+
+#titlePara {
+    font-size: larger;
+}
+
+#details {
+    display: grid;
+    grid-template-columns: max-content auto;
+    column-gap: 2em;
+    row-gap: 0.3em;
+}
+
+#invalid {
+    #invalidCaptionSpan {
+        font-weight: bolder;
+    }
+}

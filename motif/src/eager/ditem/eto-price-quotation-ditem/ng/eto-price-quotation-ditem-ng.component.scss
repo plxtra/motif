@@ -1,0 +1,56 @@
+@use './partials/svg-icon-button-size';
+@use './partials/variables';
+@use './partials/main-toolbar-css-mixin';
+@use './partials/centered-toolbar-group-mixin';
+
+:host {
+    display: block;
+    position: absolute;
+    overflow: hidden;
+    height: 100%;
+}
+
+#topDiv {
+    position: relative;
+    height: 100%;
+}
+
+#layoutEditorDiv {
+    position: absolute;
+}
+
+#inputDiv {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+#mainToolbarDiv {
+    @include main-toolbar-css-mixin.mainToolbarCssMixin;
+}
+
+#watchGridSource {
+    flex: 0 0 auto;
+}
+
+#callPutGridSource {
+    flex: 1 1 auto;
+}
+
+#symbolInput {
+    width: 12em;
+}
+
+#symbolButton {
+    margin-left: variables.$toolbar-button-separation;
+}
+
+#toolButtonsDiv {
+    @include centered-toolbar-group-mixin.centeredToolbarGroupMixin;
+    @include svg-icon-button-size.toolbarDescendantMixin;
+}
+
+#columnButtonsDiv {
+    @include centered-toolbar-group-mixin.centeredToolbarGroupMixin;
+    margin-left: variables.$toolbar-button-group-separation;
+}

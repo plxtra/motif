@@ -1,0 +1,29 @@
+{
+  "name": "tsdemo",
+  "version": "0.0.3",
+  "description": "Typescript Motif Plugin test",
+  "private": true,
+  "main": "index.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/plxtra/motif.git",
+    "directory": "extensions/tstest"
+  },
+  "scripts": {
+    "build": "webpack --mode development --config ./webpack.config.js"
+  },
+  "homepage": "https://plxtra.org",
+  "author": "Plxtra contributors",
+  "license": "MIT",
+  "dependencies": {
+    "motif": "file:../../motif"
+  },
+  "devDependencies": {
+    "css-loader": "^7.1.2",
+    "style-loader": "^4.0.0",
+    "ts-loader": "^9.5.2",
+    "typescript": "^5.8.3",
+    "webpack": "^5.28.0",
+    "webpack-cli": "^6.0.1"
+  }
+}

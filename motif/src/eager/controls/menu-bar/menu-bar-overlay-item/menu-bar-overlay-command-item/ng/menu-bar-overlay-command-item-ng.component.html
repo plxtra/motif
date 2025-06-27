@@ -1,0 +1,8 @@
+@if (keyboardActive) {
+  <span>{{accessibleCaption.preAccessKey}}</span>
+  <span class="accessKey">{{accessibleCaption.accessKey}}</span>
+  <span>{{accessibleCaption.postAccessKey}}</span>
+} @else {
+  <span>{{caption}}</span>
+}
+

@@ -1,0 +1,13 @@
+<section id="headingSection">
+    <span id="headingSpan">{{headingCaption}}</span>
+</section>
+<section id="items">
+    @for (installedExtension of installedExtensions; track installedExtension) {
+    <ng-container id="menu">
+        <app-extension-list-info-item
+            [info]=installedExtension
+            (focusEmitter)="handleFocus($event)">
+        </app-extension-list-info-item>
+    </ng-container>
+    }
+</section>

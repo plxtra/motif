@@ -1,0 +1,15 @@
+@if (restartable && restartReasonCount > 0) {
+  <section id="restartSection">
+    <button id="restartButton" (click)="restart()">{{restartCaption}}</button>
+    @if (restartReasonCount === 1) {
+      <span id="restartRequiredReasonSpan">{{restartReasonsText}}</span>
+    } @else {
+      <textarea id="restartReasonsText" spellCheck="false" readonly wrap="off">{{restartReasonsText}}</textarea>
+    }
+  </section>
+}
+<span id="errorCountText" [style.display]="errorCountDisplay">
+  {{errorCountText}}
+</span>
+<textarea id="alertTexts" spellCheck="false" readonly wrap="off">{{alertTexts}}</textarea>
+<button id="hideButton" (click)="hide()" [style.display]="hideButtonDisplay">{{hideCaption}}</button>

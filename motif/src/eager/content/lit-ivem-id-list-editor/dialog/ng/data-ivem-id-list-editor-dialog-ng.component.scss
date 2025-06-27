@@ -1,0 +1,71 @@
+@use 'partials/variables';
+@use './partials/revgrid';
+@use './partials/centered-toolbar-group-mixin';
+@use './partials/main-toolbar-css-mixin';
+@use './partials/flex-row-items-centered-mixin';
+@use './partials/svg-icon-button-size';
+
+:host {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+
+    #okGridToolbar {
+        @include flex-row-items-centered-mixin.flexRowItemsCenteredMixin;
+
+        #okCancelReturnButtons {
+            @include svg-icon-button-size.okCancelReturnMixin;
+        }
+
+        #cancelButton {
+            display: none;
+        }
+
+        #counts {
+            @include centered-toolbar-group-mixin.centeredToolbarGroupMixin;
+            margin-left: variables.$toolbar-button-group-separation;
+        }
+    }
+
+    #contentAndDialog {
+        height: 100%;
+        #content {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+
+            #contentToolbar {
+                @include main-toolbar-css-mixin.mainToolbarCssMixin;
+
+                #addDataIvemIdControl {
+                    width: 12em;
+                }
+
+                #removeControls {
+                    @include centered-toolbar-group-mixin.centeredToolbarGroupMixin;
+                    @include svg-icon-button-size.toolbarChildMixin;
+                    margin-left: variables.$toolbar-button-group-separation;
+                }
+
+                #gridControls {
+                    @include centered-toolbar-group-mixin.centeredToolbarGroupMixin;
+                    @include svg-icon-button-size.toolbarChildMixin;
+                    margin-left: variables.$toolbar-button-group-separation;
+                    #filterControl {
+                        width: 6em;
+                    }
+                }
+            }
+
+            #grid {
+                @include revgrid.hostAsColumnFlexItem;
+                flex: 1 1 0;
+            }
+        }
+
+        #dialog {
+            height: 100%;
+        }
+    }
+}

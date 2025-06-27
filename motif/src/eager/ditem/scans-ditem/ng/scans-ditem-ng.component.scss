@@ -1,0 +1,63 @@
+@use './partials/svg-icon-button-size';
+@use './partials/variables';
+@use './partials/centered-toolbar-group-mixin';
+@use './partials/main-toolbar-css-mixin';
+
+:host {
+    display: block;
+    position: absolute;
+    overflow: hidden;
+    height: 100%;
+}
+
+#inputDiv {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    #mainToolbarDiv {
+        @include main-toolbar-css-mixin.mainToolbarCssMixin;
+
+        #filterEdit {
+            @include centered-toolbar-group-mixin.centeredToolbarGroupMixin;
+            margin-left: variables.$toolbar-button-group-separation;
+        }
+
+        #toolButtonsDiv {
+            @include centered-toolbar-group-mixin.centeredToolbarGroupMixin;
+            @include svg-icon-button-size.toolbarDescendantMixin;
+            margin-left: variables.$toolbar-button-group-separation;
+
+            #columnButtonsDiv {
+                @include centered-toolbar-group-mixin.centeredToolbarGroupMixin;
+                margin-left: variables.$toolbar-button-group-separation;
+            }
+
+            #linkButtonsDiv {
+                @include centered-toolbar-group-mixin.centeredToolbarGroupMixin;
+                margin-left: variables.$toolbar-button-group-separation;
+            }
+        }
+    }
+
+    #scans {
+        flex-grow: 1;
+        min-height: 0;
+        overflow-y: hidden !important;
+
+        #listArea {
+            display: flex;
+            height: 100%;
+
+            #scanList {
+                flex: 1 1 auto;
+            }
+        }
+    }
+}
+
+#dialogDiv {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}

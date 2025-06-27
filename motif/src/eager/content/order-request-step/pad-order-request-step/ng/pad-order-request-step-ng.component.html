@@ -1,0 +1,92 @@
+<app-caption-label #accountLabel for="accountIdInput" />
+<div id="accountDiv">
+    <app-brokerage-account-group-input #accountIdInput class="accountIdControl" inputId="accountIdInput"></app-brokerage-account-group-input>
+    <app-brokerage-account-group-name-label #accountNameLabel id="accountNameLabel"></app-brokerage-account-group-name-label>
+</div>
+<app-caption-label #sideLabel for="sideInput" />
+<div id="sideDiv" class="horizontalChildrenSeparator">
+    <app-integer-captioned-radio #buySideRadio inputId="buySideRadio" [name]="sideRadioName"></app-integer-captioned-radio>
+    <app-integer-captioned-radio #sellSideRadio inputId="sellSideRadio" [name]="sideRadioName"></app-integer-captioned-radio>
+    <app-integer-enum-input #sideInput id="sideControl" inputId="sideInput" [style.visibility]="sideInputVisible ? 'visible' : 'hidden'"></app-integer-enum-input>
+</div>
+<app-caption-label #symbolLabel for="symbolInput" />
+<div id="symbolDiv">
+    <div id="symbolControls">
+        <app-trading-ivem-id-select #symbolControl id="symbolControl" inputId="symbolInput"></app-trading-ivem-id-select>
+        <app-trading-market-input #tradingMarketControl id="tradingMarketControl" [style.visibility]="tradingMarketControlVisible ? 'visible' : 'hidden'"></app-trading-market-input>
+    </div>
+    <div id="symbolNameDiv">
+        <app-trading-ivem-id-name-label #symbolNameLabel id="symbolNameLabel"></app-trading-ivem-id-name-label>
+    </div>
+</div>
+<app-caption-label #quantityLabel for="quantityInput" />
+<div id="quantityDiv">
+    <app-integer-text-input #quantityInput inputId="quantityInput"></app-integer-text-input>
+</div>
+<app-caption-label #orderTypeLabel for="orderTypeInput" />
+<div id="orderTypeDiv">
+    <div id="orderTypeRadioDiv">
+        <app-integer-captioned-radio #limitOrderTypeRadio inputId="limitOrderTypeRadio" [name]="orderTypeRadioName"></app-integer-captioned-radio>
+        <app-integer-captioned-radio #marketOrderTypeRadio inputId="marketOrderTypeRadio" [name]="orderTypeRadioName"></app-integer-captioned-radio>
+    </div>
+    <app-integer-enum-input #orderTypeInput id="orderTypeControl" inputId="orderTypeInput"></app-integer-enum-input>
+</div>
+<app-caption-label #priceLabel for="priceInput" />
+<div id="priceDiv">
+    <app-decimal-input #priceInput id="priceControl" inputId="priceInput"></app-decimal-input>
+    <app-integer-enum-caption #priceUnitLabel></app-integer-enum-caption>
+</div>
+<app-caption-label #timeInForceLabel />
+<div id="timeInForceDiv">
+    <div id="timeInForceRow1Div" class="horizontalRadioSeparator">
+        <app-integer-captioned-radio #untilCancelRadio inputId="untilCancelRadio" [name]="timeInForceRadioName"></app-integer-captioned-radio>
+        <app-integer-captioned-radio #fillAndKillRadio inputId="fillAndKillRadio" [name]="timeInForceRadioName"></app-integer-captioned-radio>
+    </div>
+    <div id="timeInForceRow2Div" class="horizontalRadioSeparator">
+        <app-integer-captioned-radio #fillOrKillRadio inputId="fillOrKillRadio" [name]="timeInForceRadioName"></app-integer-captioned-radio>
+        <app-integer-captioned-radio #dayRadio inputId="dayRadio" [name]="timeInForceRadioName"></app-integer-captioned-radio>
+    </div>
+    <div id="timeInForceRow3Div" class="horizontalChildrenSeparator">
+        <app-integer-captioned-radio #untilDateRadio inputId="untilDateRadio" [name]="timeInForceRadioName"></app-integer-captioned-radio>
+        <app-date-input #expiryDateInput></app-date-input>
+    </div>
+</div>
+<app-caption-label #triggerLabel for="triggerTypeInput" />
+<div id="triggerDiv">
+    <div id="triggerTypeDiv">
+        <div id="triggerTypeRadioDiv" class="horizontalRadioSeparator">
+            <app-integer-captioned-radio #immediateTriggerTypeRadio inputId="immediateTriggerTypeRadio" [name]="triggerTypeRadioName"></app-integer-captioned-radio>
+            <app-integer-captioned-radio #priceTriggerTypeRadio inputId="priceTriggerTypeRadio" [name]="triggerTypeRadioName"></app-integer-captioned-radio>
+        </div>
+        <!-- <app-integer-enum-input #triggerTypeInput id="triggerTypeControl" inputId="triggerTypeInput"></app-integer-enum-input> -->
+    </div>
+    <div id="priceTriggerTypeDiv" [style.display]="priceTriggerTypeVisible ? null : 'none'">
+        <div id="priceTriggerValueDiv">
+            <app-caption-label #triggerValueLabel for="triggerValueInput"></app-caption-label>
+            <app-decimal-input #triggerValueInput id="triggerValueControl" inputId="triggerValueInput"></app-decimal-input>
+        </div>
+        <!-- <app-integer-enum-input #triggerFieldSelect id="triggerFieldControl" inputId="triggerFieldSelect"></app-integer-enum-input> -->
+        <div id="triggerFieldMovementDiv">
+            <app-integer-captioned-radio #lastTriggerFieldRadio inputId="lastTriggerFieldRadio" [name]="triggerFieldRadioName"></app-integer-captioned-radio>
+            <app-integer-captioned-radio #bestBidTriggerFieldRadio inputId="bestBidTriggerFieldRadio" [name]="triggerFieldRadioName"></app-integer-captioned-radio>
+            <app-integer-captioned-radio #bestAskTriggerFieldRadio inputId="bestAskTriggerFieldRadio" [name]="triggerFieldRadioName"></app-integer-captioned-radio>
+            <app-integer-captioned-radio #noneTriggerMovementRadio inputId="noneTriggerMovementRadio" [name]="triggerMovementRadioName"></app-integer-captioned-radio>
+            <app-integer-captioned-radio #upTriggerMovementRadio inputId="upTriggerMovementRadio" [name]="triggerMovementRadioName"></app-integer-captioned-radio>
+            <app-integer-captioned-radio #downTriggerMovementRadio inputId="downTriggerMovementRadio" [name]="triggerMovementRadioName"></app-integer-captioned-radio>
+        </div>
+    </div>
+</div>
+<app-caption-label #existingOrderLabel [style.display]="existingOrderVisible ? null : 'none'" />
+<app-text-input #existingOrderIdControl [style.display]="existingOrderVisible ? null : 'none'" />
+<app-caption-label #destinationAccountLabel [style.display]="destinationAccountVisible ? null : 'none'"
+    for="destinationAccountIdControl" />
+<div [style.display]="destinationAccountVisible ? null : 'none'">
+    <app-brokerage-account-group-input #destinationAccountIdControl inputId="destinationAccountIdControl"></app-brokerage-account-group-input>
+    <app-brokerage-account-group-name-label #destinationAccountNameLabel></app-brokerage-account-group-name-label>
+</div>
+<app-caption-label #errorsLabel for="errorsInput" />
+<div id="errorsDiv">
+    <app-integer-label #errorCountLabel for="errorsInput"></app-integer-label>
+    <app-text-input #errorsInput id="errorsControl" inputId="errorsInput"></app-text-input>
+    <!--<app-caption-label #noErrorsLabel></app-caption-label>-->
+</div>

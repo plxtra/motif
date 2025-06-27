@@ -1,0 +1,10 @@
+@use "./partials/ng-select/_ng-select-id-element";
+
+#ngSelect {
+    display: inline-block!important;
+    width: 100%;
+
+    .ng-select-container .ng-value-container .ng-input > input {
+        width: var(--inputSize);
+    }
+}

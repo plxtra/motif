@@ -1,0 +1,14 @@
+<section id="headingSection">
+    <span id="headingSpan">{{headingCaption}}</span>
+</section>
+<section id="items">
+    @for (info of infos; track info) {
+    <ng-container id="menu">
+        <app-extension-list-info-item
+            [info]=info
+            (installSignalEmitter)="handleInstallSignal($event)"
+            (focusEmitter)="handleFocus($event)">
+        </app-extension-list-info-item>
+    </ng-container>
+    }
+</section>

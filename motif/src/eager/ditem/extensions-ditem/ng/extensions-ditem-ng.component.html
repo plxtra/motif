@@ -1,0 +1,14 @@
+<as-split #splitter id="splitter" direction="horizontal" [unit]="splitterUnit" [gutterSize]="splitterGutterSize" (dragEnd)="splitDragEnd()">
+    <as-split-area [size]="sidebarSplitAreaSize">
+        <app-extensions-sidebar #sidebar
+            id="sidebar"
+            (infoFocusEmitter)="handleInfoFocus($event)"
+            (listTransitionStartEmitter)="handleListTransitionStart($event)"
+            (listTransitionFinishEmitter)="handleListTransitionFinish($event)"
+        />
+    </as-split-area>
+    <as-split-area [size]="detailSplitAreaSize">
+        <app-extension-detail #detail [info]="focusedInfo" />
+    </as-split-area>
+</as-split>
+
