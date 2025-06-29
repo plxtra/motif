@@ -1,0 +1,33 @@
+name: Upload API Artifact
+
+on:
+  workflow_call:
+    secrets:
+      UPLOAD_API_ARTIFACT:
+        required: true
+
+jobs:
+  build-upload-lib-artifact:
+    runs-on: ubuntu-latest
+    defaults:
+        run:
+          working-directory: motif # directory of motif workspace (app)
+      
+    steps:
+      - name: Checkout Motif repository using git
+        uses: actions/checkout@v4
+        with:
+          repository: plxtra/motif
+          ref: upload-api-artifact-test
+
+      - name: Install dependencies required by motif app
+        run: npm ci
+
+      - name: Build motif lib content
+        run: npm run lib
+
+      - name: Upload motif lib content as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: lib-output
+          path: motif/lib # lib folder under directory of motif workspace (app)
