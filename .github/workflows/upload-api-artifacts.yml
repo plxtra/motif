@@ -52,4 +52,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: config-xosp-dev
-          path: motif\src\config\config.xosp-dev.json
+          path: motif/src/config/config.xosp-dev.json
