@@ -1,17 +1,14 @@
-name: Upload API Artifact
+name: Upload API Artifacts
 
 on:
   workflow_call:
     secrets:
-      UPLOAD_API_ARTIFACT:
+      MOTIF_UPLOAD_API_ARTIFACTS_ACCESS:
         required: true
 
 jobs:
-  build-upload-lib-artifact:
+  build-upload-lib-artifacts:
     runs-on: ubuntu-latest
-    defaults:
-        run:
-          working-directory: motif # directory of motif workspace (app)
       
     steps:
       - name: Checkout Motif repository using git
@@ -20,13 +17,39 @@ jobs:
           repository: plxtra/motif
 
       - name: Install dependencies required by motif app
+        working-directory: motif # directory of motif workspace (app)
         run: npm ci
 
       - name: Build motif lib content
+        working-directory: motif # directory of motif workspace (app)
         run: npm run lib
 
-      - name: Upload motif lib content as artifact
+      - name: Upload motif lib artifact
         uses: actions/upload-artifact@v4
         with:
           name: lib-output
           path: motif/lib # lib folder under directory of motif workspace (app)
+
+      - name: Upload ts-demo extension artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ts-demo-extension
+          path: extensions/ts-demo
+
+      - name: Upload highcharts extension artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: highcharts-extension
+          path: extensions/highcharts
+
+      - name: Upload website-embed artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: website-embed-extension
+          path: extensions/website-embed
+
+      - name: Upload XOSP config artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: config-xosp-dev
+          path: motif\src\config\config.xosp-dev.json
