@@ -24,6 +24,6 @@ export namespace ExtensionRegistrar {
         export type LoadCallback = (this: void, extension: ExtensionSvc) => Extension;
     }
 
-    export const windowPropertyName = 'motifExtensionRegistrar';
+    export const windowPropertyName = 'plxtraMotifExtensionRegistrar';
 }
 

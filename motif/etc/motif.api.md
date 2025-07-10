@@ -1366,7 +1366,7 @@ export namespace ExtensionRegistrar {
         export type LoadCallback = (this: void, extension: ExtensionSvc) => Extension;
     }
     const // (undocumented)
-    windowPropertyName = "motifExtensionRegistrar";
+    windowPropertyName = "plxtraMotifExtensionRegistrar";
 }
 
 // @public (undocumented)

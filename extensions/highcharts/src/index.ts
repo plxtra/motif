@@ -5,7 +5,7 @@ import { HighchartsExtension } from './highcharts-extension';
 
 declare global {
     interface Window {
-        motifExtensionRegistrar: ExtensionRegistrar;
+        plxtraMotifExtensionRegistrar: ExtensionRegistrar;
     }
 }
 
@@ -19,7 +19,7 @@ export function addExtensionLoadRequest() {
         apiVersion: '3',
         loadCallback: (extensionSvc) => loadCallback(extensionSvc)
     };
-    window.motifExtensionRegistrar.register(request);
+    window.plxtraMotifExtensionRegistrar.register(request);
 }
 
 export function loadCallback(extensionSvc: ExtensionSvc) {

@@ -49,7 +49,7 @@ import {
 
 declare global {
     interface Window {
-        motifExtensionRegistrar: ExtensionRegistrarImplementation;
+        plxtraMotifExtensionRegistrar: ExtensionRegistrarImplementation;
     }
 }
 
@@ -90,7 +90,7 @@ export class ExtensionsService implements FrameExtensionsAccessService {
         this._internalHandle = internalRegistration.handle;
         ExtStrings.setExtensionStrings(this._internalHandle, Strings);
 
-        window.motifExtensionRegistrar = new ExtensionRegistrarImplementation();
+        window.plxtraMotifExtensionRegistrar = new ExtensionRegistrarImplementation();
     }
 
     get internalHandle() { return this._internalHandle; }
@@ -306,7 +306,7 @@ export class ExtensionsService implements FrameExtensionsAccessService {
     private readonly _scriptLoadListener = (ev: Event) => this.handleScriptLoadEvent(ev);
 
     private handleScriptLoadEvent(ev: Event): void {
-        const requests = window.motifExtensionRegistrar.extractRequests();
+        const requests = window.plxtraMotifExtensionRegistrar.extractRequests();
         ev.currentTarget?.removeEventListener('load', this._scriptLoadListener);
 
         const requestCount = requests.length;
