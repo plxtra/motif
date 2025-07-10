@@ -196,7 +196,7 @@
      * DEFAULT VALUE: "<projectFolder>/dist/<unscopedPackageName>.d.ts"
      */
     // "untrimmedFilePath": "<projectFolder>/dist/<unscopedPackageName>.d.ts",
-    "untrimmedFilePath": "<projectFolder>/lib/public-api.d.ts",
+    "untrimmedFilePath": "<projectFolder>/lib/index.d.ts",
 
     /**
      * Specifies the output path for a .d.ts rollup file to be generated with trimming for a "beta" release.

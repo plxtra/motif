@@ -9,7 +9,7 @@ import {
     Frame,
     FrameSvc,
     JsonElement
-} from 'motif';
+} from '@plxtra/motif';
 import { ChartFrame } from '../chart-frame/chart-frame';
 import { TemplateStorage } from '../engine/template-storage';
 import { LogService } from '../log-service';

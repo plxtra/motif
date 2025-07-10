@@ -1,4 +1,4 @@
-import { Badness, DataIvemId, ExtensionSvc, JsonElement } from 'motif';
+import { Badness, DataIvemId, ExtensionSvc, JsonElement } from '@plxtra/motif';
 import { Engine } from '../engine/engine';
 import { TemplateStorage } from '../engine/template-storage';
 import { LogService } from '../log-service';

@@ -1,4 +1,4 @@
-import { Frame, FrameSvc, Json } from 'motif';
+import { Frame, FrameSvc, Json } from '@plxtra/motif';
 import './non-web-page-frame.css';
 
 export class NonWebPageFrame implements Frame {

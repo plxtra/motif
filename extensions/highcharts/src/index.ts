@@ -1,5 +1,5 @@
 import { AssertInternalError } from '@pbkware/js-utils';
-import { ExtensionRegistrar, ExtensionSvc } from 'motif';
+import { ExtensionRegistrar, ExtensionSvc } from '@plxtra/motif';
 import * as npmPackage from '../package.json';
 import { HighchartsExtension } from './highcharts-extension';
 

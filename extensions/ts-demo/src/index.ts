@@ -1,4 +1,4 @@
-import { ExtensionRegistrar, ExtensionSvc } from 'motif';
+import { ExtensionRegistrar, ExtensionSvc } from '@plxtra/motif';
 import * as npmPackage from '../package.json';
 import { TsDemoExtension } from './ts-demo-extension';
 

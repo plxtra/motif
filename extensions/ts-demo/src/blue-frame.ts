@@ -1,4 +1,4 @@
-import { Frame, FrameSvc } from 'motif';
+import { Frame, FrameSvc } from '@plxtra/motif';
 import './blue-frame.css';
 
 export class BlueFrame implements Frame {

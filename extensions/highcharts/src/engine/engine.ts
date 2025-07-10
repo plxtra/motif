@@ -15,7 +15,7 @@ import {
     IntervalHistorySequencer,
     MarketsSvc,
     RepeatableExactHistorySequencer
-} from 'motif';
+} from '@plxtra/motif';
 import { StringId, strings } from '../i18n-strings';
 import { LogService } from '../log-service';
 import { Settings } from '../settings';

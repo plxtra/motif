@@ -1,5 +1,5 @@
 import { AssertInternalError } from '@pbkware/js-utils';
-import { Command, Extension, ExtensionSvc, FrameSvc, LocalDesktop } from 'motif';
+import { Command, Extension, ExtensionSvc, FrameSvc, LocalDesktop } from '@plxtra/motif';
 import { I18nStrings, StringId } from './i18n-strings';
 import { LogService } from './log-service';
 import { Settings } from './settings';

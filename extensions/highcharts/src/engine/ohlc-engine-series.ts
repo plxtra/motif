@@ -1,6 +1,6 @@
 import { AssertInternalError } from '@pbkware/js-utils';
+import { DataIvemId, DataIvemIdPriceVolumeSequenceHistory, ExtensionSvc, Integer, OhlcHistorySequenceSeriesInterface } from '@plxtra/motif';
 import Highcharts from 'highcharts/esm/highstock.js';
-import { DataIvemId, DataIvemIdPriceVolumeSequenceHistory, ExtensionSvc, Integer, OhlcHistorySequenceSeriesInterface } from 'motif';
 import { Settings } from '../settings';
 import { EngineSeries } from './engine-series';
 import { SupportedSeriesType, SupportedSeriesTypeId } from './supported-series-type';

@@ -1,6 +1,6 @@
 import { AssertInternalError, EnumInfoOutOfOrderError } from '@pbkware/js-utils';
+import { DataIvemId, DataIvemIdPriceVolumeSequenceHistory, HistorySequenceSeries, Integer, MultiEvent } from '@plxtra/motif';
 import Highcharts from 'highcharts/esm/highstock.js';
-import { DataIvemId, DataIvemIdPriceVolumeSequenceHistory, HistorySequenceSeries, Integer, MultiEvent } from 'motif';
 import { Settings } from '../settings';
 import { SupportedSeriesTypeId } from './supported-series-type';
 

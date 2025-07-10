@@ -1,5 +1,5 @@
 {
-  "name": "motif",
+  "name": "@plxtra/motif",
   "private": true,
   "version": "3.1.1",
   "license": "Apache-2.0",
@@ -17,9 +17,10 @@
     "url": "https://plxtra.org"
   },
   "files": [
-    "dist/**/*"
+    "lib/**/*",
+    "../LICENSE"
   ],
-  "typings": "lib/public-api.d.ts",
+  "typings": "lib/index.d.ts",
   "scripts": {
     "link-core": "npm link @pbkware/js-utils @pbkware/ui-action revgrid @plxtra/motif-core",
     "ng": "ng",

@@ -1,4 +1,4 @@
-import { Command, Extension, ExtensionSvc, FrameSvc, LocalDesktop } from 'motif';
+import { Command, Extension, ExtensionSvc, FrameSvc, LocalDesktop } from '@plxtra/motif';
 import { BlueFrame } from './blue-frame';
 import { I18nStrings, StringId } from './i18nStrings';
 

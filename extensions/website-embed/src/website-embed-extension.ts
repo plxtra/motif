@@ -1,6 +1,6 @@
-import { Command, Extension, ExtensionSvc, FrameSvc, LocalDesktop } from 'motif';
-import { NonWebPageFrame } from './non-web-page-frame';
+import { Command, Extension, ExtensionSvc, FrameSvc, LocalDesktop } from '@plxtra/motif';
 import { I18nStrings, StringId, strings } from './i18nStrings';
+import { NonWebPageFrame } from './non-web-page-frame';
 import { WebPageFrame } from './web-page-frame';
 
 export class WebsiteEmbedExtension implements Extension {

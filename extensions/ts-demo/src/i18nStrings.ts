@@ -1,4 +1,4 @@
-import { ExtensionSvc } from 'motif';
+import { ExtensionSvc } from '@plxtra/motif';
 
 export const enum StringId {
     TsDemoMenuCaption,

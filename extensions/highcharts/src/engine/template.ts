@@ -52,7 +52,7 @@ import 'highcharts/esm/modules/stock-tools.js';
 // import zoomXYSvgMap from 'highcharts/gfx/stock-icons/zoom-xy.svg';
 // import zoomYSvgMap from 'highcharts/gfx/stock-icons/zoom-y.svg';
 
-import { ExtensionSvc, HistorySequencer, Integer, IntervalHistorySequencer, JsonElement } from 'motif';
+import { ExtensionSvc, HistorySequencer, Integer, IntervalHistorySequencer, JsonElement } from '@plxtra/motif';
 import { EngineSeries } from './engine-series';
 import { SupportedSeriesType } from './supported-series-type';
 
