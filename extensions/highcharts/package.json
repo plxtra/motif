@@ -2,7 +2,7 @@
   "name": "motif-highcharts",
   "version": "0.0.4",
   "description": "Highcharts Motif extension",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "private": true,
   "repository": {
     "type": "git",

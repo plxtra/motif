@@ -2,7 +2,7 @@
   "name": "motif",
   "private": true,
   "version": "3.1.1",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/plxtra/motif.git",
