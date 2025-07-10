@@ -134,7 +134,7 @@ export class ExtensionsService implements FrameExtensionsAccessService {
 
 
     // loadTest() {
-    //     this.loadExtension('tstest/dist/tstest.js');
+    //     this.loadExtension('ts-demo/dist/ts-demo.js');
     // }
 
     public installExtension(info: ExtensionInfo, loadAlso: boolean) {

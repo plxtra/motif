@@ -18,7 +18,7 @@
   "workspaces": [
     "motif",
     "extensions/highcharts",
-    "extensions/tstest",
+    "extensions/ts-demo",
     "extensions/website-embed"
   ]
 }

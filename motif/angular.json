@@ -147,8 +147,8 @@
                 },
                 {
                   "glob": "*",
-                  "input": "../extensions/tstest/dist",
-                  "output": "/extensions/tstest/"
+                  "input": "../extensions/ts-demo/dist",
+                  "output": "/extensions/ts-demo/"
                 }
               ]
             },

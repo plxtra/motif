@@ -7,7 +7,7 @@ EOT
 COPY "package.json" "package-lock.json" "./"
 COPY "motif/package.json" "motif/"
 COPY "extensions/highcharts/package.json" "extensions/highcharts/"
-COPY "extensions/tstest/package.json" "extensions/tstest/"
+COPY "extensions/ts-demo/package.json" "extensions/ts-demo/"
 COPY "extensions/website-embed/package.json" "extensions/website-embed/"
 RUN npm clean-install --no-audit --no-fund --no-update-notifier
 
@@ -33,10 +33,10 @@ COPY --from=lib /src/motif/lib /src/motif/lib/
 COPY "extensions/highcharts" "."
 RUN npm run build
 
-FROM base AS tstest
-WORKDIR /src/extensions/tstest
+FROM base AS tsdemo
+WORKDIR /src/extensions/ts-demo
 COPY --from=lib /src/motif/lib /src/motif/lib/
-COPY "extensions/tstest" "."
+COPY "extensions/ts-demo" "."
 RUN npm run build
 
 FROM base AS webembed
@@ -49,5 +49,5 @@ FROM nginx:stable AS final
 COPY motif/nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=motif /src/motif/dist /app
 COPY --from=highcharts /src/extensions/highcharts/dist /app/browser/extensions/highcharts
-COPY --from=tstest /src/extensions/tstest/dist /app/browser/extensions/tstest
+COPY --from=tsdemo /src/extensions/ts-demo/dist /app/browser/extensions/ts-demo
 COPY --from=webembed /src/extensions/website-embed/dist /app/browser/extensions/website-embed

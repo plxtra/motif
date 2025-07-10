@@ -10,7 +10,7 @@ module.exports = {
     ],
 
     output: {
-        filename: 'tsdemo.js',
+        filename: 'ts-demo.js',
         path: path.resolve(__dirname, 'dist/'),
     },
 

@@ -71,7 +71,7 @@
         "apiVersion": "1",
         "shortDescription": "TypeScript Demo",
         "longDescription": "Example extension demonstrating how an Extension is written with TypeScript",
-        "urlPath": "/_extensions/tstest/tsdemo.js"
+        "urlPath": "/_extensions/ts-demo/ts-demo.js"
       },
       "install": false
     }
