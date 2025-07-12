@@ -1,11 +1,17 @@
 import { ExtensionSvc } from '@plxtra/motif';
 
+// Translatable strings in this extension.
+
+// Each string has a unique StringId.
+// #region StringId
 export const enum StringId {
     TsDemoMenuCaption,
     BlueFrameMenuCaption,
 }
+// #endregion StringId
 
 export namespace I18nStrings {
+    // #region Languages
     // Languages
     const enum LanguageId {
         English
@@ -23,7 +29,9 @@ export namespace I18nStrings {
     const Languages: Language[] = [
         { id: LanguageId.English, code: englishCode },
     ];
+    // #endregion Languages
 
+    // #region recsObject
     interface Translations {
         en: string;
     }
@@ -35,7 +43,7 @@ export namespace I18nStrings {
 
     type recsObject = { [id in keyof typeof StringId]: Rec };
 
-    // tslint:disable:max-line-length
+    // Define English translations for each string.
     const recsObject: recsObject = {
         TsDemoMenuCaption: {
             id: StringId.TsDemoMenuCaption, translations: {
@@ -49,13 +57,14 @@ export namespace I18nStrings {
         },
 
     } as const;
+    // #endregion recsObject
 
-    // tslint:enable:max-line-length
-
-
+    // #region recs
     const recs: readonly Rec[] = Object.values(recsObject);
     export const recCount = recs.length;
+    // #endregion recs
 
+    // #region initialise
     export function initialise(extensionSvc: ExtensionSvc) {
         const outOfOrderIdx = recs.findIndex((rec: Rec, index: number) => rec.id !== index);
         if (outOfOrderIdx >= 0) {
@@ -69,6 +78,7 @@ export namespace I18nStrings {
             extensionSvc.resourcesSvc.setI18nStrings(strings);
         }
     }
+    // #endregion initialise
 
     function getBrowserLanguage(): string {
         return navigator.language; // || (navigator as any).userLanguage; // fallback for IE
@@ -103,4 +113,7 @@ export namespace I18nStrings {
     }
 }
 
+// Global accessible translated strings
+// #region strings
 export const strings: string[] = new Array<string>(I18nStrings.recCount);
+// #endregion strings

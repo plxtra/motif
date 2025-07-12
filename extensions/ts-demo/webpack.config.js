@@ -1,37 +1,37 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const webpack = require("webpack");
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+// #region requires
 const path = require("path");
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+// #endregion requires
 
 module.exports = {
+    // #region entry
     entry: [
         path.resolve(__dirname, "src/index.ts"),
     ],
+    // #endregion entry
 
+    // #region output
     output: {
         filename: 'ts-demo.js',
         path: path.resolve(__dirname, 'dist/'),
     },
+    // #endregion output
 
+    // #region source-map
     devtool: 'source-map',
+    // #endregion source-map
 
-    devServer: {
-        port: 3000,
-        writeToDisk: true,
-        publicPath: 'dist/',
-        contentBase: path.resolve(__dirname, 'dist'),
-    },
-
+    // #region resolve
     resolve: {
         extensions: ['.ts', '.js'],
         symlinks: true,
     },
+    // #endregion resolve
 
+    // #region rules
     module: {
         rules: [
             {
-                test: /.tsx?$/,
+                test: /.ts$/,
                 use: {
                     loader: 'ts-loader',
                     options: {
@@ -44,18 +44,15 @@ module.exports = {
                 test: /\.css$/,
                 use: ["style-loader", "css-loader"],
             },
-            // {
-            //     test: /\.js$/,
-            //     enforce: 'pre',
-            //     use: ['source-map-loader'],
-            
-            // },
         ]
     },
+    // #endregion rules
 
-    plugins: [
-        new webpack.DefinePlugin({
-            env: JSON.stringify(process.env)
-        }),
-    ]
+    // // #region plugins
+    // plugins: [
+    //     new webpack.DefinePlugin({
+    //         env: JSON.stringify(process.env)
+    //     }),
+    // ]
+    // // #endregion plugins
 };

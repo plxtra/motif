@@ -1,6 +1,8 @@
 import { Frame, FrameSvc } from '@plxtra/motif';
 import './blue-frame.css';
 
+// A simple frame with a blue background, some text and a control.
+// #region frameTypeName
 export class BlueFrame implements Frame {
     static get frameTypeName() { return 'blue'; }
 
@@ -27,3 +29,4 @@ export class BlueFrame implements Frame {
         this._rootHtmlElement.appendChild(symbolSelectElement);
     }
 }
+// #endregion frameTypeName
