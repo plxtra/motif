@@ -1,0 +1,20 @@
+{
+    "typescript.tsdk": "c:\\Dev\\paritech.motif\\Source\\Paritech.Motif.WebApp\\node_modules\\typescript\\lib",
+    "files.exclude": {
+        "**/releases": true,
+        "lib/**/*": true
+    },
+    "files.watcherExclude": {
+        "lib/**/*": true
+    },
+    "angular.enable-experimental-ivy-prompt": false,
+    "githubPullRequests.ignoredPullRequestBranches": [
+        "main"
+    ],
+    "prettier.singleQuote": true,
+    "prettier.tabWidth": 4,
+    "prettier.printWidth": 140,
+    "prettier.endOfLine": "auto",
+    "npm.packageManager": "npm",
+    "npm.scriptRunner": "npm"
+}

@@ -1,7 +1,8 @@
 {
-  "name": "motif-workspaces",
+  "name": "@plxtra/motif",
   "private": true,
-  "version": "0.0.1",
+  "version": "3.1.1",
+  "license": "Apache-2.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/plxtra/motif.git"
@@ -10,15 +11,72 @@
     "url": "https://github.com/plxtra/motif/issues"
   },
   "homepage": "https://plxtra.org/architecture/components/frontend/motif/",
+  "author": {
+    "name": "Plxtra contributors",
+    "url": "https://plxtra.org"
+  },
+  "typings": "lib/index.d.ts",
   "scripts": {
+    "link-core": "npm link @pbkware/js-utils @pbkware/ui-action revgrid @plxtra/motif-core",
+    "clean:cache": "if (Test-Path .angular/cache) { Remove-Item -Path .angular/cache -Recurse -Force }",
+    "clean:lib": "if (Test-Path lib) { Remove-Item -Path lib -Recurse -Force }",
+    "start:xosp-dev": "./PSScripts/Invoke-XospNgServe.ps1",
+    "startSourceMaps": "ng serve --vendorSourceMap",
+    "build:dev": "ng build -c=development",
+    "build:prod": "ng build",
+    "build:docker": "ng build",
+    "lint": "ng lint motif",
+    "lib": "npm run clean:lib && npx tsc -p ./tsconfig.app.json --declaration --declarationMap --emitDeclarationOnly --declarationDir ./lib",
     "create": "Docker-Create.ps1",
     "params": "Docker-Params.ps1",
     "publish": "Docker-Publish.ps1"
   },
-  "workspaces": [
-    "motif",
-    "extensions/highcharts",
-    "extensions/ts-demo",
-    "extensions/website-embed"
-  ]
+  "dependencies": {
+    "@angular/animations": "^19.2.9",
+    "@angular/common": "^19.2.9",
+    "@angular/compiler": "^19.2.9",
+    "@angular/core": "^19.2.9",
+    "@angular/forms": "^19.2.9",
+    "@angular/platform-browser": "^19.2.9",
+    "@angular/platform-browser-dynamic": "^19.2.9",
+    "@angular/router": "^19.2.9",
+    "@codemirror/lang-json": "^6.0.1",
+    "@codemirror/theme-one-dark": "^6.1.2",
+    "@ctrl/tinycolor": "^4.0.3",
+    "@jaames/iro": "^5.5.1",
+    "@ng-select/ng-select": "^14.7.0",
+    "@pbkware/js-utils": "^0.8.2",
+    "@pbkware/ui-action": "^0.9.2",
+    "@plxtra/motif-core": "^0.9.5",
+    "@types/toastify-js": "^1.12.3",
+    "angular-split": "^19.0.0",
+    "angular-svg-icon": "^19.1.1",
+    "codemirror": "^6.0.1",
+    "decimal.js-light": "^2.5.1",
+    "file-saver": "^2.0.5",
+    "golden-layout": "^2.6.0",
+    "nanoid": "^5.1.5",
+    "revgrid": "^0.9.3",
+    "rxjs": "^7.8.2",
+    "toastify-js": "^1.12.0",
+    "zone.js": "^0.15.0"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^19.2.9",
+    "@angular-eslint/builder": "^19.6.0",
+    "@angular/cli": "^19.2.9",
+    "@angular/compiler-cli": "^19.2.9",
+    "@angular/language-service": "^19.2.9",
+    "@eslint/js": "^9.28.0",
+    "angular-eslint": "19.7.0",
+    "eslint": "^9.28.0",
+    "eslint-import-resolver-typescript": "^4.4.2",
+    "eslint-plugin-import-x": "^4.15.0",
+    "eslint-plugin-prefer-arrow": "^1.2.3",
+    "oidc-client-ts": "^3.2.0",
+    "rollbar": "^2.26.4",
+    "sass": "^1.87.0",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.33.0"
+  }
 }

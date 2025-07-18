@@ -1,18 +1,19 @@
 
 # Motif
 node_modules/
-/motif/.angular/cache
-/motif/releases/
-/motif/deployments/
-/motif/dist/
-/motif/dev_static/
-/motif/debug.log
-/motif/api/
-/motif/lib/
-/motif/temp/
-/motif/out-tsc/
-/motif/$null
-/extensions/**/dist/*
+*.tgz
+/.angular/cache
+/releases/
+/deployments/
+/dist/
+/dev_static/**/*
+!/dev_static/README.txt
+/debug.log
+/api/
+/lib/
+/temp/
+/out-tsc/
+/$null
 /extensions/highcharts/src/blue-frame.ts
 /extensions/highcharts/app/command-parameters/highstock-chart-command-parameters-component-directive.ts
 /extensions/highcharts/app/command-parameters/add-security-series-highstock-chart-command-parameters/add-security-series-highstock-chart-command-parameters.component.html
@@ -28,9 +29,8 @@ node_modules/
 /extensions/highcharts/app/highstock-chart-status-bar/highstock-chart-status-bar.component.scss
 /extensions/highcharts/app/highstock-chart-status-bar/highstock-chart-status-bar.component.ts
 /extensions/highcharts/out-tsc/
-/**/.vscode/**/*
-!/**/editor-configs/.vscode/**/*
-motif/src/config/SelfWealth-Standard.svg
-motif/src/assets/fonts/unica-one-v8-latin-regular.woff2
-motif/src/assets/fonts/unica-one-v8-latin-regular.woff
-motif/src/assets/img/navajo-point-robert-montgomery-reduced.jpg
+/.vscode/**/*
+/src/config/SelfWealth-Standard.svg
+/src/assets/fonts/unica-one-v8-latin-regular.woff2
+/src/assets/fonts/unica-one-v8-latin-regular.woff
+/src/assets/img/navajo-point-robert-montgomery-reduced.jpg

@@ -1,0 +1,28 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "PowerShell Launch Current File",
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${file}",
+      "cwd": "${cwd}"
+    },
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Attach to Chrome",
+      "url": "http://localhost:4200",
+      "webRoot": "${workspaceFolder}",
+      "sourceMaps": true,
+      "sourceMapPathOverrides": {
+        "webpack://@plxtra/highcharts-motif-extension/./src/*": "${workspaceFolder}/../highcharts-motif-extension/src/*",
+        "webpack://@plxtra/ts-demo-motif-extension/./src/*": "${workspaceFolder}/../ts-demo-motif-extension/src/*",
+        "webpack://@plxtra/website-embed/./src/*": "${workspaceFolder}/../website-embed/src/*",
+      },
+    },
+  ]
+}

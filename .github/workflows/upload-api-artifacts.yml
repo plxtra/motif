@@ -9,47 +9,19 @@ on:
 jobs:
   build-upload-lib-artifacts:
     runs-on: ubuntu-latest
-      
+
     steps:
       - name: Checkout Motif repository using git
         uses: actions/checkout@v4
-        with:
-          repository: plxtra/motif
 
-      - name: Install dependencies required by motif app
-        working-directory: motif # directory of motif workspace (app)
+      - name: Install dependencies
         run: npm ci
 
       - name: Build motif lib content
-        working-directory: motif # directory of motif workspace (app)
         run: npm run lib
 
       - name: Upload motif lib artifact
         uses: actions/upload-artifact@v4
         with:
           name: lib-output
-          path: motif/lib # lib folder under directory of motif workspace (app)
-
-      - name: Upload ts-demo extension artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: ts-demo-extension
-          path: extensions/ts-demo
-
-      - name: Upload highcharts extension artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: highcharts-extension
-          path: extensions/highcharts
-
-      - name: Upload website-embed artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: website-embed-extension
-          path: extensions/website-embed
-
-      - name: Upload XOSP config artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: config-xosp-dev
-          path: motif/src/config/config.xosp-dev.json
+          path: lib
