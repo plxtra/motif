@@ -13,6 +13,8 @@ jobs:
     steps:
       - name: Checkout Motif repository using git
         uses: actions/checkout@v4
+        with:
+          repository: plxtra/motif # Need to specify repository as default is from workflow caller
 
       - name: Install dependencies
         run: npm ci
