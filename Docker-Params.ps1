@@ -1,5 +1,5 @@
 $Packages = @{
-	"motif" = @( "motif", "motif" );
+	"motif" = @( "", "motif" );
 }
 
 $SourcePath = $SolutionPath

@@ -10,7 +10,7 @@ param (
 if (!(Test-Path "Docker-Params.ps1"))
 {
 	Write-Warning "Unable to find parameters. Ensure Docker-Params.ps1 exists"
-	
+
 	exit
 }
 
@@ -30,7 +30,7 @@ $VersionFormat = "v{0}"
 if (!($RegistryUrl -match "(?<id>\d+)\.dkr\.ecr\.(?<region>[\w-]+)\.amazonaws\.com"))
 {
 	Write-Warning "Invalid Amazon ECR registry URL. Must match <Registry ID>.dkr.ecr.<AWS Region>.amazonaws.com"
-	
+
 	exit
 }
 
@@ -44,10 +44,10 @@ if ($PackageName -ne "")
 	if ($Packages.ContainsKey($PackageName) -eq $false)
 	{
 		Write-Warning "No package exists with the name $PackageName"
-		
+
 		exit
 	}
-	
+
 	$Packages = @{$PackageName = $Packages[$PackageName]}
 }
 
@@ -73,15 +73,15 @@ $AllPackages = $Packages.GetEnumerator() | ForEach-Object -ThrottleLimit 4 -Para
 	$ProjectFileName = Join-Path $ProjectPath "package.json"
 
 	$ProjectContent = Get-Content $ProjectFileName | ConvertFrom-Json
-	
+
 	$SourceVersionSpec = $ProjectContent.version
 
 	$ProjectVersion = $SourceVersionSpec -as [Version]
-	
+
 	if ($ProjectVersion -eq $null)
 	{
 		Write-Warning "[FAULT]  ${ProjectName}: Version specifier in $ProjectFileName is invalid: $SourceVersionSpec"
-		
+
 		return # We can't deploy this, so we just abort
 	}
 
@@ -89,15 +89,15 @@ $AllPackages = $Packages.GetEnumerator() | ForEach-Object -ThrottleLimit 4 -Para
 	$ImageDescription = (& aws ecr describe-images --registry-id $using:RegistryID --region $using:AwsRegion --repository-name $ImageName --image-ids imageTag=$using:LatestTag 2> $null) | ConvertFrom-Json
 	# Image should only have one value that matches the regex
 	$ImageVersionSpec = $ImageDescription.imageDetails.imageTags | where {$_ -ne $null -and $_ -ne $using:LatestTag -and $_ -match $using:VersionRegex} | Select-Object -First 1
-	
+
 	if ($ImageVersionSpec -ne $null -and $ImageVersionSpec -match $using:VersionRegex)
 	{
 		$ImageVersion = $Matches[1] -as [Version]
-		
+
 		if ($ImageVersion -eq $null)
 		{
 			Write-Warning "[FAULT]  ${ProjectName}: Version specifier on ${ImageName}:latest is invalid: $ImageVersionSpec"
-			
+
 			return # Can't be sure of the version, so do nothing
 		}
 	}
@@ -105,7 +105,7 @@ $AllPackages = $Packages.GetEnumerator() | ForEach-Object -ThrottleLimit 4 -Para
 	{
 		$ImageVersion = $null
 	}
-	
+
 	return [PSCustomObject]@{ "Name" = $ProjectName; "Image" = $ImageName; "Local" = $ProjectVersion; "Published" = $ImageVersion; "Path" = $ProjectPath }
 } | Sort-Object -Property "Name"
 
@@ -116,7 +116,7 @@ foreach ($Package in $AllPackages)
 	$ProjectName = $Package.Name
 	$ProjectVersion = $Package.Local
 	$ImageVersion = $Package.Published
-	
+
 	if ($ProjectVersion -eq $null)
 	{
 		# Ignore, we printed a warning earlier
@@ -133,20 +133,20 @@ foreach ($Package in $AllPackages)
 		{
 			# The version in the registry is the same as the version of our project
 			Write-Host "[SKIP]   ${ProjectName}: Image version $ImageVersion matches Project"
-			
+
 			continue
 		}
-		
+
 		if ([Version]$ProjectVersion -lt [Version]$ImageVersion)
 		{
 			Write-Warning "[WARN]   ${ProjectName}: Image version $ImageVersion is newer than the Project version $ProjectVersion, check you have the latest source code"
-			
+
 			continue
 		}
-		
+
 		Write-Host "[UPDATE] ${ProjectName}: Update image from version $ImageVersion to $ProjectVersion"
 	}
-	
+
 	# No image found, or the image version is older than the project
 	$PackagesToUpdate += , $Package
 }
@@ -162,15 +162,15 @@ $Choices = "&Yes", "&No", "&Build Only"
 if ($PackagesToUpdate.Count -gt 0)
 {
 	Write-Host "$($PackagesToUpdate.Count) images are out-of-date."
-	
+
 	$Choice = $Host.UI.PromptForChoice("Publish Images", "Build and Publish $($PackagesToUpdate.Count) images to ${RegistryUrl}?", $Choices, 1)
 }
 else
 {
 	Write-Host "All images are up-to-date."
-	
+
 	$Choice = $Host.UI.PromptForChoice("Republish Images", "Rebuild and republish $($AllPackages.Count) images to ${RegistryUrl}?", $Choices, 1)
-	
+
 	if ($Choice -ne 1)
 	{
 		$PackagesToUpdate = $AllPackages
@@ -180,7 +180,7 @@ else
 if ($Choice -eq 1)
 {
 	Write-Host "Aborted. No changes were made."
-	
+
 	exit
 }
 
@@ -193,15 +193,27 @@ foreach ($Package in $PackagesToUpdate)
 	$DockerFileName = Join-Path $Package.Path "Dockerfile"
 	$ProjectVersion = $Package.Local
 	$VersionTag = $VersionFormat -f $ProjectVersion
-	
+
     Write-Host "================================================================================"
 	Write-Host "===== Building $ProjectName version ${ProjectVersion} from ${SolutionPath}..."
-	
-    & docker build --tag "${ImageName}:latest" --tag "$RegistryUrl/${ImageName}:latest" --tag "$RegistryUrl/${ImageName}:$VersionTag" --build-arg NugetUser=$NugetUser --build-arg NugetPassword=$NugetPassword --build-arg BUILD_CONFIGURATION=$BuildConfiguration --build-arg GIT_COMMIT=$GitCommit --file $DockerFileName $SolutionPath
-	
+
+    & docker build `
+        --tag "${ImageName}:latest" `
+        --tag "$RegistryUrl/${ImageName}:latest" `
+        --tag "$RegistryUrl/${ImageName}:$VersionTag" `
+        --build-arg NugetUser=$NugetUser `
+        --build-arg NugetPassword=$NugetPassword `
+        --build-arg BUILD_CONFIGURATION=$BuildConfiguration `
+        --build-arg GIT_COMMIT=$GitCommit `
+        --file $DockerFileName `
+        --build-context highchartscontext="$SolutionPath/../highcharts-motif-extension" `
+        --build-context tsdemocontext="$SolutionPath/../ts-demo-motif-extension" `
+        --build-context websiteembedcontext="$SolutionPath/../website-embed-motif-extension" `
+        $SolutionPath
+
 	if (!$?)
 	{
-		Read-Host -Prompt "Build failed. Press Enter to finish"
+		Read-Host -Prompt "Build failed (Is Docker running?). Press Enter to finish"
 		exit
 	}
 }
@@ -211,7 +223,7 @@ Write-Host "====================================================================
 if ($Choice -eq 2)
 {
 	Read-Host -Prompt "Build complete. Press Enter to finish"
-	
+
 	exit
 }
 
@@ -223,19 +235,19 @@ foreach ($Package in $PackagesToUpdate)
 	$ImageName = $Package.Image
 	$ProjectVersion = $Package.Local
 	$VersionTag = $VersionFormat -f $ProjectVersion
-	
+
 	Write-Host "Pushing '$RegistryUrl/${ImageName}:latest'..."
-	
+
     & docker image push "$RegistryUrl/${ImageName}:latest"
-	
+
 	if (!$?)
 	{
 		Read-Host -Prompt "Pushing $ProjectName tag 'latest' failed. Press Enter to finish"
 		exit
 	}
-	
+
     & docker image push "$RegistryUrl/${ImageName}:$VersionTag"
-	
+
 	if (!$?)
 	{
 		Read-Host -Prompt "Pushing $ProjectName tag '$VersionTag' failed. Press Enter to finish"
