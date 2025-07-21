@@ -43,8 +43,9 @@ RUN <<EOT
     npm run dist
 EOT
 
-FROM nginx:stable-alpine AS final
-RUN apk upgrade --no-cache
+# FROM nginx:stable-alpine AS final
+# RUN apk upgrade --no-cache
+FROM nginx:stable AS final
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=motif /app/dist /app
 COPY --from=highcharts /app/dist /app/browser/extensions/highcharts
