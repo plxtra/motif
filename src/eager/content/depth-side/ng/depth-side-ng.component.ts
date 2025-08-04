@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, inject } from '@angular/core';
 import { ContentComponentBaseNgDirective } from '../../ng/content-component-base-ng.directive';
 import { ContentNgService } from '../../ng/content-ng.service';
 import { DepthSideFrame } from '../depth-side-frame';
@@ -13,12 +13,14 @@ import { DepthSideFrame } from '../depth-side-frame';
 export class DepthSideNgComponent extends ContentComponentBaseNgDirective implements OnDestroy {
     private static typeInstanceCreateCount = 0;
 
+    private _contentService = inject(ContentNgService);
+
     private readonly _frame: DepthSideFrame;
 
-    constructor(elRef: ElementRef<HTMLElement>, private _contentService: ContentNgService) {
-        super(elRef, ++DepthSideNgComponent.typeInstanceCreateCount);
+    constructor() {
+        super(++DepthSideNgComponent.typeInstanceCreateCount);
 
-        this._frame = this._contentService.createDepthSideFrame(elRef.nativeElement);
+        this._frame = this._contentService.createDepthSideFrame(this.elRef.nativeElement);
     }
 
     get frame(): DepthSideFrame { return this._frame; }

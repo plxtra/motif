@@ -1,14 +1,4 @@
-import {
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    ElementRef,
-    HostBinding,
-    HostListener,
-    OnDestroy,
-    viewChild
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, HostBinding, HostListener, OnDestroy, inject, viewChild } from '@angular/core';
 import { TinyColor } from '@ctrl/tinycolor';
 import { EnumInfoOutOfOrderError, HtmlTypes, ModifierKey, ModifierKeyId, MultiEvent, RGB, UnreachableCaseError, delay1Tick } from '@pbkware/js-utils';
 import { BooleanUiAction, IntegerListSelectItemUiAction, IntegerUiAction, NumberUiAction, StringUiAction, UiAction } from '@pbkware/ui-action';
@@ -41,6 +31,8 @@ import { ContentComponentBaseNgDirective } from '../../ng/content-component-base
     standalone: false
 })
 export class ColorControlsNgComponent extends ContentComponentBaseNgDirective implements OnDestroy, AfterViewInit {
+    private _cdr = inject(ChangeDetectorRef);
+
     private static typeInstanceCreateCount = 0;
 
     @HostBinding('style.flex-direction') public flexDirection: string;
@@ -137,13 +129,11 @@ export class ColorControlsNgComponent extends ContentComponentBaseNgDirective im
 
     private _settingsChangedSubscriptionId: MultiEvent.SubscriptionId;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        private _cdr: ChangeDetectorRef,
-        commandRegisterNgService: CommandRegisterNgService,
-        settingsNgService: SettingsNgService
-    ) {
-        super(elRef, ++ColorControlsNgComponent.typeInstanceCreateCount);
+    constructor() {
+        const commandRegisterNgService = inject(CommandRegisterNgService);
+        const settingsNgService = inject(SettingsNgService);
+
+        super(++ColorControlsNgComponent.typeInstanceCreateCount);
 
         this._commandRegisterService = commandRegisterNgService.service;
         this._settingsService = settingsNgService.service;

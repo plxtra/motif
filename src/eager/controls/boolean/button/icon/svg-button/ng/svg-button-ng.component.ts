@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, model, OnInit, Renderer2, viewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, inject, model, OnInit, Renderer2, viewChild } from '@angular/core';
 import { AssertInternalError, EnumInfoOutOfOrderError, ModifierKey } from '@pbkware/js-utils';
 import { UiAction } from '@pbkware/ui-action';
 import {
@@ -6,7 +6,6 @@ import {
     IconButtonUiAction
 } from '@plxtra/motif-core';
 import { SvgIconComponent, SvgIconRegistryService } from 'angular-svg-icon';
-import { SettingsNgService } from 'component-services-ng-api';
 import { ControlComponentBaseNgDirective } from '../../../../../ng/control-component-base-ng.directive';
 import nounArrowDownSvg from './svg/noun-arrow-down-70422.svg';
 import nounCancelLeft from './svg/noun-arrow-left-70423.svg';
@@ -90,6 +89,8 @@ export class SvgButtonNgComponent extends ControlComponentBaseNgDirective implem
     public readonly inputId = model<string>()
     public readonly svgName = model<string>();
 
+    private readonly _renderer = inject(Renderer2);
+
     private readonly _buttonRefSignal = viewChild.required<ElementRef>('button');
     private readonly _iconComponentSignal = viewChild.required<SvgIconComponent>('svgIcon');
 
@@ -103,17 +104,9 @@ export class SvgButtonNgComponent extends ControlComponentBaseNgDirective implem
 
     private _value: boolean | undefined;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        private _renderer: Renderer2,
-        cdr: ChangeDetectorRef,
-        settingsNgService: SettingsNgService
-    ) {
+    constructor() {
         super(
-            elRef,
             ++SvgButtonNgComponent.typeInstanceCreateCount,
-            cdr,
-            settingsNgService.service,
             ControlComponentBaseNgDirective.clickControlStateColorItemIdArray,
         );
         this._bkgdColorCssVarName = this.getBkgdColorCssVariableName(SvgButtonNgComponent.buttonColorItemId);

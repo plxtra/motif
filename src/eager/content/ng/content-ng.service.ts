@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { LockOpenListItem } from '@pbkware/js-utils';
 import { AdaptedRevgridGridSettings, EditableColumnLayoutDefinitionColumnList, GridField, SessionInfoService } from '@plxtra/motif-core';
 import {
@@ -23,14 +23,14 @@ import { TableRecordSourceFactoryNgService } from './table-record-source-factory
 export class ContentNgService {
     private _content: ContentService;
 
-    constructor(
-        coreNgService: CoreNgService,
-        tableRecordSourceDefinitionFactoryNgService: LegacyTableRecordSourceDefinitionFactoryNgService,
-        tableRecordSourceFactoryNgService: TableRecordSourceFactoryNgService,
-        sessionInfoNgService: SessionInfoNgService,
-        cellPainterFactoryNgService: CellPainterFactoryNgService,
-        toastNgService: ToastNgService,
-    ) {
+    constructor() {
+        const coreNgService = inject(CoreNgService);
+        const tableRecordSourceDefinitionFactoryNgService = inject(LegacyTableRecordSourceDefinitionFactoryNgService);
+        const tableRecordSourceFactoryNgService = inject(TableRecordSourceFactoryNgService);
+        const sessionInfoNgService = inject(SessionInfoNgService);
+        const cellPainterFactoryNgService = inject(CellPainterFactoryNgService);
+        const toastNgService = inject(ToastNgService);
+
         this._content = new ContentService(
             coreNgService.decimalFactoryService,
             coreNgService.settingsService,

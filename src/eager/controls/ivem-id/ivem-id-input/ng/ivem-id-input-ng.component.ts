@@ -1,15 +1,7 @@
-import {
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    ElementRef,
-    model,
-    viewChild
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, inject, model, viewChild } from '@angular/core';
 import { UiAction } from '@pbkware/ui-action';
 import { IvemId, IvemIdUiAction, MarketsService, StringId, Strings, SymbolsService } from '@plxtra/motif-core';
-import { MarketsNgService, SettingsNgService, SymbolsNgService } from 'component-services-ng-api';
+import { MarketsNgService, SymbolsNgService } from 'component-services-ng-api';
 import { ControlComponentBaseNgDirective } from '../../../ng/control-component-base-ng.directive';
 
 @Component({
@@ -33,14 +25,12 @@ export class IvemIdInputNgComponent extends ControlComponentBaseNgDirective impl
 
     private ivemidInput: ElementRef;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        marketsNgService: MarketsNgService,
-        settingsNgService: SettingsNgService,
-        symbolsNgService: SymbolsNgService
-    ) {
-        super(elRef, ++IvemIdInputNgComponent.typeInstanceCreateCount, cdr, settingsNgService.service, ControlComponentBaseNgDirective.textControlStateColorItemIdArray);
+    constructor() {
+        super(++IvemIdInputNgComponent.typeInstanceCreateCount, ControlComponentBaseNgDirective.textControlStateColorItemIdArray);
+
+        const marketsNgService = inject(MarketsNgService);
+        const symbolsNgService = inject(SymbolsNgService);
+
         this._marketsService = marketsNgService.service;
         this._symbolsService = symbolsNgService.service;
         this.inputId.set(`IvemIdInput:${this.typeInstanceId}`);

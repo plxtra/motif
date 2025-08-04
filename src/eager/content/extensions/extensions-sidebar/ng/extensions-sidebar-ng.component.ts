@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, OnDestroy, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, inject, OnDestroy, output } from '@angular/core';
 import { MultiEvent } from '@pbkware/js-utils';
 import { ColorScheme, ColorSettings, ExtensionInfo, SettingsService } from '@plxtra/motif-core';
 import { SettingsNgService } from 'component-services-ng-api';
@@ -26,8 +26,10 @@ export class ExtensionsSidebarNgComponent extends ContentComponentBaseNgDirectiv
     private readonly _colorSettings: ColorSettings;
     private _settingsChangedSubscriptionId: MultiEvent.SubscriptionId;
 
-    constructor(elRef: ElementRef<HTMLElement>, settingsNgService: SettingsNgService) {
-        super(elRef, ++ExtensionsSidebarNgComponent.typeInstanceCreateCount);
+    constructor() {
+        const settingsNgService = inject(SettingsNgService);
+
+        super(++ExtensionsSidebarNgComponent.typeInstanceCreateCount);
 
         this._settingsService = settingsNgService.service;
         this._colorSettings = this._settingsService.color;

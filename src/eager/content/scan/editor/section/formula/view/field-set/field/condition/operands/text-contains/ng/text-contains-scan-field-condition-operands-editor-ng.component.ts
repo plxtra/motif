@@ -1,9 +1,8 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Inject, viewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, inject, viewChild } from '@angular/core';
 import { AssertInternalError, delay1Tick } from '@pbkware/js-utils';
 import { BooleanUiAction, StringUiAction } from '@pbkware/ui-action';
 import { StringId, Strings } from '@plxtra/motif-core';
 import { ComponentInstanceId } from 'component-internal-api';
-import { SettingsNgService } from 'component-services-ng-api';
 import { CaptionedCheckboxNgComponent, CheckboxInputNgComponent, TextInputNgComponent } from 'controls-ng-api';
 import { ScanFieldConditionOperandsEditorNgDirective } from '../../ng/ng-api';
 import { TextContainsScanFieldConditionOperandsEditorFrame } from '../text-contains-scan-field-condition-operands-editor-frame';
@@ -41,14 +40,11 @@ export class TextContainsScanFieldConditionOperandsEditorNgComponent extends Sca
     private _exactControlComponent: CaptionedCheckboxNgComponent;
     private _ignoreCaseControlComponent: CaptionedCheckboxNgComponent;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        settingsNgService: SettingsNgService,
-        @Inject(ScanFieldConditionOperandsEditorNgDirective.frameInjectionToken) frame: TextContainsScanFieldConditionOperandsEditorNgComponent.Frame,
-        @Inject(ScanFieldConditionOperandsEditorNgDirective.modifierRootInjectionToken) modifierRoot: ComponentInstanceId,
-    ) {
-        super(elRef, ++TextContainsScanFieldConditionOperandsEditorNgComponent.typeInstanceCreateCount, cdr, settingsNgService, frame, modifierRoot);
+    constructor() {
+        const frame = inject<TextContainsScanFieldConditionOperandsEditorNgComponent.Frame>(ScanFieldConditionOperandsEditorNgDirective.frameInjectionToken);
+        const modifierRoot = inject<ComponentInstanceId>(ScanFieldConditionOperandsEditorNgDirective.modifierRootInjectionToken);
+
+        super(++TextContainsScanFieldConditionOperandsEditorNgComponent.typeInstanceCreateCount, frame, modifierRoot);
 
         this._notUiAction = this.createNotUiAction();
         this._valueUiAction = this.createValueUiAction();

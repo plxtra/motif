@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, HostBinding } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding } from '@angular/core';
 import { IroColor } from '@irojs/iro-core';
 import iro from '@jaames/iro';
 import { ColorPickerProps, ColorPickerState, IroColorPicker } from '@jaames/iro/dist/ColorPicker';
@@ -39,8 +39,8 @@ export class MultiColorPickerNgComponent extends ContentComponentBaseNgDirective
         }
     ];
 
-    constructor(elRef: ElementRef<HTMLElement>) {
-        super(elRef, ++MultiColorPickerNgComponent.typeInstanceCreateCount);
+    constructor() {
+        super(++MultiColorPickerNgComponent.typeInstanceCreateCount);
 
         this._colorPicker = this.createColorPicker();
     }

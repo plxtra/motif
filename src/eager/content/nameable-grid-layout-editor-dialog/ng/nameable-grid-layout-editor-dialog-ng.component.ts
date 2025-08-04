@@ -1,23 +1,9 @@
-import {
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    Component,
-    ElementRef,
-    Inject,
-    InjectionToken,
-    Injector,
-    OnDestroy,
-    Self,
-    ValueProvider,
-    ViewContainerRef,
-    viewChild
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, InjectionToken, Injector, OnDestroy, ValueProvider, ViewContainerRef, inject, viewChild } from '@angular/core';
 import { LockOpenListItem, ModifierKey, ModifierKeyId, delay1Tick } from '@pbkware/js-utils';
 import {
     AllowedSourcedFieldsColumnLayoutDefinition,
     CommandRegisterService,
     EditableColumnLayoutDefinitionColumnList,
-    GridField,
     IconButtonUiAction,
     InternalCommand,
     StringId
@@ -39,6 +25,9 @@ import { ContentComponentBaseNgDirective } from '../../ng/content-component-base
 export class NameableColumnLayoutEditorDialogNgComponent extends ContentComponentBaseNgDirective implements OnDestroy, AfterViewInit {
     private static typeInstanceCreateCount = 0;
 
+    readonly caption = inject(NameableColumnLayoutEditorDialogNgComponent.captionInjectionToken);
+    private readonly _definitionColumnList = inject<EditableColumnLayoutDefinitionColumnList>(definitionColumnListInjectionToken, { self: true });
+
     private readonly _editorComponentSignal = viewChild.required<ColumnLayoutEditorNgComponent>('editor');
     private readonly _okButtonComponentSignal = viewChild.required<SvgButtonNgComponent>('okButton');
     private readonly _cancelButtonComponentSignal = viewChild.required<SvgButtonNgComponent>('cancelButton');
@@ -55,15 +44,12 @@ export class NameableColumnLayoutEditorDialogNgComponent extends ContentComponen
     private _closeResolve: (value: RevColumnLayoutOrReferenceDefinition | undefined) => void;
     private _closeReject: (reason: unknown) => void;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        commandRegisterNgService: CommandRegisterNgService,
-        @Inject(NameableColumnLayoutEditorDialogNgComponent.captionInjectionToken) public readonly caption: string,
-        @Inject(allowedFieldsInjectionToken) _allowedFields: readonly GridField[],
-        @Inject(oldLayoutDefinitionInjectionToken) _oldLayoutDefinition: AllowedSourcedFieldsColumnLayoutDefinition,
-        @Self() @Inject(definitionColumnListInjectionToken) private readonly _definitionColumnList: EditableColumnLayoutDefinitionColumnList,
-    ) {
-        super(elRef, ++NameableColumnLayoutEditorDialogNgComponent.typeInstanceCreateCount);
+    constructor() {
+        const commandRegisterNgService = inject(CommandRegisterNgService);
+        const _allowedFields = inject(allowedFieldsInjectionToken);
+        const _oldLayoutDefinition = inject<AllowedSourcedFieldsColumnLayoutDefinition>(oldLayoutDefinitionInjectionToken);
+
+        super(++NameableColumnLayoutEditorDialogNgComponent.typeInstanceCreateCount);
 
         this._commandRegisterService = commandRegisterNgService.service;
         this._okUiAction = this.createOkUiAction();

@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnDestroy, viewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnDestroy, viewChild } from '@angular/core';
 import { AssertInternalError, delay1Tick, MultiEvent, UnreachableCaseError } from '@pbkware/js-utils';
 import { BooleanUiAction, StringUiAction } from '@pbkware/ui-action';
 import {
@@ -32,6 +32,8 @@ export class LockOpenNotificationChannelPropertiesNgComponent extends ContentCom
     public type = '';
     public status = '';
 
+    private readonly _cdr = inject(ChangeDetectorRef);
+
     private readonly _enabledLabelComponentSignal = viewChild.required<CaptionLabelNgComponent>('enabledLabel');
     private readonly _enabledControlComponentSignal = viewChild.required<IntegerTextInputNgComponent>('enabledControl');
     private readonly _nameLabelComponentSignal = viewChild.required<CaptionLabelNgComponent>('nameLabel');
@@ -55,11 +57,8 @@ export class LockOpenNotificationChannelPropertiesNgComponent extends ContentCom
     private _channel: LockOpenNotificationChannel | undefined;
     private _channelFieldsChangedSubscriptionId: MultiEvent.SubscriptionId;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        private readonly _cdr: ChangeDetectorRef,
-    ) {
-        super(elRef, ++LockOpenNotificationChannelPropertiesNgComponent.typeInstanceCreateCount);
+    constructor() {
+        super(++LockOpenNotificationChannelPropertiesNgComponent.typeInstanceCreateCount);
 
         this.typeLabel = Strings[StringId.LockOpenNotificationChannelHeader_Name];
 

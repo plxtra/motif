@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnDestroy, viewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnDestroy, viewChild } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { delay1Tick, MultiEvent } from '@pbkware/js-utils';
 import {
@@ -46,6 +46,10 @@ export class RootNgComponent extends ComponentBaseNgDirective implements AfterVi
 
     public starting = true;
 
+    private readonly _cdr = inject(ChangeDetectorRef);
+    private readonly _titleService = inject(Title);
+    private readonly _sessionNgService = inject(SessionNgService);
+
     private readonly _userAlertComponentSignal = viewChild.required<UserAlertNgComponent>('userAlert');
     private readonly _overlayOriginComponentSignal = viewChild.required<OverlayOriginNgComponent>('overlayOrigin');
     private readonly _bottomAdvertStripComponentSignal = viewChild<BottomAdvertStripNgComponent>('bottomAdvertStrip');
@@ -68,18 +72,14 @@ export class RootNgComponent extends ComponentBaseNgDirective implements AfterVi
     private _measureFontFamily: string;
     private _measureFontSize: string;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        private readonly _cdr: ChangeDetectorRef,
-        private readonly _titleService: Title,
-        private readonly _sessionNgService: SessionNgService,
-        settingsNgService: SettingsNgService,
-        capabilitiesNgService: CapabilitiesNgService,
-        extensionsNgService: ExtensionsNgService,
-        keyboardNgService: KeyboardNgService,
-        userAlertNgService: UserAlertNgService,
-    ) {
-        super(elRef, ++RootNgComponent.typeInstanceCreateCount);
+    constructor() {
+        const settingsNgService = inject(SettingsNgService);
+        const capabilitiesNgService = inject(CapabilitiesNgService);
+        const extensionsNgService = inject(ExtensionsNgService);
+        const keyboardNgService = inject(KeyboardNgService);
+        const userAlertNgService = inject(UserAlertNgService);
+
+        super(++RootNgComponent.typeInstanceCreateCount);
 
         this._session = this._sessionNgService.session;
         this._sessionStateChangeSubscriptionId =

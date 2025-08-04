@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Inject, InjectionToken, Optional, ValueProvider } from '@angular/core';
+import { ChangeDetectionStrategy, Component, InjectionToken, ValueProvider, inject } from '@angular/core';
 import { JsonElement, LockOpenListItem } from '@pbkware/js-utils';
 import { AdaptedRevgridGridSettings, DataIvemId, UiComparableList } from '@plxtra/motif-core';
 import { RevColumnLayoutOrReferenceDefinition } from 'revgrid';
@@ -22,12 +22,10 @@ export class DataIvemIdListNgComponent extends DelayedBadnessGridSourceNgDirecti
 
     private _list: UiComparableList<DataIvemId> | undefined;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        contentNgService: ContentNgService,
-        @Optional() @Inject(DataIvemIdListNgComponent.initialCustomGridSettingsInjectionToken) initialCustomGridSettings: Partial<AdaptedRevgridGridSettings> | null,
-    ) {
+    constructor() {
+        const contentNgService = inject(ContentNgService);
+        const initialCustomGridSettings = inject<Partial<AdaptedRevgridGridSettings> | null>(DataIvemIdListNgComponent.initialCustomGridSettingsInjectionToken, { optional: true });
+
         const frame = contentNgService.createDataIvemIdListFrame(initialCustomGridSettings === null ? undefined : initialCustomGridSettings);
         frame.getListEventer = () => this._list;
         frame.selectionChangedEventer = () => {
@@ -35,7 +33,7 @@ export class DataIvemIdListNgComponent extends DelayedBadnessGridSourceNgDirecti
                 this.selectionChangedEventer();
             }
         }
-        super(elRef, ++DataIvemIdListNgComponent.typeInstanceCreateCount, cdr, frame);
+        super(++DataIvemIdListNgComponent.typeInstanceCreateCount, frame);
         frame.setComponentAccess(this);
     }
 

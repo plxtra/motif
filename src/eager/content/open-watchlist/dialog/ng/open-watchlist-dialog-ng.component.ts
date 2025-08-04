@@ -1,17 +1,4 @@
-import {
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    ElementRef,
-    Inject,
-    InjectionToken,
-    Injector,
-    OnDestroy,
-    ValueProvider,
-    viewChild,
-    ViewContainerRef
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, InjectionToken, Injector, OnDestroy, ValueProvider, viewChild, ViewContainerRef } from '@angular/core';
 import { AssertInternalError, delay1Tick, LockOpenListItem, Ok, Result, UnreachableCaseError } from '@pbkware/js-utils';
 import { StringUiAction, UiAction } from '@pbkware/ui-action';
 import {
@@ -21,7 +8,7 @@ import {
     StringId,
     Strings
 } from '@plxtra/motif-core';
-import { CommandRegisterNgService, CoreInjectionTokens, ScansNgService } from 'component-services-ng-api';
+import { CommandRegisterNgService, CoreInjectionTokens } from 'component-services-ng-api';
 import { ButtonInputNgComponent, CaptionLabelNgComponent, SvgButtonNgComponent, TabListNgComponent, TextInputNgComponent } from 'controls-ng-api';
 import { ContentComponentBaseNgDirective } from '../../../ng/content-component-base-ng.directive';
 import { SymbolListDirectoryGridNgComponent } from '../../symbol-list-directory-grid/ng-api';
@@ -38,6 +25,9 @@ export class OpenWatchlistDialogNgComponent extends ContentComponentBaseNgDirect
 
     public symbolListVisible = true;
     public watchlistVisible = false;
+
+    readonly caption = inject(OpenWatchlistDialogNgComponent.captionInjectionToken);
+    private _cdr = inject(ChangeDetectorRef);
 
     private readonly _okButtonComponentSignal = viewChild.required<SvgButtonNgComponent>('okButton');
     private readonly _cancelButtonComponentSignal = viewChild.required<SvgButtonNgComponent>('cancelButton');
@@ -65,14 +55,10 @@ export class OpenWatchlistDialogNgComponent extends ContentComponentBaseNgDirect
 
     private _listId: string | undefined;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        private _cdr: ChangeDetectorRef,
-        commandRegisterNgService: CommandRegisterNgService,
-        scansNgService: ScansNgService,
-        @Inject(OpenWatchlistDialogNgComponent.captionInjectionToken) public readonly caption: string,
-    ) {
-        super(elRef, ++OpenWatchlistDialogNgComponent.typeInstanceCreateCount);
+    constructor() {
+        const commandRegisterNgService = inject(CommandRegisterNgService);
+
+        super(++OpenWatchlistDialogNgComponent.typeInstanceCreateCount);
 
         const commandRegisterService = commandRegisterNgService.service;
 

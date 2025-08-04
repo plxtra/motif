@@ -1,14 +1,4 @@
-import {
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    ElementRef,
-    OnDestroy,
-    OnInit,
-    ViewContainerRef,
-    viewChild
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewContainerRef, inject, viewChild } from '@angular/core';
 import { MultiEvent, SourceTzOffsetDateTime, delay1Tick } from '@pbkware/js-utils';
 import { BooleanUiAction, IntegerListSelectItemUiAction, IntegerListSelectItemsUiAction, IntegerUiAction, SelectItemsUiAction, StringUiAction } from '@pbkware/ui-action';
 import {
@@ -149,14 +139,13 @@ export class GeneralSettingsNgComponent extends SettingsComponentBaseNgDirective
 
     private _marketSettingsChangedSubscriptionId: MultiEvent.SubscriptionId;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        settingsNgService: SettingsNgService,
-        marketsNgService: MarketsNgService,
-        symbolsNgService: SymbolsNgService,
-    ) {
-        super(elRef, ++GeneralSettingsNgComponent.typeInstanceCreateCount, cdr, settingsNgService.service);
+    constructor() {
+        super(++GeneralSettingsNgComponent.typeInstanceCreateCount);
+
+        const settingsNgService = inject(SettingsNgService);
+        const marketsNgService = inject(MarketsNgService);
+        const symbolsNgService = inject(SymbolsNgService);
+
         this._masterSettings = settingsNgService.service.master;
         this._marketsService = marketsNgService.service;
         this._symbolsService = symbolsNgService.service;

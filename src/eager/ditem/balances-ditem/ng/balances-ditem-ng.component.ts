@@ -1,14 +1,4 @@
-import {
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    ElementRef,
-    Inject,
-    OnDestroy,
-    ViewContainerRef,
-    viewChild
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, OnDestroy, ViewContainerRef, inject, viewChild } from '@angular/core';
 import { AssertInternalError, Integer, JsonElement, ModifierKey, ModifierKeyId, delay1Tick } from '@pbkware/js-utils';
 import { UiAction } from '@pbkware/ui-action';
 import {
@@ -22,15 +12,12 @@ import {
 } from '@plxtra/motif-core';
 import {
     AdiNgService,
-    CommandRegisterNgService,
     MarketsNgService,
-    SettingsNgService,
     SymbolsNgService,
     ToastNgService
 } from 'component-services-ng-api';
 import { BalancesNgComponent, NameableColumnLayoutEditorDialogNgComponent } from 'content-ng-api';
 import { BrokerageAccountGroupInputNgComponent, SvgButtonNgComponent } from 'controls-ng-api';
-import { ComponentContainer } from 'golden-layout';
 import { BuiltinDitemNgComponentBaseNgDirective } from '../../ng/builtin-ditem-ng-component-base.directive';
 import { DesktopAccessNgService } from '../../ng/desktop-access-ng.service';
 import { BalancesDitemFrame } from '../balances-ditem-frame';
@@ -44,6 +31,8 @@ import { BalancesDitemFrame } from '../balances-ditem-frame';
 })
 export class BalancesDitemNgComponent extends BuiltinDitemNgComponentBaseNgDirective implements OnDestroy, AfterViewInit {
     private static typeInstanceCreateCount = 0;
+
+    private readonly _toastNgService = inject(ToastNgService);
 
     private readonly _balancesComponentSignal = viewChild.required<BalancesNgComponent>('balances');
     private readonly _accountGroupInputComponentSignal = viewChild.required<BrokerageAccountGroupInputNgComponent>('accountGroupInput');
@@ -68,26 +57,15 @@ export class BalancesDitemNgComponent extends BuiltinDitemNgComponentBaseNgDirec
 
     private _activeDialogTypeId = BalancesDitemNgComponent.ActiveDialogTypeId.None;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        settingsNgService: SettingsNgService,
-        marketsNgService: MarketsNgService,
-        commandRegisterNgService: CommandRegisterNgService,
-        desktopAccessNgService: DesktopAccessNgService,
-        symbolsNgService: SymbolsNgService,
-        adiNgService: AdiNgService,
-        private readonly _toastNgService: ToastNgService,
-        @Inject(BuiltinDitemNgComponentBaseNgDirective.goldenLayoutContainerInjectionToken) container: ComponentContainer,
-    ) {
+    constructor() {
         super(
-            elRef,
             ++BalancesDitemNgComponent.typeInstanceCreateCount,
-            cdr,
-            container,
-            settingsNgService.service,
-            commandRegisterNgService.service
         );
+
+        const marketsNgService = inject(MarketsNgService);
+        const desktopAccessNgService = inject(DesktopAccessNgService);
+        const symbolsNgService = inject(SymbolsNgService);
+        const adiNgService = inject(AdiNgService);
 
         this._frame = new BalancesDitemFrame(
             this,

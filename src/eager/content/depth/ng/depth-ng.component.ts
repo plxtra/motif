@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnDestroy, viewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnDestroy, viewChild } from '@angular/core';
 import { Integer, numberToPixels } from '@pbkware/js-utils';
 import { Badness } from '@plxtra/motif-core';
 import { SplitComponent } from 'angular-split';
@@ -27,6 +27,8 @@ export class DepthNgComponent extends ContentComponentBaseNgDirective implements
     public askWidthPercent = 50;
     public splitterGutterSize = 3;
 
+    private readonly _cdr = inject(ChangeDetectorRef);
+
     private readonly _delayedBadnessComponentSignal = viewChild.required<DelayedBadnessNgComponent>('delayedBadness');
     private readonly _splitSignal = viewChild.required(SplitComponent);
     private readonly _bidComponentSignal = viewChild.required<DepthSideNgComponent>('bidSide');
@@ -39,8 +41,10 @@ export class DepthNgComponent extends ContentComponentBaseNgDirective implements
 
     private readonly _frame: DepthFrame;
 
-    constructor(elRef: ElementRef<HTMLElement>, private readonly _cdr: ChangeDetectorRef, contentService: ContentNgService) {
-        super(elRef, ++DepthNgComponent.typeInstanceCreateCount);
+    constructor() {
+        const contentService = inject(ContentNgService);
+
+        super(++DepthNgComponent.typeInstanceCreateCount);
 
         this._frame = contentService.createDepthFrame(this);
     }

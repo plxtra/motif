@@ -1,9 +1,8 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Inject, viewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, inject, viewChild } from '@angular/core';
 import { delay1Tick, SourceTzOffsetDate } from '@pbkware/js-utils';
 import { BooleanUiAction, DateUiAction } from '@pbkware/ui-action';
 import { StringId, Strings } from '@plxtra/motif-core';
 import { ComponentInstanceId } from 'component-internal-api';
-import { SettingsNgService } from 'component-services-ng-api';
 import { CaptionedCheckboxNgComponent, CaptionLabelNgComponent, DateInputNgComponent } from 'controls-ng-api';
 import { ScanFieldConditionOperandsEditorNgDirective } from '../../ng/ng-api';
 import { DateValueScanFieldConditionOperandsEditorFrame } from '../date-value-scan-field-condition-operands-editor-frame';
@@ -29,14 +28,11 @@ export class DateValueScanFieldConditionOperandsEditorNgComponent extends ScanFi
     private _valueLabelComponent: CaptionLabelNgComponent;
     private _valueControlComponent: DateInputNgComponent;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        settingsNgService: SettingsNgService,
-        @Inject(ScanFieldConditionOperandsEditorNgDirective.frameInjectionToken) frame: DateValueScanFieldConditionOperandsEditorNgComponent.Frame,
-        @Inject(ScanFieldConditionOperandsEditorNgDirective.modifierRootInjectionToken) modifierRoot: ComponentInstanceId,
-    ) {
-        super(elRef, ++DateValueScanFieldConditionOperandsEditorNgComponent.typeInstanceCreateCount, cdr, settingsNgService, frame, modifierRoot);
+    constructor() {
+        const frame = inject<DateValueScanFieldConditionOperandsEditorNgComponent.Frame>(ScanFieldConditionOperandsEditorNgDirective.frameInjectionToken);
+        const modifierRoot = inject<ComponentInstanceId>(ScanFieldConditionOperandsEditorNgDirective.modifierRootInjectionToken);
+
+        super(++DateValueScanFieldConditionOperandsEditorNgComponent.typeInstanceCreateCount, frame, modifierRoot);
 
         this._notUiAction = this.createNotUiAction();
         this._valueUiAction = this.createValueUiAction();

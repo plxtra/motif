@@ -1,21 +1,9 @@
-import {
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    ElementRef,
-    HostBinding,
-    Inject,
-    OnDestroy,
-    viewChild,
-    ViewEncapsulation
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, HostBinding, inject, OnDestroy, viewChild, ViewEncapsulation } from '@angular/core';
 import { AssertInternalError, delay1Tick, JsonElement } from '@pbkware/js-utils';
 import { ColorScheme, ExtensionId, ExtensionInfo } from '@plxtra/motif-core';
 import { SplitAreaSize, SplitComponent, SplitUnit } from 'angular-split';
-import { AdiNgService, CommandRegisterNgService, MarketsNgService, SettingsNgService, SymbolsNgService } from 'component-services-ng-api';
+import { AdiNgService, MarketsNgService, SymbolsNgService } from 'component-services-ng-api';
 import { ExtensionsSidebarNgComponent } from 'content-ng-api';
-import { ComponentContainer } from 'golden-layout';
 import { BuiltinDitemNgComponentBaseNgDirective } from '../../ng/builtin-ditem-ng-component-base.directive';
 import { DesktopAccessNgService } from '../../ng/desktop-access-ng.service';
 import { ExtensionsDitemFrame } from '../extensions-ditem-frame';
@@ -52,31 +40,19 @@ export class ExtensionsDitemNgComponent extends BuiltinDitemNgComponentBaseNgDir
 
     private explicitSidbarWidth = false;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        @Inject(BuiltinDitemNgComponentBaseNgDirective.goldenLayoutContainerInjectionToken) container: ComponentContainer,
-        settingsNgService: SettingsNgService,
-        marketsNgService: MarketsNgService,
-        commandRegisterNgService: CommandRegisterNgService,
-        desktopAccessNgService: DesktopAccessNgService,
-        symbolsNgService: SymbolsNgService,
-        adiNgService: AdiNgService,
-    ) {
-        super(
-            elRef,
-            ++ExtensionsDitemNgComponent.typeInstanceCreateCount,
-            cdr,
-            container,
-            settingsNgService.service,
-            commandRegisterNgService.service
-        );
+    constructor() {
+        super(++ExtensionsDitemNgComponent.typeInstanceCreateCount);
+
+        const marketsNgService = inject(MarketsNgService);
+        const desktopAccessNgService = inject(DesktopAccessNgService);
+        const symbolsNgService = inject(SymbolsNgService);
+        const adiNgService = inject(AdiNgService);
 
         this._frame = new ExtensionsDitemFrame(this, this.settingsService, marketsNgService.service, this.commandRegisterService,
             desktopAccessNgService.service, symbolsNgService.service, adiNgService.service);
 
-        elRef.nativeElement.style.position = 'absolute';
-        elRef.nativeElement.style.overflow = 'hidden';
+        this.elRef.nativeElement.style.position = 'absolute';
+        this.elRef.nativeElement.style.overflow = 'hidden';
 
         this.constructLoad(this.getInitialComponentStateJsonElement());
 

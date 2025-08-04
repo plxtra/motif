@@ -1,8 +1,8 @@
-import { AfterViewInit, ChangeDetectorRef, Directive, ElementRef, viewChild } from '@angular/core';
+import { AfterViewInit, Directive, inject, viewChild } from '@angular/core';
 import { NgSelectComponent } from '@ng-select/ng-select';
 import { AssertInternalError, Integer, MultiEvent } from '@pbkware/js-utils';
 import { UiAction } from '@pbkware/ui-action';
-import { BrokerageAccount, SettingsService } from '@plxtra/motif-core';
+import { BrokerageAccount } from '@plxtra/motif-core';
 import { NgSelectUtils } from '../../ng-select-utils';
 import { ControlComponentBaseNgDirective } from '../../ng/control-component-base-ng.directive';
 import { NgSelectOverlayNgService } from '../../ng/ng-select-overlay-ng.service';
@@ -15,6 +15,8 @@ export abstract class SelectItemNgDirective<T> extends SelectItemUiActionNgDirec
     public selected: T | undefined;
     public entries: Entry<T>[] = [];
 
+    private readonly _ngSelectOverlayNgService = inject(NgSelectOverlayNgService);
+
     private readonly _ngSelectComponentSignal = viewChild.required<NgSelectComponent>('ngSelect');
 
     private _ngSelectComponent: NgSelectComponent;
@@ -24,18 +26,11 @@ export abstract class SelectItemNgDirective<T> extends SelectItemUiActionNgDirec
     private _ngSelectDropDownPanelWidth: number | undefined;
 
     constructor(
-        elRef: ElementRef<HTMLElement>,
         typeInstanceCreateId: Integer,
-        private _ngSelectOverlayNgService: NgSelectOverlayNgService,
-        cdr: ChangeDetectorRef,
-        settingsService: SettingsService,
-        undefinedValue: T,
+        undefinedValue: T
     ) {
         super(
-            elRef,
             typeInstanceCreateId,
-            cdr,
-            settingsService,
             ControlComponentBaseNgDirective.textControlStateColorItemIdArray,
             undefinedValue,
         );

@@ -1,13 +1,10 @@
-import { ChangeDetectorRef, Directive, ElementRef } from '@angular/core';
-import { Integer } from '@pbkware/js-utils';
+import { ChangeDetectorRef, Directive, inject } from '@angular/core';
 import { ContentComponentBaseNgDirective } from '../../ng/content-component-base-ng.directive';
 import { OrderRequestStepFrame } from '../order-request-step-frame';
 
 @Directive()
 export abstract class OrderRequestStepComponentNgDirective extends ContentComponentBaseNgDirective {
-    constructor(elRef: ElementRef<HTMLElement>, typeInstanceCreateId: Integer, private _cdr: ChangeDetectorRef) {
-        super(elRef, typeInstanceCreateId);
-    }
+    private readonly _cdr = inject(ChangeDetectorRef);
 
     abstract get frame(): OrderRequestStepFrame;
 

@@ -1,15 +1,4 @@
-import {
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    ElementRef,
-    Inject,
-    OnDestroy,
-    Self,
-    ViewContainerRef,
-    viewChild
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, OnDestroy, ViewContainerRef, inject, viewChild } from '@angular/core';
 import { AssertInternalError, JsonElement, LockOpenListItem, ModifierKey, ModifierKeyId, delay1Tick } from '@pbkware/js-utils';
 import { StringUiAction, UiAction } from '@pbkware/ui-action';
 import {
@@ -23,10 +12,9 @@ import {
     Strings,
     UiComparableList
 } from '@plxtra/motif-core';
-import { AdiNgService, CommandRegisterNgService, CoreInjectionTokens, LockOpenListItemOpenerNgUseClass, MarketsNgService, ScansNgService, SettingsNgService, SymbolsNgService, ToastNgService } from 'component-services-ng-api';
+import { AdiNgService, CoreInjectionTokens, LockOpenListItemOpenerNgUseClass, MarketsNgService, ScansNgService, SymbolsNgService, ToastNgService } from 'component-services-ng-api';
 import { DataIvemIdListEditorDialogNgComponent, NameableColumnLayoutEditorDialogNgComponent, ScanEditorNgComponent, ScanListNgComponent } from 'content-ng-api';
 import { ButtonInputNgComponent, SvgButtonNgComponent, TextInputNgComponent } from 'controls-ng-api';
-import { ComponentContainer } from 'golden-layout';
 import { RevColumnLayoutOrReferenceDefinition } from 'revgrid';
 import { BuiltinDitemNgComponentBaseNgDirective } from '../../ng/builtin-ditem-ng-component-base.directive';
 import { DesktopAccessNgService } from '../../ng/desktop-access-ng.service';
@@ -48,6 +36,9 @@ export class ScansDitemNgComponent extends BuiltinDitemNgComponentBaseNgDirectiv
     readonly splitterGutterSize = 3;
 
     public dialogActive = false;
+
+    private readonly _toastNgService = inject(ToastNgService);
+    private readonly _opener = inject<LockOpenListItem.Opener>(CoreInjectionTokens.lockOpenListItemOpener, { self: true });
 
     private readonly _newButtonComponentSignal = viewChild.required<ButtonInputNgComponent>('newButton');
     private readonly _filterEditComponentSignal = viewChild.required<TextInputNgComponent>('filterEdit');
@@ -79,28 +70,14 @@ export class ScansDitemNgComponent extends BuiltinDitemNgComponentBaseNgDirectiv
     private _listComponent: ScanListNgComponent;
     private _editorComponent: ScanEditorNgComponent;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        @Inject(BuiltinDitemNgComponentBaseNgDirective.goldenLayoutContainerInjectionToken) container: ComponentContainer,
-        settingsNgService: SettingsNgService,
-        marketsNgService: MarketsNgService,
-        commandRegisterNgService: CommandRegisterNgService,
-        desktopAccessNgService: DesktopAccessNgService,
-        symbolsNgService: SymbolsNgService,
-        adiNgService: AdiNgService,
-        scansNgService: ScansNgService,
-        private readonly _toastNgService: ToastNgService,
-        @Self() @Inject(CoreInjectionTokens.lockOpenListItemOpener) private readonly _opener: LockOpenListItem.Opener,
-    ) {
-        super(
-            elRef,
-            ++ScansDitemNgComponent.typeInstanceCreateCount,
-            cdr,
-            container,
-            settingsNgService.service,
-            commandRegisterNgService.service
-        );
+    constructor() {
+        super(++ScansDitemNgComponent.typeInstanceCreateCount);
+
+        const marketsNgService = inject(MarketsNgService);
+        const desktopAccessNgService = inject(DesktopAccessNgService);
+        const symbolsNgService = inject(SymbolsNgService);
+        const adiNgService = inject(AdiNgService);
+        const scansNgService = inject(ScansNgService);
 
         this._opener = {
             lockerName: `${Strings[StringId.ScanEditor]}:${ScansDitemNgComponent.typeInstanceCreateCount}`,

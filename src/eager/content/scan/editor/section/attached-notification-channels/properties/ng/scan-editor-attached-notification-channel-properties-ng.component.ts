@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnDestroy, viewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnDestroy, viewChild } from '@angular/core';
 import { AssertInternalError, delay1Tick, MultiEvent, UnreachableCaseError } from '@pbkware/js-utils';
 import { IntegerListSelectItemUiAction, NumberUiAction } from '@pbkware/ui-action';
 import {
@@ -23,10 +23,11 @@ import { ContentComponentBaseNgDirective } from '../../../../../../ng/content-co
     standalone: false
 })
 export class ScanEditorAttachedNotificationChannelPropertiesNgComponent extends ContentComponentBaseNgDirective implements  OnDestroy, AfterViewInit {
-
     public readonly channelNameLabel: string;
     public channelName = '';
     public channelId = '';
+
+    private readonly _cdr = inject(ChangeDetectorRef);
 
     private readonly _minimumStableLabelComponentSignal = viewChild.required<CaptionLabelNgComponent>('minimumStableLabel');
     private readonly _minimumStableControlComponentSignal = viewChild.required<IntegerTextInputNgComponent>('minimumStableControl');
@@ -56,11 +57,8 @@ export class ScanEditorAttachedNotificationChannelPropertiesNgComponent extends 
     private _channel: LockerScanAttachedNotificationChannel | undefined;
     private _channelFieldsChangedSubscriptionId: MultiEvent.SubscriptionId;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        private readonly _cdr: ChangeDetectorRef,
-    ) {
-        super(elRef, ++ScanEditorAttachedNotificationChannelPropertiesNgComponent.typeInstanceCreateCount);
+    constructor() {
+        super(++ScanEditorAttachedNotificationChannelPropertiesNgComponent.typeInstanceCreateCount);
 
         this.channelNameLabel = Strings[StringId.LockerScanAttachedNotificationChannelHeader_Name];
 

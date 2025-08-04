@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, input, OnDestroy, viewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, input, OnDestroy, viewChild } from '@angular/core';
 import { delay1Tick, MultiEvent, UnreachableCaseError } from '@pbkware/js-utils';
 import {
     ColorScheme,
@@ -37,6 +37,8 @@ export class ExpandableCollapsibleLinedHeadingNgComponent extends ContentCompone
 
     genericSelectorComponent: IntegerEnumInputNgComponent | undefined;
 
+    private readonly _cdr = inject(ChangeDetectorRef);
+
     private readonly _genericSelectorComponentSignal = viewChild<IntegerEnumInputNgComponent>('genericSelector');
     private readonly _expandButtonComponentSignal = viewChild.required<SvgButtonNgComponent>('expandButton');
     private readonly _restoreButtonComponentSignal = viewChild.required<SvgButtonNgComponent>('restoreButton');
@@ -59,13 +61,11 @@ export class ExpandableCollapsibleLinedHeadingNgComponent extends ContentCompone
     private _stateId: ExpandableCollapsibleLinedHeadingNgComponent.StateId;
     private _genericText: string | undefined;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        private readonly _cdr: ChangeDetectorRef,
-        settingsNgService: SettingsNgService,
-        commandRegisterNgService: CommandRegisterNgService
-    ) {
-        super(elRef, ++ExpandableCollapsibleLinedHeadingNgComponent.typeInstanceCreateCount);
+    constructor() {
+        const settingsNgService = inject(SettingsNgService);
+        const commandRegisterNgService = inject(CommandRegisterNgService);
+
+        super(++ExpandableCollapsibleLinedHeadingNgComponent.typeInstanceCreateCount);
 
         this._commandRegisterService = commandRegisterNgService.service;
 

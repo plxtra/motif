@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ComponentBaseNgDirective } from 'component-ng-api';
 
 @Component({
@@ -11,9 +11,8 @@ import { ComponentBaseNgDirective } from 'component-ng-api';
 export class LayoutNgComponent extends ComponentBaseNgDirective  {
     private static typeInstanceCreateCount = 0;
 
-
-    constructor(elRef: ElementRef<HTMLElement>) {
-        super(elRef, ++LayoutNgComponent.typeInstanceCreateCount);
+    constructor() {
+        super(++LayoutNgComponent.typeInstanceCreateCount);
     }
 
     loadButtonClick(): void {

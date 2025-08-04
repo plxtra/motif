@@ -1,8 +1,7 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Inject, viewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, viewChild } from '@angular/core';
 import { LockOpenListItem } from '@pbkware/js-utils';
 import {
     EditableColumnLayoutDefinitionColumnList,
-    GridField,
     StringId,
     Strings
 } from '@plxtra/motif-core';
@@ -29,21 +28,20 @@ export class ColumnLayoutEditorAllowedFieldsNgComponent extends GridSourceNgDire
 
     declare readonly frame: ColumnLayoutEditorAllowedFieldsFrame;
 
+    private readonly _toastNgService = inject(ToastNgService);
+    private readonly _opener = inject<LockOpenListItem.Opener>(CoreInjectionTokens.lockOpenListItemOpener);
+
     private readonly _searchComponentSignal = viewChild.required<ColumnLayoutEditorSearchGridNgComponent>('search');
 
     private _searchComponent: ColumnLayoutEditorSearchGridNgComponent;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        contentNgService: ContentNgService,
-        private readonly _toastNgService: ToastNgService,
-        @Inject(CoreInjectionTokens.lockOpenListItemOpener) private readonly _opener: LockOpenListItem.Opener,
-        @Inject(allowedFieldsInjectionToken) allowedFields: GridField[],
-        @Inject(definitionColumnListInjectionToken) columnList: EditableColumnLayoutDefinitionColumnList,
-    ) {
+    constructor() {
+        const contentNgService = inject(ContentNgService);
+        const allowedFields = inject(allowedFieldsInjectionToken);
+        const columnList = inject<EditableColumnLayoutDefinitionColumnList>(definitionColumnListInjectionToken);
+
         const frame = contentNgService.createColumnLayoutEditorAllowedFieldsFrame(allowedFields, columnList);
-        super(elRef, ++ColumnLayoutEditorAllowedFieldsNgComponent.typeInstanceCreateCount, cdr, frame);
+        super(++ColumnLayoutEditorAllowedFieldsNgComponent.typeInstanceCreateCount, frame);
         frame.setComponentAccess(this);
     }
 

@@ -1,7 +1,6 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Injector, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
 import { ScanEditor } from '@plxtra/motif-core';
 import { ComponentBaseNgDirective } from 'component-ng-api';
-import { IdleNgService } from 'component-services-ng-api';
 import { ZenithScanFormulaViewNgDirective } from '../../ng/zenith-scan-formula-view-ng.directive';
 
 @Component({
@@ -13,15 +12,6 @@ import { ZenithScanFormulaViewNgDirective } from '../../ng/zenith-scan-formula-v
     standalone: false
 })
 export class CriteriaZenithScanFormulaViewNgComponent extends ZenithScanFormulaViewNgDirective implements OnDestroy {
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        injector: Injector,
-        idleNgService: IdleNgService,
-    ) {
-        super(elRef, cdr, injector, idleNgService, ++CriteriaZenithScanFormulaViewNgComponent.typeInstanceCreateCount);
-    }
-
     protected getFormulaAsZenithText(editor: ScanEditor) {
         return editor.criteriaAsZenithText;
     }

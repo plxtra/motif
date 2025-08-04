@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import { NgModule, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgSelectConfig, NgSelectModule } from '@ng-select/ng-select';
 import { AngularSvgIconModule, SvgIconRegistryService } from 'angular-svg-icon';
@@ -167,11 +167,11 @@ import { TradingMarketInputNgComponent } from '../trading-market/ng-api';
 
 // eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export class EagerControlsNgModule {
-    constructor(
-        ngSelectConfig: NgSelectConfig,
-        settingsNgService: SettingsNgService,
-        svgIconRegistryService: SvgIconRegistryService,
-    ) {
+    constructor() {
+        const ngSelectConfig = inject(NgSelectConfig);
+        const settingsNgService = inject(SettingsNgService);
+        const svgIconRegistryService = inject(SvgIconRegistryService);
+
         ngSelectConfig.appendTo = '.paritechMotifNgSelectOverlay';
         NgSelectUtilsModule.setColorSettings(settingsNgService.service.color);
 

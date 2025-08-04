@@ -1,14 +1,4 @@
-import {
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    ElementRef,
-    Inject,
-    OnDestroy,
-    ViewContainerRef,
-    viewChild
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, OnDestroy, ViewContainerRef, inject, viewChild } from '@angular/core';
 import { AssertInternalError, Integer, JsonElement, ModifierKey, ModifierKeyId, delay1Tick } from '@pbkware/js-utils';
 import { UiAction } from '@pbkware/ui-action';
 import {
@@ -22,17 +12,14 @@ import {
 } from '@plxtra/motif-core';
 import {
     AdiNgService,
-    CommandRegisterNgService,
     DecimalFactoryNgService,
     MarketsNgService,
-    SettingsNgService,
     SymbolDetailCacheNgService,
     SymbolsNgService,
     ToastNgService
 } from 'component-services-ng-api';
 import { BalancesNgComponent, HoldingsColumnLayoutsDialogNgComponent, HoldingsNgComponent } from 'content-ng-api';
 import { BrokerageAccountGroupInputNgComponent, SvgButtonNgComponent } from 'controls-ng-api';
-import { ComponentContainer } from 'golden-layout';
 import { BuiltinDitemNgComponentBaseNgDirective } from '../../ng/builtin-ditem-ng-component-base.directive';
 import { DesktopAccessNgService } from '../../ng/desktop-access-ng.service';
 import { HoldingsDitemFrame } from '../holdings-ditem-frame';
@@ -83,29 +70,16 @@ export class HoldingsDitemNgComponent extends BuiltinDitemNgComponentBaseNgDirec
     private _activeDialogTypeId = HoldingsDitemNgComponent.ActiveDialogTypeId.None;
     private _explicitBalancesHeight = false;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        decimalFactoryNgService: DecimalFactoryNgService,
-        settingsNgService: SettingsNgService,
-        marketsNgService: MarketsNgService,
-        commandRegisterNgService: CommandRegisterNgService,
-        desktopAccessNgService: DesktopAccessNgService,
-        adiNgService: AdiNgService,
-        symbolsNgService: SymbolsNgService,
-        // textFormatterNgService: TextFormatterNgService,
-        symbolDetailCacheNgService: SymbolDetailCacheNgService,
-        toastNgService: ToastNgService,
-        @Inject(BuiltinDitemNgComponentBaseNgDirective.goldenLayoutContainerInjectionToken) container: ComponentContainer,
-    ) {
-        super(
-            elRef,
-            ++HoldingsDitemNgComponent.typeInstanceCreateCount,
-            cdr,
-            container,
-            settingsNgService.service,
-            commandRegisterNgService.service
-        );
+    constructor() {
+        super(++HoldingsDitemNgComponent.typeInstanceCreateCount);
+
+        const decimalFactoryNgService = inject(DecimalFactoryNgService);
+        const marketsNgService = inject(MarketsNgService);
+        const desktopAccessNgService = inject(DesktopAccessNgService);
+        const adiNgService = inject(AdiNgService);
+        const symbolsNgService = inject(SymbolsNgService);
+        const symbolDetailCacheNgService = inject(SymbolDetailCacheNgService);
+        const toastNgService = inject(ToastNgService);
 
         this._frame = new HoldingsDitemFrame(
             this,

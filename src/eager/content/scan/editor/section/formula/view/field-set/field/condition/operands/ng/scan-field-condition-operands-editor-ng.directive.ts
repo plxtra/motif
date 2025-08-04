@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Directive, ElementRef, InjectionToken, OnDestroy } from '@angular/core';
+import { ChangeDetectorRef, Directive, InjectionToken, OnDestroy, inject } from '@angular/core';
 import { Integer, MultiEvent } from '@pbkware/js-utils';
 import { ColorScheme, ColorSettings, SettingsService } from '@plxtra/motif-core';
 import { ComponentInstanceId } from 'component-internal-api';
@@ -11,24 +11,24 @@ import { ScanFieldConditionOperandsEditorFrame } from '../scan-field-condition-o
 })
 export abstract class ScanFieldConditionOperandsEditorNgDirective extends ContentComponentBaseNgDirective implements OnDestroy {
     protected readonly _modifier: ScanFieldConditionOperandsEditorFrame.Modifier;
-    private _frameChangedSubscriptionId: MultiEvent.SubscriptionId;
 
+    private readonly _cdr = inject(ChangeDetectorRef);
     private readonly _settingsService: SettingsService;
     private readonly _colorSettings: ColorSettings;
 
+    private _frameChangedSubscriptionId: MultiEvent.SubscriptionId;
     private _exclamationColor: string;
 
     private _settingsChangeSubscriptionId: MultiEvent.SubscriptionId;
 
     constructor(
-        elRef: ElementRef<HTMLElement>,
         typeInstanceCreateId: Integer,
-        private readonly _cdr: ChangeDetectorRef,
-        settingsNgService: SettingsNgService,
         protected readonly _frame: ScanFieldConditionOperandsEditorFrame,
-        modifierRoot: ComponentInstanceId,
+        modifierRoot: ComponentInstanceId
     ) {
-        super(elRef, typeInstanceCreateId);
+        const settingsNgService = inject(SettingsNgService);
+
+        super(typeInstanceCreateId);
 
         this._modifier = {
             root: modifierRoot,

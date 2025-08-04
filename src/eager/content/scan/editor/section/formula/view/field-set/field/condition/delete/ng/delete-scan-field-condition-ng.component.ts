@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, OnDestroy, viewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, inject, OnDestroy, viewChild } from '@angular/core';
 import { AssertInternalError, delay1Tick } from '@pbkware/js-utils';
 import { CommandRegisterService, IconButtonUiAction, InternalCommand, StringId, Strings } from '@plxtra/motif-core';
 import { CommandRegisterNgService } from 'component-services-ng-api';
@@ -21,11 +21,10 @@ export class DeleteScanFieldConditionNgComponent extends ContentComponentBaseNgD
 
     private _deleteControlComponent: SvgButtonNgComponent;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        commandRegisterNgService: CommandRegisterNgService,
-    ) {
-        super(elRef, ++DeleteScanFieldConditionNgComponent.typeInstanceCreateCount);
+    constructor() {
+        const commandRegisterNgService = inject(CommandRegisterNgService);
+
+        super(++DeleteScanFieldConditionNgComponent.typeInstanceCreateCount);
 
         const commandRegisterService = commandRegisterNgService.service;
         this._deleteMeUiAction = this.createDeleteMeUiAction(commandRegisterService);

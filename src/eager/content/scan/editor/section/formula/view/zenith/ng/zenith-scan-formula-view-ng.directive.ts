@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Directive, ElementRef, Inject, Injector, OnDestroy, ViewContainerRef, createNgModule, viewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Directive, Injector, OnDestroy, ViewContainerRef, createNgModule, inject, viewChild } from '@angular/core';
 import { AssertInternalError, Integer, MultiEvent, delay1Tick } from '@pbkware/js-utils';
 import { StringUiAction } from '@pbkware/ui-action';
 import { IdleService, ScanEditor, ScanFormulaZenithEncodingService, StringId, Strings } from '@plxtra/motif-core';
@@ -19,6 +19,9 @@ export abstract class ZenithScanFormulaViewNgDirective extends ScanFormulaViewNg
     public editorMinSize: number;
     public decodeProgressSize: SplitAreaSize;
     public splitterGutterSize = 3;
+
+    private readonly _cdr = inject(ChangeDetectorRef);
+    private readonly _injector = inject(Injector);
 
     private readonly _editorContainerSignal = viewChild.required('editorContainer', { read: ViewContainerRef });
     private readonly _decodeProgressComponentSignal = viewChild.required<ZenithScanFormulaViewDecodeProgressNgComponent>('decodeProgress');
@@ -41,14 +44,11 @@ export abstract class ZenithScanFormulaViewNgDirective extends ScanFormulaViewNg
     private _scanEditorFieldChangesSubscriptionId: MultiEvent.SubscriptionId;
     private _decodePromise: Promise<void> | undefined;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        private readonly _cdr: ChangeDetectorRef,
-        private readonly _injector: Injector,
-        idleNgService: IdleNgService,
-        @Inject(ComponentBaseNgDirective.typeInstanceCreateIdInjectionToken) typeInstanceCreateCount: Integer,
-    ) {
-        super(elRef, typeInstanceCreateCount);
+    constructor() {
+        const idleNgService = inject(IdleNgService);
+        const typeInstanceCreateCount = inject<Integer>(ComponentBaseNgDirective.typeInstanceCreateIdInjectionToken);
+
+        super(typeInstanceCreateCount);
         this._idleService = idleNgService.service;
         this._errorUiAction = this.createErrorUiAction();
     }

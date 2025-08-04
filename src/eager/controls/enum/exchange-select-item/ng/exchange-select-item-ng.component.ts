@@ -1,8 +1,6 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { Integer } from '@pbkware/js-utils';
 import { SelectItemUiAction } from '@pbkware/ui-action';
-import { SettingsNgService } from 'component-services-ng-api';
-import { NgSelectOverlayNgService } from '../../../ng/ng-select-overlay-ng.service';
 import { SelectItemNgDirective } from '../../ng/ng-api';
 
 @Component({
@@ -16,18 +14,9 @@ import { SelectItemNgDirective } from '../../ng/ng-api';
 export class ExchangeSelectItemNgComponent extends SelectItemNgDirective<Integer> {
     private static typeInstanceCreateCount = 0;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        ngSelectOverlayNgService: NgSelectOverlayNgService,
-        cdr: ChangeDetectorRef,
-        settingsNgService: SettingsNgService,
-    ) {
+    constructor() {
         super(
-            elRef,
             ++ExchangeSelectItemNgComponent.typeInstanceCreateCount,
-            ngSelectOverlayNgService,
-            cdr,
-            settingsNgService.service,
             SelectItemUiAction.integerUndefinedValue,
         );
     }

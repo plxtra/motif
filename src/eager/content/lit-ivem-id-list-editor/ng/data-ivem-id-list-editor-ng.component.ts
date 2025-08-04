@@ -1,8 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Inject, OnDestroy, Optional } from '@angular/core';
-import { LockOpenListItem } from '@pbkware/js-utils';
-import { DataIvemId, UiComparableList } from '@plxtra/motif-core';
-import { CommandRegisterNgService, CoreInjectionTokens, MarketsNgService, ToastNgService } from 'component-services-ng-api';
-import { TableFieldSourceDefinitionCachingFactoryNgService } from '../../ng/table-field-source-definition-caching-factory-ng.service';
+import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
 import { DataIvemIdListEditorNgDirective } from './data-ivem-id-list-editor-ng.directive';
 
 @Component({
@@ -16,26 +12,7 @@ import { DataIvemIdListEditorNgDirective } from './data-ivem-id-list-editor-ng.d
 export class DataIvemIdListEditorNgComponent extends DataIvemIdListEditorNgDirective implements OnDestroy {
     private static typeInstanceCreateCount = 0;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        marketsNgService: MarketsNgService,
-        commandRegisterNgService: CommandRegisterNgService,
-        fieldSourceDefinitionCachedFactoryNgService: TableFieldSourceDefinitionCachingFactoryNgService,
-        toastNgService: ToastNgService,
-        @Inject(CoreInjectionTokens.lockOpenListItemOpener) opener: LockOpenListItem.Opener,
-        @Optional() @Inject(DataIvemIdListEditorNgDirective.listInjectionToken) list: UiComparableList<DataIvemId> | null,
-    ) {
-        super(
-            elRef,
-            cdr,
-            marketsNgService,
-            commandRegisterNgService,
-            fieldSourceDefinitionCachedFactoryNgService,
-            toastNgService,
-            ++DataIvemIdListEditorNgComponent.typeInstanceCreateCount,
-            opener,
-            list
-        );
+    constructor() {
+        super(++DataIvemIdListEditorNgComponent.typeInstanceCreateCount);
     }
 }

@@ -1,13 +1,4 @@
-import {
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    ElementRef,
-    HostBinding,
-    OnDestroy,
-    ViewEncapsulation,
-    output
-} from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, HostBinding, OnDestroy, ViewEncapsulation, inject, output } from '@angular/core';
 import {
     Integer,
     MultiEvent,
@@ -46,19 +37,19 @@ export class InstalledExtensionListNgComponent extends ContentComponentBaseNgDir
 
     public headingCaption = Strings[StringId.Extensions_InstalledExtensionsHeadingCaption];
 
+    private readonly _cdr = inject(ChangeDetectorRef);
+
     private readonly _settingsService: SettingsService;
     private readonly _extensionsAccessService: ExtensionsAccessService;
 
     private _settingsChangedSubscriptionId: MultiEvent.SubscriptionId;
     private _installedListChangedSubscriptionId: MultiEvent.SubscriptionId;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        private readonly _cdr: ChangeDetectorRef,
-        extensionsAccessNgService: ExtensionsAccessNgService,
-        settingsNgService: SettingsNgService
-    ) {
-        super(elRef, ++InstalledExtensionListNgComponent.typeInstanceCreateCount);
+    constructor() {
+        const extensionsAccessNgService = inject(ExtensionsAccessNgService);
+        const settingsNgService = inject(SettingsNgService);
+
+        super(++InstalledExtensionListNgComponent.typeInstanceCreateCount);
 
         this._extensionsAccessService = extensionsAccessNgService.service;
         this._settingsService = settingsNgService.service;

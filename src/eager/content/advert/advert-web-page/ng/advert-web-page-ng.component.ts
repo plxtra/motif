@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject } from '@angular/core';
 import { SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
@@ -9,9 +9,9 @@ import { SafeResourceUrl } from '@angular/platform-browser';
     standalone: false
 })
 export class AdvertWebPageNgComponent {
-    public safeResourceUrl: SafeResourceUrl;
+    private readonly _cdr = inject(ChangeDetectorRef);
 
-    constructor(private readonly _cdr: ChangeDetectorRef) {}
+    public safeResourceUrl: SafeResourceUrl;
 
     loadPage(safeResourceUrl: SafeResourceUrl) {
         this.safeResourceUrl = safeResourceUrl;

@@ -1,5 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnDestroy, input } from '@angular/core';
-import { AdiNgService, MarketsNgService, SettingsNgService } from 'component-services-ng-api';
+import { ChangeDetectionStrategy, Component, OnDestroy, input } from '@angular/core';
 import { ControlComponentBaseNgDirective } from '../../../ng/control-component-base-ng.directive';
 import { BrokerageAccountGroupComponentBaseNgDirective } from '../../ng/brokerage-account-group-component-base-ng.directive';
 
@@ -17,20 +16,9 @@ export class BrokerageAccountGroupNameLabelNgComponent extends BrokerageAccountG
 
     public override caption = '';
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        settingsNgService: SettingsNgService,
-        adiNgService: AdiNgService,
-        marketsNgService: MarketsNgService,
-    ) {
+    constructor() {
         super(
-            elRef,
             ++BrokerageAccountGroupNameLabelNgComponent.typeInstanceCreateCount,
-            cdr,
-            settingsNgService.service,
-            adiNgService.service,
-            marketsNgService.service,
             ControlComponentBaseNgDirective.labelStateColorItemIdArray
         );
     }

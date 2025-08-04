@@ -1,5 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, input } from '@angular/core';
-import { SettingsNgService } from 'component-services-ng-api';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { ControlComponentBaseNgDirective } from '../../../../ng/control-component-base-ng.directive';
 import { IntegerUiActionComponentBaseNgDirective } from '../../ng/integer-ui-action-component-base-ng.directive';
 
@@ -15,12 +14,9 @@ export class IntegerLabelNgComponent extends IntegerUiActionComponentBaseNgDirec
 
     readonly for = input<string>();
 
-    constructor(elRef: ElementRef<HTMLElement>, cdr: ChangeDetectorRef, settingsNgService: SettingsNgService) {
+    constructor() {
         super(
-            elRef,
             ++IntegerLabelNgComponent.typeInstanceCreateCount,
-            cdr,
-            settingsNgService.service,
             ControlComponentBaseNgDirective.labelStateColorItemIdArray
         );
     }

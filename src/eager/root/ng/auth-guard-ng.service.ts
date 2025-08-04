@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 
 import { SessionService } from '../session-service';
 import { SessionNgService } from './session-ng.service';
@@ -9,7 +9,9 @@ import { SessionNgService } from './session-ng.service';
 export class AuthGuardNgService  {
     private readonly _sessionService: SessionService;
 
-    constructor(sessionNgService: SessionNgService) {
+    constructor() {
+        const sessionNgService = inject(SessionNgService);
+
         this._sessionService = sessionNgService.session;
     }
 

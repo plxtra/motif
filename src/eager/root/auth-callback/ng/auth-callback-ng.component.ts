@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 import { AssertInternalError } from '@pbkware/js-utils';
 import { ComponentBaseNgDirective } from 'component-ng-api';
 import { SessionNgService } from '../../ng/session-ng.service';
@@ -16,8 +16,10 @@ export class AuthCallbackNgComponent extends ComponentBaseNgDirective implements
 
     private readonly _sessionService: SessionService;
 
-    constructor(elRef: ElementRef<HTMLElement>, sessionNgService: SessionNgService) {
-        super(elRef, ++AuthCallbackNgComponent.typeInstanceCreateCount);
+    constructor() {
+        const sessionNgService = inject(SessionNgService);
+
+        super(++AuthCallbackNgComponent.typeInstanceCreateCount);
         this._sessionService = sessionNgService.session;
     }
 

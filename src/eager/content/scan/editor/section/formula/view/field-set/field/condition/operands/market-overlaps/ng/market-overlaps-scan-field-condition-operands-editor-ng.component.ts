@@ -1,9 +1,9 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Inject, viewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, inject, viewChild } from '@angular/core';
 import { delay1Tick } from '@pbkware/js-utils';
 import { BooleanUiAction } from '@pbkware/ui-action';
 import { MarketListSelectItemsUiAction, MarketsService, StringId, Strings } from '@plxtra/motif-core';
 import { ComponentInstanceId } from 'component-internal-api';
-import { MarketsNgService, SettingsNgService } from 'component-services-ng-api';
+import { MarketsNgService } from 'component-services-ng-api';
 import { CaptionedCheckboxNgComponent, CaptionLabelNgComponent, EnumArrayInputNgComponent } from 'controls-ng-api';
 import { ScanFieldConditionOperandsEditorNgDirective } from '../../ng/ng-api';
 import { MarketOverlapsScanFieldConditionOperandsEditorFrame } from '../market-overlaps-scan-field-condition-operands-editor-frame';
@@ -30,15 +30,12 @@ export class MarketOverlapsScanFieldConditionOperandsEditorNgComponent extends S
     private _marketLabelComponent: CaptionLabelNgComponent;
     private _marketControlComponent: EnumArrayInputNgComponent;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        settingsNgService: SettingsNgService,
-        marketsNgService: MarketsNgService,
-        @Inject(ScanFieldConditionOperandsEditorNgDirective.frameInjectionToken) frame: MarketOverlapsScanFieldConditionOperandsEditorNgComponent.Frame,
-        @Inject(ScanFieldConditionOperandsEditorNgDirective.modifierRootInjectionToken) modifierRoot: ComponentInstanceId,
-    ) {
-        super(elRef, ++MarketOverlapsScanFieldConditionOperandsEditorNgComponent.typeInstanceCreateCount, cdr, settingsNgService, frame, modifierRoot);
+    constructor() {
+        const marketsNgService = inject(MarketsNgService);
+        const frame = inject<MarketOverlapsScanFieldConditionOperandsEditorNgComponent.Frame>(ScanFieldConditionOperandsEditorNgDirective.frameInjectionToken);
+        const modifierRoot = inject<ComponentInstanceId>(ScanFieldConditionOperandsEditorNgDirective.modifierRootInjectionToken);
+
+        super(++MarketOverlapsScanFieldConditionOperandsEditorNgComponent.typeInstanceCreateCount, frame, modifierRoot);
 
         this._marketsService = marketsNgService.service;
         this._notUiAction = this.createNotUiAction();

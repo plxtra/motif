@@ -1,4 +1,4 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { Injectable, OnDestroy, inject } from '@angular/core';
 import {
     AdiNgService,
     AppStorageNgService,
@@ -21,20 +21,20 @@ import { ApiControlComponentFactoryNgService } from './api-control-component-fac
 export class ExtensionsNgService implements OnDestroy {
     private _service: ExtensionsService;
 
-    constructor(
-        extensionsAccessNgService: ExtensionsAccessNgService,
-        decimalFactoryNgService: DecimalFactoryNgService,
-        adiNgService: AdiNgService,
-        settingsNgService: SettingsNgService,
-        marketsNgService: MarketsNgService,
-        commandRegisterNgService: CommandRegisterNgService,
-        storageNgService: AppStorageNgService,
-        symbolsNgService: SymbolsNgService,
-        menuBarNgService: MenuBarNgService,
-        workspaceNgService: WorkspaceNgService,
-        apiControlComponentNgFactoryService: ApiControlComponentFactoryNgService,
-        apiContentComponentNgFactoryService: ApiContentComponentFactoryNgService,
-    ) {
+    constructor() {
+        const extensionsAccessNgService = inject(ExtensionsAccessNgService);
+        const decimalFactoryNgService = inject(DecimalFactoryNgService);
+        const adiNgService = inject(AdiNgService);
+        const settingsNgService = inject(SettingsNgService);
+        const marketsNgService = inject(MarketsNgService);
+        const commandRegisterNgService = inject(CommandRegisterNgService);
+        const storageNgService = inject(AppStorageNgService);
+        const symbolsNgService = inject(SymbolsNgService);
+        const menuBarNgService = inject(MenuBarNgService);
+        const workspaceNgService = inject(WorkspaceNgService);
+        const apiControlComponentNgFactoryService = inject(ApiControlComponentFactoryNgService);
+        const apiContentComponentNgFactoryService = inject(ApiContentComponentFactoryNgService);
+
         this._service = new ExtensionsService(
             decimalFactoryNgService.service,
             adiNgService.service,

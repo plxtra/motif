@@ -1,13 +1,4 @@
-import {
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    ElementRef,
-    OnDestroy,
-    ViewContainerRef,
-    viewChild
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, ViewContainerRef, inject, viewChild } from '@angular/core';
 import { TinyColor } from '@ctrl/tinycolor';
 import { ModifierKey, StringBuilder, delay1Tick, tryGetErrorMessage } from '@pbkware/js-utils';
 import { UiAction } from '@pbkware/ui-action';
@@ -34,6 +25,8 @@ import { ContentComponentBaseNgDirective } from '../../ng/content-component-base
     standalone: false
 })
 export class ColorSchemePresetCodeNgComponent extends ContentComponentBaseNgDirective implements AfterViewInit, OnDestroy {
+    private _cdr = inject(ChangeDetectorRef);
+
     private static typeInstanceCreateCount = 0;
 
     private static readonly _tabs2 = ' '.repeat(8);
@@ -58,13 +51,11 @@ export class ColorSchemePresetCodeNgComponent extends ContentComponentBaseNgDire
     private _closeResolve: () => void;
     private _closeReject: (reason: unknown) => void;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        private _cdr: ChangeDetectorRef,
-        toastNgService: ToastNgService,
-        commandRegisterNgService: CommandRegisterNgService
-    ) {
-        super(elRef, ++ColorSchemePresetCodeNgComponent.typeInstanceCreateCount);
+    constructor() {
+        const toastNgService = inject(ToastNgService);
+        const commandRegisterNgService = inject(CommandRegisterNgService);
+
+        super(++ColorSchemePresetCodeNgComponent.typeInstanceCreateCount);
 
         this._toastService = toastNgService.service;
         this._commandRegisterService = commandRegisterNgService.service;

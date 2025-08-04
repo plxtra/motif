@@ -1,17 +1,4 @@
-import {
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    ElementRef,
-    Inject,
-    InjectionToken,
-    Injector,
-    OnDestroy,
-    ValueProvider,
-    ViewContainerRef,
-    viewChild
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, InjectionToken, Injector, OnDestroy, ValueProvider, ViewContainerRef, inject, viewChild } from '@angular/core';
 import { AssertInternalError, LockOpenListItem, ModifierKey, UnreachableCaseError, delay1Tick } from '@pbkware/js-utils';
 import { UiAction } from '@pbkware/ui-action';
 import {
@@ -42,10 +29,15 @@ import { ContentComponentBaseNgDirective } from '../../ng/content-component-base
 export class DepthAndSalesColumnLayoutsDialogNgComponent extends ContentComponentBaseNgDirective implements OnDestroy, AfterViewInit {
     private static typeInstanceCreateCount = 0;
 
+    readonly caption = inject(DepthAndSalesColumnLayoutsDialogNgComponent.captionInjectionToken);
+
+    private readonly _opener = inject<LockOpenListItem.Opener>(CoreInjectionTokens.lockOpenListItemOpener);
     private readonly _okButtonComponentSignal = viewChild.required<SvgButtonNgComponent>('okButton');
     private readonly _cancelButtonComponentSignal = viewChild.required<SvgButtonNgComponent>('cancelButton');
     private readonly _tabListComponentSignal = viewChild.required<TabListNgComponent>('tabList');
     private readonly _editorContainerSignal = viewChild.required('editorContainer', { read: ViewContainerRef });
+
+    private _cdr = inject(ChangeDetectorRef);
 
     private _okButtonComponent: SvgButtonNgComponent;
     private _cancelButtonComponent: SvgButtonNgComponent;
@@ -73,16 +65,12 @@ export class DepthAndSalesColumnLayoutsDialogNgComponent extends ContentComponen
     private _closeResolve: (value: DepthAndSalesDitemFrame.ColumnLayoutDefinitions | undefined) => void;
     private _closeReject: (reason: unknown) => void;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        private _cdr: ChangeDetectorRef,
-        commandRegisterNgService: CommandRegisterNgService,
-        @Inject(CoreInjectionTokens.lockOpenListItemOpener) private readonly _opener: LockOpenListItem.Opener,
-        @Inject(DepthAndSalesColumnLayoutsDialogNgComponent.captionInjectionToken) public readonly caption: string,
-        @Inject(DepthAndSalesColumnLayoutsDialogNgComponent.depthAndSalesAllowedFieldsInjectionToken) allowedFields: DepthAndSalesDitemFrame.AllowedGridFields,
-        @Inject(DepthAndSalesColumnLayoutsDialogNgComponent.oldDepthAndSalesColumnLayoutDefinitionsInjectionToken) oldLayoutDefinitions: DepthAndSalesDitemFrame.ColumnLayoutDefinitions,
-    ) {
-        super(elRef, ++DepthAndSalesColumnLayoutsDialogNgComponent.typeInstanceCreateCount);
+    constructor() {
+        const commandRegisterNgService = inject(CommandRegisterNgService);
+        const allowedFields = inject<DepthAndSalesDitemFrame.AllowedGridFields>(DepthAndSalesColumnLayoutsDialogNgComponent.depthAndSalesAllowedFieldsInjectionToken);
+        const oldLayoutDefinitions = inject<DepthAndSalesDitemFrame.ColumnLayoutDefinitions>(DepthAndSalesColumnLayoutsDialogNgComponent.oldDepthAndSalesColumnLayoutDefinitionsInjectionToken);
+
+        super(++DepthAndSalesColumnLayoutsDialogNgComponent.typeInstanceCreateCount);
 
         this._commandRegisterService = commandRegisterNgService.service;
 

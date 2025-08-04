@@ -1,10 +1,8 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { UnreachableCaseError } from '@pbkware/js-utils';
 import { ColorScheme } from '@plxtra/motif-core';
-import { SettingsNgService } from 'component-services-ng-api';
 import { MenuBarCommandItemComponentNgDirective } from '../../../ng/menu-bar-command-item-component-ng.directive';
 import { MenuBarMenuItemComponentNgDirective } from '../../../ng/menu-bar-menu-item-component-ng.directive';
-import { MenuBarNgService } from '../../../ng/menu-bar-ng.service';
 
 @Component({
     selector: 'app-menu-bar-root-command-item',
@@ -16,8 +14,8 @@ import { MenuBarNgService } from '../../../ng/menu-bar-ng.service';
 export class MenuBarRootCommandItemNgComponent extends MenuBarCommandItemComponentNgDirective implements OnInit, OnDestroy {
     private static typeInstanceCreateCount = 0;
 
-    constructor(elRef: ElementRef<HTMLElement>, cdr: ChangeDetectorRef, settingsNgService: SettingsNgService, menuBarNgService: MenuBarNgService) {
-        super(elRef, ++MenuBarRootCommandItemNgComponent.typeInstanceCreateCount, cdr, settingsNgService.service, menuBarNgService);
+    constructor() {
+        super(++MenuBarRootCommandItemNgComponent.typeInstanceCreateCount);
     }
 
     ngOnInit() {

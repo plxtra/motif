@@ -1,12 +1,4 @@
-import {
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    Component,
-    ElementRef,
-    Inject,
-    OnDestroy,
-    viewChild
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, inject, OnDestroy, viewChild } from '@angular/core';
 import { SafeResourceUrl } from '@angular/platform-browser';
 import { AssertInternalError, delay1Tick, MultiEvent } from '@pbkware/js-utils';
 import {
@@ -82,31 +74,29 @@ export class DesktopNgComponent extends ComponentBaseNgDirective implements Afte
     private _signOutButtonComponent: ButtonInputNgComponent;
     private _layoutHostComponent: GoldenLayoutHostNgComponent;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        // configNgService: ConfigNgService,
-        decimalFactoryNgService: DecimalFactoryNgService,
-        toastNgService: ToastNgService,
-        idleNgService: IdleNgService,
-        appStorageNgService: AppStorageNgService,
-        settingsNgService: SettingsNgService,
-        marketsNgService: MarketsNgService,
-        userAlertNgService: UserAlertNgService,
-        capabilitiesNgService: CapabilitiesNgService,
-        extensionsAccessNgService: ExtensionsAccessNgService,
-        desktopAccessNgService: DesktopAccessNgService,
-        symbolDetailCacheNgService: SymbolDetailCacheNgService,
-        adiNgService: AdiNgService,
-        signOutNgService: SignOutNgService,
-        menuBarNgService: MenuBarNgService,
-        commandRegisterNgService: CommandRegisterNgService,
-        keyboardNgService: KeyboardNgService,
-        tableFieldSourceDefinitionFactoryNgService: TableFieldSourceDefinitionCachingFactoryNgService, // include to make sure factory is created
-        tableRecordSourceFactoryNgService: TableRecordSourceFactoryNgService, // include to make sure factory is created
-        hideUnloadSaveNgService: HideUnloadSaveNgService,
-        @Inject(BrandingNgService.injectionToken) brandingService: BrandingNgService,
-    ) {
-        super(elRef, ++DesktopNgComponent.typeInstanceCreateCount);
+    constructor() {
+        super(++DesktopNgComponent.typeInstanceCreateCount);
+
+        const decimalFactoryNgService = inject(DecimalFactoryNgService);
+        const toastNgService = inject(ToastNgService);
+        const idleNgService = inject(IdleNgService);
+        const appStorageNgService = inject(AppStorageNgService);
+        const settingsNgService = inject(SettingsNgService);
+        const marketsNgService = inject(MarketsNgService);
+        const userAlertNgService = inject(UserAlertNgService);
+        const capabilitiesNgService = inject(CapabilitiesNgService);
+        const extensionsAccessNgService = inject(ExtensionsAccessNgService);
+        const desktopAccessNgService = inject(DesktopAccessNgService);
+        const symbolDetailCacheNgService = inject(SymbolDetailCacheNgService);
+        const adiNgService = inject(AdiNgService);
+        const signOutNgService = inject(SignOutNgService);
+        const menuBarNgService = inject(MenuBarNgService);
+        const commandRegisterNgService = inject(CommandRegisterNgService);
+        const keyboardNgService = inject(KeyboardNgService);
+        const tableFieldSourceDefinitionFactoryNgService = inject(TableFieldSourceDefinitionCachingFactoryNgService);
+        const tableRecordSourceFactoryNgService = inject(TableRecordSourceFactoryNgService);
+        const hideUnloadSaveNgService = inject(HideUnloadSaveNgService);
+        const brandingService = inject<BrandingNgService>(BrandingNgService.injectionToken);
 
         this._commandRegisterService = commandRegisterNgService.service;
         this._settingsService = settingsNgService.service;

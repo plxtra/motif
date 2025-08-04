@@ -1,9 +1,8 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Inject, viewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, inject, viewChild } from '@angular/core';
 import { delay1Tick, SourceTzOffsetDate } from '@pbkware/js-utils';
 import { BooleanUiAction, DateUiAction } from '@pbkware/ui-action';
 import { StringId, Strings } from '@plxtra/motif-core';
 import { ComponentInstanceId } from 'component-internal-api';
-import { SettingsNgService } from 'component-services-ng-api';
 import { CaptionedCheckboxNgComponent, CaptionLabelNgComponent, DateInputNgComponent } from 'controls-ng-api';
 import { ScanFieldConditionOperandsEditorNgDirective } from '../../ng/ng-api';
 import { DateRangeScanFieldConditionOperandsEditorFrame } from '../date-range-scan-field-condition-operands-editor-frame';
@@ -34,14 +33,11 @@ export class DateRangeScanFieldConditionOperandsEditorNgComponent extends ScanFi
     private _maxLabelComponent: CaptionLabelNgComponent;
     private _maxControlComponent: DateInputNgComponent;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        settingsNgService: SettingsNgService,
-        @Inject(ScanFieldConditionOperandsEditorNgDirective.frameInjectionToken) frame: DateRangeScanFieldConditionOperandsEditorNgComponent.Frame,
-        @Inject(ScanFieldConditionOperandsEditorNgDirective.modifierRootInjectionToken) modifierRoot: ComponentInstanceId,
-    ) {
-        super(elRef, ++DateRangeScanFieldConditionOperandsEditorNgComponent.typeInstanceCreateCount, cdr, settingsNgService, frame, modifierRoot);
+    constructor() {
+        const frame = inject<DateRangeScanFieldConditionOperandsEditorNgComponent.Frame>(ScanFieldConditionOperandsEditorNgDirective.frameInjectionToken);
+        const modifierRoot = inject<ComponentInstanceId>(ScanFieldConditionOperandsEditorNgDirective.modifierRootInjectionToken);
+
+        super(++DateRangeScanFieldConditionOperandsEditorNgComponent.typeInstanceCreateCount, frame, modifierRoot);
 
         this._notUiAction = this.createNotUiAction();
         this._minUiAction = this.createMinUiAction();

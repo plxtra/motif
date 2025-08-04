@@ -1,16 +1,6 @@
-import {
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    ElementRef,
-    Inject,
-    OnDestroy,
-    viewChild,
-    ViewContainerRef
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, inject, OnDestroy, viewChild, ViewContainerRef } from '@angular/core';
 import { delay1Tick, JsonElement } from '@pbkware/js-utils';
-import { AdiNgService, CommandRegisterNgService, MarketsNgService, SettingsNgService, SymbolsNgService } from 'component-services-ng-api';
+import { AdiNgService, MarketsNgService, SymbolsNgService } from 'component-services-ng-api';
 import {
     ColorSettingsNgComponent,
     ExchangesSettingsNgComponent,
@@ -19,7 +9,6 @@ import {
     OrderPadSettingsNgComponent
 } from 'content-ng-api';
 import { TabListNgComponent } from 'controls-ng-api';
-import { ComponentContainer } from 'golden-layout';
 import { BuiltinDitemNgComponentBaseNgDirective } from '../../ng/builtin-ditem-ng-component-base.directive';
 import { DesktopAccessNgService } from '../../ng/desktop-access-ng.service';
 import { SettingsDitemFrame } from '../settings-ditem-frame';
@@ -44,25 +33,13 @@ export class SettingsDitemNgComponent extends BuiltinDitemNgComponentBaseNgDirec
 
     private _settingsGroupId: SettingsDitemFrame.GroupId;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        @Inject(BuiltinDitemNgComponentBaseNgDirective.goldenLayoutContainerInjectionToken) container: ComponentContainer,
-        settingsNgService: SettingsNgService,
-        marketsNgService: MarketsNgService,
-        commandRegisterNgService: CommandRegisterNgService,
-        desktopAccessNgService: DesktopAccessNgService,
-        symbolsNgService: SymbolsNgService,
-        adiNgService: AdiNgService,
-    ) {
-        super(
-            elRef,
-            ++SettingsDitemNgComponent.typeInstanceCreateCount,
-            cdr,
-            container,
-            settingsNgService.service,
-            commandRegisterNgService.service
-        );
+    constructor() {
+        super(++SettingsDitemNgComponent.typeInstanceCreateCount);
+
+        const marketsNgService = inject(MarketsNgService);
+        const desktopAccessNgService = inject(DesktopAccessNgService);
+        const symbolsNgService = inject(SymbolsNgService);
+        const adiNgService = inject(AdiNgService);
 
         this._frame = new SettingsDitemFrame(this, this.settingsService, marketsNgService.service, this.commandRegisterService,
             desktopAccessNgService.service, symbolsNgService.service, adiNgService.service);

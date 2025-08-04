@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, inject } from '@angular/core';
 import { Integer } from '@pbkware/js-utils';
 import {
     CellPainterFactoryService,
@@ -41,12 +41,11 @@ export class ColorSchemeGridNgComponent extends ContentComponentBaseNgDirective 
     private _filterActive = false;
     private _filterFolderId = ColorScheme.Item.FolderId.Grid;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        settingsNgService: SettingsNgService,
-        cellPainterFactoryNgService: CellPainterFactoryNgService,
-    ) {
-        super(elRef, ++ColorSchemeGridNgComponent.typeInstanceCreateCount);
+    constructor() {
+        const settingsNgService = inject(SettingsNgService);
+        const cellPainterFactoryNgService = inject(CellPainterFactoryNgService);
+
+        super(++ColorSchemeGridNgComponent.typeInstanceCreateCount);
         this._settingsService = settingsNgService.service;
         this._cellPainterFactoryService = cellPainterFactoryNgService.service;
         this._recordStore = new ColorSchemeGridRecordStore(this._settingsService);

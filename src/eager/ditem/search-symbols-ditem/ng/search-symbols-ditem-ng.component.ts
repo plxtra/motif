@@ -1,14 +1,4 @@
-import {
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    ElementRef,
-    Inject,
-    OnDestroy,
-    viewChild,
-    ViewContainerRef
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, inject, OnDestroy, viewChild, ViewContainerRef } from '@angular/core';
 import {
     AssertInternalError,
     delay1Tick,
@@ -32,10 +22,8 @@ import {
 } from '@plxtra/motif-core';
 import {
     AdiNgService,
-    CommandRegisterNgService,
     DecimalFactoryNgService,
     MarketsNgService,
-    SettingsNgService,
     SymbolsNgService,
     ToastNgService
 } from 'component-services-ng-api';
@@ -56,7 +44,6 @@ import {
     SvgButtonNgComponent,
     TextInputNgComponent
 } from 'controls-ng-api';
-import { ComponentContainer } from 'golden-layout';
 import { BuiltinDitemNgComponentBaseNgDirective } from '../../ng/builtin-ditem-ng-component-base.directive';
 import { DesktopAccessNgService } from '../../ng/desktop-access-ng.service';
 import { SearchSymbolsDitemFrame } from '../search-symbols-ditem-frame';
@@ -75,6 +62,8 @@ export class SearchSymbolsDitemNgComponent extends BuiltinDitemNgComponentBaseNg
     public readonly indicesRadioName: string;
 
     public paginationActive = false; // hide this until implemented
+
+    private readonly _toastNgService = inject(ToastNgService);
 
     private readonly _toolbarExecuteButtonComponentSignal = viewChild.required<SvgButtonNgComponent>('toolbarExecuteButton');
     private readonly _symbolLinkButtonComponentSignal = viewChild.required<SvgButtonNgComponent>('symbolLinkButton');
@@ -217,27 +206,14 @@ export class SearchSymbolsDitemNgComponent extends BuiltinDitemNgComponentBaseNg
 
     private _modeId = SearchSymbolsDitemNgComponent.ModeId.Main;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        @Inject(BuiltinDitemNgComponentBaseNgDirective.goldenLayoutContainerInjectionToken) container: ComponentContainer,
-        decimalFactoryNgService: DecimalFactoryNgService,
-        settingsNgService: SettingsNgService,
-        marketsNgService: MarketsNgService,
-        commandRegisterNgService: CommandRegisterNgService,
-        desktopAccessNgService: DesktopAccessNgService,
-        symbolsNgService: SymbolsNgService,
-        adiNgService: AdiNgService,
-        private readonly _toastNgService: ToastNgService,
-    ) {
-        super(
-            elRef,
-            ++SearchSymbolsDitemNgComponent.typeInstanceCreateCount,
-            cdr,
-            container,
-            settingsNgService.service,
-            commandRegisterNgService.service
-        );
+    constructor() {
+        super(++SearchSymbolsDitemNgComponent.typeInstanceCreateCount);
+
+        const decimalFactoryNgService = inject(DecimalFactoryNgService);
+        const marketsNgService = inject(MarketsNgService);
+        const desktopAccessNgService = inject(DesktopAccessNgService);
+        const symbolsNgService = inject(SymbolsNgService);
+        const adiNgService = inject(AdiNgService);
 
         this._marketsService = marketsNgService.service;
 

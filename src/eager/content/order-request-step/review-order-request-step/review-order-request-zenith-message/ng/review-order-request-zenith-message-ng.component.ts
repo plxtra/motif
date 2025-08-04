@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, OnDestroy, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, inject, input } from '@angular/core';
 import { MultiEvent } from '@pbkware/js-utils';
 import { ColorScheme, ColorSettings, SettingsService } from '@plxtra/motif-core';
 import { SettingsNgService } from 'component-services-ng-api';
@@ -24,8 +24,10 @@ export class ReviewOrderRequestZenithMessageNgComponent extends ContentComponent
     private readonly _colorSettings: ColorSettings;
     private _settingsChangedSubscriptionId: MultiEvent.SubscriptionId;
 
-    constructor(elRef: ElementRef<HTMLElement>, settingsNgService: SettingsNgService) {
-        super(elRef, ++ReviewOrderRequestZenithMessageNgComponent.typeInstanceCreateCount);
+    constructor() {
+        const settingsNgService = inject(SettingsNgService);
+
+        super(++ReviewOrderRequestZenithMessageNgComponent.typeInstanceCreateCount);
 
         this._settingsService = settingsNgService.service;
         this._colorSettings = this._settingsService.color;

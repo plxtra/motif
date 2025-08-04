@@ -1,6 +1,5 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnDestroy, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, input } from '@angular/core';
 import { Integer } from '@pbkware/js-utils';
-import { SettingsNgService } from 'component-services-ng-api';
 import { ControlComponentBaseNgDirective } from '../../../ng/control-component-base-ng.directive';
 import { ListItemSelectItemsUiActionNgDirective } from '../../ng/list-item-select-items-ui-action-ng.directive';
 
@@ -16,12 +15,9 @@ export class EnumArrayElementCaptionNgComponent extends ListItemSelectItemsUiAct
 
     readonly for = input<string>();
 
-    constructor(elRef: ElementRef<HTMLElement>, cdr: ChangeDetectorRef, settingsNgService: SettingsNgService) {
+    constructor() {
         super(
-            elRef,
             ++EnumArrayElementCaptionNgComponent.typeInstanceCreateCount,
-            cdr,
-            settingsNgService.service,
             ControlComponentBaseNgDirective.labelStateColorItemIdArray,
             Number.MIN_SAFE_INTEGER,
         );

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { RevReferenceableDataSourceDefinitionsStore } from 'revgrid';
 import { CoreNgService } from './core-ng.service';
 
@@ -8,7 +8,9 @@ import { CoreNgService } from './core-ng.service';
 export class ReferenceableDataSourceDefinitionsStoreNgService {
     private _service: RevReferenceableDataSourceDefinitionsStore;
 
-    constructor(coreNgService: CoreNgService) {
+    constructor() {
+        const coreNgService = inject(CoreNgService);
+
         this._service = coreNgService.referenceableDataSourceDefinitionsStoreService;
     }
 

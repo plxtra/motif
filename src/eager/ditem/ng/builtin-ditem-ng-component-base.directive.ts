@@ -1,7 +1,8 @@
-import { ChangeDetectorRef, Directive, ElementRef, InjectionToken } from '@angular/core';
+import { ChangeDetectorRef, Directive, InjectionToken, inject } from '@angular/core';
 import { Integer, Json, JsonElement, MultiEvent } from '@pbkware/js-utils';
 import { ColorScheme, CommandRegisterService, SettingsService } from '@plxtra/motif-core';
 import { ComponentBaseNgDirective } from 'component-ng-api';
+import { CommandRegisterNgService, SettingsNgService } from 'component-services-ng-api';
 import { ComponentContainer } from 'golden-layout';
 import { BuiltinDitemFrame } from '../builtin-ditem-frame';
 import { DitemComponent } from '../ditem-component';
@@ -11,26 +12,32 @@ import { DitemFrame } from '../ditem-frame';
 export abstract class BuiltinDitemNgComponentBaseNgDirective extends ComponentBaseNgDirective
     implements DitemFrame.ComponentAccess, DitemComponent {
 
+    readonly container: ComponentContainer;
+    protected readonly settingsService: SettingsService;
+    protected readonly commandRegisterService: CommandRegisterService;
+
+    private readonly _cdr: ChangeDetectorRef;
+
     private _focused = false;
     private _settingsChangedSubscriptionId: MultiEvent.SubscriptionId;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        typeInstanceCreateId: Integer,
-        private readonly _cdr: ChangeDetectorRef,
-        readonly container: ComponentContainer,
-        protected readonly settingsService: SettingsService,
-        protected readonly commandRegisterService: CommandRegisterService,
-        generateUniqueId = true
-    ) {
-        super(elRef, typeInstanceCreateId, generateUniqueId);
+    constructor(typeInstanceCreateId: Integer, generateUniqueId = true) {
+        super(typeInstanceCreateId, generateUniqueId);
 
-        this.container.stateRequestEvent = () => this.handleContainerStateRequestEvent();
+        this._cdr = inject(ChangeDetectorRef);
 
-        this.container.addEventListener('show', this._containerShownEventListener);
-        this.container.addEventListener('hide', this._containerHideEventListener);
-        this.container.addEventListener('focus', this._containerFocusEventListener);
-        this.container.addEventListener('blur', this._containerBlurEventListener);
+        const settingsNgService = inject(SettingsNgService);
+        this.settingsService = settingsNgService.service;
+        const commandRegisterNgService = inject(CommandRegisterNgService);
+        this.commandRegisterService = commandRegisterNgService.service;
+
+        const container = inject<ComponentContainer>(BuiltinDitemNgComponentBaseNgDirective.goldenLayoutContainerInjectionToken);
+        this.container = container;
+        container.stateRequestEvent = () => this.handleContainerStateRequestEvent();
+        container.addEventListener('show', this._containerShownEventListener);
+        container.addEventListener('hide', this._containerHideEventListener);
+        container.addEventListener('focus', this._containerFocusEventListener);
+        container.addEventListener('blur', this._containerBlurEventListener);
 
         this.initialiseFocusDetectionHandling();
     }

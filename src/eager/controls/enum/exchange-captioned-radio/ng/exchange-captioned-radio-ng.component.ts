@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, inject } from '@angular/core';
 import { Exchange } from '@plxtra/motif-core';
-import { MarketsNgService, SettingsNgService } from 'component-services-ng-api';
+import { MarketsNgService } from 'component-services-ng-api';
 import { ControlComponentBaseNgDirective } from '../../../ng/control-component-base-ng.directive';
 import { CaptionedRadioNgDirective } from '../../ng/ng-api';
 
@@ -14,17 +14,11 @@ import { CaptionedRadioNgDirective } from '../../ng/ng-api';
 export class ExchangeCaptionedRadioNgComponent extends CaptionedRadioNgDirective<Exchange> implements OnDestroy {
     private static typeInstanceCreateCount = 0;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        settingsNgService: SettingsNgService,
-        marketsNgService: MarketsNgService,
-    ) {
+    constructor() {
+        const marketsNgService = inject(MarketsNgService);
+
         super(
-            elRef,
             ++ExchangeCaptionedRadioNgComponent.typeInstanceCreateCount,
-            cdr,
-            settingsNgService.service,
             ControlComponentBaseNgDirective.clickControlStateColorItemIdArray,
             marketsNgService.service.genericUnknownExchange,
         );

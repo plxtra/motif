@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, OnDestroy, viewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, inject, OnDestroy, viewChild } from '@angular/core';
 import { AssertInternalError, delay1Tick, HtmlTypes, Integer, MultiEvent, UnreachableCaseError } from '@pbkware/js-utils';
 import { StringListSelectItemUiAction } from '@pbkware/ui-action';
 import {
@@ -38,6 +38,8 @@ export class ScanEditorAttachedNotificationChannelsNgComponent extends ScanEdito
 
     protected override _sectionHeadingComponent: ExpandableCollapsibleLinedHeadingNgComponent;
 
+    private readonly _toastNgService = inject(ToastNgService);
+
     private readonly _sectionHeadingComponentSignal = viewChild.required<ExpandableCollapsibleLinedHeadingNgComponent>('sectionHeading');
     private readonly _contentSectionSignal = viewChild.required<HTMLElement>('content');
     private readonly _channelsGridComponentSignal = viewChild.required<ScanEditorAttachedNotificationChannelsGridNgComponent>('channelsGrid');
@@ -65,13 +67,11 @@ export class ScanEditorAttachedNotificationChannelsNgComponent extends ScanEdito
     private _listBeforeChannelsDetachSubscriptionId: MultiEvent.SubscriptionId;
     private _channelsGridFrame: ScanEditorAttachedNotificationChannelsGridFrame;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        commandRegisterNgService: CommandRegisterNgService,
-        notificationChannelsNgService: NotificationChannelsNgService,
-        private readonly _toastNgService: ToastNgService,
-    ) {
-        super(elRef, ++ScanEditorAttachedNotificationChannelsNgComponent.typeInstanceCreateCount);
+    constructor() {
+        const commandRegisterNgService = inject(CommandRegisterNgService);
+        const notificationChannelsNgService = inject(NotificationChannelsNgService);
+
+        super(++ScanEditorAttachedNotificationChannelsNgComponent.typeInstanceCreateCount);
 
         this._notificationChannelsService = notificationChannelsNgService.service;
 

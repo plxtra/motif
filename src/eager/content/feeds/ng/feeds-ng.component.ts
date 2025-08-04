@@ -1,16 +1,4 @@
-import {
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    ElementRef,
-    Inject,
-    Injector,
-    OnDestroy,
-    ValueProvider,
-    ViewContainerRef,
-    viewChild
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, Injector, OnDestroy, ValueProvider, ViewContainerRef, inject, viewChild } from '@angular/core';
 import { AssertInternalError, LockOpenListItem, ModifierKey, delay1Tick } from '@pbkware/js-utils';
 import {
     ColumnLayoutOrReference,
@@ -41,6 +29,10 @@ export class FeedsNgComponent extends ContentComponentBaseNgDirective implements
 
     public dialogActive = false;
 
+    private readonly _cdr = inject(ChangeDetectorRef);
+    private readonly _toastNgService = inject(ToastNgService);
+    private readonly _opener = inject<LockOpenListItem.Opener>(CoreInjectionTokens.lockOpenListItemOpener);
+
     private readonly _gridComponentSignal = viewChild.required<FeedsGridNgComponent>('grid');
     private readonly _columnsButtonComponentSignal = viewChild.required<SvgButtonNgComponent>('columnsButton');
     private readonly _autoSizeColumnWidthsButtonComponentSignal = viewChild.required<SvgButtonNgComponent>('autoSizeColumnWidthsButton');
@@ -54,14 +46,10 @@ export class FeedsNgComponent extends ContentComponentBaseNgDirective implements
     private _autoSizeColumnWidthsButtonComponent: SvgButtonNgComponent;
     private _dialogContainer: ViewContainerRef;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        private readonly _cdr: ChangeDetectorRef,
-        commandRegisterNgService: CommandRegisterNgService,
-        private readonly _toastNgService: ToastNgService,
-        @Inject(CoreInjectionTokens.lockOpenListItemOpener) private readonly _opener: LockOpenListItem.Opener,
-    ) {
-        super(elRef, ++FeedsNgComponent.typeInstanceCreateCount);
+    constructor() {
+        const commandRegisterNgService = inject(CommandRegisterNgService);
+
+        super(++FeedsNgComponent.typeInstanceCreateCount);
 
         const commandRegisterService = commandRegisterNgService.service;
         this._columnsUiAction = this.createColumnsUiAction(commandRegisterService);

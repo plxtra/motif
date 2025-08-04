@@ -1,14 +1,4 @@
-import {
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    ElementRef,
-    Inject,
-    OnDestroy,
-    ViewContainerRef,
-    viewChild
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, OnDestroy, ViewContainerRef, inject, viewChild } from '@angular/core';
 import { AssertInternalError, JsonElement, ModifierKey, ModifierKeyId, delay1Tick } from '@pbkware/js-utils';
 import { DateUiAction, UiAction } from '@pbkware/ui-action';
 import {
@@ -21,10 +11,9 @@ import {
     assert,
     assigned
 } from '@plxtra/motif-core';
-import { AdiNgService, CommandRegisterNgService, MarketsNgService, SettingsNgService, SymbolsNgService } from 'component-services-ng-api';
+import { AdiNgService, MarketsNgService, SettingsNgService, SymbolsNgService } from 'component-services-ng-api';
 import { ColumnLayoutDialogNgComponent, TradesNgComponent } from 'content-ng-api';
 import { DataIvemIdSelectNgComponent, DateInputNgComponent, SvgButtonNgComponent } from 'controls-ng-api';
-import { ComponentContainer } from 'golden-layout';
 import { BuiltinDitemNgComponentBaseNgDirective } from '../../ng/builtin-ditem-ng-component-base.directive';
 import { DesktopAccessNgService } from '../../ng/desktop-access-ng.service';
 import { TradesDitemFrame } from '../trades-ditem-frame';
@@ -71,30 +60,18 @@ export class TradesDitemNgComponent extends BuiltinDitemNgComponentBaseNgDirecti
     private _contentComponent: TradesNgComponent;
     private _dialogContainer: ViewContainerRef;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        @Inject(BuiltinDitemNgComponentBaseNgDirective.goldenLayoutContainerInjectionToken) container: ComponentContainer,
-        settingsNgService: SettingsNgService,
-        marketsNgService: MarketsNgService,
-        commandRegisterNgService: CommandRegisterNgService,
-        desktopAccessNgService: DesktopAccessNgService,
-        symbolsNgService: SymbolsNgService,
-        adiNgService: AdiNgService,
-    ) {
-        const settingsService = settingsNgService.service;
-        super(
-            elRef,
-            ++TradesDitemNgComponent.typeInstanceCreateCount,
-            cdr,
-            container,
-            settingsService,
-            commandRegisterNgService.service
-        );
+    constructor() {
+        super(++TradesDitemNgComponent.typeInstanceCreateCount);
+
+        const settingsNgService = inject(SettingsNgService);
+        const marketsNgService = inject(MarketsNgService);
+        const desktopAccessNgService = inject(DesktopAccessNgService);
+        const symbolsNgService = inject(SymbolsNgService);
+        const adiNgService = inject(AdiNgService);
 
         this._marketsService = marketsNgService.service;
 
-        this._frame = new TradesDitemFrame(this, settingsService, marketsNgService.service, this.commandRegisterService,
+        this._frame = new TradesDitemFrame(this, settingsNgService.service, this._marketsService, this.commandRegisterService,
             desktopAccessNgService.service, symbolsNgService.service, adiNgService.service);
 
         this._symbolEditUiAction = this.createSymbolEditUiAction();

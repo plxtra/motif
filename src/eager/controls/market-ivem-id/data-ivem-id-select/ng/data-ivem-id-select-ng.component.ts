@@ -1,25 +1,9 @@
-import {
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    ElementRef,
-    ViewEncapsulation
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import {
     DataIvemId,
     DataMarket,
     Market
 } from '@plxtra/motif-core';
-import {
-    AdiNgService,
-    CommandRegisterNgService,
-    DecimalFactoryNgService,
-    MarketsNgService,
-    SettingsNgService,
-    SymbolDetailCacheNgService,
-    SymbolsNgService
-} from 'component-services-ng-api';
-import { NgSelectOverlayNgService } from '../../../ng/ng-select-overlay-ng.service';
 import { MarketIvemIdSelectNgDirective } from '../../ng/market-ivem-id-select-ng.directive';
 
 @Component({
@@ -33,32 +17,9 @@ import { MarketIvemIdSelectNgDirective } from '../../ng/market-ivem-id-select-ng
 export class DataIvemIdSelectNgComponent extends MarketIvemIdSelectNgDirective<DataMarket> {
     private static typeInstanceCreateCount = 0;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        decimalFactoryNgService: DecimalFactoryNgService,
-        commandRegisterNgService: CommandRegisterNgService,
-        ngSelectOverlayNgService: NgSelectOverlayNgService,
-        settingsNgService: SettingsNgService,
-        marketsNgService: MarketsNgService,
-        adiNgService: AdiNgService,
-        symbolsNgService: SymbolsNgService,
-        symbolDetailCacheNgService: SymbolDetailCacheNgService,
-    ) {
-        const symbolsService = symbolsNgService.service;
-
+    constructor() {
         super(
-            elRef,
             ++DataIvemIdSelectNgComponent.typeInstanceCreateCount,
-            cdr,
-            decimalFactoryNgService.service,
-            commandRegisterNgService.service,
-            ngSelectOverlayNgService,
-            settingsNgService.service,
-            marketsNgService.service,
-            adiNgService.service,
-            symbolsService,
-            symbolDetailCacheNgService.service,
             Market.TypeId.Data,
             DataIvemId,
             (dataMarket) => [dataMarket],

@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, OnDestroy, viewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, OnDestroy, viewChild, inject } from '@angular/core';
 import { delay1Tick } from '@pbkware/js-utils';
 import { ButtonUiAction, CommandRegisterService, InternalCommand, StringId, Strings } from '@plxtra/motif-core';
 import { CommandRegisterNgService } from 'component-services-ng-api';
@@ -37,7 +37,9 @@ export class BannerAdvertNgComponent implements OnDestroy, AfterViewInit {
     private _rightSimilarButtonComponent: ButtonInputNgComponent;
     private _rightNotInterestedButtonComponent: ButtonInputNgComponent;
 
-    constructor(commandRegisterNgService: CommandRegisterNgService) {
+    constructor() {
+        const commandRegisterNgService = inject(CommandRegisterNgService);
+
         this._commandRegisterService = commandRegisterNgService.service;
 
         this._contactMeUiAction = this.createContactMeUiAction();

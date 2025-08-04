@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Directive, ElementRef, InjectionToken, OnDestroy, viewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Directive, inject, InjectionToken, OnDestroy, viewChild } from '@angular/core';
 import { AssertInternalError, delay1Tick, Integer, LockOpenListItem, MultiEvent } from '@pbkware/js-utils';
 import { StringUiAction } from '@pbkware/ui-action';
 import {
@@ -22,6 +22,7 @@ import {
 } from '@plxtra/motif-core';
 import {
     CommandRegisterNgService,
+    CoreInjectionTokens,
     MarketsNgService,
     ToastNgService
 } from 'component-services-ng-api';
@@ -39,6 +40,10 @@ export abstract class DataIvemIdListEditorNgDirective extends ContentComponentBa
     popoutEventer: DataIvemIdListEditorNgDirective.PopoutEventer | undefined;
 
     readonly list: UiComparableList<DataIvemId>;
+    readonly opener = inject<LockOpenListItem.Opener>(CoreInjectionTokens.lockOpenListItemOpener);
+
+    protected readonly _cdr = inject(ChangeDetectorRef);
+    private readonly _toastNgService = inject(ToastNgService);
 
     private readonly _addDataIvemIdControlComponentSignal = viewChild.required<DataIvemIdSelectNgComponent>('addDataIvemIdControl');
     private readonly _selectAllControlComponentSignal = viewChild.required<SvgButtonNgComponent>('selectAllControl');
@@ -71,18 +76,14 @@ export abstract class DataIvemIdListEditorNgDirective extends ContentComponentBa
     private _afterListChangedMultiEvent = new MultiEvent<DataIvemIdListEditorNgDirective.AfterListChangedEventHandler>();
     private _listChangeSubscriptionId: MultiEvent.SubscriptionId | undefined;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        protected readonly _cdr: ChangeDetectorRef,
-        marketsNgService: MarketsNgService,
-        commandRegisterNgService: CommandRegisterNgService,
-        fieldSourceDefinitionCachedFactoryNgService: TableFieldSourceDefinitionCachingFactoryNgService,
-        private readonly _toastNgService: ToastNgService,
-        typeInstanceCreateCount: Integer,
-        protected readonly opener: LockOpenListItem.Opener,
-        list: UiComparableList<DataIvemId> | null,
-    ) {
-        super(elRef, typeInstanceCreateCount);
+    constructor(typeInstanceCreateCount: Integer) {
+        super(typeInstanceCreateCount);
+
+        const list = inject<UiComparableList<DataIvemId> | null>(DataIvemIdListEditorNgDirective.listInjectionToken, { optional: true });
+
+        const marketsNgService = inject(MarketsNgService);
+        const commandRegisterNgService = inject(CommandRegisterNgService);
+        const fieldSourceDefinitionCachedFactoryNgService = inject(TableFieldSourceDefinitionCachingFactoryNgService);
 
         if (list === null) {
             this.list = new UiComparableList<DataIvemId>();

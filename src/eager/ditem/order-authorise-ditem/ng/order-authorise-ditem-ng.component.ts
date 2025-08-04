@@ -1,10 +1,4 @@
-import {
-    AfterViewInit,
-    ChangeDetectionStrategy, ChangeDetectorRef, Component,
-    ElementRef, Inject, OnDestroy,
-    viewChild,
-    ViewContainerRef
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, inject, OnDestroy, viewChild, ViewContainerRef } from '@angular/core';
 import {
     AssertInternalError,
     delay1Tick,
@@ -25,17 +19,14 @@ import {
 } from '@plxtra/motif-core';
 import {
     AdiNgService,
-    CommandRegisterNgService,
     DecimalFactoryNgService,
     MarketsNgService,
-    SettingsNgService,
     SymbolDetailCacheNgService,
     SymbolsNgService,
     ToastNgService
 } from 'component-services-ng-api';
 import { NameableColumnLayoutEditorDialogNgComponent, OrderAuthoriseNgComponent } from 'content-ng-api';
 import { BrokerageAccountGroupInputNgComponent, SvgButtonNgComponent } from 'controls-ng-api';
-import { ComponentContainer } from 'golden-layout';
 import { BuiltinDitemNgComponentBaseNgDirective } from '../../ng/builtin-ditem-ng-component-base.directive';
 import { DesktopAccessNgService } from '../../ng/desktop-access-ng.service';
 import { OrderAuthoriseDitemFrame } from '../order-authorise-ditem-frame';
@@ -49,6 +40,8 @@ import { OrderAuthoriseDitemFrame } from '../order-authorise-ditem-frame';
 })
 export class OrderAuthoriseDitemNgComponent extends BuiltinDitemNgComponentBaseNgDirective implements OnDestroy, AfterViewInit {
     private static typeInstanceCreateCount = 0;
+
+    private readonly _toastNgService = inject(ToastNgService);
 
     private readonly _orderAuthoriseComponentSignal = viewChild.required<OrderAuthoriseNgComponent>('orderAuthorise');
     private readonly _accountGroupInputComponentSignal = viewChild.required<BrokerageAccountGroupInputNgComponent>('accountGroupInput');
@@ -86,29 +79,15 @@ export class OrderAuthoriseDitemNgComponent extends BuiltinDitemNgComponentBaseN
 
     private _modeId = OrderAuthoriseDitemNgComponent.ModeId.Main;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        @Inject(BuiltinDitemNgComponentBaseNgDirective.goldenLayoutContainerInjectionToken) container: ComponentContainer,
-        decimalFactoryNgService: DecimalFactoryNgService,
-        settingsNgService: SettingsNgService,
-        marketsNgService: MarketsNgService,
-        commandRegisterNgService: CommandRegisterNgService,
-        desktopAccessNgService: DesktopAccessNgService,
-        adiNgService: AdiNgService,
-        symbolsNgService: SymbolsNgService,
-        symbolDetailCacheNgService: SymbolDetailCacheNgService,
-        private readonly _toastNgService: ToastNgService,
-    ) {
-        super(
-            elRef,
-            ++OrderAuthoriseDitemNgComponent.typeInstanceCreateCount,
-            cdr,
-            container,
-            settingsNgService.service,
-            commandRegisterNgService.service
-        );
+    constructor() {
+        super(++OrderAuthoriseDitemNgComponent.typeInstanceCreateCount);
 
+        const decimalFactoryNgService = inject(DecimalFactoryNgService);
+        const marketsNgService = inject(MarketsNgService);
+        const desktopAccessNgService = inject(DesktopAccessNgService);
+        const adiNgService = inject(AdiNgService);
+        const symbolsNgService = inject(SymbolsNgService);
+        const symbolDetailCacheNgService = inject(SymbolDetailCacheNgService);
 
         this._frame = new OrderAuthoriseDitemFrame(
             this,

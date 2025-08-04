@@ -1,8 +1,7 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, input, viewChild, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, inject, input, viewChild, ViewEncapsulation } from '@angular/core';
 import { NgSelectComponent } from '@ng-select/ng-select';
 import { MultiEvent } from '@pbkware/js-utils';
 import { UiAction } from '@pbkware/ui-action';
-import { SettingsNgService } from 'component-services-ng-api';
 import { ItemsUiActionNgDirective } from '../../../array/ng-api';
 import { NgSelectUtils } from '../../../ng-select-utils';
 import { ControlComponentBaseNgDirective } from '../../../ng/control-component-base-ng.directive';
@@ -23,6 +22,8 @@ export class StringArrayInputNgComponent extends ItemsUiActionNgDirective<string
     readonly addTag = input(true);
     readonly isOpen = input<boolean>();
 
+    private _ngSelectOverlayNgService = inject(NgSelectOverlayNgService);
+
     private readonly _ngSelectComponentSignal = viewChild.required<NgSelectComponent>('ngSelect');
 
     private _ngSelectComponent: NgSelectComponent;
@@ -34,17 +35,9 @@ export class StringArrayInputNgComponent extends ItemsUiActionNgDirective<string
     private _measureCanvasContext: CanvasRenderingContext2D;
     private _ngSelectDropDownPanelWidth: number | undefined;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        private _ngSelectOverlayNgService: NgSelectOverlayNgService,
-        settingsNgService: SettingsNgService
-    ) {
+    constructor() {
         super(
-            elRef,
             ++StringArrayInputNgComponent.typeInstanceCreateCount,
-            cdr,
-            settingsNgService.service,
             ControlComponentBaseNgDirective.textControlStateColorItemIdArray
         );
         this.inputId.set(`StringArrayInput:${this.typeInstanceId}`);

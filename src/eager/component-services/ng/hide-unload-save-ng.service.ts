@@ -1,4 +1,4 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { Injectable, OnDestroy, inject } from '@angular/core';
 import { HideUnloadSaveService } from '../hide-unload-save-service';
 import { UserAlertNgService } from './user-alert-ng.service';
 
@@ -8,7 +8,9 @@ import { UserAlertNgService } from './user-alert-ng.service';
 export class HideUnloadSaveNgService implements OnDestroy {
     private readonly _service: HideUnloadSaveService;
 
-    constructor(userAlertNgService: UserAlertNgService) {
+    constructor() {
+        const userAlertNgService = inject(UserAlertNgService);
+
         this._service = new HideUnloadSaveService(userAlertNgService.service);
     }
 

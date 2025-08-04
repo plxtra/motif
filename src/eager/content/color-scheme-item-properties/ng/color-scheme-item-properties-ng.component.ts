@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnDestroy, viewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, inject, viewChild } from '@angular/core';
 import { isReadable as tinyColorIsReadable, readability as tinyColorReadability } from '@ctrl/tinycolor';
 import { EnumInfoOutOfOrderError, Integer, UnreachableCaseError, delay1Tick } from '@pbkware/js-utils';
 import { IntegerListSelectItemUiAction, NumberUiAction } from '@pbkware/ui-action';
@@ -22,6 +22,8 @@ import { ContentComponentBaseNgDirective } from '../../ng/content-component-base
     standalone: false
 })
 export class ColorSchemeItemPropertiesNgComponent extends ContentComponentBaseNgDirective implements AfterViewInit, OnDestroy {
+    private _cdr = inject(ChangeDetectorRef);
+
     private static typeInstanceCreateCount = 0;
 
     itemChangedEvent: ColorSchemeItemPropertiesComponent.ItemChangedEvent;
@@ -52,8 +54,10 @@ export class ColorSchemeItemPropertiesNgComponent extends ContentComponentBaseNg
     private _itemId: ColorScheme.ItemId | undefined;
     private _width: Integer;
 
-    constructor(elRef: ElementRef<HTMLElement>, private _cdr: ChangeDetectorRef, settingsNgService: SettingsNgService) {
-        super(elRef, ++ColorSchemeItemPropertiesNgComponent.typeInstanceCreateCount);
+    constructor() {
+        const settingsNgService = inject(SettingsNgService);
+
+        super(++ColorSchemeItemPropertiesNgComponent.typeInstanceCreateCount);
 
         this._colorSettings = settingsNgService.service.color;
 

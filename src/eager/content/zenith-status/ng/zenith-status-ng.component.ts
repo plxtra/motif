@@ -1,13 +1,4 @@
-import {
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    ElementRef,
-    OnDestroy,
-    ViewContainerRef,
-    viewChild
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, ViewContainerRef, inject, viewChild } from '@angular/core';
 import { AssertInternalError, delay1Tick } from '@pbkware/js-utils';
 import { Badness } from '@plxtra/motif-core';
 import { SessionInfoNgService } from 'component-services-ng-api';
@@ -24,7 +15,6 @@ import { ZenithStatusFrame } from '../zenith-status-frame';
     standalone: false
 })
 export class ZenithStatusNgComponent extends ContentComponentBaseNgDirective implements OnDestroy, AfterViewInit, ZenithStatusFrame.ComponentAccess {
-
     private static typeInstanceCreateCount = 0;
 
     public endpoints: readonly string[];
@@ -65,14 +55,19 @@ export class ZenithStatusNgComponent extends ContentComponentBaseNgDirective imp
     public softwareVersion: string;
     public protocolVersion: string;
 
+    private readonly _cdr = inject(ChangeDetectorRef);
+
     private readonly _delayedBadnessComponentSignal = viewChild.required<DelayedBadnessNgComponent>('delayedBadness');
 
     private readonly _frame: ZenithStatusFrame;
 
     private _delayedBadnessComponent: DelayedBadnessNgComponent;
 
-    constructor(elRef: ElementRef<HTMLElement>, private _cdr: ChangeDetectorRef, contentService: ContentNgService, sessionInfoNgService: SessionInfoNgService) {
-        super(elRef, ++ZenithStatusNgComponent.typeInstanceCreateCount);
+    constructor() {
+        super(++ZenithStatusNgComponent.typeInstanceCreateCount);
+
+        const contentService = inject(ContentNgService);
+        const sessionInfoNgService = inject(SessionInfoNgService);
 
         this._frame = contentService.createZenithStatusFrame(this, sessionInfoNgService.service.zenithEndpoints);
     }

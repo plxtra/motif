@@ -1,8 +1,7 @@
-import { AfterViewInit, ChangeDetectorRef, Directive, ElementRef, input, viewChild } from '@angular/core';
+import { AfterViewInit, Directive, inject, input, viewChild } from '@angular/core';
 import { NgSelectComponent } from '@ng-select/ng-select';
 import { Integer, MultiEvent } from '@pbkware/js-utils';
 import { UiAction } from '@pbkware/ui-action';
-import { SettingsService } from '@plxtra/motif-core';
 import { NgSelectUtils } from '../../ng-select-utils';
 import { ControlComponentBaseNgDirective } from '../../ng/control-component-base-ng.directive';
 import { NgSelectOverlayNgService } from '../../ng/ng-select-overlay-ng.service';
@@ -15,6 +14,8 @@ export abstract class SelectItemsNgDirective<T> extends SelectItemsUiActionNgDir
     public selected: T[];
     public entries: Entry<T>[] = [];
 
+    private readonly _ngSelectOverlayNgService = inject(NgSelectOverlayNgService);
+
     private readonly _ngSelectComponentSignal = viewChild.required<NgSelectComponent>('ngSelect');
 
     private _ngSelectComponent: NgSelectComponent;
@@ -24,18 +25,11 @@ export abstract class SelectItemsNgDirective<T> extends SelectItemsUiActionNgDir
     private _ngSelectDropDownPanelWidth: number | undefined;
 
     constructor(
-        elRef: ElementRef<HTMLElement>,
         typeInstanceCreateCount: Integer,
-        cdr: ChangeDetectorRef,
-        private readonly _ngSelectOverlayNgService: NgSelectOverlayNgService,
-        settingsService: SettingsService,
         stateColorItemIdArray: ControlComponentBaseNgDirective.ReadonlyStateColorItemIdArray,
     ) {
         super(
-            elRef,
             typeInstanceCreateCount,
-            cdr,
-            settingsService,
             stateColorItemIdArray,
         );
         this._measureCanvasContext = this._ngSelectOverlayNgService.measureCanvasContext;

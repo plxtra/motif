@@ -1,8 +1,8 @@
-import { ChangeDetectorRef, Directive, ElementRef, HostBinding, input } from '@angular/core';
+import { Directive, HostBinding, inject, input } from '@angular/core';
 import { EnumInfoOutOfOrderError, Integer, MultiEvent } from '@pbkware/js-utils';
 import { ColorSettings, CommandUiAction, SettingsService } from '@plxtra/motif-core';
+import { SettingsNgService } from 'component-services-ng-api';
 import { MenuBarService } from '../menu-bar-service';
-import { MenuBarNgService } from './menu-bar-ng.service';
 import { MenuBarRenderItemComponentNgDirective } from './menu-bar-render-item-component-ng.directive';
 
 @Directive()
@@ -17,20 +17,18 @@ export abstract class MenuBarMenuItemComponentNgDirective extends MenuBarRenderI
     public caption: string;
     public accessibleCaption: CommandUiAction.AccessibleCaption;
 
-    private _colorSettings: ColorSettings;
+    private readonly _settingsService: SettingsService;
+    private readonly _colorSettings: ColorSettings;
     private _settingsChangedSubscriptionId: MultiEvent.SubscriptionId;
     private _keyboardActiveChangedSubscriptionId: MultiEvent.SubscriptionId;
 
     private _stateColorId: MenuBarMenuItemComponentNgDirective.StateColorId;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        typeInstanceCreateId: Integer,
-        cdr: ChangeDetectorRef,
-        private readonly _settingsService: SettingsService,
-        menuBarNgService: MenuBarNgService
-    ) {
-        super(elRef, typeInstanceCreateId, cdr, menuBarNgService);
+    constructor(typeInstanceCreateId: Integer) {
+        super(typeInstanceCreateId);
+
+        const settingsNgService = inject(SettingsNgService)
+        this._settingsService = settingsNgService.service;
         this._colorSettings = this._settingsService.color;
         this._settingsChangedSubscriptionId = this._settingsService.subscribeSettingsChangedEvent(() => this.handleSettingsChangedEvent());
     }

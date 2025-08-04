@@ -1,26 +1,16 @@
-import {
-    AfterViewInit,
-    ChangeDetectorRef,
-    Directive,
-    ElementRef,
-    OnDestroy,
-    viewChild
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Directive, ElementRef, inject, OnDestroy, viewChild } from '@angular/core';
 import { Integer } from '@pbkware/js-utils';
 import { ContentComponentBaseNgDirective } from '../../ng/content-component-base-ng.directive';
 import { GridSourceFrame } from '../grid-source-frame';
 
 @Directive()
 export abstract class GridSourceNgDirective extends ContentComponentBaseNgDirective implements OnDestroy, AfterViewInit, GridSourceFrame.ComponentAccess {
+    protected readonly _cdr = inject(ChangeDetectorRef);
+
     private readonly _gridHostSignal = viewChild.required<ElementRef<HTMLElement>>('gridHost', { debugName: 'gridHost' });
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        typeInstanceCreateId: Integer,
-        protected readonly _cdr: ChangeDetectorRef,
-        readonly frame: GridSourceFrame,
-    ) {
-        super(elRef, typeInstanceCreateId);
+    constructor(typeInstanceCreateId: Integer, readonly frame: GridSourceFrame) {
+        super(typeInstanceCreateId);
     }
 
     get gridHost(): HTMLElement { return this._gridHostSignal().nativeElement; }

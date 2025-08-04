@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Directive, ElementRef, input } from '@angular/core';
+import { Directive, inject, input } from '@angular/core';
 import { AssertInternalError, getErrorMessage, Integer, UnreachableCaseError } from '@pbkware/js-utils';
 import { UiAction } from '@pbkware/ui-action';
 import {
@@ -9,7 +9,7 @@ import {
     BrokerageAccountsDataItem,
     DataItemIncubator,
     MarketsService,
-    SettingsService, SingleBrokerageAccountGroup, StringId, Strings,
+    SingleBrokerageAccountGroup, StringId, Strings
 } from '@plxtra/motif-core';
 import { ControlComponentBaseNgDirective } from '../../ng/control-component-base-ng.directive';
 
@@ -20,20 +20,16 @@ export abstract class BrokerageAccountGroupComponentBaseNgDirective extends Cont
     public namedGroups: BrokerageAccountGroupComponentBaseNgDirective.NamedGroup[] = [];
     public loading = false;
 
+    private readonly _marketsService = inject(MarketsService);
+
     private readonly _dataItemIncubator: DataItemIncubator<BrokerageAccountsDataItem>;
 
     private _dataItem: BrokerageAccountsDataItem | undefined;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        typeInstanceCreateId: Integer,
-        cdr: ChangeDetectorRef,
-        settingsService: SettingsService,
-        adiService: AdiService,
-        private readonly _marketsService: MarketsService,
-        stateColorItemIdArray: ControlComponentBaseNgDirective.ReadonlyStateColorItemIdArray,
-    ) {
-        super(elRef, typeInstanceCreateId, cdr, settingsService, stateColorItemIdArray);
+    constructor(typeInstanceCreateId: Integer, stateColorItemIdArray: ControlComponentBaseNgDirective.ReadonlyStateColorItemIdArray) {
+        super(typeInstanceCreateId, stateColorItemIdArray);
+
+        const adiService = inject(AdiService);
         this._dataItemIncubator = new DataItemIncubator<BrokerageAccountsDataItem>(adiService);
     }
 

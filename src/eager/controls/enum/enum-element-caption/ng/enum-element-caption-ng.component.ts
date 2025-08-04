@@ -1,6 +1,5 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnDestroy, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, input } from '@angular/core';
 import { Integer } from '@pbkware/js-utils';
-import { SettingsNgService } from 'component-services-ng-api';
 import { ControlComponentBaseNgDirective } from '../../../ng/control-component-base-ng.directive';
 import { IntegerEnumElementComponentBaseNgDirective } from '../../ng/ng-api';
 
@@ -16,12 +15,9 @@ export class EnumElementCaptionNgComponent extends IntegerEnumElementComponentBa
 
     readonly for = input<string>();
 
-    constructor(elRef: ElementRef<HTMLElement>, cdr: ChangeDetectorRef, settingsNgService: SettingsNgService) {
+    constructor() {
         super(
-            elRef,
             ++EnumElementCaptionNgComponent.typeInstanceCreateCount,
-            cdr,
-            settingsNgService.service,
             ControlComponentBaseNgDirective.labelStateColorItemIdArray
         );
     }

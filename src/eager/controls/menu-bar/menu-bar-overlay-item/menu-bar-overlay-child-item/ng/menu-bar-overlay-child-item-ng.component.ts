@@ -1,10 +1,8 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Line, UnreachableCaseError, getElementDocumentPositionRect } from '@pbkware/js-utils';
 import { ColorScheme } from '@plxtra/motif-core';
-import { SettingsNgService } from 'component-services-ng-api';
 import { MenuBarChildItemComponentNgDirective } from '../../../ng/menu-bar-child-item-component-ng.directive';
 import { MenuBarMenuItemComponentNgDirective } from '../../../ng/menu-bar-menu-item-component-ng.directive';
-import { MenuBarNgService } from '../../../ng/menu-bar-ng.service';
 
 @Component({
     selector: 'app-menu-bar-overlay-child-item',
@@ -16,13 +14,8 @@ import { MenuBarNgService } from '../../../ng/menu-bar-ng.service';
 export class MenuBarOverlayChildItemNgComponent extends MenuBarChildItemComponentNgDirective implements OnInit, OnDestroy {
     private static typeInstanceCreateCount = 0;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        settingsNgService: SettingsNgService,
-        menuBarNgService: MenuBarNgService
-    ) {
-        super(elRef, ++MenuBarOverlayChildItemNgComponent.typeInstanceCreateCount, cdr, settingsNgService.service, menuBarNgService);
+    constructor() {
+        super(++MenuBarOverlayChildItemNgComponent.typeInstanceCreateCount);
     }
 
     @HostListener('click', []) handleClickEvent() {

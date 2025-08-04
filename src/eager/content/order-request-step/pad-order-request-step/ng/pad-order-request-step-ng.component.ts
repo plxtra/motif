@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostBinding, OnDestroy, viewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, HostBinding, inject, OnDestroy, viewChild } from '@angular/core';
 import {
     AssertInternalError,
     DecimalFactory,
@@ -208,15 +208,13 @@ export class PadOrderRequestStepNgComponent extends OrderRequestStepComponentNgD
 
     private _settingsChangedSubscriptionId: MultiEvent.SubscriptionId;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        decimalFactoryNgService: DecimalFactoryNgService,
-        settingsNgService: SettingsNgService,
-        marketsNgService: MarketsNgService,
-        contentNgService: ContentNgService,
-    ) {
-        super(elRef, ++PadOrderRequestStepNgComponent.typeInstanceCreateCount, cdr);
+    constructor() {
+        const decimalFactoryNgService = inject(DecimalFactoryNgService);
+        const settingsNgService = inject(SettingsNgService);
+        const marketsNgService = inject(MarketsNgService);
+        const contentNgService = inject(ContentNgService);
+
+        super(++PadOrderRequestStepNgComponent.typeInstanceCreateCount);
 
         this._decimalFactory = decimalFactoryNgService.service;
         this._settingsService = settingsNgService.service;

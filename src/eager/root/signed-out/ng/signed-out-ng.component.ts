@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, OnDestroy, viewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, inject, OnDestroy, viewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AssertInternalError, delay1Tick } from '@pbkware/js-utils';
 import { ButtonUiAction, CommandRegisterService, InternalCommand, StringId, Strings } from '@plxtra/motif-core';
@@ -18,6 +18,8 @@ export class SignedOutNgComponent extends ComponentBaseNgDirective implements On
 
     public signedOutText = Strings[StringId.SignedOut];
 
+    private readonly _router = inject(Router);
+
     private readonly _signInAgainButtonComponentSignal = viewChild.required<ButtonInputNgComponent>('signInAgainButton');
 
     private readonly _commandRegisterService: CommandRegisterService;
@@ -25,12 +27,10 @@ export class SignedOutNgComponent extends ComponentBaseNgDirective implements On
 
     private _signInAgainButtonComponent: ButtonInputNgComponent;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        private readonly _router: Router,
-        commandRegisterNgService: CommandRegisterNgService
-    ) {
-        super(elRef, ++SignedOutNgComponent.typeInstanceCreateCount);
+    constructor() {
+        const commandRegisterNgService = inject(CommandRegisterNgService);
+
+        super(++SignedOutNgComponent.typeInstanceCreateCount);
 
         this._commandRegisterService = commandRegisterNgService.service;
         this._signInAgainUiAction = this.createSignInAgainUiAction();

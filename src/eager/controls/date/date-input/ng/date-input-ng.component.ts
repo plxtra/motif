@@ -1,8 +1,7 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnInit, input, model, viewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, OnInit, input, model, viewChild } from '@angular/core';
 import { Err, Ok, Result } from '@pbkware/js-utils';
 import { DateUiAction, UiAction } from '@pbkware/ui-action';
 import { DateText, StringId, Strings } from '@plxtra/motif-core';
-import { SettingsNgService } from 'component-services-ng-api';
 import { ControlComponentBaseNgDirective } from '../../../ng/control-component-base-ng.directive';
 
 @Component({
@@ -26,8 +25,8 @@ export class DateInputNgComponent extends ControlComponentBaseNgDirective implem
 
     private _utc = true;
 
-    constructor(elRef: ElementRef<HTMLElement>, cdr: ChangeDetectorRef, settingsNgService: SettingsNgService) {
-        super(elRef, ++DateInputNgComponent.typeInstanceCreateCount, cdr, settingsNgService.service, ControlComponentBaseNgDirective.textControlStateColorItemIdArray);
+    constructor() {
+        super(++DateInputNgComponent.typeInstanceCreateCount, ControlComponentBaseNgDirective.textControlStateColorItemIdArray);
         this.inputId.set(`DateInput:${this.typeInstanceId}`);
     }
 

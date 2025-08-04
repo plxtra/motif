@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { CoreNgService } from '../../component-services/ng/core-ng.service';
 import { TableRecordSourceFactoryService } from '../table-record-source-factory-service';
 import { TableFieldSourceDefinitionCachingFactoryNgService } from './table-field-source-definition-caching-factory-ng.service';
@@ -9,10 +9,10 @@ import { TableFieldSourceDefinitionCachingFactoryNgService } from './table-field
 export class TableRecordSourceFactoryNgService {
     private _service: TableRecordSourceFactoryService;
 
-    constructor(
-        coreNgService: CoreNgService,
-        tableFieldSourceDefinitionCachingFactoryNgService: TableFieldSourceDefinitionCachingFactoryNgService,
-    ) {
+    constructor() {
+        const coreNgService = inject(CoreNgService);
+        const tableFieldSourceDefinitionCachingFactoryNgService = inject(TableFieldSourceDefinitionCachingFactoryNgService);
+
         const coreService = coreNgService.service;
         const tableFieldSourceDefinitionCachingFactory = tableFieldSourceDefinitionCachingFactoryNgService.service;
 

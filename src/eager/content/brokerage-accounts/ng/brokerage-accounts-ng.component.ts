@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { DelayedBadnessGridSourceNgDirective } from '../../delayed-badness-grid-source/ng-api';
 import { ContentNgService } from '../../ng/content-ng.service';
 import { BrokerageAccountsFrame } from '../brokerage-accounts-frame';
@@ -15,13 +15,11 @@ export class BrokerageAccountsNgComponent extends DelayedBadnessGridSourceNgDire
 
     declare frame: BrokerageAccountsFrame;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        contentNgService: ContentNgService,
-    ) {
+    constructor() {
+        const contentNgService = inject(ContentNgService);
+
         const frame = contentNgService.createBrokerageAccountsFrame();
-        super(elRef, ++BrokerageAccountsNgComponent.typeInstanceCreateCount, cdr, frame);
+        super(++BrokerageAccountsNgComponent.typeInstanceCreateCount, frame);
         frame.setComponentAccess(this);
     }
 }

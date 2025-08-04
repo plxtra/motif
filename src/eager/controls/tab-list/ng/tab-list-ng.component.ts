@@ -1,7 +1,6 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Inject, InjectionToken, OnDestroy, Optional } from '@angular/core';
+import { ChangeDetectionStrategy, Component, InjectionToken, OnDestroy, inject } from '@angular/core';
 import { HtmlTypes, Integer, ModifierKey } from '@pbkware/js-utils';
 import { ColorScheme, ColorSettings } from '@plxtra/motif-core';
-import { SettingsNgService } from 'component-services-ng-api';
 import { ControlComponentBaseNgDirective } from '../../ng/control-component-base-ng.directive';
 
 @Component({
@@ -20,13 +19,10 @@ export class TabListNgComponent extends ControlComponentBaseNgDirective implemen
     public readonly tabs: TabListNgComponent.Tab[] = [];
     public borderColor: string;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        settingsNgService: SettingsNgService,
-        @Optional() @Inject(TabListNgComponent.tabDefinitionsInjectionToken) initialTabDefinitions: readonly TabListNgComponent.TabDefinition[] | null,
-    ) {
-        super(elRef, ++TabListNgComponent.typeInstanceCreateCount, cdr, settingsNgService.service, ControlComponentBaseNgDirective.textControlStateColorItemIdArray);
+    constructor() {
+        super(++TabListNgComponent.typeInstanceCreateCount, ControlComponentBaseNgDirective.textControlStateColorItemIdArray);
+
+        const initialTabDefinitions = inject(TabListNgComponent.tabDefinitionsInjectionToken, { optional: true });
 
         if (initialTabDefinitions !== null) {
             this.setTabs(initialTabDefinitions);

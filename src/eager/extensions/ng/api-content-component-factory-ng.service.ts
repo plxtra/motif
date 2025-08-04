@@ -1,9 +1,4 @@
-import {
-    ApplicationRef, ComponentRef,
-    createComponent,
-    EnvironmentInjector,
-    Injectable, Type
-} from '@angular/core';
+import { ComponentRef, createComponent, EnvironmentInjector, inject, Injectable, Type } from '@angular/core';
 import { ContentComponentBaseNgDirective, DelayedBadnessNgComponent } from 'content-ng-api';
 import {
     ApiContentComponentFactory,
@@ -15,12 +10,7 @@ import { ApiComponentFactoryServiceBaseNgDirective } from './api-component-facto
     providedIn: 'root',
 })
 export class ApiContentComponentFactoryNgService extends ApiComponentFactoryServiceBaseNgDirective implements ApiContentComponentFactory {
-    constructor(
-        appRef: ApplicationRef,
-        private readonly _environmentInjector: EnvironmentInjector,
-    ) {
-        super(appRef);
-    }
+    private readonly _environmentInjector = inject(EnvironmentInjector);
 
     createDelayedBadnessComponent() {
         const factoryComponentRef = this.createFactoryComponentRef(DelayedBadnessNgComponent);

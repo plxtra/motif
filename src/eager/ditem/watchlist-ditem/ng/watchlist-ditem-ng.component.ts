@@ -1,14 +1,4 @@
-import {
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    ElementRef,
-    Inject,
-    OnDestroy,
-    ViewContainerRef,
-    viewChild
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, OnDestroy, ViewContainerRef, inject, viewChild } from '@angular/core';
 import { AssertInternalError, Integer, JsonElement, ModifierKey, ModifierKeyId, UnreachableCaseError, delay1Tick } from '@pbkware/js-utils';
 import { MappedListSelectItemsUiAction, UiAction } from '@pbkware/ui-action';
 import {
@@ -25,7 +15,6 @@ import {
 } from '@plxtra/motif-core';
 import {
     AdiNgService,
-    CommandRegisterNgService,
     FavouriteReferenceableColumnLayoutDefinitionsStoreNgService,
     MarketsNgService,
     SettingsNgService,
@@ -40,7 +29,6 @@ import {
     WatchlistNgComponent
 } from 'content-ng-api';
 import { DataIvemIdSelectNgComponent, SvgButtonNgComponent } from 'controls-ng-api';
-import { ComponentContainer } from 'golden-layout';
 import { RevColumnLayout, RevReferenceableColumnLayoutDefinition } from 'revgrid';
 import { BuiltinDitemNgComponentBaseNgDirective } from '../../ng/builtin-ditem-ng-component-base.directive';
 import { DesktopAccessNgService } from '../../ng/desktop-access-ng.service';
@@ -59,6 +47,8 @@ export class WatchlistDitemNgComponent extends BuiltinDitemNgComponentBaseNgDire
     public watchlistCaption: string;
     public watchlistAbbreviatedDescription: string;
     public watchListFullDescription: string;
+
+    private readonly _toastNgService = inject(ToastNgService);
 
     private readonly _symbolEditComponentSignal = viewChild.required<DataIvemIdSelectNgComponent>('symbolInput');
     private readonly _symbolButtonComponentSignal = viewChild.required<SvgButtonNgComponent>('symbolButton');
@@ -103,28 +93,16 @@ export class WatchlistDitemNgComponent extends BuiltinDitemNgComponentBaseNgDire
     private _modeId = WatchlistDitemNgComponent.ModeId.Input;
     private _forceOnNextCommit = false;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        settingsNgService: SettingsNgService,
-        marketsNgService: MarketsNgService,
-        commandRegisterNgService: CommandRegisterNgService,
-        desktopAccessNgService: DesktopAccessNgService,
-        symbolsNgService: SymbolsNgService,
-        adiNgService: AdiNgService,
-        textFormatterNgService: TextFormatterNgService,
-        favouriteNamedColumnLayoutDefinitionReferencesNgService: FavouriteReferenceableColumnLayoutDefinitionsStoreNgService,
-        private readonly _toastNgService: ToastNgService,
-        @Inject(BuiltinDitemNgComponentBaseNgDirective.goldenLayoutContainerInjectionToken) container: ComponentContainer,
-    ) {
-        super(
-            elRef,
-            ++WatchlistDitemNgComponent.typeInstanceCreateCount,
-            cdr,
-            container,
-            settingsNgService.service,
-            commandRegisterNgService.service
-        );
+    constructor() {
+        super(++WatchlistDitemNgComponent.typeInstanceCreateCount);
+
+        const settingsNgService = inject(SettingsNgService);
+        const marketsNgService = inject(MarketsNgService);
+        const desktopAccessNgService = inject(DesktopAccessNgService);
+        const symbolsNgService = inject(SymbolsNgService);
+        const adiNgService = inject(AdiNgService);
+        const textFormatterNgService = inject(TextFormatterNgService);
+        const favouriteNamedColumnLayoutDefinitionReferencesNgService = inject(FavouriteReferenceableColumnLayoutDefinitionsStoreNgService);
 
         this._marketsService = marketsNgService.service;
 

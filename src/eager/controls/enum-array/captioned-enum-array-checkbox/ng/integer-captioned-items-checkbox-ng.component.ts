@@ -1,6 +1,5 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
 import { Integer } from '@pbkware/js-utils';
-import { SettingsNgService } from 'component-services-ng-api';
 import { ControlComponentBaseNgDirective } from '../../../ng/control-component-base-ng.directive';
 import { CaptionedItemsCheckboxNgDirective } from '../../ng/captioned-items-checkbox-ng.directive';
 
@@ -14,12 +13,9 @@ import { CaptionedItemsCheckboxNgDirective } from '../../ng/captioned-items-chec
 export class IntegerCaptionedItemsCheckboxNgComponent extends CaptionedItemsCheckboxNgDirective<Integer> implements OnDestroy {
     private static typeInstanceCreateCount = 0;
 
-    constructor(elRef: ElementRef<HTMLElement>, cdr: ChangeDetectorRef, settingsNgService: SettingsNgService) {
+    constructor() {
         super(
-            elRef,
             ++IntegerCaptionedItemsCheckboxNgComponent.typeInstanceCreateCount,
-            cdr,
-            settingsNgService.service,
             ControlComponentBaseNgDirective.clickControlStateColorItemIdArray,
             Number.MIN_SAFE_INTEGER,
         );

@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, InjectionToken, Injector, OnDestroy, ValueProvider, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, InjectionToken, Injector, OnDestroy, ValueProvider, ViewContainerRef } from '@angular/core';
 import { LockOpenListItem } from '@pbkware/js-utils';
 import { CoreInjectionTokens } from 'component-services-ng-api';
 import { RevDataSourceOrReferenceDefinition } from 'revgrid';
@@ -16,8 +16,8 @@ export class SaveWatchlistDialogNgComponent extends ContentComponentBaseNgDirect
 
     private _closeResolve: (value: RevDataSourceOrReferenceDefinition.SaveAsDefinition | undefined) => void;
 
-    constructor(elRef: ElementRef<HTMLElement>) {
-        super(elRef, ++SaveWatchlistDialogNgComponent.typeInstanceCreateCount);
+    constructor() {
+        super(++SaveWatchlistDialogNgComponent.typeInstanceCreateCount);
     }
 
     // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method

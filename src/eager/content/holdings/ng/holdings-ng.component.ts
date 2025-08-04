@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { DelayedBadnessGridSourceNgDirective } from '../../delayed-badness-grid-source/ng-api';
 import { ContentNgService } from '../../ng/content-ng.service';
 import { HoldingsFrame } from '../holdings-frame';
@@ -15,13 +15,11 @@ export class HoldingsNgComponent extends DelayedBadnessGridSourceNgDirective {
 
     declare frame: HoldingsFrame;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        contentNgService: ContentNgService,
-    ) {
+    constructor() {
+        const contentNgService = inject(ContentNgService);
+
         const frame = contentNgService.createHoldingsFrame();
-        super(elRef, ++HoldingsNgComponent.typeInstanceCreateCount, cdr, frame);
+        super(++HoldingsNgComponent.typeInstanceCreateCount, frame);
         frame.setComponentAccess(this);
     }
 }

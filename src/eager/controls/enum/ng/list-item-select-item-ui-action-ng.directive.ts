@@ -1,7 +1,6 @@
-import { ChangeDetectorRef, Directive, ElementRef } from '@angular/core';
+import { Directive } from '@angular/core';
 import { Integer } from '@pbkware/js-utils';
 import { SelectItemUiAction } from '@pbkware/ui-action';
-import { SettingsService } from '@plxtra/motif-core';
 import { ControlComponentBaseNgDirective } from '../../ng/control-component-base-ng.directive';
 import { SelectItemUiActionNgDirective } from './select-item-ui-action-ng.directive';
 
@@ -13,14 +12,11 @@ export abstract class ListItemSelectItemUiActionNgDirectiveNgDirective<T> extend
     private _item: T;
 
     constructor(
-        elRef: ElementRef<HTMLElement>,
         typeInstanceCreateId: Integer,
-        cdr: ChangeDetectorRef,
-        settingsService: SettingsService,
         stateColorItemIdArray: ControlComponentBaseNgDirective.ReadonlyStateColorItemIdArray,
-        undefinedValue: T,
+        undefinedValue: T
     ) {
-        super(elRef, typeInstanceCreateId, cdr, settingsService, stateColorItemIdArray, undefinedValue);
+        super(typeInstanceCreateId, stateColorItemIdArray, undefinedValue);
         this._item = undefinedValue;
     }
 

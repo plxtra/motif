@@ -1,17 +1,5 @@
-import {
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    ElementRef,
-    model,
-    OnDestroy,
-    OnInit,
-    Renderer2,
-    viewChild
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, model, OnDestroy, OnInit, viewChild } from '@angular/core';
 import { BooleanUiAction, UiAction } from '@pbkware/ui-action';
-import { SettingsNgService } from 'component-services-ng-api';
 import { ControlComponentBaseNgDirective } from '../../../ng/control-component-base-ng.directive';
 
 @Component({
@@ -31,17 +19,9 @@ export class CaptionedCheckboxNgComponent extends ControlComponentBaseNgDirectiv
 
     private _checkboxInput: ElementRef<HTMLInputElement>;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        private _renderer: Renderer2,
-        cdr: ChangeDetectorRef,
-        settingsNgService: SettingsNgService
-    ) {
+    constructor() {
         super(
-            elRef,
             ++CaptionedCheckboxNgComponent.typeInstanceCreateCount,
-            cdr,
-            settingsNgService.service,
             ControlComponentBaseNgDirective.clickControlStateColorItemIdArray
         );
         this.inputId.set(`CaptionedCheckbox:${this.typeInstanceId}`);

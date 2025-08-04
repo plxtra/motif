@@ -1,15 +1,4 @@
-import {
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    ElementRef,
-    Injector,
-    Type,
-    ValueProvider,
-    ViewContainerRef,
-    viewChild
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, Injector, Type, ValueProvider, ViewContainerRef, inject, viewChild } from '@angular/core';
 import { OrderPad, OrderRequestDataDefinition } from '@plxtra/motif-core';
 import { ContentNgService } from '../../../ng/content-ng.service';
 import { OrderRequestStepComponentNgDirective } from '../../ng/order-request-step-component-ng.directive';
@@ -30,6 +19,8 @@ import { ReviewOrderRequestComponentNgDirective } from './review-order-request-c
 export class ReviewOrderRequestStepNgComponent extends OrderRequestStepComponentNgDirective implements AfterViewInit, ReviewOrderRequestStepFrame.ComponentAccess {
     private static typeInstanceCreateCount = 0;
 
+    private readonly _contentService = inject(ContentNgService);
+
     private readonly _reviewContainerSignal = viewChild.required('reviewContainer', { read: ViewContainerRef });
 
     private readonly _frame: ReviewOrderRequestStepFrame;
@@ -38,8 +29,8 @@ export class ReviewOrderRequestStepNgComponent extends OrderRequestStepComponent
 
     private _requestTypeComponent: ReviewOrderRequestComponentNgDirective;
 
-    constructor(elRef: ElementRef<HTMLElement>, cdr: ChangeDetectorRef, private readonly _contentService: ContentNgService) {
-        super(elRef, ++ReviewOrderRequestStepNgComponent.typeInstanceCreateCount, cdr);
+    constructor() {
+        super(++ReviewOrderRequestStepNgComponent.typeInstanceCreateCount);
         this._frame = this._contentService.createReviewOrderRequestStepFrame(this);
     }
 

@@ -1,17 +1,8 @@
-import {
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    ElementRef,
-    ViewContainerRef,
-    viewChild
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ViewContainerRef, viewChild } from '@angular/core';
 import { delay1Tick } from '@pbkware/js-utils';
 import {
     Command, CommandRegisterService, CommandUiAction
 } from '@plxtra/motif-core';
-import { CommandRegisterNgService, SettingsNgService } from '../../../../component-services/ng-api';
 import { ControlComponentBaseNgDirective } from '../../../ng/control-component-base-ng.directive';
 // import { CommandParametersComponentRegister } from '../../command-parameters-component-register';
 // import { CommandSelectNgComponent } from '../../command-select/ng-api';
@@ -37,13 +28,8 @@ export class CommandBarNgComponent extends ControlComponentBaseNgDirective imple
 
     private _activeCommand: Command | undefined;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        settingsNgService: SettingsNgService,
-        commandRegisterNgService: CommandRegisterNgService,
-    ) {
-        super(elRef, ++CommandBarNgComponent.typeInstanceCreateCount, cdr, settingsNgService.service, ControlComponentBaseNgDirective.textControlStateColorItemIdArray);
+    constructor() {
+        super(++CommandBarNgComponent.typeInstanceCreateCount, ControlComponentBaseNgDirective.textControlStateColorItemIdArray);
         // this._commandUiAction = this.createCommandUiAction(
         //     commandRegisterNgService.service
         // );

@@ -1,16 +1,4 @@
-import {
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    ElementRef,
-    Inject,
-    Injector,
-    OnDestroy,
-    ValueProvider,
-    ViewContainerRef,
-    viewChild
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, Injector, OnDestroy, ValueProvider, ViewContainerRef, inject, viewChild } from '@angular/core';
 import { AssertInternalError, LockOpenListItem, ModifierKey, UnreachableCaseError, delay1Tick } from '@pbkware/js-utils';
 import { IntegerListSelectItemUiAction } from '@pbkware/ui-action';
 import {
@@ -45,6 +33,10 @@ export class ExchangesNgComponent extends ContentComponentBaseNgDirective implem
     public dialogActive = false;
     public readonly listRadioName: string;
 
+    private readonly _cdr = inject(ChangeDetectorRef);
+    private readonly _toastNgService = inject(ToastNgService);
+    private readonly _opener = inject<LockOpenListItem.Opener>(CoreInjectionTokens.lockOpenListItemOpener);
+
     private readonly _gridComponentSignal = viewChild.required<ExchangesGridNgComponent>('grid');
     private readonly _knownListControlComponentSignal = viewChild.required<IntegerCaptionedRadioNgComponent>('knownListControl');
     private readonly _environmentDefaultListControlComponentSignal = viewChild.required<IntegerCaptionedRadioNgComponent>('environmentDefaultListControl');
@@ -67,15 +59,11 @@ export class ExchangesNgComponent extends ContentComponentBaseNgDirective implem
     private readonly _columnsUiAction: IconButtonUiAction;
     private readonly _autoSizeColumnWidthsUiAction: IconButtonUiAction;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        private readonly _cdr: ChangeDetectorRef,
-        marketsNgService: MarketsNgService,
-        commandRegisterNgService: CommandRegisterNgService,
-        private readonly _toastNgService: ToastNgService,
-        @Inject(CoreInjectionTokens.lockOpenListItemOpener) private readonly _opener: LockOpenListItem.Opener,
-    ) {
-        super(elRef, ++ExchangesNgComponent.typeInstanceCreateCount);
+    constructor() {
+        const marketsNgService = inject(MarketsNgService);
+        const commandRegisterNgService = inject(CommandRegisterNgService);
+
+        super(++ExchangesNgComponent.typeInstanceCreateCount);
         this._marketsService = marketsNgService.service;
 
         this.listRadioName = this.generateInstancedRadioName('list');

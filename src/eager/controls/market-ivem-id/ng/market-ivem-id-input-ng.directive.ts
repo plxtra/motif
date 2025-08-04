@@ -1,14 +1,8 @@
-import {
-    AfterViewInit,
-    ChangeDetectorRef,
-    Directive,
-    ElementRef,
-    model,
-    viewChild
-} from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, inject, model, viewChild } from '@angular/core';
 import { Integer } from '@pbkware/js-utils';
 import { UiAction } from '@pbkware/ui-action';
-import { Market, MarketIvemId, MarketsService, SettingsService, StringId, Strings, SymbolsService } from '@plxtra/motif-core';
+import { Market, MarketIvemId, MarketsService, StringId, Strings, SymbolsService } from '@plxtra/motif-core';
+import { MarketsNgService } from 'component-services-ng-api';
 import { ControlComponentBaseNgDirective } from '../../ng/control-component-base-ng.directive';
 import { ReadonlyMarketIvemIdNgDirective } from './readonly-market-ivem-id-ng.directive';
 
@@ -24,17 +18,14 @@ export abstract class MarketIvemIdInputNgComponent<T extends Market> extends Rea
     private symbolInput: ElementRef;
 
     constructor(
-        elRef: ElementRef<HTMLElement>,
         typeInstanceCreateId: Integer,
-        cdr: ChangeDetectorRef,
-        settingsService: SettingsService,
-        marketsService: MarketsService,
-        symbolsService: SymbolsService,
         marketTypeId: Market.TypeId,
         private readonly _marketIvemIdConstructor: MarketIvemId.Constructor<T>,
     ) {
-        super(elRef, typeInstanceCreateId, cdr, settingsService, symbolsService, ControlComponentBaseNgDirective.textControlStateColorItemIdArray);
+        super(typeInstanceCreateId, ControlComponentBaseNgDirective.textControlStateColorItemIdArray);
 
+        const marketsNgService = inject(MarketsNgService);
+        const marketsService = marketsNgService.service;
         this._allMarkets = marketsService.getAllMarkets<T>(marketTypeId);
         this._defaultEnvironmentMarkets = marketsService.getDefaultExchangeEnvironmentMarkets<T>(marketTypeId);
     }

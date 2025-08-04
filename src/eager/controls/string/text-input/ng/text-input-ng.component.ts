@@ -1,7 +1,6 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Renderer2, input, model, viewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, input, model, viewChild } from '@angular/core';
 import { delay1Tick } from '@pbkware/js-utils';
 import { StringUiAction, UiAction } from '@pbkware/ui-action';
-import { SettingsNgService } from 'component-services-ng-api';
 import { ControlComponentBaseNgDirective } from '../../../ng/control-component-base-ng.directive';
 
 @Component({
@@ -23,8 +22,8 @@ export class TextInputNgComponent extends ControlComponentBaseNgDirective implem
 
     private _textInput: ElementRef<HTMLInputElement>;
 
-    constructor(elRef: ElementRef<HTMLElement>, private _renderer: Renderer2, cdr: ChangeDetectorRef, settingsNgService: SettingsNgService) {
-        super(elRef, ++TextInputNgComponent.typeInstanceCreateCount, cdr, settingsNgService.service, ControlComponentBaseNgDirective.textControlStateColorItemIdArray);
+    constructor() {
+        super(++TextInputNgComponent.typeInstanceCreateCount, ControlComponentBaseNgDirective.textControlStateColorItemIdArray);
         this.inputId.set(`TextInput:${this.typeInstanceId}`);
     }
 

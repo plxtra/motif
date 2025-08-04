@@ -1,11 +1,4 @@
-import {
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    ElementRef,
-    OnDestroy
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, inject } from '@angular/core';
 import { Integer, MultiEvent, UnexpectedCaseError } from '@pbkware/js-utils';
 import {
     ColorScheme,
@@ -37,6 +30,8 @@ export class DesktopBannerNgComponent extends ComponentBaseNgDirective implement
     public environmentBkgdColor = 'yellow';
     public environmentForeColor = 'black';
 
+    private _cdr = inject(ChangeDetectorRef);
+
     private readonly _colorSettings: ColorSettings;
     private readonly _marketsService: MarketsService;
     private readonly _sessionInfoService: SessionInfoService;
@@ -44,14 +39,12 @@ export class DesktopBannerNgComponent extends ComponentBaseNgDirective implement
     private _publisherSessionTerminatedEventSubscriptionId: MultiEvent.SubscriptionId;
     private _kickedOff = false;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        private _cdr: ChangeDetectorRef,
-        settingsNgService: SettingsNgService,
-        marketsNgService: MarketsNgService,
-        sessionInfoNgService: SessionInfoNgService
-    ) {
-        super(elRef, ++DesktopBannerNgComponent.typeInstanceCreateCount);
+    constructor() {
+        super(++DesktopBannerNgComponent.typeInstanceCreateCount);
+
+        const settingsNgService = inject(SettingsNgService);
+        const marketsNgService = inject(MarketsNgService);
+        const sessionInfoNgService = inject(SessionInfoNgService);
 
         this._marketsService = marketsNgService.service;
         this._colorSettings = settingsNgService.service.color;

@@ -1,15 +1,4 @@
-import {
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    effect,
-    ElementRef, Inject,
-    OnDestroy,
-    untracked,
-    viewChild,
-    viewChildren
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, effect, ElementRef, inject, OnDestroy, untracked, viewChild, viewChildren } from '@angular/core';
 import { delay1Tick, HtmlTypes, JsonElement, ModifierKey, ModifierKeyId, numberToPixels } from '@pbkware/js-utils';
 import { BooleanUiAction, UiAction } from '@pbkware/ui-action';
 import {
@@ -24,10 +13,8 @@ import {
 } from '@plxtra/motif-core';
 import {
     AdiNgService,
-    CommandRegisterNgService,
     DecimalFactoryNgService,
     MarketsNgService,
-    SettingsNgService,
     SymbolDetailCacheNgService,
     SymbolsNgService
 } from 'component-services-ng-api';
@@ -36,7 +23,6 @@ import {
     OrderRequestStepComponentNgDirective
 } from 'content-ng-api';
 import { ButtonInputNgComponent, CaptionedCheckboxNgComponent, SvgButtonNgComponent } from 'controls-ng-api';
-import { ComponentContainer } from 'golden-layout';
 import { BuiltinDitemNgComponentBaseNgDirective } from '../../ng/builtin-ditem-ng-component-base.directive';
 import { DesktopAccessNgService } from '../../ng/desktop-access-ng.service';
 import { OrderRequestDitemFrame } from '../order-request-ditem-frame';
@@ -105,28 +91,15 @@ export class OrderRequestDitemNgComponent extends BuiltinDitemNgComponentBaseNgD
 
     private _padHtmlElement: HTMLDivElement;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        @Inject(BuiltinDitemNgComponentBaseNgDirective.goldenLayoutContainerInjectionToken) container: ComponentContainer,
-        decimalFactoryNgService: DecimalFactoryNgService,
-        settingsNgService: SettingsNgService,
-        marketsNgService: MarketsNgService,
-        commandRegisterNgService: CommandRegisterNgService,
-        desktopAccessNgService: DesktopAccessNgService,
-        adiNgService: AdiNgService,
-        symbolsNgService: SymbolsNgService,
-        symbolDetailCacheNgService: SymbolDetailCacheNgService,
-    ) {
-        super(
-            elRef,
-            ++OrderRequestDitemNgComponent.typeInstanceCreateCount,
-            cdr,
-            container,
-            settingsNgService.service,
-            commandRegisterNgService.service
-        );
+    constructor() {
+        super(++OrderRequestDitemNgComponent.typeInstanceCreateCount);
 
+        const decimalFactoryNgService = inject(DecimalFactoryNgService);
+        const marketsNgService = inject(MarketsNgService);
+        const desktopAccessNgService = inject(DesktopAccessNgService);
+        const adiNgService = inject(AdiNgService);
+        const symbolsNgService = inject(SymbolsNgService);
+        const symbolDetailCacheNgService = inject(SymbolDetailCacheNgService);
 
         this._frame = new OrderRequestDitemFrame(
             this,

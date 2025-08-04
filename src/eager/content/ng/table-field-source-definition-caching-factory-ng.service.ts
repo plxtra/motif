@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { TableFieldSourceDefinitionCachingFactory } from '@plxtra/motif-core';
 import { CoreNgService } from '../../component-services/ng/core-ng.service';
 import { TableFieldSourceDefinitionFactoryService } from '../table-field-source-definition-factory-service';
@@ -9,7 +9,9 @@ import { TableFieldSourceDefinitionFactoryService } from '../table-field-source-
 export class TableFieldSourceDefinitionCachingFactoryNgService {
     private _service: TableFieldSourceDefinitionCachingFactory;
 
-    constructor(coreNgService: CoreNgService) {
+    constructor() {
+        const coreNgService = inject(CoreNgService);
+
         const coreService = coreNgService.service;
 
         const definitionFactoryService = new TableFieldSourceDefinitionFactoryService();

@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Injector, OnDestroy, Type, ValueProvider, viewChild, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Injector, OnDestroy, Type, ValueProvider, viewChild, ViewContainerRef } from '@angular/core';
 import { AssertInternalError, ComparableList, delay1Tick, Integer, MultiEvent, UnreachableCaseError, UsableListChangeType, UsableListChangeTypeId } from '@pbkware/js-utils';
 import { IntegerListSelectItemUiAction } from '@pbkware/ui-action';
 import {
@@ -53,6 +53,8 @@ export class ScanFieldEditorNgComponent extends ContentComponentBaseNgDirective 
     public conditionsLabel = Strings[StringId.ScanFieldEditor_Conditions];
     public requiresRadioName: string;
 
+    private readonly _cdr = inject(ChangeDetectorRef);
+
     private readonly _requiresLabelComponentSignal = viewChild.required<CaptionLabelNgComponent>('requiresLabel');
     private readonly _requiresAllControlComponentSignal = viewChild.required<IntegerCaptionedRadioNgComponent>('requiresAllControl');
     private readonly _requiresAnyControlComponentSignal = viewChild.required<IntegerCaptionedRadioNgComponent>('requiresAnyControl');
@@ -88,14 +90,11 @@ export class ScanFieldEditorNgComponent extends ContentComponentBaseNgDirective 
 
     private _settingsChangeSubscriptionId: MultiEvent.SubscriptionId;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        private readonly _cdr: ChangeDetectorRef,
-        private readonly _injector: Injector,
-        settingsNgService: SettingsNgService,
-        commandRegisterNgService: CommandRegisterNgService,
-    ) {
-        super(elRef, ++ScanFieldEditorNgComponent.typeInstanceCreateCount);
+    constructor() {
+        const settingsNgService = inject(SettingsNgService);
+        const commandRegisterNgService = inject(CommandRegisterNgService);
+
+        super(++ScanFieldEditorNgComponent.typeInstanceCreateCount);
 
         this._settingsService = settingsNgService.service;
         this._colorSettings = this._settingsService.color;

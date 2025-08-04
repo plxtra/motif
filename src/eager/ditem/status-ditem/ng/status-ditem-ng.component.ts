@@ -1,20 +1,9 @@
 
-import {
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    ElementRef,
-    Inject,
-    OnDestroy,
-    viewChild,
-    ViewContainerRef
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, inject, OnDestroy, viewChild, ViewContainerRef } from '@angular/core';
 import { delay1Tick, JsonElement } from '@pbkware/js-utils';
 import { StringId, Strings } from '@plxtra/motif-core';
-import { AdiNgService, CommandRegisterNgService, MarketsNgService, SettingsNgService, SymbolsNgService } from 'component-services-ng-api';
+import { AdiNgService, MarketsNgService, SettingsNgService, SymbolsNgService } from 'component-services-ng-api';
 import { ExchangeEnvironmentsNgComponent, ExchangesNgComponent, FeedsNgComponent, MarketBoardsNgComponent, StatusSummaryNgComponent, ZenithStatusNgComponent } from 'content-ng-api';
-import { ComponentContainer } from 'golden-layout';
 import { DataMarketsNgComponent } from '../../../content/data-markets/ng-api';
 import { TradingMarketsNgComponent } from '../../../content/trading-markets/ng-api';
 import { TabListNgComponent } from '../../../controls/ng-api';
@@ -40,29 +29,18 @@ export class StatusDitemNgComponent extends BuiltinDitemNgComponentBaseNgDirecti
     private _tabListComponent: TabListNgComponent;
     private _statusContainer: ViewContainerRef;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        @Inject(BuiltinDitemNgComponentBaseNgDirective.goldenLayoutContainerInjectionToken) container: ComponentContainer,
-        settingsNgService: SettingsNgService,
-        marketsNgService: MarketsNgService,
-        commandRegisterNgService: CommandRegisterNgService,
-        desktopAccessNgService: DesktopAccessNgService,
-        symbolsNgService: SymbolsNgService,
-        adiNgService: AdiNgService,
-    ) {
-        const settingsService = settingsNgService.service;
-        super(
-            elRef,
-            ++StatusDitemNgComponent.typeInstanceCreateCount,
-            cdr,
-            container,
-            settingsService,
-            commandRegisterNgService.service
-        );
+    constructor() {
+        super(++StatusDitemNgComponent.typeInstanceCreateCount);
+
+        const settingsNgService = inject(SettingsNgService);
+        const marketsNgService = inject(MarketsNgService);
+        const desktopAccessNgService = inject(DesktopAccessNgService);
+        const symbolsNgService = inject(SymbolsNgService);
+        const adiNgService = inject(AdiNgService);
+
         this._frame = new StatusDitemFrame(
             this,
-            settingsService,
+            settingsNgService.service,
             marketsNgService.service,
             this.commandRegisterService,
             desktopAccessNgService.service,

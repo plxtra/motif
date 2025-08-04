@@ -1,17 +1,4 @@
-import {
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    ElementRef,
-    Inject,
-    InjectionToken,
-    Injector,
-    OnDestroy,
-    ValueProvider,
-    ViewContainerRef,
-    viewChild
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, InjectionToken, Injector, OnDestroy, ValueProvider, ViewContainerRef, inject, viewChild } from '@angular/core';
 import { AssertInternalError, LockOpenListItem, ModifierKey, UnreachableCaseError, delay1Tick } from '@pbkware/js-utils';
 import { UiAction } from '@pbkware/ui-action';
 import {
@@ -39,6 +26,10 @@ import { ContentComponentBaseNgDirective } from '../../ng/content-component-base
     standalone: false
 })
 export class HoldingsColumnLayoutsDialogNgComponent extends ContentComponentBaseNgDirective implements OnDestroy, AfterViewInit {
+    private _cdr = inject(ChangeDetectorRef);
+    private readonly _opener = inject<LockOpenListItem.Opener>(CoreInjectionTokens.lockOpenListItemOpener);
+    readonly caption = inject(HoldingsColumnLayoutsDialogNgComponent.captionInjectionToken);
+
     private static typeInstanceCreateCount = 0;
 
     private readonly _okButtonComponentSignal = viewChild.required<SvgButtonNgComponent>('okButton');
@@ -72,16 +63,12 @@ export class HoldingsColumnLayoutsDialogNgComponent extends ContentComponentBase
     private _closeResolve: (value: HoldingsDitemFrame.ColumnLayoutDefinitions | undefined) => void;
     private _closeReject: (reason: unknown) => void;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        private _cdr: ChangeDetectorRef,
-        commandRegisterNgService: CommandRegisterNgService,
-        @Inject(CoreInjectionTokens.lockOpenListItemOpener) private readonly _opener: LockOpenListItem.Opener,
-        @Inject(HoldingsColumnLayoutsDialogNgComponent.captionInjectionToken) public readonly caption: string,
-        @Inject(HoldingsColumnLayoutsDialogNgComponent.holdingsAllowedFieldsInjectionToken) allowedFields: HoldingsDitemFrame.AllowedGridFields,
-        @Inject(HoldingsColumnLayoutsDialogNgComponent.oldHoldingsColumnLayoutDefinitionsInjectionToken) oldLayoutDefinitions: HoldingsDitemFrame.ColumnLayoutDefinitions,
-    ) {
-        super(elRef, ++HoldingsColumnLayoutsDialogNgComponent.typeInstanceCreateCount);
+    constructor() {
+        const commandRegisterNgService = inject(CommandRegisterNgService);
+        const allowedFields = inject<HoldingsDitemFrame.AllowedGridFields>(HoldingsColumnLayoutsDialogNgComponent.holdingsAllowedFieldsInjectionToken);
+        const oldLayoutDefinitions = inject<HoldingsDitemFrame.ColumnLayoutDefinitions>(HoldingsColumnLayoutsDialogNgComponent.oldHoldingsColumnLayoutDefinitionsInjectionToken);
+
+        super(++HoldingsColumnLayoutsDialogNgComponent.typeInstanceCreateCount);
 
         this._commandRegisterService = commandRegisterNgService.service;
 

@@ -1,7 +1,6 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, input, model, viewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, input, model, viewChild } from '@angular/core';
 import { AssertInternalError, delay1Tick, Integer } from '@pbkware/js-utils';
 import { AdaptedRevgridBehavioredColumnSettings, GridField } from '@plxtra/motif-core';
-import { SettingsNgService } from 'component-services-ng-api';
 import { RevCellEditor, RevDataServer, RevViewCell } from 'revgrid';
 import { ControlComponentBaseNgDirective } from '../../../../ng/control-component-base-ng.directive';
 import { NumberUiActionComponentBaseNgDirective } from '../../../ng/number-ui-action-component-base-ng.directive';
@@ -34,12 +33,9 @@ export class IntegerTextInputNgComponent extends IntegerUiActionComponentBaseNgD
     private _oldSelectionStart: Integer | null;
     private _oldSelectionEnd: Integer | null;
 
-    constructor(elRef: ElementRef<HTMLElement>, cdr: ChangeDetectorRef, settingsNgService: SettingsNgService) {
+    constructor() {
         super(
-            elRef,
             ++IntegerTextInputNgComponent.typeInstanceCreateCount,
-            cdr,
-            settingsNgService.service,
             ControlComponentBaseNgDirective.textControlStateColorItemIdArray
         );
         this.inputId.set('IntegerInput' + this.typeInstanceId);

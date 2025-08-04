@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { AssertInternalError, ChangeSubscribableComparableList, LockOpenListItem } from '@pbkware/js-utils';
 import { StringId, Strings, TradingMarket } from '@plxtra/motif-core';
 import { CoreInjectionTokens, ToastNgService } from 'component-services-ng-api';
@@ -17,15 +17,14 @@ import { TradingMarketsGridFrame } from '../trading-markets-grid-frame';
 export class TradingMarketsGridNgComponent extends GridSourceNgDirective {
     declare frame: TradingMarketsGridNgComponent.Frame;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        private readonly _toastNgService: ToastNgService,
-        contentNgService: ContentNgService,
-        @Inject(CoreInjectionTokens.lockOpenListItemOpener) private readonly _opener: LockOpenListItem.Opener,
-    ) {
+    private readonly _toastNgService = inject(ToastNgService);
+    private readonly _opener = inject<LockOpenListItem.Opener>(CoreInjectionTokens.lockOpenListItemOpener);
+
+    constructor() {
+        const contentNgService = inject(ContentNgService);
+
         const frame: TradingMarketsGridNgComponent.Frame = contentNgService.createTradingMarketsGridFrame();
-        super(elRef, ++TradingMarketsGridNgComponent.typeInstanceCreateCount, cdr, frame);
+        super(++TradingMarketsGridNgComponent.typeInstanceCreateCount, frame);
         frame.setComponentAccess(this);
     }
 

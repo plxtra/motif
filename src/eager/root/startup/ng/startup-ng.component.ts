@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, inject } from '@angular/core';
 import {
     AssertInternalError,
     Integer,
@@ -33,6 +33,8 @@ export class StartupNgComponent extends ComponentBaseNgDirective implements OnIn
     public logTextAreaDisplayed = false;
     public log = 'Startup Log';
 
+    private readonly _cdr = inject(ChangeDetectorRef);
+
     private readonly _logService: LogService;
     private readonly _sessionService: SessionService;
 
@@ -42,13 +44,11 @@ export class StartupNgComponent extends ComponentBaseNgDirective implements OnIn
 
     private _logTextAreaDisplayedSetTimeoutId: ReturnType<typeof setInterval> | undefined;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        private readonly _cdr: ChangeDetectorRef,
-        logNgService: LogNgService,
-        sessionNgService: SessionNgService,
-    ) {
-        super(elRef, ++StartupNgComponent.typeInstanceCreateCount);
+    constructor() {
+        const logNgService = inject(LogNgService);
+        const sessionNgService = inject(SessionNgService);
+
+        super(++StartupNgComponent.typeInstanceCreateCount);
 
         this._logService = logNgService.service;
         this._sessionService = sessionNgService.session;

@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, viewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnDestroy, OnInit, viewChild } from '@angular/core';
 import { delay1Tick } from '@pbkware/js-utils';
 import { BooleanUiAction, StringUiAction } from '@pbkware/ui-action';
 import {
@@ -42,6 +42,8 @@ export class GeneralScanEditorSectionNgComponent extends ScanEditorSectionNgDire
 
     protected override _sectionHeadingComponent: ExpandableCollapsibleLinedHeadingNgComponent;
 
+    private readonly _cdr = inject(ChangeDetectorRef);
+
     private readonly _sectionHeadingComponentSignal = viewChild.required<ExpandableCollapsibleLinedHeadingNgComponent>('sectionHeading');
     private readonly _enabledLabelComponentSignal = viewChild.required<CaptionLabelNgComponent>('enabledLabel');
     private readonly _enabledControlComponentSignal = viewChild.required<CheckboxInputNgComponent>('enabledControl');
@@ -72,11 +74,8 @@ export class GeneralScanEditorSectionNgComponent extends ScanEditorSectionNgDire
     private _symbolListControlComponent: CheckboxInputNgComponent;
     private _showRankControlComponent: CaptionedCheckboxNgComponent;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        private readonly _cdr: ChangeDetectorRef,
-    ) {
-        super(elRef, ++GeneralScanEditorSectionNgComponent.typeInstanceCreateCount);
+    constructor() {
+        super(++GeneralScanEditorSectionNgComponent.typeInstanceCreateCount);
 
         this._enabledUiAction = this.createEnabledUiAction();
         this._nameUiAction = this.createNameUiAction();

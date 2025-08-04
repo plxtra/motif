@@ -1,7 +1,6 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Inject, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, inject } from '@angular/core';
 import { JsonElement } from '@pbkware/js-utils';
-import { AdiNgService, CommandRegisterNgService, MarketsNgService, SettingsNgService, SymbolsNgService } from 'component-services-ng-api';
-import { ComponentContainer } from 'golden-layout';
+import { AdiNgService, MarketsNgService, SymbolsNgService } from 'component-services-ng-api';
 import { BuiltinDitemNgComponentBaseNgDirective } from '../../ng/builtin-ditem-ng-component-base.directive';
 import { DesktopAccessNgService } from '../../ng/desktop-access-ng.service';
 import { NewsBodyDitemFrame } from '../news-body-ditem-frame';
@@ -18,26 +17,13 @@ export class NewsBodyDitemNgComponent extends BuiltinDitemNgComponentBaseNgDirec
 
     private _frame: NewsBodyDitemFrame;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        @Inject(BuiltinDitemNgComponentBaseNgDirective.goldenLayoutContainerInjectionToken) container: ComponentContainer,
-        settingsNgService: SettingsNgService,
-        marketsNgService: MarketsNgService,
-        commandRegisterNgService: CommandRegisterNgService,
-        desktopAccessNgService: DesktopAccessNgService,
-        symbolsNgService: SymbolsNgService,
-        adiNgService: AdiNgService,
-    ) {
-        super(
-            elRef,
-            ++NewsBodyDitemNgComponent.typeInstanceCreateCount,
-            cdr,
-            container,
-            settingsNgService.service,
-            commandRegisterNgService.service
-        );
+    constructor() {
+        super(++NewsBodyDitemNgComponent.typeInstanceCreateCount);
 
+        const marketsNgService = inject(MarketsNgService);
+        const desktopAccessNgService = inject(DesktopAccessNgService);
+        const symbolsNgService = inject(SymbolsNgService);
+        const adiNgService = inject(AdiNgService);
 
         this._frame = new NewsBodyDitemFrame(this, this.settingsService, marketsNgService.service, this.commandRegisterService,
             desktopAccessNgService.service, symbolsNgService.service, adiNgService.service);

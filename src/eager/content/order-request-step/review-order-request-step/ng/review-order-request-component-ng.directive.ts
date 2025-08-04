@@ -1,5 +1,5 @@
-import { ChangeDetectorRef, Directive, ElementRef, InjectionToken } from '@angular/core';
-import { Integer, UnexpectedCaseError } from '@pbkware/js-utils';
+import { ChangeDetectorRef, Directive, InjectionToken, inject } from '@angular/core';
+import { UnexpectedCaseError } from '@pbkware/js-utils';
 import {
     AmendOrderMessageConvert,
     AmendOrderRequestDataDefinition,
@@ -22,18 +22,12 @@ import { ContentComponentBaseNgDirective } from '../../../ng/content-component-b
 export abstract class ReviewOrderRequestComponentNgDirective extends ContentComponentBaseNgDirective {
     public zenithMessageTitle = '';
 
+    private readonly _cdr = inject(ChangeDetectorRef);
+    private readonly _orderPad = inject(OrderPad);
+    private readonly _dataDefinition = inject(OrderRequestDataDefinition);
+
     private _zenithMessageActive = false;
     private _zenithMessageText: string | undefined;
-
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        typeInstanceCreateId: Integer,
-        private readonly _cdr: ChangeDetectorRef,
-        private readonly _orderPad: OrderPad,
-        private readonly _dataDefinition: OrderRequestDataDefinition
-    ) {
-        super(elRef, typeInstanceCreateId);
-    }
 
     public get zenithMessageActive() { return this._zenithMessageActive; }
     public get zenithMessageText() {

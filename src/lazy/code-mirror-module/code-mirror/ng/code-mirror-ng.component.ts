@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, NgZone, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, NgZone, OnDestroy, inject } from '@angular/core';
 import { autocompletion, closeBrackets, closeBracketsKeymap, completionKeymap } from "@codemirror/autocomplete";
 import { defaultKeymap, history, historyKeymap } from "@codemirror/commands";
 import { json, jsonParseLinter } from '@codemirror/lang-json';
@@ -29,12 +29,13 @@ import {
     standalone: false
 })
 export class CodeMirrorNgComponent implements OnDestroy {
+    private _ngZone = inject(NgZone);
+    private readonly _elRef = inject<ElementRef<HTMLElement>>(ElementRef);
+
     docChangedEventer: CodeMirrorNgComponent.DocChangedEventer;
 
     private _editor: EditorView;
     private _textSetting = false;
-    constructor(private _ngZone: NgZone, private readonly _elRef: ElementRef<HTMLElement>) {
-    }
 
     get textSetting() { return this._textSetting; }
 

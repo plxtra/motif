@@ -1,17 +1,7 @@
-import {
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    ElementRef,
-    OnDestroy,
-    ViewContainerRef,
-    viewChild
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, OnDestroy, ViewContainerRef, viewChild } from '@angular/core';
 import { delay1Tick } from '@pbkware/js-utils';
 import { BooleanUiAction, IntegerUiAction, NumberUiAction, StringUiAction } from '@pbkware/ui-action';
 import { StringId, Strings, assert } from '@plxtra/motif-core';
-import { SettingsNgService } from 'component-services-ng-api';
 import {
     CaptionLabelNgComponent,
     CaptionedCheckboxNgComponent,
@@ -143,8 +133,8 @@ export class GridSettingsNgComponent extends SettingsComponentBaseNgDirective im
     private _scrollbarThumbInactiveOpacityLabel: CaptionLabelNgComponent;
     private _scrollbarThumbInactiveOpacityEdit: NumberInputNgComponent;
 
-    constructor(elRef: ElementRef<HTMLElement>, cdr: ChangeDetectorRef, settingsNgService: SettingsNgService) {
-        super(elRef, ++GridSettingsNgComponent.typeInstanceCreateCount, cdr, settingsNgService.service);
+    constructor() {
+        super(++GridSettingsNgComponent.typeInstanceCreateCount);
 
         this._fontFamilyUiAction = this.createFontFamilyUiAction();
         this._fontSizeUiAction = this.createFontSizeUiAction();

@@ -1,13 +1,4 @@
-import {
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    ElementRef,
-    OnDestroy,
-    viewChild,
-    ViewContainerRef
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, inject, OnDestroy, viewChild, ViewContainerRef } from '@angular/core';
 import {
     AssertInternalError,
     delay1Tick,
@@ -27,7 +18,7 @@ import {
     Strings
 } from '@plxtra/motif-core';
 import { SplitAreaSize, SplitUnit } from 'angular-split';
-import { CommandRegisterNgService, SettingsNgService } from 'component-services-ng-api';
+import { CommandRegisterNgService } from 'component-services-ng-api';
 import { SvgButtonNgComponent } from 'controls-ng-api';
 import { RevRecordIndex } from 'revgrid';
 import { ColorSchemeGridNgComponent } from '../../../color-scheme-grid/ng-api';
@@ -72,13 +63,10 @@ export class ColorSettingsNgComponent extends SettingsComponentBaseNgDirective i
 
     private _currentRecordIndex: Integer | undefined;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        commandRegisterNgService: CommandRegisterNgService,
-        settingsNgService: SettingsNgService,
-    ) {
-        super(elRef, ++ColorSettingsNgComponent.typeInstanceCreateCount, cdr, settingsNgService.service);
+    constructor() {
+        const commandRegisterNgService = inject(CommandRegisterNgService);
+
+        super(++ColorSettingsNgComponent.typeInstanceCreateCount);
 
         this._commandRegisterService = commandRegisterNgService.service;
 

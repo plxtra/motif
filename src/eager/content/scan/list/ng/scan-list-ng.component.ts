@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { DelayedBadnessGridSourceNgDirective } from '../../../delayed-badness-grid-source/ng-api';
 import { ContentNgService } from '../../../ng/content-ng.service';
 import { ScanListFrame } from '../scan-list-frame';
@@ -15,13 +15,11 @@ export class ScanListNgComponent extends DelayedBadnessGridSourceNgDirective {
 
     declare frame: ScanListFrame;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        contentNgService: ContentNgService,
-    ) {
+    constructor() {
+        const contentNgService = inject(ContentNgService);
+
         const frame = contentNgService.createScanListFrame();
-        super(elRef, ++ScanListNgComponent.typeInstanceCreateCount, cdr, frame);
+        super(++ScanListNgComponent.typeInstanceCreateCount, frame);
         frame.setComponentAccess(this);
     }
 }

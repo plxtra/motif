@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, inject } from '@angular/core';
 import {
     HtmlTypes,
     Integer,
@@ -33,6 +33,8 @@ export class DelayedBadnessNgComponent extends ContentComponentBaseNgDirective i
     public display = HtmlTypes.Display.None;
     public displayText = '';
 
+    private _cdr = inject(ChangeDetectorRef);
+
     private readonly _settingsService: SettingsService;
     private readonly _colorSettings: ColorSettings;
     private _settingsChangeSubscriptionId: MultiEvent.SubscriptionId;
@@ -43,8 +45,10 @@ export class DelayedBadnessNgComponent extends ContentComponentBaseNgDirective i
     private _visibleDelayActive = false;
     private _visibleDelayTransactionId = 0;
 
-    constructor(elRef: ElementRef<HTMLElement>, private _cdr: ChangeDetectorRef, settingsNgService: SettingsNgService) {
-        super(elRef, ++DelayedBadnessNgComponent.typeInstanceCreateCount);
+    constructor() {
+        const settingsNgService = inject(SettingsNgService);
+
+        super(++DelayedBadnessNgComponent.typeInstanceCreateCount);
         this._settingsService = settingsNgService.service;
         this._colorSettings = this._settingsService.color;
 

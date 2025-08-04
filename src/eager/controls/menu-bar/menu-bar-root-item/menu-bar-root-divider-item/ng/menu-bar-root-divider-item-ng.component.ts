@@ -1,5 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef } from '@angular/core';
-import { MenuBarNgService } from '../../../ng/menu-bar-ng.service';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MenuBarRenderItemComponentNgDirective } from '../../../ng/menu-bar-render-item-component-ng.directive';
 
 @Component({
@@ -12,7 +11,7 @@ import { MenuBarRenderItemComponentNgDirective } from '../../../ng/menu-bar-rend
 export class MenuBarRootDividerItemNgComponent extends MenuBarRenderItemComponentNgDirective {
     private static typeInstanceCreateCount = 0;
 
-    constructor(elRef: ElementRef<HTMLElement>, cdr: ChangeDetectorRef, menuBarNgService: MenuBarNgService) {
-        super(elRef, ++MenuBarRootDividerItemNgComponent.typeInstanceCreateCount, cdr, menuBarNgService);
+    constructor() {
+        super(++MenuBarRootDividerItemNgComponent.typeInstanceCreateCount);
     }
 }

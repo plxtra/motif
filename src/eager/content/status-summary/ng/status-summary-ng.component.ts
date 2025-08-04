@@ -1,14 +1,4 @@
-import {
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    ElementRef,
-    isDevMode,
-    OnDestroy,
-    viewChild,
-    ViewContainerRef
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, isDevMode, OnDestroy, viewChild, ViewContainerRef } from '@angular/core';
 import { AssertInternalError, delay1Tick } from '@pbkware/js-utils';
 import {
     Badness,
@@ -29,7 +19,6 @@ import { StatusSummaryFrame } from '../status-summary-frame';
     standalone: false
 })
 export class StatusSummaryNgComponent extends ContentComponentBaseNgDirective implements OnDestroy, AfterViewInit, StatusSummaryFrame.ComponentAccess {
-
     private static typeInstanceCreateCount = 0;
 
     public serviceName: string;
@@ -48,6 +37,8 @@ export class StatusSummaryNgComponent extends ContentComponentBaseNgDirective im
     public publisherOnline: string;
     public publisherStateId: string;
 
+    private readonly _cdr = inject(ChangeDetectorRef);
+
     private readonly _delayedBadnessComponentSignal = viewChild.required<DelayedBadnessNgComponent>('delayedBadness');
 
     private readonly _frame: StatusSummaryFrame;
@@ -55,14 +46,12 @@ export class StatusSummaryNgComponent extends ContentComponentBaseNgDirective im
 
     private _delayedBadnessComponent: DelayedBadnessNgComponent;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        private _cdr: ChangeDetectorRef,
-        marketsNgService: MarketsNgService,
-        sessionInfoNgService: SessionInfoNgService,
-        contentService: ContentNgService,
-    ) {
-        super(elRef, ++StatusSummaryNgComponent.typeInstanceCreateCount);
+    constructor() {
+        super(++StatusSummaryNgComponent.typeInstanceCreateCount);
+
+        const marketsNgService = inject(MarketsNgService);
+        const sessionInfoNgService = inject(SessionInfoNgService);
+        const contentService = inject(ContentNgService);
 
         this._sessionInfoService = sessionInfoNgService.service;
 

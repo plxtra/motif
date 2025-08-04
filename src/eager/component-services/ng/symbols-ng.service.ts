@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { DataIvemId, DataMarket, SymbolsService, TradingIvemId, TradingMarket } from '@plxtra/motif-core';
 import { CoreNgService } from './core-ng.service';
 
@@ -8,7 +8,9 @@ import { CoreNgService } from './core-ng.service';
 export class SymbolsNgService {
     private _service: SymbolsService;
 
-    constructor(coreNgService: CoreNgService) {
+    constructor() {
+        const coreNgService = inject(CoreNgService);
+
         this._service = coreNgService.symbolsService;
     }
 

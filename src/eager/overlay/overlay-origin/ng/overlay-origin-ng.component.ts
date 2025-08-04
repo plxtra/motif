@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, viewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, viewChild } from '@angular/core';
 import { NgSelectOverlayNgComponent } from '../../ng-select-overlay/ng-api';
 import { OverlayComponentBaseNgDirective } from '../../ng/overlay-component-base-ng.directive';
 
@@ -16,8 +16,8 @@ export class OverlayOriginNgComponent extends OverlayComponentBaseNgDirective im
 
     private _ngSelectOverlayComponent: NgSelectOverlayNgComponent;
 
-    constructor(elRef: ElementRef<HTMLElement>) {
-        super(elRef, ++OverlayOriginNgComponent.typeInstanceCreateCount);
+    constructor() {
+        super(++OverlayOriginNgComponent.typeInstanceCreateCount);
     }
 
     ngAfterViewInit(): void {

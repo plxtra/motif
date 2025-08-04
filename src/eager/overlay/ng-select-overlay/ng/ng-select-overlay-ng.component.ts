@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, OnDestroy, ViewEncapsulation, viewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, OnDestroy, ViewEncapsulation, inject, viewChild } from '@angular/core';
 import { AssertInternalError, HtmlTypes, MultiEvent, delay1Tick, numberToPixels } from '@pbkware/js-utils';
 import {
     ColorScheme,
@@ -21,6 +21,8 @@ import { OverlayComponentBaseNgDirective } from '../../ng/overlay-component-base
 export class NgSelectOverlayNgComponent extends OverlayComponentBaseNgDirective implements OnDestroy, AfterViewInit {
     private static typeInstanceCreateCount = 0;
 
+    private readonly _ngSelectOverlayNgService = inject(NgSelectOverlayNgService);
+
     private readonly _measureCanvasSignal = viewChild.required<ElementRef<HTMLCanvasElement>>('measureCanvas');
     private readonly _measureBoldCanvasSignal = viewChild.required<ElementRef<HTMLCanvasElement>>('measureBoldCanvas');
 
@@ -40,12 +42,10 @@ export class NgSelectOverlayNgComponent extends OverlayComponentBaseNgDirective 
 
     private _scrollHostCollection: HTMLCollectionOf<Element> | undefined;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        private readonly _ngSelectOverlayNgService: NgSelectOverlayNgService,
-        settingsNgService: SettingsNgService
-    ) {
-        super(elRef, ++NgSelectOverlayNgComponent.typeInstanceCreateCount);
+    constructor() {
+        const settingsNgService = inject(SettingsNgService);
+
+        super(++NgSelectOverlayNgComponent.typeInstanceCreateCount);
 
         this._element = this.rootHtmlElement;
         this._settingsService = settingsNgService.service;

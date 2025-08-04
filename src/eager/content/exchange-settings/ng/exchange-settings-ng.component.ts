@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, input, OnDestroy, viewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, inject, input, OnDestroy, viewChild } from '@angular/core';
 import { delay1Tick, MultiEvent } from '@pbkware/js-utils';
 import { IntegerListSelectItemsUiAction, IntegerListSelectItemUiAction } from '@pbkware/ui-action';
 import {
@@ -44,8 +44,10 @@ export class ExchangeSettingsNgComponent extends ContentComponentBaseNgDirective
     private _exchange: Exchange;
     private _exchangeSettings: ExchangeSettings;
 
-    constructor(elRef: ElementRef<HTMLElement>, settingsNgService: SettingsNgService) {
-        super(elRef, ++ExchangeSettingsNgComponent.typeInstanceCreateCount);
+    constructor() {
+        const settingsNgService = inject(SettingsNgService);
+
+        super(++ExchangeSettingsNgComponent.typeInstanceCreateCount);
 
         this._settingsService = settingsNgService.service;
         this._settingsChangedSubsciptionId = this._settingsService.subscribeSettingsChangedEvent(() => this.handleSettingsChangedEvent());

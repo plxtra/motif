@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Injector, OnDestroy, viewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, OnDestroy, viewChild } from '@angular/core';
 import { EnumInfoOutOfOrderError, delay1Tick } from '@pbkware/js-utils';
 import { BooleanUiAction, IntegerListSelectItemUiAction } from '@pbkware/ui-action';
 import { ScanConditionSet, StringId, Strings } from '@plxtra/motif-core';
@@ -32,12 +32,8 @@ export class ConditionSetScanFormulaViewNgComponent extends ScanFormulaViewNgDir
     private _newConditionLabelComponent: CaptionLabelNgComponent;
     private _newConditionControlComponent: IntegerEnumInputNgComponent;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        private readonly _cdr: ChangeDetectorRef,
-        private readonly _injector: Injector,
-    ) {
-        super(elRef, ++ConditionSetScanFormulaViewNgComponent.typeInstanceCreateCount);
+    constructor() {
+        super(++ConditionSetScanFormulaViewNgComponent.typeInstanceCreateCount);
 
         this._setOperationUiAction = this.createSetOperationUiAction();
         this._excludeUiAction = this.createExcludeUiAction();

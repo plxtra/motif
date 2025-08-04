@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostBinding, OnDestroy, viewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, HostBinding, inject, OnDestroy, viewChild } from '@angular/core';
 import { AssertInternalError, delay1Tick, HtmlTypes, Integer, MultiEvent, UnreachableCaseError } from '@pbkware/js-utils';
 import {
     AllowedSourcedFieldsColumnLayoutDefinition,
@@ -46,6 +46,9 @@ export class ScanEditorNgComponent extends ContentComponentBaseNgDirective imple
     public splitterGutterSize = 3;
     public rankDisplayed: boolean;
 
+    private readonly _cdr = inject(ChangeDetectorRef);
+    private readonly _toastNgService = inject(ToastNgService);
+
     private readonly _generalSectionComponentSignal = viewChild.required<GeneralScanEditorSectionNgComponent>('generalSection');
     private readonly _criteriaSectionComponentSignal = viewChild.required<FormulaScanEditorSectionNgComponent>('criteriaSection');
     private readonly _rankSectionComponentSignal = viewChild.required<FormulaScanEditorSectionNgComponent>('rankSection');
@@ -79,13 +82,10 @@ export class ScanEditorNgComponent extends ContentComponentBaseNgDirective imple
     private _resizeObserver: ResizeObserver;
     private _splitterDragged = false;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        private readonly _cdr: ChangeDetectorRef,
-        commandRegisterNgService: CommandRegisterNgService,
-        private readonly _toastNgService: ToastNgService,
-    ) {
-        super(elRef, ++ScanEditorNgComponent.typeInstanceCreateCount);
+    constructor() {
+        const commandRegisterNgService = inject(CommandRegisterNgService);
+
+        super(++ScanEditorNgComponent.typeInstanceCreateCount);
 
         const commandRegisterService = commandRegisterNgService.service;
 

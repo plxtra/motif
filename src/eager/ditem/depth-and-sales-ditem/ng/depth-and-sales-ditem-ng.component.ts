@@ -1,14 +1,4 @@
-import {
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    ElementRef,
-    Inject,
-    OnDestroy,
-    viewChild,
-    ViewContainerRef
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, inject, OnDestroy, viewChild, ViewContainerRef } from '@angular/core';
 import {
     CommaText,
     delay1Tick,
@@ -31,9 +21,7 @@ import {
 import { SplitAreaSize, SplitUnit } from 'angular-split';
 import {
     AdiNgService,
-    CommandRegisterNgService,
     MarketsNgService,
-    SettingsNgService,
     SymbolsNgService,
     TextFormatterNgService,
     ToastNgService
@@ -46,7 +34,6 @@ import {
     SvgButtonNgComponent,
     TextInputNgComponent
 } from 'controls-ng-api';
-import { ComponentContainer } from 'golden-layout';
 import { BuiltinDitemNgComponentBaseNgDirective } from '../../ng/builtin-ditem-ng-component-base.directive';
 import { DesktopAccessNgService } from '../../ng/desktop-access-ng.service';
 import { DepthAndSalesDitemFrame } from '../depth-and-sales-ditem-frame';
@@ -119,20 +106,15 @@ export class DepthAndSalesDitemNgComponent extends BuiltinDitemNgComponentBaseNg
 
     private _modeId = DepthAndSalesDitemNgComponent.ModeId.Main;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        @Inject(BuiltinDitemNgComponentBaseNgDirective.goldenLayoutContainerInjectionToken) container: ComponentContainer,
-        settingsNgService: SettingsNgService,
-        marketsNgService: MarketsNgService,
-        commandRegisterNgService: CommandRegisterNgService,
-        desktopAccessNgService: DesktopAccessNgService,
-        symbolsNgService: SymbolsNgService,
-        adiNgService: AdiNgService,
-        textFormatterNgService: TextFormatterNgService,
-        toastNgService: ToastNgService,
-    ) {
-        super(elRef, ++DepthAndSalesDitemNgComponent.typeInstanceCreateCount, cdr, container, settingsNgService.service, commandRegisterNgService.service);
+    constructor() {
+        super(++DepthAndSalesDitemNgComponent.typeInstanceCreateCount);
+
+        const marketsNgService = inject(MarketsNgService);
+        const desktopAccessNgService = inject(DesktopAccessNgService);
+        const symbolsNgService = inject(SymbolsNgService);
+        const adiNgService = inject(AdiNgService);
+        const textFormatterNgService = inject(TextFormatterNgService);
+        const toastNgService = inject(ToastNgService);
 
         this._marketsService = marketsNgService.service;
 

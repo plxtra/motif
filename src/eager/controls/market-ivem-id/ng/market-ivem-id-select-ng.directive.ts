@@ -1,11 +1,4 @@
-import {
-    AfterViewInit,
-    ChangeDetectorRef,
-    Directive,
-    ElementRef,
-    model,
-    viewChild
-} from '@angular/core';
+import { AfterViewInit, Directive, inject, model, viewChild } from '@angular/core';
 import { NgSelectComponent } from '@ng-select/ng-select';
 import { AssertInternalError, compareString, ComparisonResult, DecimalFactory, delay1Tick, Integer, MultiEvent } from '@pbkware/js-utils';
 import { BooleanUiAction, UiAction } from '@pbkware/ui-action';
@@ -23,14 +16,14 @@ import {
     MarketsService,
     SearchSymbolsDataDefinition,
     SearchSymbolsDataIvemBaseDetail,
-    SettingsService,
     StringId,
     Strings,
     SymbolDetailCacheService,
     SymbolsDataItem,
     SymbolsService,
-    TradingMarket,
+    TradingMarket
 } from '@plxtra/motif-core';
+import { AdiNgService, CommandRegisterNgService, DecimalFactoryNgService, MarketsNgService, SymbolDetailCacheNgService, SymbolsNgService } from 'component-services-ng-api';
 import { distinctUntilChanged, map, merge, Observable, Observer, of, Subject, switchAll, tap, Unsubscribable } from 'rxjs';
 import { SvgButtonNgComponent } from '../../boolean/ng-api';
 import { NgSelectUtils } from '../../ng-select-utils';
@@ -51,10 +44,12 @@ export abstract class MarketIvemIdSelectNgDirective<T extends Market> extends Co
     public selected: MarketIvemIdSelectNgDirective.Item<T> | null;
     public minCodeLength = 2;
 
+    private readonly _ngSelectOverlayNgService = inject(NgSelectOverlayNgService);
+
     private readonly _ngSelectComponentSignal = viewChild.required<NgSelectComponent>('ngSelect');
     private readonly _searchTermNotExchangedMarketProcessedToggleButtonComponentSignal = viewChild.required<SvgButtonNgComponent>('searchTermNotExchangedMarketProcessedToggleButton');
 
-    private readonly _marketsService: MarketsService;
+    private readonly _decimalFactory: DecimalFactory
     private readonly _adiService: AdiService;
     private readonly _symbolsService: SymbolsService;
     private readonly _symbolDetailCacheService: SymbolDetailCacheService;
@@ -77,39 +72,35 @@ export abstract class MarketIvemIdSelectNgDirective<T extends Market> extends Co
     private _measureBoldCanvasContext: CanvasRenderingContext2D;
 
     constructor(
-        elRef: ElementRef<HTMLElement>,
         typeInstanceCreateId: Integer,
-        cdr: ChangeDetectorRef,
-        private readonly _decimalFactory: DecimalFactory,
-        commandRegisterService: CommandRegisterService,
-        private readonly _ngSelectOverlayNgService: NgSelectOverlayNgService,
-        settingsService: SettingsService,
-        marketsService: MarketsService,
-        adiService: AdiService,
-        symbolsService: SymbolsService,
-        symbolDetailCacheService: SymbolDetailCacheService,
         marketTypeId: Market.TypeId,
         private readonly _marketIvemIdConstructor: MarketIvemId.Constructor<T>,
         private readonly _resolveMarketsEventer: MarketIvemIdSelectNgDirective.ResolveMarketsEventer<T>,
-) {
+    ) {
         super(
-            elRef,
             typeInstanceCreateId,
-            cdr,
-            settingsService,
             ControlComponentBaseNgDirective.textControlStateColorItemIdArray
         );
-        this._marketsService = marketsService;
-        this._adiService = adiService;
-        this._symbolsService = symbolsService;
-        this._symbolDetailCacheService = symbolDetailCacheService;
 
+        const decimalFactoryNgService = inject(DecimalFactoryNgService);
+        const commandRegisterNgService = inject(CommandRegisterNgService);
+        const marketsNgService = inject(MarketsNgService);
+        const adiNgService = inject(AdiNgService);
+        const symbolsNgService = inject(SymbolsNgService);
+        const symbolDetailCacheNgService = inject(SymbolDetailCacheNgService);
+
+        this._decimalFactory = decimalFactoryNgService.service;
+        this._adiService = adiNgService.service;
+        this._symbolsService = symbolsNgService.service;
+        this._symbolDetailCacheService = symbolDetailCacheNgService.service;
+
+        const marketsService = marketsNgService.service;
         this._allMarkets = marketsService.getAllMarkets<T>(marketTypeId);
         this._defaultEnvironmentMarkets = marketsService.getDefaultExchangeEnvironmentMarkets<T>(marketTypeId);
 
         this.inputId.set('DataIvemIdInput' + this.typeInstanceId);
         this._searchTermNotExchangedMarketProcessedToggleUiAction =
-            this.createSearchTermNotExchangedMarketProcessedToggleUiAction(commandRegisterService);
+            this.createSearchTermNotExchangedMarketProcessedToggleUiAction(commandRegisterNgService.service);
 
         this._measureCanvasContext = this._ngSelectOverlayNgService.measureCanvasContext;
         this._measureBoldCanvasContext = this._ngSelectOverlayNgService.measureBoldCanvasContext;

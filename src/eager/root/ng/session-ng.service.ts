@@ -1,4 +1,4 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { Injectable, OnDestroy, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { AssertInternalError } from '@pbkware/js-utils';
 import {
@@ -29,31 +29,32 @@ import { TelemetryNgService } from './telemetry-ng.service';
     providedIn: 'root'
 })
 export class SessionNgService implements OnDestroy {
+    private readonly _router = inject(Router);
+
     private _config: Config;
     private _session: SessionService;
 
-    constructor(
-        private readonly _router: Router,
-        configNgService: ConfigNgService,
-        logNgService: LogNgService,
-        telemetryNgService: TelemetryNgService,
-        userAlertNgService: UserAlertNgService,
-        settingsNgService: SettingsNgService,
-        openIdNgService: OpenIdNgService,
-        capabilitiesNgService: CapabilitiesNgService,
-        motifServicesNgService: MotifServicesNgService,
-        appStorageNgService: AppStorageNgService,
-        extensionNgService: ExtensionsNgService,
-        workspaceNgService: WorkspaceNgService,
-        adiNgService: AdiNgService,
-        marketsNgService: MarketsNgService,
-        symbolsNgService: SymbolsNgService,
-        notificationChannelsNgService: NotificationChannelsNgService,
-        scansNgService: ScansNgService,
-        sessionInfoNgService: SessionInfoNgService,
-        hideUnloadSaveNgService: HideUnloadSaveNgService,
-        signOutNgService: SignOutNgService,
-    ) {
+    constructor() {
+        const configNgService = inject(ConfigNgService);
+        const logNgService = inject(LogNgService);
+        const telemetryNgService = inject(TelemetryNgService);
+        const userAlertNgService = inject(UserAlertNgService);
+        const settingsNgService = inject(SettingsNgService);
+        const openIdNgService = inject(OpenIdNgService);
+        const capabilitiesNgService = inject(CapabilitiesNgService);
+        const motifServicesNgService = inject(MotifServicesNgService);
+        const appStorageNgService = inject(AppStorageNgService);
+        const extensionNgService = inject(ExtensionsNgService);
+        const workspaceNgService = inject(WorkspaceNgService);
+        const adiNgService = inject(AdiNgService);
+        const marketsNgService = inject(MarketsNgService);
+        const symbolsNgService = inject(SymbolsNgService);
+        const notificationChannelsNgService = inject(NotificationChannelsNgService);
+        const scansNgService = inject(ScansNgService);
+        const sessionInfoNgService = inject(SessionInfoNgService);
+        const hideUnloadSaveNgService = inject(HideUnloadSaveNgService);
+        const signOutNgService = inject(SignOutNgService);
+
         this._config = configNgService.config;
         this._session = new SessionService(
             configNgService.config,

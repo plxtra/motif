@@ -1,13 +1,4 @@
-import {
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    ElementRef,
-    OnDestroy,
-    ViewContainerRef,
-    viewChild
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, ViewContainerRef, inject, viewChild } from '@angular/core';
 import { AssertInternalError, delay1Tick } from '@pbkware/js-utils';
 import { Badness } from '@plxtra/motif-core';
 import { DelayedBadnessNgComponent } from '../../../delayed-badness/ng-api';
@@ -27,13 +18,17 @@ export class DataMarketsWithBoardsNgComponent extends ContentComponentBaseNgDire
 
     public displayRecords: DataMarketsWithBoardsFrame.DisplayRecord[];
 
+    private _cdr = inject(ChangeDetectorRef);
+
     private readonly _delayedBadnessComponentSignal = viewChild.required<DelayedBadnessNgComponent>('delayedBadness', { debugName: 'delayedBadness' });
 
     private _delayedBadnessComponent: DelayedBadnessNgComponent;
     private _frame: DataMarketsWithBoardsFrame;
 
-    constructor(elRef: ElementRef<HTMLElement>, private _cdr: ChangeDetectorRef, contentService: ContentNgService) {
-        super(elRef, ++DataMarketsWithBoardsNgComponent.typeInstanceCreateCount);
+    constructor() {
+        const contentService = inject(ContentNgService);
+
+        super(++DataMarketsWithBoardsNgComponent.typeInstanceCreateCount);
 
         this._frame = contentService.createDataMarketsWithBoardsFrame(this);
         this.displayRecords = this._frame.displayRecords;

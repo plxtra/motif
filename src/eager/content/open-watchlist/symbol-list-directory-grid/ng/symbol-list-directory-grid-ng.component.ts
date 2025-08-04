@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { LockOpenListItem } from '@pbkware/js-utils';
 import { CoreInjectionTokens, ToastNgService } from 'component-services-ng-api';
 import { GridSourceNgDirective } from '../../../grid-source/ng-api';
@@ -15,15 +15,17 @@ import { SymbolListDirectoryGridFrame } from '../symbol-list-directory-grid-fram
 export class SymbolListDirectoryGridNgComponent extends GridSourceNgDirective {
     declare frame: SymbolListDirectoryGridNgComponent.Frame;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        private readonly _toastNgService: ToastNgService,
-        contentNgService: ContentNgService,
-        @Inject(CoreInjectionTokens.lockOpenListItemOpener) private readonly _opener: LockOpenListItem.Opener,
-    ) {
+    private readonly _toastNgService = inject(ToastNgService);
+    private readonly _opener: LockOpenListItem.Opener;
+
+    constructor() {
+        const contentNgService = inject(ContentNgService);
+        const _opener = inject<LockOpenListItem.Opener>(CoreInjectionTokens.lockOpenListItemOpener);
         const frame: SymbolListDirectoryGridNgComponent.Frame = contentNgService.createSymbolListDirectoryGridFrame(_opener);
-        super(elRef, ++SymbolListDirectoryGridNgComponent.typeInstanceCreateCount, cdr, frame);
+
+        super(++SymbolListDirectoryGridNgComponent.typeInstanceCreateCount, frame);
+        this._opener = _opener;
+
         frame.setComponentAccess(this);
     }
 

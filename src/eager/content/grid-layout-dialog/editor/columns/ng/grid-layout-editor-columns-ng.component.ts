@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Inject, viewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, viewChild } from '@angular/core';
 import { delay1Tick, LockOpenListItem } from '@pbkware/js-utils';
 import { IntegerUiAction } from '@pbkware/ui-action';
 import {
@@ -28,6 +28,9 @@ export class ColumnLayoutEditorColumnsNgComponent extends GridSourceNgDirective 
 
     declare readonly frame: ColumnLayoutEditorColumnsFrame;
 
+    private readonly _toastNgService = inject(ToastNgService);
+    private readonly _opener = inject<LockOpenListItem.Opener>(CoreInjectionTokens.lockOpenListItemOpener);
+
     private readonly _searchComponentSignal = viewChild.required<ColumnLayoutEditorSearchGridNgComponent>('search');
     private readonly _widthEditorComponentSignal = viewChild.required<IntegerTextInputNgComponent>('widthEditorControl');
 
@@ -36,16 +39,12 @@ export class ColumnLayoutEditorColumnsNgComponent extends GridSourceNgDirective 
     private _searchComponent: ColumnLayoutEditorSearchGridNgComponent;
     private _widthEditorComponent: IntegerTextInputNgComponent;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        contentNgService: ContentNgService,
-        private readonly _toastNgService: ToastNgService,
-        @Inject(CoreInjectionTokens.lockOpenListItemOpener) private readonly _opener: LockOpenListItem.Opener,
-        @Inject(definitionColumnListInjectionToken) columnList: EditableColumnLayoutDefinitionColumnList,
-    ) {
+    constructor() {
+        const contentNgService = inject(ContentNgService);
+        const columnList = inject<EditableColumnLayoutDefinitionColumnList>(definitionColumnListInjectionToken);
+
         const frame = contentNgService.createColumnLayoutEditorColumnsFrame(columnList);
-        super(elRef, ++ColumnLayoutEditorColumnsNgComponent.typeInstanceCreateCount, cdr, frame);
+        super(++ColumnLayoutEditorColumnsNgComponent.typeInstanceCreateCount, frame);
         frame.setComponentAccess(this);
 
         this._widthEditorUiAction = this.createWidthEditorUiAction();

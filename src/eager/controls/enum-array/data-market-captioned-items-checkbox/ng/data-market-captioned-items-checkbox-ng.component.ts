@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, inject } from '@angular/core';
 import { DataMarket } from '@plxtra/motif-core';
-import { MarketsNgService, SettingsNgService } from 'component-services-ng-api';
+import { MarketsNgService } from 'component-services-ng-api';
 import { ControlComponentBaseNgDirective } from '../../../ng/control-component-base-ng.directive';
 import { CaptionedItemsCheckboxNgDirective } from '../../ng/captioned-items-checkbox-ng.directive';
 
@@ -14,17 +14,11 @@ import { CaptionedItemsCheckboxNgDirective } from '../../ng/captioned-items-chec
 export class DataMarketCaptionedItemsCheckboxNgComponent extends CaptionedItemsCheckboxNgDirective<DataMarket> implements OnDestroy {
     private static typeInstanceCreateCount = 0;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        settingsNgService: SettingsNgService,
-        marketsNgService: MarketsNgService,
-    ) {
+    constructor() {
+        const marketsNgService = inject(MarketsNgService);
+
         super(
-            elRef,
             ++DataMarketCaptionedItemsCheckboxNgComponent.typeInstanceCreateCount,
-            cdr,
-            settingsNgService.service,
             ControlComponentBaseNgDirective.clickControlStateColorItemIdArray,
             marketsNgService.service.genericUnknownDataMarket,
         );

@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, OnDestroy, viewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, inject, OnDestroy, viewChild } from '@angular/core';
 import { Badness } from '@plxtra/motif-core';
 import { DelayedBadnessNgComponent } from '../../delayed-badness/ng-api';
 import { ContentComponentBaseNgDirective } from '../../ng/content-component-base-ng.directive';
@@ -22,8 +22,10 @@ export class TradesNgComponent extends ContentComponentBaseNgDirective implement
 
     private _delayedBadnessComponent: DelayedBadnessNgComponent;
 
-    constructor(elRef: ElementRef<HTMLElement>, contentService: ContentNgService) {
-        super(elRef, ++TradesNgComponent.typeInstanceCreateCount);
+    constructor() {
+        super(++TradesNgComponent.typeInstanceCreateCount);
+
+        const contentService = inject(ContentNgService);
 
         this._frame = contentService.createTradesFrame(this);
     }

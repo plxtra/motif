@@ -1,17 +1,4 @@
-import {
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    ElementRef,
-    Inject,
-    InjectionToken,
-    Injector,
-    OnDestroy,
-    ValueProvider,
-    ViewContainerRef,
-    viewChild
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, InjectionToken, Injector, OnDestroy, ValueProvider, ViewContainerRef, inject, viewChild } from '@angular/core';
 import { AssertInternalError, LockOpenListItem, UnreachableCaseError, delay1Tick } from '@pbkware/js-utils';
 import {
     AllowedGridField,
@@ -42,10 +29,19 @@ import { ContentComponentBaseNgDirective } from '../../ng/content-component-base
 export class DepthColumnLayoutsDialogNgComponent extends ContentComponentBaseNgDirective implements OnDestroy, AfterViewInit {
     private static typeInstanceCreateCount = 0;
 
+    readonly caption = inject(DepthColumnLayoutsDialogNgComponent.captionInjectionToken);
+
+    private readonly _opener = inject<LockOpenListItem.Opener>(CoreInjectionTokens.lockOpenListItemOpener);
+    private readonly _bidAskAllowedFields = inject<BidAskAllowedGridFields>(bidAskAllowedFieldsInjectionToken);
+    private readonly _oldBidAskLayoutDefinitions = inject<BidAskColumnLayoutDefinitions>(oldBidAskLayoutDefinitionInjectionToken);
+
+
     private readonly _okButtonComponentSignal = viewChild.required<SvgButtonNgComponent>('okButton');
     private readonly _cancelButtonComponentSignal = viewChild.required<SvgButtonNgComponent>('cancelButton');
     private readonly _tabListComponentSignal = viewChild.required<TabListNgComponent>('tabList');
     private readonly _editorContainerSignal = viewChild.required('editorContainer', { read: ViewContainerRef });
+
+    private _cdr = inject(ChangeDetectorRef);
 
     private _okButtonComponent: SvgButtonNgComponent;
     private _cancelButtonComponent: SvgButtonNgComponent;
@@ -65,16 +61,10 @@ export class DepthColumnLayoutsDialogNgComponent extends ContentComponentBaseNgD
     private _sideId: OrderSideId | undefined;
     private _editorComponent: ColumnLayoutEditorNgComponent | undefined;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        private _cdr: ChangeDetectorRef,
-        commandRegisterNgService: CommandRegisterNgService,
-        @Inject(CoreInjectionTokens.lockOpenListItemOpener) private readonly _opener: LockOpenListItem.Opener,
-        @Inject(DepthColumnLayoutsDialogNgComponent.captionInjectionToken) public readonly caption: string,
-        @Inject(bidAskAllowedFieldsInjectionToken) private readonly _bidAskAllowedFields: BidAskAllowedGridFields,
-        @Inject(oldBidAskLayoutDefinitionInjectionToken) private readonly _oldBidAskLayoutDefinitions: BidAskColumnLayoutDefinitions,
-    ) {
-        super(elRef, ++DepthColumnLayoutsDialogNgComponent.typeInstanceCreateCount);
+    constructor() {
+        const commandRegisterNgService = inject(CommandRegisterNgService);
+
+        super(++DepthColumnLayoutsDialogNgComponent.typeInstanceCreateCount);
 
         this._commandRegisterService = commandRegisterNgService.service;
 

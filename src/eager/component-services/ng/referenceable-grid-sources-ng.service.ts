@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { ReferenceableDataSourcesService } from '@plxtra/motif-core';
 import { CoreNgService } from './core-ng.service';
 
@@ -8,7 +8,9 @@ import { CoreNgService } from './core-ng.service';
 export class ReferenceableGridSourcesNgService {
     private _service: ReferenceableDataSourcesService;
 
-    constructor(coreNgService: CoreNgService) {
+    constructor() {
+        const coreNgService = inject(CoreNgService);
+
         this._service = coreNgService.referenceableDataSourcesService;
     }
 

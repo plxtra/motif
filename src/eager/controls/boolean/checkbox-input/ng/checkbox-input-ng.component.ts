@@ -1,6 +1,5 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, model, OnInit, viewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, model, OnInit, viewChild } from '@angular/core';
 import { BooleanUiAction, UiAction } from '@pbkware/ui-action';
-import { SettingsNgService } from 'component-services-ng-api';
 import { ControlComponentBaseNgDirective } from '../../../ng/control-component-base-ng.directive';
 
 @Component({
@@ -20,8 +19,8 @@ export class CheckboxInputNgComponent extends ControlComponentBaseNgDirective im
 
     private _checkboxInput: ElementRef<HTMLInputElement>;
 
-    constructor(elRef: ElementRef<HTMLElement>, cdr: ChangeDetectorRef, settingsNgService: SettingsNgService) {
-        super(elRef, ++CheckboxInputNgComponent.typeInstanceCreateCount, cdr, settingsNgService.service, ControlComponentBaseNgDirective.clickControlStateColorItemIdArray);
+    constructor() {
+        super(++CheckboxInputNgComponent.typeInstanceCreateCount, ControlComponentBaseNgDirective.clickControlStateColorItemIdArray);
         this.inputId.set(`Checkbox:${this.typeInstanceId}`);
     }
 

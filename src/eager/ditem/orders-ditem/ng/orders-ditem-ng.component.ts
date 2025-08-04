@@ -1,14 +1,4 @@
-import {
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    ElementRef,
-    Inject,
-    OnDestroy,
-    ViewContainerRef,
-    viewChild
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, OnDestroy, ViewContainerRef, inject, viewChild } from '@angular/core';
 import { AssertInternalError, Integer, JsonElement, ModifierKey, ModifierKeyId, delay1Tick } from '@pbkware/js-utils';
 import { UiAction } from '@pbkware/ui-action';
 import {
@@ -22,17 +12,14 @@ import {
 } from '@plxtra/motif-core';
 import {
     AdiNgService,
-    CommandRegisterNgService,
     DecimalFactoryNgService,
     MarketsNgService,
-    SettingsNgService,
     SymbolDetailCacheNgService,
     SymbolsNgService,
     ToastNgService
 } from 'component-services-ng-api';
 import { NameableColumnLayoutEditorDialogNgComponent, OrdersNgComponent } from 'content-ng-api';
 import { BrokerageAccountGroupInputNgComponent, SvgButtonNgComponent } from 'controls-ng-api';
-import { ComponentContainer } from 'golden-layout';
 import { BuiltinDitemNgComponentBaseNgDirective } from '../../ng/builtin-ditem-ng-component-base.directive';
 import { DesktopAccessNgService } from '../../ng/desktop-access-ng.service';
 import { OrdersDitemFrame } from '../orders-ditem-frame';
@@ -46,6 +33,8 @@ import { OrdersDitemFrame } from '../orders-ditem-frame';
 })
 export class OrdersDitemNgComponent extends BuiltinDitemNgComponentBaseNgDirective implements OnDestroy, AfterViewInit {
     private static typeInstanceCreateCount = 0;
+
+    private readonly _toastNgService = inject(ToastNgService);
 
     private readonly _ordersComponentSignal = viewChild.required<OrdersNgComponent>('orders');
     private readonly _accountGroupInputComponentSignal = viewChild.required<BrokerageAccountGroupInputNgComponent>('accountGroupInput');
@@ -88,28 +77,15 @@ export class OrdersDitemNgComponent extends BuiltinDitemNgComponentBaseNgDirecti
 
     private _activeDialogTypeId = OrdersDitemNgComponent.ActiveDialogTypeId.None;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        @Inject(BuiltinDitemNgComponentBaseNgDirective.goldenLayoutContainerInjectionToken) container: ComponentContainer,
-        decimalFactoryNgService: DecimalFactoryNgService,
-        settingsNgService: SettingsNgService,
-        marketsNgService: MarketsNgService,
-        commandRegisterNgService: CommandRegisterNgService,
-        desktopAccessNgService: DesktopAccessNgService,
-        adiNgService: AdiNgService,
-        symbolsNgService: SymbolsNgService,
-        symbolDetailCacheNgService: SymbolDetailCacheNgService,
-        private readonly _toastNgService: ToastNgService,
-    ) {
-        super(
-            elRef,
-            ++OrdersDitemNgComponent.typeInstanceCreateCount,
-            cdr,
-            container,
-            settingsNgService.service,
-            commandRegisterNgService.service
-        );
+    constructor() {
+        super(++OrdersDitemNgComponent.typeInstanceCreateCount);
+
+        const decimalFactoryNgService = inject(DecimalFactoryNgService);
+        const marketsNgService = inject(MarketsNgService);
+        const desktopAccessNgService = inject(DesktopAccessNgService);
+        const adiNgService = inject(AdiNgService);
+        const symbolsNgService = inject(SymbolsNgService);
+        const symbolDetailCacheNgService = inject(SymbolDetailCacheNgService);
 
         this._frame = new OrdersDitemFrame(
             this,

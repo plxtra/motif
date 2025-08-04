@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnDestroy, viewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, inject, OnDestroy, viewChild } from '@angular/core';
 import { delay1Tick, MultiEvent } from '@pbkware/js-utils';
 import { StringUiAction } from '@pbkware/ui-action';
 import { Badness, ColorScheme, SettingsService, StringId, Strings } from '@plxtra/motif-core';
@@ -17,7 +17,6 @@ import { ResultOrderRequestStepFrame } from '../result-order-request-step-frame'
     standalone: false
 })
 export class ResultOrderRequestStepNgComponent extends OrderRequestStepComponentNgDirective implements OnDestroy, AfterViewInit, ResultOrderRequestStepFrame.ComponentAccess {
-
     private static typeInstanceCreateCount = 0;
 
     public success = false;
@@ -28,6 +27,8 @@ export class ResultOrderRequestStepNgComponent extends OrderRequestStepComponent
     public errorsTextAreaSuccessForeColor: string;
     public errorsTextAreaErrorBkgdColor: string;
     public errorsTextAreaErrorForeColor: string;
+
+    private readonly _contentService = inject(ContentNgService);
 
     private readonly _delayedBadnessComponentSignal = viewChild.required<DelayedBadnessNgComponent>('delayedBadness');
     private readonly _statusLabelComponentSignal = viewChild.required<CaptionLabelNgComponent>('statusLabel');
@@ -52,13 +53,10 @@ export class ResultOrderRequestStepNgComponent extends OrderRequestStepComponent
     private _orderIdInputComponent: TextInputNgComponent;
     private _errorsLabelComponent: CaptionLabelNgComponent;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        settingsNgService: SettingsNgService,
-        private _contentService: ContentNgService
-    ) {
-        super(elRef, ++ResultOrderRequestStepNgComponent.typeInstanceCreateCount, cdr);
+    constructor() {
+        const settingsNgService = inject(SettingsNgService);
+
+        super(++ResultOrderRequestStepNgComponent.typeInstanceCreateCount);
 
         this._settingsService = settingsNgService.service;
         this._settingsChangedSubscriptionId = this._settingsService.subscribeSettingsChangedEvent(

@@ -1,8 +1,7 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Inject, Injector, OnDestroy, ViewContainerRef, createNgModule, viewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, Injector, OnDestroy, ViewContainerRef, createNgModule, inject, viewChild } from '@angular/core';
 import { AssertInternalError, JsonElement, delay1Tick } from '@pbkware/js-utils';
-import { AdiNgService, CommandRegisterNgService, MarketsNgService, SettingsNgService, SymbolsNgService } from 'component-services-ng-api';
+import { AdiNgService, MarketsNgService, SettingsNgService, SymbolsNgService } from 'component-services-ng-api';
 import { TabListNgComponent } from 'controls-ng-api';
-import { ComponentContainer } from 'golden-layout';
 import { BuiltinDitemNgComponentBaseNgDirective } from '../../ng/builtin-ditem-ng-component-base.directive';
 import { DesktopAccessNgService } from '../../ng/desktop-access-ng.service';
 import { DiagnosticsDitemFrame } from '../diagnostics-ditem-frame';
@@ -17,6 +16,8 @@ import { DiagnosticsDitemFrame } from '../diagnostics-ditem-frame';
 export class DiagnosticsDitemNgComponent extends BuiltinDitemNgComponentBaseNgDirective implements OnDestroy, AfterViewInit {
     private static typeInstanceCreateCount = 0;
 
+    private readonly _injector = inject(Injector);
+
     private readonly _tabListComponentSignal = viewChild.required<TabListNgComponent>('tabList');
     private readonly _groupContainerSignal = viewChild.required('groupContainer', { read: ViewContainerRef });
 
@@ -27,31 +28,18 @@ export class DiagnosticsDitemNgComponent extends BuiltinDitemNgComponentBaseNgDi
 
     private _diagnosticsGroupId: DiagnosticsDitemFrame.GroupId;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        private readonly _injector: Injector,
-        @Inject(BuiltinDitemNgComponentBaseNgDirective.goldenLayoutContainerInjectionToken) container: ComponentContainer,
-        settingsNgService: SettingsNgService,
-        marketsNgService: MarketsNgService,
-        commandRegisterNgService: CommandRegisterNgService,
-        desktopAccessNgService: DesktopAccessNgService,
-        symbolsNgService: SymbolsNgService,
-        adiNgService: AdiNgService,
-    ) {
-        const settingsService = settingsNgService.service;
-        super(
-            elRef,
-            ++DiagnosticsDitemNgComponent.typeInstanceCreateCount,
-            cdr,
-            container,
-            settingsService,
-            commandRegisterNgService.service
-        );
+    constructor() {
+        super(++DiagnosticsDitemNgComponent.typeInstanceCreateCount);
+
+        const settingsNgService = inject(SettingsNgService);
+        const marketsNgService = inject(MarketsNgService);
+        const desktopAccessNgService = inject(DesktopAccessNgService);
+        const symbolsNgService = inject(SymbolsNgService);
+        const adiNgService = inject(AdiNgService);
 
         this._frame = new DiagnosticsDitemFrame(
             this,
-            settingsService,
+            settingsNgService.service,
             marketsNgService.service,
             this.commandRegisterService,
             desktopAccessNgService.service,

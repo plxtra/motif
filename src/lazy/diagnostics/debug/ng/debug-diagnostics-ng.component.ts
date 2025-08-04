@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnDestroy, viewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, inject, OnDestroy, viewChild } from '@angular/core';
 import { delay1Tick } from '@pbkware/js-utils';
 import { AdiService, ButtonUiAction, CommandRegisterService, InternalCommand, StringId, ZenithExtConnectionDataDefinition, ZenithExtConnectionDataItem } from '@plxtra/motif-core';
 import { AdiNgService, CommandRegisterNgService, SessionInfoNgService } from 'component-services-ng-api';
@@ -24,14 +24,12 @@ export class DebugDiagnosticsNgComponent extends DiagnosticsComponentBaseNgDirec
 
     private _closeSocketConnectionButtonComponent: ButtonInputNgComponent;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        commandRegisterNgService: CommandRegisterNgService,
-        adiNgService: AdiNgService,
-        sessionInfoNgService: SessionInfoNgService,
-    ) {
-        super(elRef, ++DebugDiagnosticsNgComponent.typeInstanceCreateCount, cdr);
+    constructor() {
+        super(++DebugDiagnosticsNgComponent.typeInstanceCreateCount);
+
+        const commandRegisterNgService = inject(CommandRegisterNgService);
+        const adiNgService = inject(AdiNgService);
+        const sessionInfoNgService = inject(SessionInfoNgService);
 
         this._zenithEndpoints = sessionInfoNgService.service.zenithEndpoints;
         this._adiService = adiNgService.service;

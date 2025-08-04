@@ -1,25 +1,20 @@
-import {
-    ChangeDetectorRef,
-    Directive,
-    ElementRef
-} from '@angular/core';
+import { Directive, inject } from '@angular/core';
 import { Integer } from '@pbkware/js-utils';
-import { Market, MarketIvemId, MarketIvemIdUiAction, SettingsService, SymbolsService } from '@plxtra/motif-core';
+import { Market, MarketIvemId, MarketIvemIdUiAction, SymbolsService } from '@plxtra/motif-core';
+import { SymbolsNgService } from 'component-services-ng-api';
 import { ControlComponentBaseNgDirective } from '../../ng/control-component-base-ng.directive';
 
 @Directive()
 export abstract class ReadonlyMarketIvemIdNgDirective<T extends Market> extends ControlComponentBaseNgDirective {
     public symbol = ReadonlyMarketIvemIdNgDirective.emptySymbol;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        typeInstanceCreateId: Integer,
-        cdr: ChangeDetectorRef,
-        settingsService: SettingsService,
-        protected readonly _symbolsService: SymbolsService,
-        stateColorItemIdArray: ControlComponentBaseNgDirective.ReadonlyStateColorItemIdArray,
-    ) {
-        super(elRef, typeInstanceCreateId, cdr, settingsService, stateColorItemIdArray);
+    protected readonly _symbolsService: SymbolsService;
+
+    constructor(typeInstanceCreateId: Integer, stateColorItemIdArray: ControlComponentBaseNgDirective.ReadonlyStateColorItemIdArray) {
+        super(typeInstanceCreateId, stateColorItemIdArray);
+
+        const symbolsNgService = inject(SymbolsNgService);
+        this._symbolsService = symbolsNgService.service;
     }
 
     public override get uiAction() { return super.uiAction as MarketIvemIdUiAction<T>; }

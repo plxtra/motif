@@ -1,5 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnDestroy, input } from '@angular/core';
-import { SettingsNgService } from 'component-services-ng-api';
+import { ChangeDetectionStrategy, Component, OnDestroy, input } from '@angular/core';
 import { ControlComponentBaseNgDirective } from '../../../ng/control-component-base-ng.directive';
 import { LabelComponentBaseNgDirective } from '../../ng/label-component-base-ng.directive';
 
@@ -15,12 +14,9 @@ export class CaptionLabelNgComponent extends LabelComponentBaseNgDirective imple
 
     readonly for = input<string>();
 
-    constructor(elRef: ElementRef<HTMLElement>, cdr: ChangeDetectorRef, settingsNgService: SettingsNgService) {
+    constructor() {
         super(
-            elRef,
             ++CaptionLabelNgComponent.typeInstanceCreateCount,
-            cdr,
-            settingsNgService.service,
             ControlComponentBaseNgDirective.labelStateColorItemIdArray
         );
     }

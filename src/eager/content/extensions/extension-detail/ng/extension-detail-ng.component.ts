@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, effect, ElementRef, HostBinding, input, OnDestroy, untracked } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, effect, HostBinding, inject, input, OnDestroy, untracked } from '@angular/core';
 import { AssertInternalError, HtmlTypes, MultiEvent } from '@pbkware/js-utils';
 import {
     ColorScheme, ExtensionInfo,
@@ -38,6 +38,8 @@ export class ExtensionDetailNgComponent extends ContentComponentBaseNgDirective 
 
     public detailSectionBorderTypeColor: string;
 
+    private readonly _cdr = inject(ChangeDetectorRef);
+
     private readonly _settingsService: SettingsService;
     private readonly _extensionsAccessService: ExtensionsAccessService;
 
@@ -48,13 +50,11 @@ export class ExtensionDetailNgComponent extends ContentComponentBaseNgDirective 
 
     private _installedExtensionLoadedChangedSubscriptionId: MultiEvent.SubscriptionId;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        private readonly _cdr: ChangeDetectorRef,
-        settingsNgService: SettingsNgService,
-        extensionsAccessNgService: ExtensionsAccessNgService
-    ) {
-        super(elRef, ++ExtensionDetailNgComponent.typeInstanceCreateCount);
+    constructor() {
+        const settingsNgService = inject(SettingsNgService);
+        const extensionsAccessNgService = inject(ExtensionsAccessNgService);
+
+        super(++ExtensionDetailNgComponent.typeInstanceCreateCount);
 
         this._settingsService = settingsNgService.service;
         this._settingsChangedSubscriptionId = this._settingsService.subscribeSettingsChangedEvent(() => this.applySettings());

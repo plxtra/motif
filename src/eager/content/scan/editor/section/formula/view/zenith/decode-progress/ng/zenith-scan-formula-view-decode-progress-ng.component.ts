@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostBinding, OnDestroy, viewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostBinding, inject, OnDestroy, viewChild } from '@angular/core';
 import { AssertInternalError, delay1Tick, HtmlTypes } from '@pbkware/js-utils';
 import { IntegerUiAction } from '@pbkware/ui-action';
 import { ColorScheme, CommandRegisterService, IconButtonUiAction, InternalCommand, ScanFormulaZenithEncodingService, StringId, Strings } from '@plxtra/motif-core';
@@ -24,6 +24,8 @@ export class ZenithScanFormulaViewDecodeProgressNgComponent extends ContentCompo
 
     public title = Strings[StringId.ZenithScanFormulaViewDecodeProgress_Title];
 
+    private readonly _cdr = inject(ChangeDetectorRef);
+
     private readonly _closeButtonComponentSignal = viewChild.required<SvgButtonNgComponent>('closeButton');
     private readonly _countLabelComponentSignal = viewChild.required<CaptionLabelNgComponent>('countLabel');
     private readonly _countControlComponentSignal = viewChild.required<IntegerTextInputNgComponent>('countControl');
@@ -45,14 +47,12 @@ export class ZenithScanFormulaViewDecodeProgressNgComponent extends ContentCompo
 
     private _defaultWidth: number | undefined;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        private readonly _cdr: ChangeDetectorRef,
-        settingsNgService: SettingsNgService,
-        commandRegisterNgService: CommandRegisterNgService,
-        cellPainterFactoryNgService: CellPainterFactoryNgService,
-    ) {
-        super(elRef, ++ZenithScanFormulaViewDecodeProgressNgComponent.typeInstanceCreateCount);
+    constructor() {
+        const settingsNgService = inject(SettingsNgService);
+        const commandRegisterNgService = inject(CommandRegisterNgService);
+        const cellPainterFactoryNgService = inject(CellPainterFactoryNgService);
+
+        super(++ZenithScanFormulaViewDecodeProgressNgComponent.typeInstanceCreateCount);
 
         this._frame = new ZenithScanFormulaViewDecodeProgressFrame(settingsNgService.service, cellPainterFactoryNgService.service);
 

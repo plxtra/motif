@@ -1,16 +1,4 @@
-import {
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    createComponent,
-    createEnvironmentInjector,
-    EnvironmentInjector,
-    ValueProvider,
-    viewChild,
-    ViewContainerRef,
-    ViewRef
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, createComponent, createEnvironmentInjector, EnvironmentInjector, ValueProvider, viewChild, ViewContainerRef, ViewRef, inject } from '@angular/core';
 import { AssertInternalError, Line } from '@pbkware/js-utils';
 import { MenuBarOverlayMenuNgComponent } from '../../menu-bar-overlay-menu/ng-api';
 import { MenuBarService } from '../../menu-bar-service';
@@ -24,6 +12,9 @@ import { MenuBarNgService } from '../../ng/menu-bar-ng.service';
     standalone: false
 })
 export class MenuBarOverlayNgComponent implements AfterViewInit {
+    private readonly _cdr = inject(ChangeDetectorRef);
+    private readonly _environmentInjector = inject(EnvironmentInjector);
+
     private readonly _menusContainerRefSignal = viewChild.required('menusContainer', { read: ViewContainerRef });
 
     private _menusContainerRef: ViewContainerRef;
@@ -31,11 +22,9 @@ export class MenuBarOverlayNgComponent implements AfterViewInit {
     private readonly _menuBarService: MenuBarService;
     private readonly _activeMenus: MenuBarOverlayNgComponent.Menu[] = [];
 
-    constructor(
-        private readonly _cdr: ChangeDetectorRef,
-        private readonly _environmentInjector: EnvironmentInjector,
-        menuBarNgService: MenuBarNgService
-    ) {
+    constructor() {
+        const menuBarNgService = inject(MenuBarNgService);
+
         this._menuBarService = menuBarNgService.service;
         this._menuBarService.addOverlayChildMenuEvent = (menu, parentItemContactDocumentLine) =>
             this.handleAddOverlayChildMenuEvent(menu, parentItemContactDocumentLine);

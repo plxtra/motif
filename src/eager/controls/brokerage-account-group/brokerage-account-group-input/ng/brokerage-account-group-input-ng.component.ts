@@ -1,9 +1,8 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnInit, ViewEncapsulation, viewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation, inject, viewChild } from '@angular/core';
 import { NgSelectComponent } from '@ng-select/ng-select';
 import { MultiEvent } from '@pbkware/js-utils';
 import { UiAction } from '@pbkware/ui-action';
 import { StringId, Strings } from '@plxtra/motif-core';
-import { AdiNgService, MarketsNgService, SettingsNgService } from 'component-services-ng-api';
 import { NgSelectUtils } from '../../../ng-select-utils';
 import { ControlComponentBaseNgDirective } from '../../../ng/control-component-base-ng.directive';
 import { NgSelectOverlayNgService } from '../../../ng/ng-select-overlay-ng.service';
@@ -23,6 +22,8 @@ export class BrokerageAccountGroupInputNgComponent extends BrokerageAccountGroup
 
     public selected: BrokerageAccountGroupComponentBaseNgDirective.NamedGroup | undefined;
 
+    private readonly _ngSelectOverlayNgService = inject(NgSelectOverlayNgService);
+
     private readonly _ngSelectComponentSignal = viewChild.required<NgSelectComponent>('ngSelect');
 
     private _ngSelectComponent: NgSelectComponent;
@@ -32,21 +33,9 @@ export class BrokerageAccountGroupInputNgComponent extends BrokerageAccountGroup
     private _measureBoldCanvasContext: CanvasRenderingContext2D;
     private _ngSelectWidths: NgSelectWidths | undefined;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        private readonly _ngSelectOverlayNgService: NgSelectOverlayNgService,
-        settingsNgService: SettingsNgService,
-        adiNgService: AdiNgService,
-        marketsNgService: MarketsNgService,
-    ) {
+    constructor() {
         super(
-            elRef,
             ++BrokerageAccountGroupInputNgComponent.typeInstanceCreateCount,
-            cdr,
-            settingsNgService.service,
-            adiNgService.service,
-            marketsNgService.service,
             ControlComponentBaseNgDirective.textControlStateColorItemIdArray
         );
         this._measureCanvasContext = this._ngSelectOverlayNgService.measureCanvasContext;

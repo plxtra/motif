@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { AssertInternalError, LockOpenListItem } from '@pbkware/js-utils';
 import { BadnessComparableList, StringId, Strings } from '@plxtra/motif-core';
 import { CoreInjectionTokens, ToastNgService } from 'component-services-ng-api';
@@ -17,15 +17,14 @@ import { ScanFieldEditorFramesGridFrame } from '../scan-field-editor-frames-grid
 export class ScanFieldEditorFramesGridNgComponent extends GridSourceNgDirective {
     declare frame: ScanFieldEditorFramesGridNgComponent.Frame;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        private readonly _toastNgService: ToastNgService,
-        contentNgService: ContentNgService,
-        @Inject(CoreInjectionTokens.lockOpenListItemOpener) private readonly _opener: LockOpenListItem.Opener,
-    ) {
+    private readonly _toastNgService = inject(ToastNgService);
+    private readonly _opener = inject<LockOpenListItem.Opener>(CoreInjectionTokens.lockOpenListItemOpener);
+
+    constructor() {
+        const contentNgService = inject(ContentNgService);
+
         const frame: ScanFieldEditorFramesGridNgComponent.Frame = contentNgService.createScanFieldEditorFramesGridFrame();
-        super(elRef, ++ScanFieldEditorFramesGridNgComponent.typeInstanceCreateCount, cdr, frame);
+        super(++ScanFieldEditorFramesGridNgComponent.typeInstanceCreateCount, frame);
         frame.setComponentAccess(this);
     }
 

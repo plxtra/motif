@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnDestroy, viewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnDestroy, viewChild } from '@angular/core';
 import { AssertInternalError, delay1Tick, Integer, MultiEvent } from '@pbkware/js-utils';
 import { IntegerListSelectItemUiAction } from '@pbkware/ui-action';
 import { ScanEditor, ScanFieldSetLoadErrorType, ScanFormula, StringId, Strings } from '@plxtra/motif-core';
@@ -27,6 +27,8 @@ export class ScanFieldSetEditorNgComponent extends ScanFormulaViewNgDirective im
     public criteriaNotCompatibleHeading = `${Strings[StringId.Incompatible]}: `;
     public criteriaNotCompatibleReason: string;
 
+    private readonly _cdr = inject(ChangeDetectorRef);
+
     private readonly _fieldEditorFrameComponentSignal = viewChild.required<ScanFieldEditorNgComponent>('fieldEditorFrameComponent');
     private readonly _fieldEditorFramesGridComponentSignal = viewChild.required<ScanFieldEditorFramesGridNgComponent>('fieldsGrid');
     // @viewChild.required('addFieldLabel', { static: true }) private _addFieldLabelComponentSignal: CaptionLabelNgComponent;
@@ -53,11 +55,8 @@ export class ScanFieldSetEditorNgComponent extends ScanFormulaViewNgDirective im
     private _frameBeforeFieldsDeleteSubscriptionId: MultiEvent.SubscriptionId;
     private _fieldEditorFramesGridFrame: ScanFieldEditorFramesGridFrame;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        private readonly _cdr: ChangeDetectorRef,
-    ) {
-        super(elRef, ++ScanFieldSetEditorNgComponent.typeInstanceCreateCount);
+    constructor() {
+        super(++ScanFieldSetEditorNgComponent.typeInstanceCreateCount);
 
         this._addFieldUiAction = this.createAddFieldUiAction();
         this._addAttributeFieldUiAction = this.createAddAttributeFieldUiAction();

@@ -1,12 +1,4 @@
-import {
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    Component,
-    ElementRef,
-    Inject,
-    OnDestroy,
-    viewChild
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, inject, OnDestroy, viewChild } from '@angular/core';
 import { delay1Tick } from '@pbkware/js-utils';
 import {
     CommandRegisterService,
@@ -49,6 +41,8 @@ export class ColumnLayoutEditorFieldControlsNgComponent extends ContentComponent
     private readonly _moveDownUiAction: IconButtonUiAction;
     private readonly _moveBottomUiAction: IconButtonUiAction;
 
+    private _columnList = inject<EditableColumnLayoutDefinitionColumnList>(definitionColumnListInjectionToken);
+
     private _insertButtonComponent: SvgButtonNgComponent;
     private _removeButtonComponent: SvgButtonNgComponent;
     private _moveUpButtonComponent: SvgButtonNgComponent;
@@ -59,12 +53,10 @@ export class ColumnLayoutEditorFieldControlsNgComponent extends ContentComponent
     private _allowedFieldsFrame: ColumnLayoutEditorAllowedFieldsFrame;
     private _columnsFrame: ColumnLayoutEditorColumnsFrame;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        commandRegisterNgService: CommandRegisterNgService,
-        @Inject(definitionColumnListInjectionToken) private _columnList: EditableColumnLayoutDefinitionColumnList,
-    ) {
-        super(elRef, ++ColumnLayoutEditorFieldControlsNgComponent.typeInstanceCreateCount);
+    constructor() {
+        const commandRegisterNgService = inject(CommandRegisterNgService);
+
+        super(++ColumnLayoutEditorFieldControlsNgComponent.typeInstanceCreateCount);
 
         const commandRegisterService = commandRegisterNgService.service;
 

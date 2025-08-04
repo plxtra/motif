@@ -1,25 +1,21 @@
-import { ChangeDetectorRef, Directive, ElementRef } from '@angular/core';
-import { Integer } from '@pbkware/js-utils';
+import { ChangeDetectorRef, Directive, inject } from '@angular/core';
 import { ContentComponentBaseNgDirective } from 'content-ng-api';
 
 @Directive()
 export abstract class DiagnosticsComponentBaseNgDirective extends ContentComponentBaseNgDirective {
+    private readonly _cdr = inject(ChangeDetectorRef);
+
     // private _scalarSettings: ScalarSettings;
     // private _colorSettings: ColorSettings;
     // private _settingsChangedSubscriptionId: MultiEvent.SubscriptionId;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        typeInstanceCreateId: Integer,
-        private readonly _cdr: ChangeDetectorRef,
-        // private _settingsService: SettingsService,
-    ) {
-        super(elRef, typeInstanceCreateId);
+    // constructor(typeInstanceCreateId: Integer) {
+    //     super(typeInstanceCreateId);
 
-        // this._scalarSettings = this._settingsService.scalar;
-        // this._colorSettings = this._settingsService.color;
-        // this._settingsChangedSubscriptionId = this._settingsService.subscribeSettingsChangedEvent(() => this.handleSettingsChangedEvent());
-    }
+    //     // this._scalarSettings = this._settingsService.scalar;
+    //     // this._colorSettings = this._settingsService.color;
+    //     // this._settingsChangedSubscriptionId = this._settingsService.subscribeSettingsChangedEvent(() => this.handleSettingsChangedEvent());
+    // }
 
     // protected get settingsService() { return this._settingsService; }
     // protected get userSettings() { return this._scalarSettings; }

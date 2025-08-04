@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, effect, ElementRef, input, OnDestroy, OnInit, untracked, viewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, effect, inject, input, OnDestroy, OnInit, untracked, viewChild } from '@angular/core';
 import { AssertInternalError, delay1Tick, EnumInfoOutOfOrderError, Integer, UnreachableCaseError } from '@pbkware/js-utils';
 import { IntegerListSelectItemUiAction } from '@pbkware/ui-action';
 import {
@@ -29,6 +29,8 @@ export class FormulaScanEditorSectionNgComponent extends ScanEditorSectionNgDire
 
     protected override _sectionHeadingComponent: ExpandableCollapsibleLinedHeadingNgComponent;
 
+    private readonly _cdr = inject(ChangeDetectorRef);
+
     private readonly _sectionHeadingComponentSignal = viewChild.required<ExpandableCollapsibleLinedHeadingNgComponent>('sectionHeading');
     private readonly _zenithCriteriaViewComponentSignal = viewChild<CriteriaZenithScanFormulaViewNgComponent>('zenithCriteriaView');
     private readonly _conditionSetCriteriaViewComponentSignal = viewChild<ConditionSetScanFormulaViewNgComponent>('conditionSetCriteriaView');
@@ -45,8 +47,8 @@ export class FormulaScanEditorSectionNgComponent extends ScanEditorSectionNgDire
     private _formulaField: FormulaScanEditorSectionNgComponent.FormulaField;
     private _viewId: FormulaScanEditorSectionNgComponent.ViewId;
 
-    constructor(elRef: ElementRef<HTMLElement>, private readonly _cdr: ChangeDetectorRef) {
-        super(elRef, ++FormulaScanEditorSectionNgComponent.typeInstanceCreateCount);
+    constructor() {
+        super(++FormulaScanEditorSectionNgComponent.typeInstanceCreateCount);
 
         this._viewUiAction = this.createViewUiAction();
 

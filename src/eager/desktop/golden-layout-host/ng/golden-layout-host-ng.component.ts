@@ -1,18 +1,4 @@
-import {
-    AfterViewInit,
-    ApplicationRef,
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    ComponentRef,
-    ElementRef,
-    EnvironmentInjector,
-    Injector,
-    OnDestroy,
-    viewChild,
-    ViewContainerRef,
-    ViewEncapsulation
-} from '@angular/core';
+import { AfterViewInit, ApplicationRef, ChangeDetectionStrategy, ChangeDetectorRef, Component, ComponentRef, EnvironmentInjector, inject, Injector, OnDestroy, viewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
 import { AssertInternalError, Json, JsonElement, MultiEvent, numberToPixels, Result, UnreachableCaseError } from '@pbkware/js-utils';
 import {
     ColorScheme,
@@ -58,6 +44,9 @@ import { GoldenLayoutHostFrame } from '../golden-layout-host-frame';
     standalone: false
 })
 export class GoldenLayoutHostNgComponent extends ComponentBaseNgDirective implements OnDestroy, AfterViewInit, GoldenLayoutHostFrame.ComponentAccess {
+    private readonly _cdr = inject(ChangeDetectorRef);
+    private readonly _appRef = inject(ApplicationRef);
+
     private static typeInstanceCreateCount = 0;
 
     private readonly _componentsViewContainerRefSignal = viewChild.required('componentsViewContainer', { read: ViewContainerRef });
@@ -79,19 +68,16 @@ export class GoldenLayoutHostNgComponent extends ComponentBaseNgDirective implem
     private _settingsChangedSubscriptionId: MultiEvent.SubscriptionId;
     private _componentsParentBoundingClientRect: DOMRect = new DOMRect();
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        environmentInjector: EnvironmentInjector,
-        elementInjector: Injector,
-        private readonly _cdr: ChangeDetectorRef,
-        private readonly _appRef: ApplicationRef,
-        sessionNgService: SessionInfoNgService,
-        settingsNgService: SettingsNgService,
-        marketsNgService: MarketsNgService,
-        extensionsAccessNgService: ExtensionsAccessNgService,
-        desktopAccessNgService: DesktopAccessNgService,
-    ) {
-        super(elRef, ++GoldenLayoutHostNgComponent.typeInstanceCreateCount);
+    constructor() {
+        super(++GoldenLayoutHostNgComponent.typeInstanceCreateCount);
+
+        const environmentInjector = inject(EnvironmentInjector);
+        const elementInjector = inject(Injector);
+        const sessionNgService = inject(SessionInfoNgService);
+        const settingsNgService = inject(SettingsNgService);
+        const marketsNgService = inject(MarketsNgService);
+        const extensionsAccessNgService = inject(ExtensionsAccessNgService);
+        const desktopAccessNgService = inject(DesktopAccessNgService);
 
         this._componentsParentHtmlElement = this.rootHtmlElement;
         this._settingsService = settingsNgService.service;

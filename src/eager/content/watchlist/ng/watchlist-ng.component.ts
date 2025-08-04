@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { numberToPixels } from '@pbkware/js-utils';
 import { DelayedBadnessGridSourceNgDirective } from '../../delayed-badness-grid-source/ng-api';
 import { ContentNgService } from '../../ng/content-ng.service';
@@ -18,13 +18,11 @@ export class WatchlistNgComponent extends DelayedBadnessGridSourceNgDirective {
 
     public gridHostFlexBasis = '';
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        contentNgService: ContentNgService,
-    ) {
+    constructor() {
+        const contentNgService = inject(ContentNgService);
+
         const frame = contentNgService.createWatchlistFrame();
-        super(elRef, ++WatchlistNgComponent.typeInstanceCreateCount, cdr, frame);
+        super(++WatchlistNgComponent.typeInstanceCreateCount, frame);
         frame.setComponentAccess(this);
 
         frame.setGridHostFlexBasisEventer = (value) => {

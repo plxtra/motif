@@ -1,9 +1,4 @@
-import {
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    ElementRef
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { DelayedBadnessGridSourceNgDirective } from '../../delayed-badness-grid-source/ng-api';
 import { ContentNgService } from '../../ng/content-ng.service';
 import { SearchSymbolsFrame } from '../search-symbols-frame';
@@ -20,13 +15,11 @@ export class SearchSymbolsNgComponent extends DelayedBadnessGridSourceNgDirectiv
 
     declare frame: SearchSymbolsFrame;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        contentNgService: ContentNgService,
-    ) {
+    constructor() {
+        const contentNgService = inject(ContentNgService);
+
         const frame = contentNgService.createSearchSymbolsFrame();
-        super(elRef, ++SearchSymbolsNgComponent.typeInstanceCreateCount, cdr, frame);
+        super(++SearchSymbolsNgComponent.typeInstanceCreateCount, frame);
         frame.setComponentAccess(this);
     }
 }

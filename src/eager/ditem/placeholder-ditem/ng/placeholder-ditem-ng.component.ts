@@ -1,16 +1,7 @@
-import {
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    ElementRef,
-    Inject,
-    InjectionToken,
-    OnDestroy
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, inject, InjectionToken, OnDestroy } from '@angular/core';
 import { delay1Tick, JsonElement } from '@pbkware/js-utils';
 import { ColorScheme, StringId, Strings } from '@plxtra/motif-core';
-import { AdiNgService, CommandRegisterNgService, MarketsNgService, SettingsNgService, SymbolsNgService } from 'component-services-ng-api';
+import { AdiNgService, MarketsNgService, SymbolsNgService } from 'component-services-ng-api';
 import { ComponentContainer } from 'golden-layout';
 import { BuiltinDitemNgComponentBaseNgDirective } from '../../ng/builtin-ditem-ng-component-base.directive';
 import { DesktopAccessNgService } from '../../ng/desktop-access-ng.service';
@@ -39,25 +30,13 @@ export class PlaceholderDitemNgComponent extends BuiltinDitemNgComponentBaseNgDi
 
     private _frame: PlaceholderDitemFrame;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        @Inject(BuiltinDitemNgComponentBaseNgDirective.goldenLayoutContainerInjectionToken) container: ComponentContainer,
-        settingsNgService: SettingsNgService,
-        marketsNgService: MarketsNgService,
-        commandRegisterNgService: CommandRegisterNgService,
-        desktopAccessNgService: DesktopAccessNgService,
-        symbolsNgService: SymbolsNgService,
-        adiNgService: AdiNgService,
-    ) {
-        super(
-            elRef,
-            ++PlaceholderDitemNgComponent.typeInstanceCreateCount,
-            cdr,
-            container,
-            settingsNgService.service,
-            commandRegisterNgService.service
-        );
+    constructor() {
+        super(++PlaceholderDitemNgComponent.typeInstanceCreateCount);
+
+        const marketsNgService = inject(MarketsNgService);
+        const desktopAccessNgService = inject(DesktopAccessNgService);
+        const symbolsNgService = inject(SymbolsNgService);
+        const adiNgService = inject(AdiNgService);
 
         this._frame = new PlaceholderDitemFrame(this, this.settingsService, marketsNgService.service, this.commandRegisterService,
             desktopAccessNgService.service, symbolsNgService.service, adiNgService.service);

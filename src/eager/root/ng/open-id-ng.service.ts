@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { UserAlertNgService } from 'component-services-ng-api';
 import { OpenIdService } from '../open-id-service';
 
@@ -8,7 +8,9 @@ import { OpenIdService } from '../open-id-service';
 export class OpenIdNgService {
     private readonly _service: OpenIdService;
 
-    constructor(userAlertNgService: UserAlertNgService) {
+    constructor() {
+        const userAlertNgService = inject(UserAlertNgService);
+
         this._service = new OpenIdService(userAlertNgService.service);
     }
 

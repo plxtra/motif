@@ -1,10 +1,8 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Inject, viewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, inject, viewChild } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { delay1Tick, JsonElement } from '@pbkware/js-utils';
-import { AdiNgService, CommandRegisterNgService, MarketsNgService, SettingsNgService, SymbolsNgService } from 'component-services-ng-api';
+import { AdiNgService, MarketsNgService, SettingsNgService, SymbolsNgService } from 'component-services-ng-api';
 import { AdvertWebPageNgComponent } from 'content-ng-api';
-import { ComponentContainer } from 'golden-layout';
-import { BuiltinDitemNgComponentBaseNgDirective } from '../../../ng/builtin-ditem-ng-component-base.directive';
 import { DesktopAccessNgService } from '../../../ng/desktop-access-ng.service';
 import { WebPageDitemNgComponentBaseNgDirective } from '../../ng/web-page-ditem-ng-component-base-ng.directive';
 import { AdvertWebPageDitemFrame } from '../advert-web-page-ditem-frame';
@@ -19,34 +17,24 @@ import { AdvertWebPageDitemFrame } from '../advert-web-page-ditem-frame';
 export class AdvertWebPageDitemNgComponent extends WebPageDitemNgComponentBaseNgDirective implements AfterViewInit, AdvertWebPageDitemFrame.ComponentAccess {
     private static typeInstanceCreateCount = 0;
 
+    private readonly _sanitizer = inject(DomSanitizer);
+
     private readonly _pageComponentSignal = viewChild.required<AdvertWebPageNgComponent>('page');
 
     private readonly _frame: AdvertWebPageDitemFrame;
 
     private _pageComponent: AdvertWebPageNgComponent;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        private readonly _sanitizer: DomSanitizer,
-        @Inject(BuiltinDitemNgComponentBaseNgDirective.goldenLayoutContainerInjectionToken) container: ComponentContainer,
-        settingsNgService: SettingsNgService,
-        marketsNgService: MarketsNgService,
-        commandRegisterNgService: CommandRegisterNgService,
-        desktopAccessNgService: DesktopAccessNgService,
-        symbolsNgService: SymbolsNgService,
-        adiNgService: AdiNgService,
-    ) {
-        const settingsService = settingsNgService.service;
-        super(
-            elRef,
-            ++AdvertWebPageDitemNgComponent.typeInstanceCreateCount,
-            cdr,
-            container,
-            settingsService,
-            commandRegisterNgService.service
-        );
-        this._frame = new AdvertWebPageDitemFrame(this, settingsService, marketsNgService.service, this.commandRegisterService,
+    constructor() {
+        super(++AdvertWebPageDitemNgComponent.typeInstanceCreateCount);
+
+        const settingsNgService = inject(SettingsNgService);
+        const marketsNgService = inject(MarketsNgService);
+        const desktopAccessNgService = inject(DesktopAccessNgService);
+        const symbolsNgService = inject(SymbolsNgService);
+        const adiNgService = inject(AdiNgService);
+
+        this._frame = new AdvertWebPageDitemFrame(this, settingsNgService.service, marketsNgService.service, this.commandRegisterService,
             desktopAccessNgService.service, symbolsNgService.service, adiNgService.service);
 
         this.constructLoad(this.getInitialComponentStateJsonElement());

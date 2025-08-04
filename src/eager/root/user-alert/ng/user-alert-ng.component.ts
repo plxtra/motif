@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostBinding, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, HostBinding, OnDestroy, inject } from '@angular/core';
 import { HtmlTypes, MultiEvent } from '@pbkware/js-utils';
 import { ColorScheme, ColorSettings, SettingsService, StringId, Strings, UserAlertService } from '@plxtra/motif-core';
 import { ComponentBaseNgDirective } from 'component-ng-api';
@@ -26,6 +26,9 @@ export class UserAlertNgComponent extends ComponentBaseNgDirective implements On
     public hideButtonDisplay = HtmlTypes.Display.None;
     public hideCaption = Strings[StringId.Hide];
 
+    private readonly _cdr = inject(ChangeDetectorRef);
+    private readonly settingsNgService = inject(SettingsNgService);
+
     private readonly _settingsService: SettingsService;
     private readonly _colorSettings: ColorSettings;
 
@@ -35,12 +38,10 @@ export class UserAlertNgComponent extends ComponentBaseNgDirective implements On
 
     private _settingsChangedSubscriptionId: MultiEvent.SubscriptionId;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        private readonly _cdr: ChangeDetectorRef,
-        private readonly settingsNgService: SettingsNgService,
-    ) {
-        super(elRef, ++UserAlertNgComponent.typeInstanceCreateCount);
+    constructor() {
+        super(++UserAlertNgComponent.typeInstanceCreateCount);
+
+        const settingsNgService = this.settingsNgService;
 
         this._settingsService = settingsNgService.service;
         this._colorSettings = this._settingsService.color;

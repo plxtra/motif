@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { StringId, Strings } from '@plxtra/motif-core';
 import { ComponentBaseNgDirective } from 'component-ng-api';
 import { Version } from 'generated-internal-api';
@@ -24,8 +24,10 @@ export class NotCurrentVersionNgComponent extends ComponentBaseNgDirective {
     public reloadAppCaption = Strings[StringId.NotCurrentVersion_ReloadAppCaption];
     public moreInfo = Strings[StringId.NotCurrentVersion_MoreInfo];
 
-    constructor(elRef: ElementRef<HTMLElement>, configNgService: ConfigNgService) {
-        super(elRef, ++NotCurrentVersionNgComponent.typeInstanceCreateCount);
+    constructor() {
+        const configNgService = inject(ConfigNgService);
+
+        super(++NotCurrentVersionNgComponent.typeInstanceCreateCount);
         this.currentVersion = configNgService.version;
     }
 

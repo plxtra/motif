@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { AssertInternalError, ChangeSubscribableComparableList, LockOpenListItem } from '@pbkware/js-utils';
 import { Exchange, StringId, Strings } from '@plxtra/motif-core';
 import { CoreInjectionTokens, ToastNgService } from 'component-services-ng-api';
@@ -17,15 +17,14 @@ import { ExchangesGridFrame } from '../exchanges-grid-frame';
 export class ExchangesGridNgComponent extends GridSourceNgDirective {
     declare frame: ExchangesGridNgComponent.Frame;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        private readonly _toastNgService: ToastNgService,
-        contentNgService: ContentNgService,
-        @Inject(CoreInjectionTokens.lockOpenListItemOpener) private readonly _opener: LockOpenListItem.Opener,
-    ) {
+    private readonly _toastNgService = inject(ToastNgService);
+    private readonly _opener = inject<LockOpenListItem.Opener>(CoreInjectionTokens.lockOpenListItemOpener);
+
+    constructor() {
+        const contentNgService = inject(ContentNgService);
+
         const frame: ExchangesGridNgComponent.Frame = contentNgService.createExchangesGridFrame();
-        super(elRef, ++ExchangesGridNgComponent.typeInstanceCreateCount, cdr, frame);
+        super(++ExchangesGridNgComponent.typeInstanceCreateCount, frame);
         frame.setComponentAccess(this);
     }
 

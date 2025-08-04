@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostBinding, OnDestroy, viewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, HostBinding, inject, OnDestroy, viewChild } from '@angular/core';
 import { AssertInternalError, delay1Tick, HtmlTypes, Integer, MultiEvent, UnreachableCaseError, UsableListChangeTypeId } from '@pbkware/js-utils';
 import {
     CommandRegisterService,
@@ -37,6 +37,8 @@ export class ScanTestNgComponent extends ContentComponentBaseNgDirective impleme
     public title = Strings[StringId.Test];
     public matchCount = '';
 
+    private readonly _cdr = inject(ChangeDetectorRef);
+
     private readonly _closeButtonComponentSignal = viewChild.required<SvgButtonNgComponent>('closeButton');
     private readonly _matchesComponentSignal = viewChild.required<ScanTestMatchesNgComponent>('matches');
 
@@ -50,12 +52,10 @@ export class ScanTestNgComponent extends ContentComponentBaseNgDirective impleme
 
     private _usable = false;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        private readonly _cdr: ChangeDetectorRef,
-        commandRegisterNgService: CommandRegisterNgService,
-    ) {
-        super(elRef, ++ScanTestNgComponent.typeInstanceCreateCount);
+    constructor() {
+        const commandRegisterNgService = inject(CommandRegisterNgService);
+
+        super(++ScanTestNgComponent.typeInstanceCreateCount);
 
         const commandRegisterService = commandRegisterNgService.service;
         this._closeUiAction = this.createCloseUiAction(commandRegisterService);

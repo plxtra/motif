@@ -1,4 +1,4 @@
-import { Injectable, isDevMode } from '@angular/core';
+import { Injectable, isDevMode, inject } from '@angular/core';
 import { LogService } from '../log-service';
 import { TelemetryNgService } from './telemetry-ng.service';
 
@@ -8,7 +8,9 @@ import { TelemetryNgService } from './telemetry-ng.service';
 export class LogNgService {
     private _service: LogService;
 
-    constructor(telemetryNgService: TelemetryNgService) {
+    constructor() {
+        const telemetryNgService = inject(TelemetryNgService);
+
         this._service = new LogService(
             isDevMode(),
             telemetryNgService.service

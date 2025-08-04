@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { LockOpenListItem } from '@pbkware/js-utils';
 import { CoreInjectionTokens, ToastNgService } from 'component-services-ng-api';
 import { GridSourceNgDirective } from '../../../grid-source/ng-api';
@@ -15,15 +15,17 @@ import { LockOpenNotificationChannelsGridFrame } from '../lock-open-notification
 export class LockOpenNotificationChannelsGridNgComponent extends GridSourceNgDirective {
     declare frame: LockOpenNotificationChannelsGridNgComponent.Frame;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        private readonly _toastNgService: ToastNgService,
-        contentNgService: ContentNgService,
-        @Inject(CoreInjectionTokens.lockOpenListItemOpener) private readonly _opener: LockOpenListItem.Opener,
-    ) {
+    private readonly _toastNgService = inject(ToastNgService);
+    private readonly _opener: LockOpenListItem.Opener;
+
+    constructor() {
+        const contentNgService = inject(ContentNgService);
+        const _opener = inject<LockOpenListItem.Opener>(CoreInjectionTokens.lockOpenListItemOpener);
         const frame: LockOpenNotificationChannelsGridNgComponent.Frame = contentNgService.createLockOpenNotificationChannelsGridFrame(_opener);
-        super(elRef, ++LockOpenNotificationChannelsGridNgComponent.typeInstanceCreateCount, cdr, frame);
+
+        super(++LockOpenNotificationChannelsGridNgComponent.typeInstanceCreateCount, frame);
+        this._opener = _opener;
+
         frame.setComponentAccess(this);
     }
 

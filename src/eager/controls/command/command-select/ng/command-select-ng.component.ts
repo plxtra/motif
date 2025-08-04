@@ -1,9 +1,8 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, ViewEncapsulation, viewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ViewEncapsulation, inject, viewChild } from '@angular/core';
 import { NgSelectComponent } from '@ng-select/ng-select';
 import { MultiEvent } from '@pbkware/js-utils';
 import { UiAction } from '@pbkware/ui-action';
 import { BrokerageAccount, Command } from '@plxtra/motif-core';
-import { SettingsNgService } from 'component-services-ng-api';
 import { NgSelectUtils } from '../../../ng-select-utils';
 import { ControlComponentBaseNgDirective } from '../../../ng/control-component-base-ng.directive';
 import { NgSelectOverlayNgService } from '../../../ng/ng-select-overlay-ng.service';
@@ -23,6 +22,8 @@ export class CommandSelectNgComponent extends CommandComponentNgDirective implem
     // public selected: ProcessorCommandUiAction.Item | undefined;
     public entries: Entry[] = [];
 
+    private _ngSelectOverlayNgService = inject(NgSelectOverlayNgService);
+
     private readonly _ngSelectComponentSignal = viewChild.required<NgSelectComponent>('ngSelect');
 
     private _ngSelectComponent: NgSelectComponent;
@@ -31,11 +32,8 @@ export class CommandSelectNgComponent extends CommandComponentNgDirective implem
     private _measureCanvasContext: CanvasRenderingContext2D;
     private _ngSelectDropDownPanelWidth: number | undefined;
 
-    constructor(elRef: ElementRef<HTMLElement>, private _ngSelectOverlayNgService: NgSelectOverlayNgService,
-        cdr: ChangeDetectorRef,
-        settingsNgService: SettingsNgService
-    ) {
-        super(elRef, ++CommandSelectNgComponent.typeInstanceCreateCount, cdr, settingsNgService.service, ControlComponentBaseNgDirective.textControlStateColorItemIdArray);
+    constructor() {
+        super(++CommandSelectNgComponent.typeInstanceCreateCount, ControlComponentBaseNgDirective.textControlStateColorItemIdArray);
         this.inputId.set(`EnumInput:${this.typeInstanceId}`);
         this._measureCanvasContext = this._ngSelectOverlayNgService.measureCanvasContext;
         this._measureCanvasContextsEventSubscriptionId = this._ngSelectOverlayNgService.subscribeMeasureCanvasContextsEvent(

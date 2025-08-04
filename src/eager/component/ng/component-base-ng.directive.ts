@@ -1,4 +1,4 @@
-import { Directive, ElementRef, InjectionToken } from '@angular/core';
+import { Directive, ElementRef, InjectionToken, inject } from '@angular/core';
 import { Integer } from '@pbkware/js-utils';
 import { ComponentInstanceId } from '../component-instance-id';
 import { IdentifiableComponent } from '../identifiable-component';
@@ -8,12 +8,16 @@ export abstract class ComponentBaseNgDirective implements IdentifiableComponent 
     private static readonly invalidInstanceId = 0;
     private static _lastInstanceId: ComponentBaseNgDirective.InstanceId = ComponentBaseNgDirective.invalidInstanceId;
 
+    readonly elRef: ElementRef<HTMLElement>;
+
     readonly rootHtmlElement: HTMLElement;
     readonly instanceId: ComponentBaseNgDirective.InstanceId;
     readonly typeName: string;
     readonly typeInstanceId: string;
 
-    constructor(readonly elRef: ElementRef<HTMLElement>, readonly typeInstanceCreateId: Integer, generateUniqueId = false) {
+    constructor(readonly typeInstanceCreateId: Integer, generateUniqueId = false) {
+        const elRef = inject<ElementRef<HTMLElement>>(ElementRef);
+
         this.rootHtmlElement = elRef.nativeElement;
         this.instanceId = ++ComponentBaseNgDirective._lastInstanceId;
 

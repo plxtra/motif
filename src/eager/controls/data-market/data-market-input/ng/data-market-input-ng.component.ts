@@ -1,9 +1,8 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnInit, Renderer2, input, viewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, OnInit, input, viewChild } from '@angular/core';
 import { NgSelectComponent } from '@ng-select/ng-select';
 import { isArrayEqualUniquely } from '@pbkware/js-utils';
 import { UiAction } from '@pbkware/ui-action';
 import { DataMarket, DataMarketUiAction, StringId, Strings } from '@plxtra/motif-core';
-import { SettingsNgService } from 'component-services-ng-api';
 import { NgSelectUtils } from '../../../ng-select-utils';
 import { ControlComponentBaseNgDirective } from '../../../ng/control-component-base-ng.directive';
 
@@ -27,8 +26,8 @@ export class DataMarketInputNgComponent extends ControlComponentBaseNgDirective 
 
     private _ngSelectComponent: NgSelectComponent;
 
-    constructor(elRef: ElementRef<HTMLElement>, private _renderer: Renderer2, cdr: ChangeDetectorRef, settingsNgService: SettingsNgService) {
-        super(elRef, ++DataMarketInputNgComponent.typeInstanceCreateCount, cdr, settingsNgService.service, ControlComponentBaseNgDirective.textControlStateColorItemIdArray);
+    constructor() {
+        super(++DataMarketInputNgComponent.typeInstanceCreateCount, ControlComponentBaseNgDirective.textControlStateColorItemIdArray);
     }
 
     public override get uiAction() { return super.uiAction as DataMarketUiAction; }

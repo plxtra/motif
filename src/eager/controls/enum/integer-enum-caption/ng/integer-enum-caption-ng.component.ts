@@ -1,7 +1,6 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
 import { Integer } from '@pbkware/js-utils';
 import { SelectItemUiAction } from '@pbkware/ui-action';
-import { SettingsNgService } from 'component-services-ng-api';
 import { EnumCaptionNgComponent } from '../../ng/ng-api';
 
 @Component({
@@ -14,12 +13,9 @@ import { EnumCaptionNgComponent } from '../../ng/ng-api';
 export class IntegerEnumCaptionNgComponent extends EnumCaptionNgComponent<Integer> implements OnDestroy {
     private static typeInstanceCreateCount = 0;
 
-    constructor(elRef: ElementRef<HTMLElement>, cdr: ChangeDetectorRef, settingsNgService: SettingsNgService) {
+    constructor() {
         super(
-            elRef,
             ++IntegerEnumCaptionNgComponent.typeInstanceCreateCount,
-            cdr,
-            settingsNgService.service,
             SelectItemUiAction.integerUndefinedValue,
         );
     }

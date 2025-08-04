@@ -1,13 +1,4 @@
-import {
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    ElementRef,
-    HostBinding,
-    Inject,
-    InjectionToken,
-    OnDestroy
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, InjectionToken, OnDestroy, inject } from '@angular/core';
 import { Line, MultiEvent, numberToPixels } from '@pbkware/js-utils';
 import {
     ColorScheme,
@@ -17,7 +8,6 @@ import {
 import { SettingsNgService } from 'component-services-ng-api';
 import { MenuBarService } from '../../menu-bar-service';
 import { MenuBarMenuComponentNgDirective } from '../../ng/menu-bar-menu-component-ng.directive';
-import { MenuBarNgService } from '../../ng/menu-bar-ng.service';
 
 @Component({
     selector: 'app-menu-bar-overlay-menu',
@@ -34,23 +24,17 @@ export class MenuBarOverlayMenuNgComponent extends MenuBarMenuComponentNgDirecti
     @HostBinding('style.background-color') bkgdColor: string;
     @HostBinding('style.border-color') borderColor: string;
 
+    private readonly _menu = inject<MenuBarService.ChildMenu>(MenuBarOverlayMenuNgComponent.ChildMenuInjectionToken);
+
     private readonly _settingsService: SettingsService;
     private readonly _colorSettings: ColorSettings;
     private _settingsChangedSubscriptionId: MultiEvent.SubscriptionId;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        @Inject(MenuBarOverlayMenuNgComponent.ChildMenuInjectionToken)
-        private readonly _menu: MenuBarService.ChildMenu,
-        @Inject(
-            MenuBarOverlayMenuNgComponent.ParentItemContactDocumentLineInjectionToken
-        )
-        parentItemContactDocumentLineInjectionTokenMenu: Line,
-        settingsNgService: SettingsNgService,
-        menuBarNgService: MenuBarNgService
-    ) {
-        super(elRef, ++MenuBarOverlayMenuNgComponent.typeInstanceCreateCount, cdr, menuBarNgService);
+    constructor() {
+        super(++MenuBarOverlayMenuNgComponent.typeInstanceCreateCount);
+
+        const parentItemContactDocumentLineInjectionTokenMenu = inject<Line>(MenuBarOverlayMenuNgComponent.ParentItemContactDocumentLineInjectionToken);
+        const settingsNgService = inject(SettingsNgService);
 
         this._settingsService = settingsNgService.service;
         this._colorSettings = this._settingsService.color;

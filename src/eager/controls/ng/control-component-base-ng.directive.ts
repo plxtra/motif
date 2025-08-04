@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Directive, effect, ElementRef, HostBinding, model, OnDestroy, untracked } from '@angular/core';
+import { ChangeDetectorRef, Directive, effect, HostBinding, inject, model, OnDestroy, untracked } from '@angular/core';
 import { delay1Tick, HtmlTypes, Integer, MultiEvent, numberToPixels, UnreachableCaseError } from '@pbkware/js-utils';
 import { UiAction } from '@pbkware/ui-action';
 import {
@@ -9,6 +9,7 @@ import {
     SettingsService
 } from '@plxtra/motif-core';
 import { ComponentBaseNgDirective } from 'component-ng-api';
+import { SettingsNgService } from 'component-services-ng-api';
 import { RevFocus, RevRectangle } from 'revgrid';
 
 @Directive()
@@ -34,6 +35,9 @@ export abstract class ControlComponentBaseNgDirective extends ComponentBaseNgDir
 
     // protected readonly exchangeSettingsArray: readonly ExchangeSettings[];
 
+    private readonly _cdr = inject(ChangeDetectorRef);
+    private readonly _settingsService: SettingsService;
+
     private _uiAction: UiAction | undefined;
     private _pushEventsSubscriptionId: MultiEvent.SubscriptionId;
 
@@ -45,14 +49,13 @@ export abstract class ControlComponentBaseNgDirective extends ComponentBaseNgDir
 
     private _readonlyAlways = false;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        typeInstanceCreateId: Integer,
-        private _cdr: ChangeDetectorRef,
-        private _settingsService: SettingsService,
-        stateColorItemIdArray: ControlComponentBaseNgDirective.ReadonlyStateColorItemIdArray,
-    ) {
-        super(elRef, typeInstanceCreateId);
+    constructor(typeInstanceCreateId: Integer, stateColorItemIdArray: ControlComponentBaseNgDirective.ReadonlyStateColorItemIdArray) {
+
+        super(typeInstanceCreateId);
+
+        const settingsNgService = inject(SettingsNgService);
+        this._settingsService = settingsNgService.service;
+
         this._scalarSettings = this._settingsService.scalar;
         this._colorSettings = this._settingsService.color;
         // this.exchangeSettingsArray = this._settingsService.exchanges.exchanges;

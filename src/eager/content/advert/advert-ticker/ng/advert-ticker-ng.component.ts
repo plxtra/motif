@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, OnDestroy, viewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, inject, OnDestroy, viewChild } from '@angular/core';
 import { delay1Tick } from '@pbkware/js-utils';
 import { ButtonUiAction, CommandRegisterService, InternalCommand, StringId, Strings } from '@plxtra/motif-core';
 import { ComponentBaseNgDirective } from 'component-ng-api';
@@ -25,8 +25,10 @@ export class AdvertTickerNgComponent extends ComponentBaseNgDirective implements
     private _leftInterestedButtonComponent: ButtonInputNgComponent;
     private _rightInterestedButtonComponent: ButtonInputNgComponent;
 
-    constructor(elRef: ElementRef<HTMLElement>, commandRegisterNgService: CommandRegisterNgService) {
-        super(elRef, ++AdvertTickerNgComponent.typeInstanceCreateCount);
+    constructor() {
+        const commandRegisterNgService = inject(CommandRegisterNgService);
+
+        super(++AdvertTickerNgComponent.typeInstanceCreateCount);
 
         this._commandRegisterService = commandRegisterNgService.service;
 

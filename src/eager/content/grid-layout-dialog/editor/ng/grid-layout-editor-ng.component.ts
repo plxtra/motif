@@ -1,14 +1,4 @@
-import {
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    ElementRef,
-    Inject,
-    OnDestroy,
-    viewChild,
-    ViewContainerRef
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, inject, OnDestroy, viewChild, ViewContainerRef } from '@angular/core';
 import {
     AssertInternalError,
     delay1Tick,
@@ -40,6 +30,9 @@ export class ColumnLayoutEditorNgComponent extends ContentComponentBaseNgDirecti
     public allowedFieldsMinWidth: SplitAreaSize;
     public splitterGutterSize = 3;
 
+    private readonly _cdr = inject(ChangeDetectorRef);
+    private readonly _columnList = inject<EditableColumnLayoutDefinitionColumnList>(definitionColumnListInjectionToken);
+
     private readonly _allowedFieldsComponentSignal = viewChild.required<ColumnLayoutEditorAllowedFieldsNgComponent>('allowedFields');
     private readonly _fieldControlsAndColumnsElRefSignal = viewChild.required<ElementRef<HTMLDivElement>>('fieldControlsAndColumns');
     private readonly _fieldControlsComponentSignal = viewChild.required<ColumnLayoutEditorFieldControlsNgComponent>('fieldControls');
@@ -55,12 +48,8 @@ export class ColumnLayoutEditorNgComponent extends ContentComponentBaseNgDirecti
     private _resizeObserver: ResizeObserver;
     private _splitterDragged = false;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        private readonly _cdr: ChangeDetectorRef,
-        @Inject(definitionColumnListInjectionToken) private readonly _columnList: EditableColumnLayoutDefinitionColumnList,
-    ) {
-        super(elRef, ++ColumnLayoutEditorNgComponent.typeInstanceCreateCount);
+    constructor() {
+        super(++ColumnLayoutEditorNgComponent.typeInstanceCreateCount);
     }
 
     public handleSplitterDragEnd() {

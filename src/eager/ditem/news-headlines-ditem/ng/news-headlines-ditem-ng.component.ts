@@ -1,14 +1,4 @@
-import {
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    ElementRef,
-    Inject,
-    OnDestroy,
-    viewChild,
-    ViewContainerRef
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, inject, OnDestroy, viewChild, ViewContainerRef } from '@angular/core';
 import { delay1Tick, JsonElement } from '@pbkware/js-utils';
 import { StringUiAction } from '@pbkware/ui-action';
 import {
@@ -19,10 +9,9 @@ import {
     StringId,
     Strings
 } from '@plxtra/motif-core';
-import { AdiNgService, CellPainterFactoryNgService, CommandRegisterNgService, MarketsNgService, SettingsNgService, SymbolsNgService } from 'component-services-ng-api';
+import { AdiNgService, CellPainterFactoryNgService, MarketsNgService, SymbolsNgService } from 'component-services-ng-api';
 import { RowDataArrayGridNgComponent } from 'content-ng-api';
 import { DataIvemIdSelectNgComponent, SvgButtonNgComponent, TextInputNgComponent } from 'controls-ng-api';
-import { ComponentContainer } from 'golden-layout';
 import { BuiltinDitemNgComponentBaseNgDirective } from '../../ng/builtin-ditem-ng-component-base.directive';
 import { DesktopAccessNgService } from '../../ng/desktop-access-ng.service';
 import { NewsHeadlinesDitemFrame } from '../news-headlines-ditem-frame';
@@ -68,26 +57,14 @@ export class NewsHeadlinesDitemNgComponent extends BuiltinDitemNgComponentBaseNg
     private _gridComponent: RowDataArrayGridNgComponent;
     private _layoutEditorContainer: ViewContainerRef;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        @Inject(BuiltinDitemNgComponentBaseNgDirective.goldenLayoutContainerInjectionToken) container: ComponentContainer,
-        settingsNgService: SettingsNgService,
-        marketsNgService: MarketsNgService,
-        commandRegisterNgService: CommandRegisterNgService,
-        desktopAccessNgService: DesktopAccessNgService,
-        symbolsNgService: SymbolsNgService,
-        adiNgService: AdiNgService,
-        cellPainterFactoryNgService: CellPainterFactoryNgService,
-    ) {
-        super(
-            elRef,
-            ++NewsHeadlinesDitemNgComponent.typeInstanceCreateCount,
-            cdr,
-            container,
-            settingsNgService.service,
-            commandRegisterNgService.service
-        );
+    constructor() {
+        super(++NewsHeadlinesDitemNgComponent.typeInstanceCreateCount);
+
+        const marketsNgService = inject(MarketsNgService);
+        const desktopAccessNgService = inject(DesktopAccessNgService);
+        const symbolsNgService = inject(SymbolsNgService);
+        const adiNgService = inject(AdiNgService);
+        const cellPainterFactoryNgService = inject(CellPainterFactoryNgService);
 
         this._marketsService = marketsNgService.service;
 

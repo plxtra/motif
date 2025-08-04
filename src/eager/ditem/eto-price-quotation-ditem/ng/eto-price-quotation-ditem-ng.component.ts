@@ -1,13 +1,4 @@
-import {
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    ElementRef,
-    Inject,
-    OnDestroy,
-    viewChild
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, inject, OnDestroy, viewChild } from '@angular/core';
 import { delay1Tick, JsonElement, ModifierKey } from '@pbkware/js-utils';
 import {
     DataIvemIdUiAction,
@@ -17,10 +8,9 @@ import {
     StringId,
     Strings
 } from '@plxtra/motif-core';
-import { CommandRegisterNgService, CoreNgService, MarketsNgService, SettingsNgService } from 'component-services-ng-api';
+import { CoreNgService, MarketsNgService } from 'component-services-ng-api';
 import { ColumnLayoutEditorNgComponent, GridSourceNgDirective, WatchlistNgComponent } from 'content-ng-api';
 import { DataIvemIdSelectNgComponent, SvgButtonNgComponent } from 'controls-ng-api';
-import { ComponentContainer } from 'golden-layout';
 import { BuiltinDitemNgComponentBaseNgDirective } from '../../ng/builtin-ditem-ng-component-base.directive';
 import { DesktopAccessNgService } from '../../ng/desktop-access-ng.service';
 import { EtoPriceQuotationDitemFrame } from '../eto-price-quotation-ditem-frame';
@@ -62,24 +52,12 @@ export class EtoPriceQuotationDitemNgComponent extends BuiltinDitemNgComponentBa
 
     private _modeId = EtoPriceQuotationDitemNgComponent.ModeId.Input;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        @Inject(BuiltinDitemNgComponentBaseNgDirective.goldenLayoutContainerInjectionToken) container: ComponentContainer,
-        settingsNgService: SettingsNgService,
-        marketsNgService: MarketsNgService,
-        commandRegisterNgService: CommandRegisterNgService,
-        desktopAccessNgService: DesktopAccessNgService,
-        pulseService: CoreNgService
-    ) {
-        super(
-            elRef,
-            ++EtoPriceQuotationDitemNgComponent.typeInstanceCreateCount,
-            cdr,
-            container,
-            settingsNgService.service,
-            commandRegisterNgService.service
-        );
+    constructor() {
+        super(++EtoPriceQuotationDitemNgComponent.typeInstanceCreateCount);
+
+        const marketsNgService = inject(MarketsNgService);
+        const desktopAccessNgService = inject(DesktopAccessNgService);
+        const pulseService = inject(CoreNgService);
 
         this._marketsService = marketsNgService.service;
 

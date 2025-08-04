@@ -1,16 +1,4 @@
-import {
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    effect,
-    ElementRef,
-    HostBinding,
-    HostListener,
-    input,
-    OnDestroy,
-    output,
-    untracked
-} from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, effect, HostBinding, HostListener, inject, input, OnDestroy, output, untracked } from '@angular/core';
 import { AssertInternalError, MultiEvent } from '@pbkware/js-utils';
 import {
     ColorScheme, ExtensionInfo,
@@ -41,6 +29,8 @@ export class ExtensionListInfoItemNgComponent extends ContentComponentBaseNgDire
 
     public isInstallable = false;
 
+    private readonly _cdr = inject(ChangeDetectorRef);
+
     private readonly _settingsService: SettingsService;
 
     private _info: ExtensionInfo;
@@ -49,12 +39,10 @@ export class ExtensionListInfoItemNgComponent extends ContentComponentBaseNgDire
     private _settingsChangedSubscriptionId: MultiEvent.SubscriptionId;
     private _installedExtensionLoadedChangedSubscriptionId: MultiEvent.SubscriptionId;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        private readonly _cdr: ChangeDetectorRef,
-        settingsNgService: SettingsNgService
-    ) {
-        super(elRef, ++ExtensionListInfoItemNgComponent.typeInstanceCreateCount);
+    constructor() {
+        const settingsNgService = inject(SettingsNgService);
+
+        super(++ExtensionListInfoItemNgComponent.typeInstanceCreateCount);
 
         this._settingsService = settingsNgService.service;
         this._settingsChangedSubscriptionId = this._settingsService.subscribeSettingsChangedEvent(

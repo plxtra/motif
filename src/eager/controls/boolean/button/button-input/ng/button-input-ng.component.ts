@@ -1,8 +1,7 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, model, Renderer2, viewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, model, viewChild } from '@angular/core';
 import { AssertInternalError, delay1Tick, ModifierKey } from '@pbkware/js-utils';
 import { BooleanUiAction, UiAction } from '@pbkware/ui-action';
 import { ButtonUiAction } from '@plxtra/motif-core';
-import { SettingsNgService } from 'component-services-ng-api';
 import { ControlComponentBaseNgDirective } from '../../../../ng/control-component-base-ng.directive';
 
 @Component({
@@ -23,8 +22,8 @@ export class ButtonInputNgComponent extends ControlComponentBaseNgDirective impl
 
     private _value: boolean;
 
-    constructor(elRef: ElementRef<HTMLElement>, private _renderer: Renderer2, cdr: ChangeDetectorRef, settingsNgService: SettingsNgService) {
-        super(elRef, ++ButtonInputNgComponent.typeInstanceCreateCount, cdr, settingsNgService.service, ControlComponentBaseNgDirective.clickControlStateColorItemIdArray);
+    constructor() {
+        super(++ButtonInputNgComponent.typeInstanceCreateCount, ControlComponentBaseNgDirective.clickControlStateColorItemIdArray);
         this.inputId.set(`ButtonInput:${this.typeInstanceId}`);
     }
 

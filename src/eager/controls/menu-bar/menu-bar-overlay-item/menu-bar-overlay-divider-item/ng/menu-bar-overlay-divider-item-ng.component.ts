@@ -1,7 +1,6 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ColorScheme } from '@plxtra/motif-core';
 import { SettingsNgService } from 'component-services-ng-api';
-import { MenuBarNgService } from '../../../ng/menu-bar-ng.service';
 import { MenuBarRenderItemComponentNgDirective } from '../../../ng/menu-bar-render-item-component-ng.directive';
 
 @Component({
@@ -16,8 +15,10 @@ export class MenuBarOverlayDividerItemNgComponent extends MenuBarRenderItemCompo
 
     public lineBkgdColor: string;
 
-    constructor(elRef: ElementRef<HTMLElement>, cdr: ChangeDetectorRef, settingsNgService: SettingsNgService, menuBarNgService: MenuBarNgService) {
-        super(elRef, ++MenuBarOverlayDividerItemNgComponent.typeInstanceCreateCount, cdr, menuBarNgService);
+    constructor() {
+        super(++MenuBarOverlayDividerItemNgComponent.typeInstanceCreateCount);
+
+        const settingsNgService = inject(SettingsNgService);
         this.lineBkgdColor = settingsNgService.service.color.getFore(ColorScheme.ItemId.MenuBar_OverlayItem_Disabled);
     }
 }

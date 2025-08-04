@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { ExtensionInfo, PublisherId } from '@plxtra/motif-core';
 import { ContentComponentBaseNgDirective } from '../../../ng/content-component-base-ng.directive';
 
@@ -15,8 +15,8 @@ export class ExtensionListRegisteredItemNgComponent extends ContentComponentBase
     readonly installSignalEmitter = output();
     protected readonly _info = input.required<ExtensionInfo>();
 
-    constructor(elRef: ElementRef<HTMLElement>) {
-        super(elRef, ++ExtensionListRegisteredItemNgComponent.typeInstanceCreateCount);
+    constructor() {
+        super(++ExtensionListRegisteredItemNgComponent.typeInstanceCreateCount);
     }
 
     public get abbreviatedPublisherTypeDisplay() { return PublisherId.Type.idToAbbreviatedDisplay(this._info().publisherId.typeId); }

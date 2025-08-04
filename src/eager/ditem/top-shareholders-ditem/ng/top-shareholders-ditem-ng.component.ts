@@ -1,13 +1,4 @@
-import {
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    ElementRef,
-    Inject,
-    OnDestroy,
-    viewChild
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, inject, OnDestroy, viewChild } from '@angular/core';
 import {
     delay1Tick,
     EnumInfoOutOfOrderError,
@@ -32,15 +23,12 @@ import {
 } from '@plxtra/motif-core';
 import {
     AdiNgService,
-    CommandRegisterNgService,
     MarketsNgService,
-    SettingsNgService,
     SymbolsNgService,
     ToastNgService
 } from 'component-services-ng-api';
 import { GridSourceNgDirective, LegacyTableRecordSourceDefinitionFactoryNgService } from 'content-ng-api';
 import { DateInputNgComponent, IvemIdInputNgComponent, SvgButtonNgComponent } from 'controls-ng-api';
-import { ComponentContainer } from 'golden-layout';
 import { BuiltinDitemNgComponentBaseNgDirective } from '../../ng/builtin-ditem-ng-component-base.directive';
 import { DesktopAccessNgService } from '../../ng/desktop-access-ng.service';
 import { TopShareholdersDitemFrame } from '../top-shareholders-ditem-frame';
@@ -65,6 +53,8 @@ export class TopShareholdersDitemNgComponent extends BuiltinDitemNgComponentBase
     public detailsModeActive = false;
     public historicalOrCompareModeActive = false;
     public compareModeActive = false;
+
+    private readonly _symbolsNgService = inject(SymbolsNgService);
 
     private readonly _todayModeButtonInputComponentSignal = viewChild.required<SvgButtonNgComponent>('todayModeButton');
     private readonly _historicalModeButtonInputComponentSignal = viewChild.required<SvgButtonNgComponent>('historicalModeButton');
@@ -108,27 +98,14 @@ export class TopShareholdersDitemNgComponent extends BuiltinDitemNgComponentBase
 
     private _modeId: TopShareholdersDitemNgComponent.ModeId;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        @Inject(BuiltinDitemNgComponentBaseNgDirective.goldenLayoutContainerInjectionToken) container: ComponentContainer,
-        settingsNgService: SettingsNgService,
-        marketsNgService: MarketsNgService,
-        commandRegisterNgService: CommandRegisterNgService,
-        desktopAccessNgService: DesktopAccessNgService,
-        private readonly _symbolsNgService: SymbolsNgService,
-        adiNgService: AdiNgService,
-        tableRecordSourceDefinitionFactoryNgService: LegacyTableRecordSourceDefinitionFactoryNgService,
-        toastNgService: ToastNgService,
-    ) {
-        super(
-            elRef,
-            ++TopShareholdersDitemNgComponent.typeInstanceCreateCount,
-            cdr,
-            container,
-            settingsNgService.service,
-            commandRegisterNgService.service
-        );
+    constructor() {
+        super(++TopShareholdersDitemNgComponent.typeInstanceCreateCount);
+
+        const marketsNgService = inject(MarketsNgService);
+        const desktopAccessNgService = inject(DesktopAccessNgService);
+        const adiNgService = inject(AdiNgService);
+        const tableRecordSourceDefinitionFactoryNgService = inject(LegacyTableRecordSourceDefinitionFactoryNgService);
+        const toastNgService = inject(ToastNgService);
 
         this._marketsService = marketsNgService.service;
 

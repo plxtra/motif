@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { LockOpenListItem } from '@pbkware/js-utils';
 import { CoreInjectionTokens } from 'component-services-ng-api';
 import { DelayedBadnessGridSourceNgDirective } from '../../../../delayed-badness-grid-source/ng-api';
@@ -17,14 +17,13 @@ export class ScanTestMatchesNgComponent extends DelayedBadnessGridSourceNgDirect
 
     readonly declare frame: ScanTestMatchesFrame;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        contentNgService: ContentNgService,
-        @Inject(CoreInjectionTokens.lockOpenListItemOpener) private readonly _opener: LockOpenListItem.Opener,
-    ) {
+    private readonly _opener = inject<LockOpenListItem.Opener>(CoreInjectionTokens.lockOpenListItemOpener);
+
+    constructor() {
+        const contentNgService = inject(ContentNgService);
+
         const frame = contentNgService.createScanTestMatchesFrame();
-        super(elRef, ++ScanTestMatchesNgComponent.typeInstanceCreateCount, cdr, frame);
+        super(++ScanTestMatchesNgComponent.typeInstanceCreateCount, frame);
         frame.setComponentAccess(this);
     }
 

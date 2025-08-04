@@ -1,13 +1,4 @@
-import {
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    ElementRef,
-    Inject,
-    Injector,
-    ValueProvider,
-    ViewContainerRef
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Injector, ValueProvider, ViewContainerRef } from '@angular/core';
 import { delay1Tick, LockOpenListItem } from '@pbkware/js-utils';
 import { CoreInjectionTokens } from 'component-services-ng-api';
 import { DelayedBadnessGridSourceNgDirective } from '../../../delayed-badness-grid-source/ng-api';
@@ -26,14 +17,13 @@ export class FeedsGridNgComponent extends DelayedBadnessGridSourceNgDirective {
 
     declare frame: FeedsGridFrame;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        contentNgService: ContentNgService,
-        @Inject(CoreInjectionTokens.lockOpenListItemOpener) private readonly _opener: LockOpenListItem.Opener,
-    ) {
+    private readonly _opener = inject<LockOpenListItem.Opener>(CoreInjectionTokens.lockOpenListItemOpener);
+
+    constructor() {
+        const contentNgService = inject(ContentNgService);
+
         const frame = contentNgService.createFeedsGridFrame();
-        super(elRef, ++FeedsGridNgComponent.typeInstanceCreateCount, cdr, frame);
+        super(++FeedsGridNgComponent.typeInstanceCreateCount, frame);
         frame.setComponentAccess(this);
     }
 

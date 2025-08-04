@@ -1,14 +1,4 @@
-import {
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    ElementRef,
-    OnDestroy,
-    OnInit,
-    ViewContainerRef,
-    viewChild
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewContainerRef, viewChild } from '@angular/core';
 import { delay1Tick } from '@pbkware/js-utils';
 import { BooleanUiAction, IntegerListSelectItemUiAction } from '@pbkware/ui-action';
 import {
@@ -17,7 +7,6 @@ import {
     Strings,
     TimeInForce
 } from '@plxtra/motif-core';
-import { SettingsNgService } from 'component-services-ng-api';
 import { CaptionLabelNgComponent, CheckboxInputNgComponent, IntegerEnumInputNgComponent } from 'controls-ng-api';
 import { SettingsComponentBaseNgDirective } from '../../ng/settings-component-base-ng.directive';
 
@@ -49,8 +38,8 @@ export class OrderPadSettingsNgComponent extends SettingsComponentBaseNgDirectiv
     private _defaultTimeInForceIdLabelComponent: CaptionLabelNgComponent;
     private _defaultTimeInForceIdControlComponent: IntegerEnumInputNgComponent;
 
-    constructor(elRef: ElementRef<HTMLElement>, cdr: ChangeDetectorRef, settingsNgService: SettingsNgService) {
-        super(elRef, ++OrderPadSettingsNgComponent.typeInstanceCreateCount, cdr, settingsNgService.service);
+    constructor() {
+        super(++OrderPadSettingsNgComponent.typeInstanceCreateCount);
 
         this._reviewEnabledUiAction = this.createReviewEnabledUiAction();
         this._defaultOrderTypeIdUiAction = this.createDefaultOrderTypeIdUiAction();

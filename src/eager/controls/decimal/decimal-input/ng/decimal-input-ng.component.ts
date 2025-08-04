@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnInit, input, model, viewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, OnInit, inject, input, model, viewChild } from '@angular/core';
 import {
     AssertInternalError,
     DecimalFactory,
@@ -15,7 +15,7 @@ import {
     StringId,
     Strings,
 } from '@plxtra/motif-core';
-import { DecimalFactoryNgService, SettingsNgService } from 'component-services-ng-api';
+import { DecimalFactoryNgService } from 'component-services-ng-api';
 import { Decimal } from 'decimal.js-light';
 import { ControlComponentBaseNgDirective } from '../../../ng/control-component-base-ng.directive';
 import { DecimalComponentBaseNgDirective } from '../../ng/decimal-component-base-ng.directive';
@@ -48,20 +48,13 @@ export class DecimalInputNgComponent extends DecimalComponentBaseNgDirective imp
     private _oldSelectionStart: Integer | null;
     private _oldSelectionEnd: Integer | null;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        decimalFactoryNgService: DecimalFactoryNgService,
-        settingsNgService: SettingsNgService
-    ) {
+    constructor() {
         super(
-            elRef,
             ++DecimalInputNgComponent.typeInstanceCreateCount,
-            cdr,
-            settingsNgService.service,
             ControlComponentBaseNgDirective.textControlStateColorItemIdArray
         );
 
+        const decimalFactoryNgService = inject(DecimalFactoryNgService);
         this._decimalFactory = decimalFactoryNgService.service;
 
         this.inputId.set(`DecimalInput:${this.typeInstanceId}`);

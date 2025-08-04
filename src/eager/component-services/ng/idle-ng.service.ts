@@ -1,4 +1,4 @@
-import { Injectable, NgZone } from '@angular/core';
+import { Injectable, NgZone, inject } from '@angular/core';
 import { IdleService } from '@plxtra/motif-core';
 
 @Injectable({
@@ -7,7 +7,9 @@ import { IdleService } from '@plxtra/motif-core';
 export class IdleNgService {
     private _service: IdleService;
 
-    constructor(ngZone: NgZone) {
+    constructor() {
+        const ngZone = inject(NgZone);
+
         this._service = new IdleService();
         this._service.callbackExecuteEventer = (idleCallbackClosure) => {
             ngZone.runGuarded(idleCallbackClosure);

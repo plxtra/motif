@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { DesktopFrame } from 'desktop-internal-api';
 import { DesktopAccessNgService } from 'ditem-ng-api';
 import { WorkspaceService } from '../workspace-service';
@@ -8,9 +8,11 @@ import { EagerWorkspaceNgModule } from './eager-workspace-ng.module';
     providedIn: EagerWorkspaceNgModule
 })
 export class WorkspaceNgService {
+    private readonly _desktopAccessNgService = inject(DesktopAccessNgService);
+
     private _service: WorkspaceService;
 
-    constructor(private readonly _desktopAccessNgService: DesktopAccessNgService) {
+    constructor() {
         this._service = new WorkspaceService();
         this._desktopAccessNgService.initialLoadedEvent = () => this.handleDesktopAccessNgServiceInitialLoadedEvent();
     }

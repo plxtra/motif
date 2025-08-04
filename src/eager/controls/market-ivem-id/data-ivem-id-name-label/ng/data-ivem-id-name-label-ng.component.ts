@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnDestroy, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, inject, input } from '@angular/core';
 import { AssertInternalError } from '@pbkware/js-utils';
 import { DataIvemId, DataMarket, SymbolDetailCacheService } from '@plxtra/motif-core';
-import { SettingsNgService, SymbolDetailCacheNgService, SymbolsNgService } from 'component-services-ng-api';
+import { SymbolDetailCacheNgService } from 'component-services-ng-api';
 import { ControlComponentBaseNgDirective } from '../../../ng/control-component-base-ng.directive';
 import { ReadonlyMarketIvemIdNgDirective } from '../../ng/readonly-market-ivem-id-ng.directive';
 
@@ -20,22 +20,13 @@ export class DataIvemIdNameLabelNgComponent extends ReadonlyMarketIvemIdNgDirect
     private readonly _symbolDetailCacheService: SymbolDetailCacheService;
     private activePromiseId = 0;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        settingsNgService: SettingsNgService,
-        symbolsNgService: SymbolsNgService,
-        symbolDetailCacheNgService: SymbolDetailCacheNgService,
-    ) {
+    constructor() {
         super(
-            elRef,
             ++DataIvemIdNameLabelNgComponent.typeInstanceCreateCount,
-            cdr,
-            settingsNgService.service,
-            symbolsNgService.service,
             ControlComponentBaseNgDirective.labelStateColorItemIdArray,
         );
 
+        const symbolDetailCacheNgService = inject(SymbolDetailCacheNgService);
         this._symbolDetailCacheService = symbolDetailCacheNgService.service;
     }
 

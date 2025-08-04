@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnDestroy, viewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnDestroy, viewChild } from '@angular/core';
 import { delay1Tick, ModifierKey } from '@pbkware/js-utils';
 import { StringUiAction } from '@pbkware/ui-action';
 import {
@@ -26,6 +26,8 @@ export class ColumnLayoutEditorSearchGridNgComponent extends ContentComponentBas
     searchNextEventer: ColumnLayoutEditorSearchGridNgComponent.SearchNextEventer | undefined;
     selectAllEventer: ColumnLayoutEditorSearchGridNgComponent.SelectAllEventer | undefined;
 
+    private readonly _cdr = inject(ChangeDetectorRef);
+
     private readonly _searchInputComponentSignal = viewChild.required<TextInputNgComponent>('searchInput');
     private readonly _searchNextButtonComponentSignal = viewChild.required<SvgButtonNgComponent>('searchNextButton');
     private readonly _selectAllButtonComponentSignal = viewChild.required<SvgButtonNgComponent>('selectAllButton');
@@ -42,12 +44,10 @@ export class ColumnLayoutEditorSearchGridNgComponent extends ContentComponentBas
 
     private _searchEnabled = true;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        private readonly _cdr: ChangeDetectorRef,
-        commandRegisterNgService: CommandRegisterNgService,
-    ) {
-        super(elRef, ++ColumnLayoutEditorSearchGridNgComponent.typeInstanceCreateCount);
+    constructor() {
+        const commandRegisterNgService = inject(CommandRegisterNgService);
+
+        super(++ColumnLayoutEditorSearchGridNgComponent.typeInstanceCreateCount);
 
         this._commandRegisterService = commandRegisterNgService.service;
 

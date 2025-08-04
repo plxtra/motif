@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnDestroy, viewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, inject, viewChild } from '@angular/core';
 import { AssertInternalError, EnumInfoOutOfOrderError, Integer, MultiEvent, UnreachableCaseError, delay1Tick } from '@pbkware/js-utils';
 import { IntegerListSelectItemUiAction, IntegerUiAction } from '@pbkware/ui-action';
 import {
@@ -44,6 +44,8 @@ export class ScanEditorTargetsNgComponent extends ContentComponentBaseNgDirectiv
     editGridColumnsEventer: ScanEditorTargetsNgComponent.EditGridColumnsEventer | undefined;
     popoutMultiSymbolListEditorEventer: ScanEditorTargetsNgComponent.PopoutMultiSymbolListEditorEventer | undefined;
 
+    private readonly _cdr = inject(ChangeDetectorRef);
+
     private readonly _singleSymbolTargetSubTypeControlComponentSignal = viewChild.required<IntegerCaptionedRadioNgComponent>('singleSymbolTargetSubTypeControl');
     private readonly _multiSymbolTargetSubTypeControlComponentSignal = viewChild.required<IntegerCaptionedRadioNgComponent>('multiSymbolTargetSubTypeControl');
     private readonly _singleMarketTargetSubTypeControlComponentSignal = viewChild.required<IntegerCaptionedRadioNgComponent>('singleMarketTargetSubTypeControl');
@@ -88,13 +90,11 @@ export class ScanEditorTargetsNgComponent extends ContentComponentBaseNgDirectiv
     private _scanEditorFieldChangesSubscriptionId: MultiEvent.SubscriptionId | undefined;
     private _multiSymbolEditorComponentAfterListChangedSubscriptionId: MultiEvent.SubscriptionId | undefined;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        private readonly _cdr: ChangeDetectorRef,
-        marketsNgService: MarketsNgService,
-        symbolsNgService: SymbolsNgService,
-    ) {
-        super(elRef, ++ScanEditorTargetsNgComponent.typeInstanceCreateCount);
+    constructor() {
+        const marketsNgService = inject(MarketsNgService);
+        const symbolsNgService = inject(SymbolsNgService);
+
+        super(++ScanEditorTargetsNgComponent.typeInstanceCreateCount);
 
         this.targetSubTypeRadioName = this.generateInstancedRadioName('targetSubType');
 

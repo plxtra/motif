@@ -1,7 +1,6 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, input, model } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, model } from '@angular/core';
 import { Integer } from '@pbkware/js-utils';
 import { UiAction } from '@pbkware/ui-action';
-import { SettingsNgService } from 'component-services-ng-api';
 import { ControlComponentBaseNgDirective } from '../../../ng/control-component-base-ng.directive';
 import { IntegerEnumElementComponentBaseNgDirective } from '../../ng/ng-api';
 
@@ -20,12 +19,9 @@ export class RadioInputNgComponent extends IntegerEnumElementComponentBaseNgDire
 
     public radioDisabled = true;
 
-    constructor(elRef: ElementRef<HTMLElement>,cdr: ChangeDetectorRef, settingsNgService: SettingsNgService) {
+    constructor() {
         super(
-            elRef,
             ++RadioInputNgComponent.typeInstanceCreateCount,
-            cdr,
-            settingsNgService.service,
             ControlComponentBaseNgDirective.clickControlStateColorItemIdArray
         );
         this.inputId.set(`Radio:${this.typeInstanceId}`);

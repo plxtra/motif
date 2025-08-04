@@ -1,10 +1,4 @@
-import {
-    ApplicationRef,
-    ComponentRef,
-    createComponent,
-    EnvironmentInjector,
-    Injectable, Type
-} from '@angular/core';
+import { ComponentRef, createComponent, EnvironmentInjector, inject, Injectable, Type } from '@angular/core';
 import { DecimalFactory } from '@pbkware/js-utils';
 import { BooleanUiAction, DateUiAction, DecimalUiAction, IntegerUiAction, NumberUiAction } from '@pbkware/ui-action';
 import {
@@ -56,16 +50,16 @@ import { ApiComponentFactoryServiceBaseNgDirective } from './api-component-facto
     providedIn: 'root',
 })
 export class ApiControlComponentFactoryNgService extends ApiComponentFactoryServiceBaseNgDirective implements ApiControlComponentFactory {
+    private readonly _environmentInjector = inject(EnvironmentInjector);
+
     private readonly _decimalFactory: DecimalFactory;
     private readonly _marketsService: MarketsService;
 
-    constructor(
-        appRef: ApplicationRef,
-        private readonly _environmentInjector: EnvironmentInjector,
-        decimalFactoryNgService: DecimalFactoryNgService,
-        marketsNgService: MarketsNgService,
-    ) {
-        super(appRef);
+    constructor() {
+        super();
+
+        const decimalFactoryNgService = inject(DecimalFactoryNgService);
+        const marketsNgService = inject(MarketsNgService);
 
         this._decimalFactory = decimalFactoryNgService.service;
         this._marketsService = marketsNgService.service;

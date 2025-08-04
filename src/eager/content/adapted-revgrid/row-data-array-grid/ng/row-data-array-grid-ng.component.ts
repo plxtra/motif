@@ -1,6 +1,5 @@
-import { ChangeDetectionStrategy, Component, ElementRef, OnDestroy, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { AdaptedRevgridBehavioredColumnSettings, GridField, RowDataArrayGrid, SourcedFieldGrid } from '@plxtra/motif-core';
-import { SettingsNgService, TextFormatterNgService } from 'component-services-ng-api';
 import { RevSingleHeadingDataRowArraySourcedFieldGrid, RevSubgrid } from 'revgrid';
 import { AdaptedRevgridComponentNgDirective } from '../../ng/adapted-revgrid-component-ng.directive';
 
@@ -16,9 +15,8 @@ import { AdaptedRevgridComponentNgDirective } from '../../ng/adapted-revgrid-com
 export class RowDataArrayGridNgComponent extends AdaptedRevgridComponentNgDirective implements OnDestroy {
     private _grid: RowDataArrayGrid | undefined;
 
-    constructor(elRef: ElementRef<HTMLElement>, settingsNgService: SettingsNgService, textFormatterNgService: TextFormatterNgService) {
-        const settingsService = settingsNgService.service;
-        super(elRef, 1, settingsService);
+    constructor() {
+        super(1);
     }
 
     ngOnDestroy() {

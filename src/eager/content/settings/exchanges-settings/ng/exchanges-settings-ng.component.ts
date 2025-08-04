@@ -1,12 +1,5 @@
-import {
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    ElementRef,
-    ViewContainerRef
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewContainerRef } from '@angular/core';
 import { ExchangeSettings } from '@plxtra/motif-core';
-import { SettingsNgService } from 'component-services-ng-api';
 import { SettingsComponentBaseNgDirective } from '../../ng/settings-component-base-ng.directive';
 
 @Component({
@@ -21,12 +14,8 @@ export class ExchangesSettingsNgComponent extends SettingsComponentBaseNgDirecti
 
     public settingsArray: ExchangeSettings[];
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        settingsNgService: SettingsNgService,
-    ) {
-        super(elRef, ++ExchangesSettingsNgComponent.typeInstanceCreateCount, cdr, settingsNgService.service);
+    constructor() {
+        super(++ExchangesSettingsNgComponent.typeInstanceCreateCount);
 
         const exchangesSettings = this.settingsService.exchanges;
         this.settingsArray = exchangesSettings.settingsArray;

@@ -1,13 +1,4 @@
-import {
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    ElementRef,
-    Inject,
-    OnDestroy,
-    viewChild
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, inject, OnDestroy, viewChild } from '@angular/core';
 import { delay1Tick, JsonElement } from '@pbkware/js-utils';
 import {
     IconButtonUiAction,
@@ -17,16 +8,12 @@ import {
 } from '@plxtra/motif-core';
 import {
     AdiNgService,
-    CommandRegisterNgService,
     MarketsNgService,
-    SettingsNgService,
     SymbolsNgService,
-    TextFormatterNgService,
     ToastNgService
 } from 'component-services-ng-api';
 import { BrokerageAccountsNgComponent } from 'content-ng-api';
 import { SvgButtonNgComponent } from 'controls-ng-api';
-import { ComponentContainer } from 'golden-layout';
 import { BuiltinDitemNgComponentBaseNgDirective } from '../../ng/builtin-ditem-ng-component-base.directive';
 import { DesktopAccessNgService } from '../../ng/desktop-access-ng.service';
 import { BrokerageAccountsDitemFrame } from '../brokerage-accounts-ditem-frame';
@@ -50,28 +37,14 @@ export class BrokerageAccountsDitemNgComponent extends BuiltinDitemNgComponentBa
     private _brokerageAccountsComponent: BrokerageAccountsNgComponent;
     private _accountLinkButtonComponent: SvgButtonNgComponent;
 
-    constructor(
-        cdr: ChangeDetectorRef,
-        elRef: ElementRef<HTMLElement>,
-        settingsNgService: SettingsNgService,
-        marketsNgService: MarketsNgService,
-        commandRegisterNgService: CommandRegisterNgService,
-        desktopAccessNgService: DesktopAccessNgService,
-        symbolsNgService: SymbolsNgService,
-        adiNgService: AdiNgService,
-        textFormatterNgService: TextFormatterNgService,
-        toastNgService: ToastNgService,
-        @Inject(BuiltinDitemNgComponentBaseNgDirective.goldenLayoutContainerInjectionToken) container: ComponentContainer,
-    ) {
-        super(
-            elRef,
-            ++BrokerageAccountsDitemNgComponent.typeInstanceCreateCount,
-            cdr,
-            container,
-            settingsNgService.service,
-            commandRegisterNgService.service
-        );
+    constructor() {
+        super(++BrokerageAccountsDitemNgComponent.typeInstanceCreateCount);
 
+        const marketsNgService = inject(MarketsNgService);
+        const desktopAccessNgService = inject(DesktopAccessNgService);
+        const symbolsNgService = inject(SymbolsNgService);
+        const adiNgService = inject(AdiNgService);
+        const toastNgService = inject(ToastNgService);
 
         this._frame = new BrokerageAccountsDitemFrame(
             this,

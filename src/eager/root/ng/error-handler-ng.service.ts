@@ -1,4 +1,4 @@
-import { ErrorHandler, Injectable } from '@angular/core';
+import { ErrorHandler, Injectable, inject } from '@angular/core';
 import { getErrorMessage } from '@pbkware/js-utils';
 import { UserAlertService } from '@plxtra/motif-core';
 import { UserAlertNgService } from 'component-services-ng-api';
@@ -12,7 +12,10 @@ export class ErrorHandlerNgService implements ErrorHandler {
     private _telemetry: TelemetryService;
     private _userAlertService: UserAlertService;
 
-    constructor(telemetryService: TelemetryNgService, userAlertNgService: UserAlertNgService) {
+    constructor() {
+        const telemetryService = inject(TelemetryNgService);
+        const userAlertNgService = inject(UserAlertNgService);
+
         this._telemetry = telemetryService.service;
         this._userAlertService = userAlertNgService.service;
     }

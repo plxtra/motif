@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { ReferenceableColumnLayoutsService } from '@plxtra/motif-core';
 import { CoreNgService } from './core-ng.service';
 
@@ -8,7 +8,9 @@ import { CoreNgService } from './core-ng.service';
 export class ReferenceableColumnLayoutsNgService {
     private _service: ReferenceableColumnLayoutsService;
 
-    constructor(coreNgService: CoreNgService) {
+    constructor() {
+        const coreNgService = inject(CoreNgService);
+
         this._service = coreNgService.referenceableColumnLayoutsService;
     }
 

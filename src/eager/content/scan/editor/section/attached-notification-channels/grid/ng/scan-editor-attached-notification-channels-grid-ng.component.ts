@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { AssertInternalError, LockOpenListItem } from '@pbkware/js-utils';
 import { LockerScanAttachedNotificationChannelList, StringId, Strings } from '@plxtra/motif-core';
 import { CoreInjectionTokens, ToastNgService } from 'component-services-ng-api';
@@ -16,15 +16,17 @@ import { ScanEditorAttachedNotificationChannelsGridFrame } from '../scan-editor-
 export class ScanEditorAttachedNotificationChannelsGridNgComponent extends GridSourceNgDirective {
     declare frame: ScanEditorAttachedNotificationChannelsGridNgComponent.Frame;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        private readonly _toastNgService: ToastNgService,
-        contentNgService: ContentNgService,
-        @Inject(CoreInjectionTokens.lockOpenListItemOpener) private readonly _opener: LockOpenListItem.Opener,
-    ) {
+    private readonly _toastNgService = inject(ToastNgService);
+    private readonly _opener: LockOpenListItem.Opener;
+
+    constructor() {
+        const contentNgService = inject(ContentNgService);
+        const _opener = inject<LockOpenListItem.Opener>(CoreInjectionTokens.lockOpenListItemOpener);
         const frame: ScanEditorAttachedNotificationChannelsGridNgComponent.Frame = contentNgService.createScanEditorAttachedNotificationChannelsGridFrame(_opener);
-        super(elRef, ++ScanEditorAttachedNotificationChannelsGridNgComponent.typeInstanceCreateCount, cdr, frame);
+
+        super(++ScanEditorAttachedNotificationChannelsGridNgComponent.typeInstanceCreateCount, frame);
+        this._opener = _opener;
+
         frame.setComponentAccess(this);
     }
 

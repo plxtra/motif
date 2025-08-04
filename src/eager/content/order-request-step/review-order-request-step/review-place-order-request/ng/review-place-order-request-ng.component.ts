@@ -1,9 +1,8 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostBinding, Inject, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, OnDestroy, inject } from '@angular/core';
 import { AssertInternalError, MultiEvent, NotImplementedError, UnreachableCaseError } from '@pbkware/js-utils';
 import {
     ColorScheme,
     OrderPad,
-    OrderRequestDataDefinition,
     OrderTradeTypeId,
     OrderTriggerTypeId,
     SettingsService, StringId,
@@ -52,16 +51,13 @@ export class ReviewPlaceOrderRequestNgComponent extends ReviewOrderRequestCompon
 
     private readonly _sideId: OrderTradeTypeId;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        settingsNgService: SettingsNgService,
-        symbolsNgService: SymbolsNgService,
-        textFormatterNgService: TextFormatterNgService,
-        @Inject(ReviewOrderRequestComponentNgDirective.orderPadInjectionToken) orderPad: OrderPad,
-        @Inject(ReviewOrderRequestComponentNgDirective.definitionInjectionToken) definition: OrderRequestDataDefinition
-    ) {
-        super(elRef, ++ReviewPlaceOrderRequestNgComponent.typeInstanceCreateCount, cdr, orderPad, definition);
+    constructor() {
+        const settingsNgService = inject(SettingsNgService);
+        const symbolsNgService = inject(SymbolsNgService);
+        const textFormatterNgService = inject(TextFormatterNgService);
+        const orderPad = inject<OrderPad>(ReviewOrderRequestComponentNgDirective.orderPadInjectionToken);
+
+        super(++ReviewPlaceOrderRequestNgComponent.typeInstanceCreateCount);
 
         this._settingsService = settingsNgService.service;
         this._settingsChangedSubscriptionId = this._settingsService.subscribeSettingsChangedEvent(() => this.applySettings());

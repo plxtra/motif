@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { ToastService } from '../toast-service';
 import { SettingsNgService } from './settings-ng.service';
 
@@ -8,9 +8,9 @@ import { SettingsNgService } from './settings-ng.service';
 export class ToastNgService {
     private readonly _service: ToastService;
 
-    constructor(
-        settingsNgService: SettingsNgService,
-    ) {
+    constructor() {
+        const settingsNgService = inject(SettingsNgService);
+
         this._service = new ToastService(settingsNgService.service);
     }
 

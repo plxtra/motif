@@ -1,15 +1,4 @@
-import {
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    ElementRef,
-    Inject,
-    OnDestroy,
-    Self,
-    ViewContainerRef,
-    viewChild
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, OnDestroy, ViewContainerRef, inject, viewChild } from '@angular/core';
 import { AssertInternalError, JsonElement, LockOpenListItem, ModifierKey, ModifierKeyId, delay1Tick } from '@pbkware/js-utils';
 import { IntegerListSelectItemUiAction, UiAction } from '@pbkware/ui-action';
 import {
@@ -22,10 +11,9 @@ import {
     StringId,
     Strings
 } from '@plxtra/motif-core';
-import { AdiNgService, CommandRegisterNgService, CoreInjectionTokens, LockOpenListItemOpenerNgUseClass, MarketsNgService, NotificationChannelsNgService, SettingsNgService, SymbolsNgService, ToastNgService } from 'component-services-ng-api';
+import { AdiNgService, CoreInjectionTokens, LockOpenListItemOpenerNgUseClass, MarketsNgService, NotificationChannelsNgService, SymbolsNgService, ToastNgService } from 'component-services-ng-api';
 import { LockOpenNotificationChannelPropertiesNgComponent, LockOpenNotificationChannelsGridNgComponent, NameableColumnLayoutEditorDialogNgComponent } from 'content-ng-api';
 import { ButtonInputNgComponent, IntegerEnumInputNgComponent, SvgButtonNgComponent } from 'controls-ng-api';
-import { ComponentContainer } from 'golden-layout';
 import { RevColumnLayoutOrReferenceDefinition } from 'revgrid';
 import { BuiltinDitemNgComponentBaseNgDirective } from '../../ng/builtin-ditem-ng-component-base.directive';
 import { DesktopAccessNgService } from '../../ng/desktop-access-ng.service';
@@ -47,6 +35,9 @@ export class NotificationChannelsDitemNgComponent extends BuiltinDitemNgComponen
     public splitterGutterSize = 3;
 
     public dialogActive = false;
+
+    private readonly _toastNgService = inject(ToastNgService);
+    private readonly _opener = inject<LockOpenListItem.Opener>(CoreInjectionTokens.lockOpenListItemOpener, { self: true });
 
     private readonly _addControlComponentSignal = viewChild.required<IntegerEnumInputNgComponent>('addControl');
     private readonly _deleteSelectedControlComponentSignal = viewChild.required<SvgButtonNgComponent>('deleteSelectedControl');
@@ -81,28 +72,14 @@ export class NotificationChannelsDitemNgComponent extends BuiltinDitemNgComponen
     private _propertiesComponent: LockOpenNotificationChannelPropertiesNgComponent;
     private _dialogContainer: ViewContainerRef;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        @Inject(BuiltinDitemNgComponentBaseNgDirective.goldenLayoutContainerInjectionToken) container: ComponentContainer,
-        settingsNgService: SettingsNgService,
-        marketsNgService: MarketsNgService,
-        commandRegisterNgService: CommandRegisterNgService,
-        desktopAccessNgService: DesktopAccessNgService,
-        symbolsNgService: SymbolsNgService,
-        adiNgService: AdiNgService,
-        notificationChannelsNgService: NotificationChannelsNgService,
-        private readonly _toastNgService: ToastNgService,
-        @Self() @Inject(CoreInjectionTokens.lockOpenListItemOpener) private readonly _opener: LockOpenListItem.Opener,
-    ) {
-        super(
-            elRef,
-            ++NotificationChannelsDitemNgComponent.typeInstanceCreateCount,
-            cdr,
-            container,
-            settingsNgService.service,
-            commandRegisterNgService.service
-        );
+    constructor() {
+        super(++NotificationChannelsDitemNgComponent.typeInstanceCreateCount);
+
+        const marketsNgService = inject(MarketsNgService);
+        const desktopAccessNgService = inject(DesktopAccessNgService);
+        const symbolsNgService = inject(SymbolsNgService);
+        const adiNgService = inject(AdiNgService);
+        const notificationChannelsNgService = inject(NotificationChannelsNgService);
 
         this._opener = {
             lockerName: `${Strings[StringId.Notifications]}:${NotificationChannelsDitemNgComponent.typeInstanceCreateCount}`,

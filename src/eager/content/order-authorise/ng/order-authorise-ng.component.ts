@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { DelayedBadnessGridSourceNgDirective } from '../../delayed-badness-grid-source/ng-api';
 import { ContentNgService } from '../../ng/content-ng.service';
 import { OrderAuthoriseFrame } from '../order-authorise-frame';
@@ -15,13 +15,11 @@ export class OrderAuthoriseNgComponent extends DelayedBadnessGridSourceNgDirecti
 
     declare frame: OrderAuthoriseFrame;
 
-    constructor(
-        elRef: ElementRef<HTMLElement>,
-        cdr: ChangeDetectorRef,
-        contentNgService: ContentNgService,
-    ) {
+    constructor() {
+        const contentNgService = inject(ContentNgService);
+
         const frame = contentNgService.createOrderAuthoriseFrame();
-        super(elRef, ++OrderAuthoriseNgComponent.typeInstanceCreateCount, cdr, frame);
+        super(++OrderAuthoriseNgComponent.typeInstanceCreateCount, frame);
         frame.setComponentAccess(this);
     }
 }
