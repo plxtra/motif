@@ -74,12 +74,14 @@ export class ColumnLayoutEditorAllowedFieldsFrame extends GridSourceFrame {
     }
 
     get selectedCount() {
-        return this.grid.getSelectedRowCount(true);
+        const mainSubgrid = this.grid.mainSubgrid;
+        return this.grid.getSelectedRowCount(mainSubgrid, true);
     }
 
     get selectedFields() {
         const selection = this.grid.selection
-        const rowIndices = selection.getRowIndices(true);
+        const mainSubgrid = this.grid.mainSubgrid;
+        const rowIndices = selection.getSubgridRowIndices(mainSubgrid);
         const count = rowIndices.length;
         const fields = new Array<GridField>(count);
         for (let i = 0; i < count; i++) {

@@ -164,12 +164,12 @@ export abstract class GridSourceFrame extends ContentFrame {
         layoutDefinition.saveToJson(keptLayoutElement);
     }
 
-    areRowsSelected(includeAllAuto: boolean) {
-        return this.grid.areRowsSelected(includeAllAuto);
+    areRowsSelected(includeDynamicAll: boolean) {
+        return this.grid.areRowsSelected(this.grid.mainSubgrid, includeDynamicAll);
     }
 
-    areColumnsSelected(includeAllAuto: boolean) {
-        this.grid.areColumnsSelected(includeAllAuto);
+    areColumnsSelected(includeDynamicAll: boolean) {
+        this.grid.areColumnsSelected(includeDynamicAll);
     }
 
     async tryOpenJsonOrDefault(frameElement: JsonElement | undefined, keepView: boolean): Promise<Result<DataSourceOrReference>> {
@@ -854,7 +854,7 @@ export abstract class GridSourceFrame extends ContentFrame {
 
     getSelectedRecordIndices() {
         const selection = this.grid.selection
-        const rowIndices = selection.getRowIndices(true);
+        const rowIndices = selection.getSubgridRowIndices(this.grid.mainSubgrid);
         const count = rowIndices.length;
         const recordIndices = new Array<Integer>(count);
         for (let i = 0; i < count; i++) {

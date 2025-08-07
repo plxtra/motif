@@ -79,14 +79,14 @@ export class SymbolListDirectoryGridFrame extends GridSourceFrame {
             const list = directory.getAt(i);
             const listName = list.name;
             if (listName.toUpperCase() === upperName) {
-                this.grid.tryFocusYAndEnsureInView(i);
+                this.grid.tryFocusRowAndEnsureInView(i);
                 return listName;
             }
         }
         for (let i = 0; i < count; i++) {
             const list = directory.getAt(i);
             if (list.id === idOrName) {
-                this.grid.tryFocusYAndEnsureInView(i);
+                this.grid.tryFocusRowAndEnsureInView(i);
                 return list.name;
             }
         }

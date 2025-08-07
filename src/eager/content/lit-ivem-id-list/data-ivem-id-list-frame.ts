@@ -122,10 +122,11 @@ export class DataIvemIdListFrame extends DelayedBadnessGridSourceFrame {
 
     deleteSelected() {
         const grid = this.grid;
-        if (!grid.isFiltered && grid.selection.allAuto) {
+        const mainSubgrid = grid.mainSubgrid;
+        if (!grid.isFiltered && grid.selection.isDynamicAllSelected(mainSubgrid)) {
             this._list.clear();
         } else {
-            const rowIndices = grid.selection.getRowIndices(true);
+            const rowIndices = grid.selection.getSubgridRowIndices(mainSubgrid);
             const count = rowIndices.length;
             const recordIndices = new Array<Integer>(count);
             for (let i = 0; i < count; i++) {

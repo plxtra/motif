@@ -82,8 +82,8 @@ export class DataIvemIdListNgComponent extends DelayedBadnessGridSourceNgDirecti
         return this.frame.tryOpenColumnLayoutOrReferenceDefinition(layoutOrReferenceDefinition)
     }
 
-    areRowsSelected(includeAllAuto: boolean) {
-        return this.frame.areRowsSelected(includeAllAuto);
+    areRowsSelected(includeDynamicAll: boolean) {
+        return this.frame.areRowsSelected(includeDynamicAll);
     }
 
     protected override finalise() {

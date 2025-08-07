@@ -66,7 +66,7 @@ export class LockOpenNotificationChannelsGridFrame extends GridSourceFrame {
     }
 
     get list() { return this._list; }
-    get selectedCount() { return this.grid.getSelectedRowCount(true); }
+    get selectedCount() { return this.grid.getSelectedRowCount(this.grid.mainSubgrid, true); }
 
     override initialise(opener: LockOpenListItem.Opener, previousLayoutDefinition: RevColumnLayoutOrReferenceDefinition | undefined, keepPreviousLayoutIfPossible: boolean): void {
         super.initialise(opener, previousLayoutDefinition, keepPreviousLayoutIfPossible);
@@ -123,7 +123,7 @@ export class LockOpenNotificationChannelsGridFrame extends GridSourceFrame {
 
     getSelectedChannelIds() {
         const grid = this.grid;
-        const rowIndices = grid.selection.getRowIndices(true);
+        const rowIndices = grid.selection.getSubgridRowIndices(this.grid.mainSubgrid);
         const count = rowIndices.length;
         const channelIds = new Array<string>(count);
         for (let i = 0; i < count; i++) {

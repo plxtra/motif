@@ -71,7 +71,7 @@ export class ColumnLayoutEditorColumnsFrame extends GridSourceFrame {
 
     get selectedRecordIndices() {
         const selection = this.grid.selection
-        const rowIndices = selection.getRowIndices(true);
+        const rowIndices = selection.getSubgridRowIndices(this.grid.mainSubgrid);
         const count = rowIndices.length;
         const recordIndices = new Array<Integer>(count);
         for (let i = 0; i < count; i++) {
