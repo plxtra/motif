@@ -25,8 +25,6 @@ import { ContentComponentBaseNgDirective } from '../../ng/content-component-base
     standalone: false
 })
 export class ColorSchemePresetCodeNgComponent extends ContentComponentBaseNgDirective implements AfterViewInit, OnDestroy {
-    private _cdr = inject(ChangeDetectorRef);
-
     private static typeInstanceCreateCount = 0;
 
     private static readonly _tabs2 = ' '.repeat(8);
@@ -34,6 +32,8 @@ export class ColorSchemePresetCodeNgComponent extends ContentComponentBaseNgDire
 
     public dialogCaption = 'Preset code for current color scheme (only for developers)';
     public presetCode = '';
+
+    private _cdr = inject(ChangeDetectorRef);
 
     private readonly _returnButtonComponentSignal = viewChild.required<SvgButtonNgComponent>('returnButton');
     private readonly _copyToClipboardButtonSignal = viewChild.required<SvgButtonNgComponent>('copyToClipboardButton');

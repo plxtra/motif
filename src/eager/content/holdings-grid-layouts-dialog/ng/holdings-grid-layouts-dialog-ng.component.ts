@@ -26,11 +26,12 @@ import { ContentComponentBaseNgDirective } from '../../ng/content-component-base
     standalone: false
 })
 export class HoldingsColumnLayoutsDialogNgComponent extends ContentComponentBaseNgDirective implements OnDestroy, AfterViewInit {
-    private _cdr = inject(ChangeDetectorRef);
-    private readonly _opener = inject<LockOpenListItem.Opener>(CoreInjectionTokens.lockOpenListItemOpener);
+    private static typeInstanceCreateCount = 0;
+
     readonly caption = inject(HoldingsColumnLayoutsDialogNgComponent.captionInjectionToken);
 
-    private static typeInstanceCreateCount = 0;
+    private _cdr = inject(ChangeDetectorRef);
+    private readonly _opener = inject<LockOpenListItem.Opener>(CoreInjectionTokens.lockOpenListItemOpener);
 
     private readonly _okButtonComponentSignal = viewChild.required<SvgButtonNgComponent>('okButton');
     private readonly _cancelButtonComponentSignal = viewChild.required<SvgButtonNgComponent>('cancelButton');

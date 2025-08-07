@@ -22,14 +22,14 @@ import { ContentComponentBaseNgDirective } from '../../ng/content-component-base
     standalone: false
 })
 export class ColorSchemeItemPropertiesNgComponent extends ContentComponentBaseNgDirective implements AfterViewInit, OnDestroy {
-    private _cdr = inject(ChangeDetectorRef);
-
     private static typeInstanceCreateCount = 0;
 
     itemChangedEvent: ColorSchemeItemPropertiesComponent.ItemChangedEvent;
 
     public hasBkgd = true;
     public hasFore = true;
+
+    private _cdr = inject(ChangeDetectorRef);
 
     private readonly _bkgdControlsSignal = viewChild.required<ColorControlsNgComponent>('bkgdControls');
     private readonly _multiPickerSignal = viewChild.required<MultiColorPickerNgComponent>('multiPicker');

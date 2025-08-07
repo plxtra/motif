@@ -31,8 +31,6 @@ import { ContentComponentBaseNgDirective } from '../../ng/content-component-base
     standalone: false
 })
 export class ColorControlsNgComponent extends ContentComponentBaseNgDirective implements OnDestroy, AfterViewInit {
-    private _cdr = inject(ChangeDetectorRef);
-
     private static typeInstanceCreateCount = 0;
 
     @HostBinding('style.flex-direction') public flexDirection: string;
@@ -44,6 +42,8 @@ export class ColorControlsNgComponent extends ContentComponentBaseNgDirective im
 
     public activeInPickerIndicatorFontWeight: HtmlTypes.FontWeight | '';
     public heading: string;
+
+    private _cdr = inject(ChangeDetectorRef);
 
     private readonly _hideInPickerControlSignal = viewChild.required<CaptionedCheckboxNgComponent>('hideInPickerControl');
     private readonly _inheritedRadioSignal = viewChild.required<IntegerCaptionedRadioNgComponent>('inheritedRadio');

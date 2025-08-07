@@ -29,10 +29,10 @@ import {
     standalone: false
 })
 export class CodeMirrorNgComponent implements OnDestroy {
+    docChangedEventer: CodeMirrorNgComponent.DocChangedEventer;
+
     private _ngZone = inject(NgZone);
     private readonly _elRef = inject<ElementRef<HTMLElement>>(ElementRef);
-
-    docChangedEventer: CodeMirrorNgComponent.DocChangedEventer;
 
     private _editor: EditorView;
     private _textSetting = false;

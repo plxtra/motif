@@ -28,16 +28,16 @@ import { DataMarketsGridNgComponent } from '../grid/ng-api';
     standalone: false
 })
 export class DataMarketsNgComponent extends ContentComponentBaseNgDirective implements OnDestroy, AfterViewInit {
-    private readonly _cdr = inject(ChangeDetectorRef);
-    private readonly _toastNgService = inject(ToastNgService);
-    private readonly _opener = inject<LockOpenListItem.Opener>(CoreInjectionTokens.lockOpenListItemOpener);
-
     private static typeInstanceCreateCount = 0;
 
     public dialogActive = false;
     public withBoardsActive = false;
 
     public readonly listRadioName: string;
+
+    private readonly _cdr = inject(ChangeDetectorRef);
+    private readonly _toastNgService = inject(ToastNgService);
+    private readonly _opener = inject<LockOpenListItem.Opener>(CoreInjectionTokens.lockOpenListItemOpener);
 
     private readonly _gridComponentSignal = viewChild.required<DataMarketsGridNgComponent>('grid', { debugName: 'grid'});
     private readonly _knownListControlComponentSignal = viewChild.required<IntegerCaptionedRadioNgComponent>('knownListControl', { debugName: 'knownListControl' });

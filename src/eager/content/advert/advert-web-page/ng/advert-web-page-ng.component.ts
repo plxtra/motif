@@ -9,9 +9,9 @@ import { SafeResourceUrl } from '@angular/platform-browser';
     standalone: false
 })
 export class AdvertWebPageNgComponent {
-    private readonly _cdr = inject(ChangeDetectorRef);
-
     public safeResourceUrl: SafeResourceUrl;
+
+    private readonly _cdr = inject(ChangeDetectorRef);
 
     loadPage(safeResourceUrl: SafeResourceUrl) {
         this.safeResourceUrl = safeResourceUrl;

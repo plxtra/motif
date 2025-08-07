@@ -44,10 +44,10 @@ import { GoldenLayoutHostFrame } from '../golden-layout-host-frame';
     standalone: false
 })
 export class GoldenLayoutHostNgComponent extends ComponentBaseNgDirective implements OnDestroy, AfterViewInit, GoldenLayoutHostFrame.ComponentAccess {
+    private static typeInstanceCreateCount = 0;
+
     private readonly _cdr = inject(ChangeDetectorRef);
     private readonly _appRef = inject(ApplicationRef);
-
-    private static typeInstanceCreateCount = 0;
 
     private readonly _componentsViewContainerRefSignal = viewChild.required('componentsViewContainer', { read: ViewContainerRef });
 
