@@ -49,7 +49,7 @@ export abstract class DataIvemIdListEditorNgDirective extends ContentComponentBa
     private readonly _selectAllControlComponentSignal = viewChild.required<SvgButtonNgComponent>('selectAllControl');
     private readonly _removeSelectedControlComponentSignal = viewChild.required<SvgButtonNgComponent>('removeSelectedControl');
     private readonly _columnsControlComponentSignal = viewChild.required<SvgButtonNgComponent>('columnsControl');
-    private readonly _popoutControlComponentSignal = viewChild.required<SvgButtonNgComponent>('popoutControl');
+    private readonly _popoutControlComponentSignal = viewChild<SvgButtonNgComponent>('popoutControl');
     private readonly _filterControlComponentSignal = viewChild.required<TextInputNgComponent>('filterControl');
     private readonly _dataIvemIdListComponentSignal = viewChild.required<DataIvemIdListNgComponent>('grid');
 

@@ -2,7 +2,6 @@ import { Directive, inject, input } from '@angular/core';
 import { AssertInternalError, getErrorMessage, Integer, UnreachableCaseError } from '@pbkware/js-utils';
 import { UiAction } from '@pbkware/ui-action';
 import {
-    AdiService,
     BrokerageAccount,
     BrokerageAccountEnvironmentedId,
     BrokerageAccountGroup, BrokerageAccountGroupUiAction, BrokerageAccountsDataDefinition,
@@ -11,6 +10,7 @@ import {
     MarketsService,
     SingleBrokerageAccountGroup, StringId, Strings
 } from '@plxtra/motif-core';
+import { AdiNgService, MarketsNgService } from 'component-services-ng-api';
 import { ControlComponentBaseNgDirective } from '../../ng/control-component-base-ng.directive';
 
 @Directive()
@@ -20,7 +20,7 @@ export abstract class BrokerageAccountGroupComponentBaseNgDirective extends Cont
     public namedGroups: BrokerageAccountGroupComponentBaseNgDirective.NamedGroup[] = [];
     public loading = false;
 
-    private readonly _marketsService = inject(MarketsService);
+    private readonly _marketsService: MarketsService;
 
     private readonly _dataItemIncubator: DataItemIncubator<BrokerageAccountsDataItem>;
 
@@ -29,8 +29,10 @@ export abstract class BrokerageAccountGroupComponentBaseNgDirective extends Cont
     constructor(typeInstanceCreateId: Integer, stateColorItemIdArray: ControlComponentBaseNgDirective.ReadonlyStateColorItemIdArray) {
         super(typeInstanceCreateId, stateColorItemIdArray);
 
-        const adiService = inject(AdiService);
-        this._dataItemIncubator = new DataItemIncubator<BrokerageAccountsDataItem>(adiService);
+        this._marketsService = inject(MarketsNgService).service;
+
+        const adiService = inject(AdiNgService);
+        this._dataItemIncubator = new DataItemIncubator<BrokerageAccountsDataItem>(adiService.service);
     }
 
     protected override get uiAction() { return super.uiAction as BrokerageAccountGroupUiAction; }
