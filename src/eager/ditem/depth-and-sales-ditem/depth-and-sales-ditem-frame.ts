@@ -88,6 +88,7 @@ export class DepthAndSalesDitemFrame extends BuiltinDitemFrame {
                     this._toastService.popup(`${Strings[StringId.ErrorLoadingColumnLayout]} ${Strings[StringId.DepthAndSalesWatchlist]}: ${Strings[StringId.Watchlist]}: ${layoutDefinitionResult.error}`);
                 } else {
                     watchlistLayoutDefinition = layoutDefinitionResult.value;
+                    this._watchlistFrame.initialise(this.opener, watchlistLayoutDefinition, true);
                 }
             }
 
@@ -108,7 +109,6 @@ export class DepthAndSalesDitemFrame extends BuiltinDitemFrame {
             }
         }
 
-        this._watchlistFrame.initialise(this.opener, watchlistLayoutDefinition, true);
         watchlistFrame.fixedRowCount = 1;
         watchlistFrame.focusedRowColoredAllowed = false;
 
