@@ -71,6 +71,8 @@ export abstract class MarketIvemIdSelectNgDirective<T extends Market> extends Co
     private _measureCanvasContext: CanvasRenderingContext2D;
     private _measureBoldCanvasContext: CanvasRenderingContext2D;
 
+    private _notFoundText = Strings[StringId.NoMatchingSymbolsOrNamesFound];
+
     constructor(
         typeInstanceCreateId: Integer,
         marketTypeId: Market.TypeId,
@@ -234,6 +236,10 @@ export abstract class MarketIvemIdSelectNgDirective<T extends Market> extends Co
         NgSelectUtils.ApplyColors(this._ngSelectComponent.element, this.foreColor, this.bkgdColor);
     }
 
+    protected getNotFoundText() {
+        return this._notFoundText;
+    }
+
     private handleMeasureCanvasContextsEvent() {
         this._measureCanvasContext = this._ngSelectOverlayNgService.measureCanvasContext;
         this._measureBoldCanvasContext = this._ngSelectOverlayNgService.measureBoldCanvasContext;
@@ -330,9 +336,7 @@ export abstract class MarketIvemIdSelectNgDirective<T extends Market> extends Co
     }
 
     private setNotFoundText(value: string) {
-        if (value !== this._ngSelectComponent.notFoundText) {
-            this._ngSelectComponent.notFoundText = value;
-        }
+        this._notFoundText = value;
     }
 
     private checkSetNotFoundTextToSymbolSearchRequiresCodeWithAtLeast(searchable: boolean) {
@@ -476,13 +480,13 @@ export abstract class MarketIvemIdSelectNgDirective<T extends Market> extends Co
         if (start) {
             if (this._debounceDelayingCount++ === 0) {
                 if (this._queryRunningCount === 0) {
-                    this._ngSelectComponent.notFoundText = Strings[StringId.TypingPauseWaiting];
+                    this._notFoundText = Strings[StringId.TypingPauseWaiting];
                 }
             }
         } else {
             if (--this._debounceDelayingCount === 0) {
                 if (this._queryRunningCount === 0) {
-                    this._ngSelectComponent.notFoundText = Strings[StringId.NoMatchingSymbolsOrNamesFound];
+                    this._notFoundText = Strings[StringId.NoMatchingSymbolsOrNamesFound];
                 }
             }
         }
@@ -492,13 +496,13 @@ export abstract class MarketIvemIdSelectNgDirective<T extends Market> extends Co
         if (start) {
             if (this._queryRunningCount++ === 0) {
                 this.loading = true;
-                this._ngSelectComponent.notFoundText = Strings[StringId.NoMatchingSymbolsOrNamesFound];
+                this._notFoundText = Strings[StringId.NoMatchingSymbolsOrNamesFound];
             }
         } else {
             if (--this._queryRunningCount === 0) {
                 this.loading = false;
                 if (this._debounceDelayingCount > 0) {
-                    this._ngSelectComponent.notFoundText = Strings[StringId.TypingPauseWaiting];
+                    this._notFoundText = Strings[StringId.TypingPauseWaiting];
                 }
             }
         }

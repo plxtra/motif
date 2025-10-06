@@ -44,12 +44,12 @@
     "@codemirror/theme-one-dark": "^6.1.2",
     "@ctrl/tinycolor": "^4.0.3",
     "@jaames/iro": "^5.5.1",
-    "@ng-select/ng-select": "^14.7.0",
+    "@ng-select/ng-select": "^20.2.2",
     "@pbkware/js-utils": "^0.8.3",
     "@pbkware/ui-action": "^0.9.3",
     "@plxtra/motif-core": "^0.9.6",
     "@types/toastify-js": "^1.12.3",
-    "angular-split": "^19.0.0",
+    "angular-split": "^20.0.0",
     "angular-svg-icon": "^19.1.1",
     "codemirror": "^6.0.1",
     "decimal.js-light": "^2.5.1",
@@ -75,7 +75,7 @@
     "eslint-plugin-prefer-arrow": "^1.2.3",
     "oidc-client-ts": "^3.2.0",
     "rollbar": "^2.26.4",
-    "sass": "^1.87.0",
+    "sass": "^1.93.2",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.33.0"
   }

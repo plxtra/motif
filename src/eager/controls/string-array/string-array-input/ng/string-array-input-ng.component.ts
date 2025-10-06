@@ -20,7 +20,7 @@ export class StringArrayInputNgComponent extends ItemsUiActionNgDirective<string
 
     readonly inputSize = input('8em');
     readonly addTag = input(true);
-    readonly isOpen = input<boolean>();
+    readonly isOpen = input.required<boolean>();
 
     private _ngSelectOverlayNgService = inject(NgSelectOverlayNgService);
 
