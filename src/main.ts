@@ -1,6 +1,6 @@
-import { enableProdMode, provideAppInitializer, inject, ErrorHandler, importProvidersFrom } from '@angular/core';
+import { enableProdMode, provideAppInitializer, inject, ErrorHandler, importProvidersFrom, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
 import { environment } from './environments/environment';
-import { DomSanitizer, BrowserModule, bootstrapApplication } from '@angular/platform-browser';
+import { DomSanitizer, bootstrapApplication } from '@angular/platform-browser';
 import { LogNgService } from './eager/root/ng/log-ng.service';
 import { ConfigNgService } from './eager/root/ng/config-ng.service';
 import { AuthGuardNgService } from './eager/root/ng/auth-guard-ng.service';
@@ -10,7 +10,6 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 import { AngularSvgIconModule, SvgIconRegistryService } from 'angular-svg-icon';
 import { routes } from './eager/root/ng/app.routes';
 import { SvgButtonNgComponent } from 'controls-ng-api';
-import { FormsModule } from '@angular/forms';
 import { RootNgComponent } from './eager/root/root/ng/root-ng.component';
 import { NgSelectConfig } from '@ng-select/ng-select';
 import { SettingsNgService } from './eager/component-services/ng/settings-ng.service';
@@ -23,8 +22,17 @@ if (environment.prodMode) {
 
 bootstrapApplication(RootNgComponent, {
     providers: [
+        provideBrowserGlobalErrorListeners(),
+        provideZoneChangeDetection({ eventCoalescing: true }),
         provideRouter(routes),
-        importProvidersFrom(AngularSvgIconModule.forRoot(), BrowserModule, FormsModule),
+        provideHttpClient(withInterceptorsFromDi()),
+
+        { provide: ErrorHandler, useClass: ErrorHandlerNgService },
+
+        importProvidersFrom(AngularSvgIconModule.forRoot()),
+
+        AuthGuardNgService,
+        CurrentVersionGuardNgService,
 
         provideAppInitializer(() => {
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -43,10 +51,6 @@ bootstrapApplication(RootNgComponent, {
             const configNgService = inject(ConfigNgService);
             return configNgService.load(domSanitizer);
         }),
-        AuthGuardNgService,
-        CurrentVersionGuardNgService,
-        { provide: ErrorHandler, useClass: ErrorHandlerNgService },
-        provideHttpClient(withInterceptorsFromDi())
     ]
 })
     .catch((err: unknown) => console.log(err));
