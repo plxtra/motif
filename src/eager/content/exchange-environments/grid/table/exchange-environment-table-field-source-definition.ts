@@ -184,8 +184,4 @@ export namespace ExchangeEnvironmentTableFieldSourceDefinition {
     }
 }
 
-export namespace ExchangeEnvironmentTableFieldSourceDefinitionModule {
-    export function initialiseStatic() {
-        ExchangeEnvironmentTableFieldSourceDefinition.Field.initialise();
-    }
-}
+ExchangeEnvironmentTableFieldSourceDefinition.Field.initialise();

@@ -16,14 +16,13 @@ import { ToastService } from 'component-services-internal-api';
 import { CommandRegisterNgService, ToastNgService } from 'component-services-ng-api';
 import { SvgButtonNgComponent } from 'controls-ng-api';
 import { ContentComponentBaseNgDirective } from '../../ng/content-component-base-ng.directive';
-import { SvgButtonNgComponent as SvgButtonNgComponent_1 } from '../../../controls/boolean/button/icon/svg-button/ng/svg-button-ng.component';
 
 @Component({
     selector: 'app-color-scheme-preset-code',
     templateUrl: './color-scheme-preset-code-ng.component.html',
     styleUrls: ['./color-scheme-preset-code-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [SvgButtonNgComponent_1]
+    imports: [SvgButtonNgComponent]
 })
 export class ColorSchemePresetCodeNgComponent extends ContentComponentBaseNgDirective implements AfterViewInit, OnDestroy {
     private static typeInstanceCreateCount = 0;

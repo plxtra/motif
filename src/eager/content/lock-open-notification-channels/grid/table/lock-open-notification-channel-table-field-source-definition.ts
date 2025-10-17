@@ -192,8 +192,4 @@ export namespace LockOpenNotificationChannelTableFieldSourceDefinition {
     }
 }
 
-export namespace LockOpenNotificationChannelTableFieldSourceDefinitionModule {
-    export function initialiseStatic() {
-        LockOpenNotificationChannelTableFieldSourceDefinition.Field.initialise();
-    }
-}
+LockOpenNotificationChannelTableFieldSourceDefinition.Field.initialise();

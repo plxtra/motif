@@ -6,7 +6,6 @@ export {
     FrameSvcImplementation
 } from './frame-svc/internal-api';
 export {
-    ApiErrorImplementationModule,
     BrokerageAccountGroupSelectImplementation,
     BuiltinIconButtonImplementation,
     ButtonImplementation,

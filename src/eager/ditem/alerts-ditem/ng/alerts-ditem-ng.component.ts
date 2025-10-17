@@ -14,16 +14,13 @@ import { ButtonInputNgComponent, SvgButtonNgComponent, TextInputNgComponent } fr
 import { BuiltinDitemNgComponentBaseNgDirective } from '../../ng/builtin-ditem-ng-component-base.directive';
 import { DesktopAccessNgService } from '../../ng/desktop-access-ng.service';
 import { AlertsDitemFrame } from '../alerts-ditem-frame';
-import { TextInputNgComponent as TextInputNgComponent_1 } from '../../../controls/string/text-input/ng/text-input-ng.component';
-import { ButtonInputNgComponent as ButtonInputNgComponent_1 } from '../../../controls/boolean/button/button-input/ng/button-input-ng.component';
-import { SvgButtonNgComponent as SvgButtonNgComponent_1 } from '../../../controls/boolean/button/icon/svg-button/ng/svg-button-ng.component';
 
 @Component({
     selector: 'app-alerts-ditem-ng',
     templateUrl: './alerts-ditem-ng.component.html',
     styleUrls: ['./alerts-ditem-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [TextInputNgComponent_1, ButtonInputNgComponent_1, SvgButtonNgComponent_1]
+    imports: [TextInputNgComponent, ButtonInputNgComponent, SvgButtonNgComponent]
 })
 export class AlertsDitemNgComponent extends BuiltinDitemNgComponentBaseNgDirective implements OnDestroy, AfterViewInit {
     private static typeInstanceCreateCount = 0;

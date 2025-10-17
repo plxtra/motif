@@ -6,16 +6,13 @@ import { CellPainterFactoryNgService, CommandRegisterNgService, SettingsNgServic
 import { CaptionLabelNgComponent, ControlComponentBaseNgDirective, IntegerTextInputNgComponent, SvgButtonNgComponent } from 'controls-ng-api';
 import { ContentComponentBaseNgDirective } from '../../../../../../../../ng/content-component-base-ng.directive';
 import { ZenithScanFormulaViewDecodeProgressFrame } from '../zenith-scan-formula-view-decode-progress-frame';
-import { SvgButtonNgComponent as SvgButtonNgComponent_1 } from '../../../../../../../../../controls/boolean/button/icon/svg-button/ng/svg-button-ng.component';
-import { CaptionLabelNgComponent as CaptionLabelNgComponent_1 } from '../../../../../../../../../controls/label/caption-label/ng/caption-label-ng.component';
-import { IntegerTextInputNgComponent as IntegerTextInputNgComponent_1 } from '../../../../../../../../../controls/number/integer/integer-text-input/ng/integer-text-input-ng.component';
 
 @Component({
     selector: 'app-zenith-scan-formula-view-decode-progress',
     templateUrl: './zenith-scan-formula-view-decode-progress-ng.component.html',
     styleUrls: ['./zenith-scan-formula-view-decode-progress-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [SvgButtonNgComponent_1, CaptionLabelNgComponent_1, IntegerTextInputNgComponent_1]
+    imports: [SvgButtonNgComponent, CaptionLabelNgComponent, IntegerTextInputNgComponent]
 })
 export class ZenithScanFormulaViewDecodeProgressNgComponent extends ContentComponentBaseNgDirective implements OnDestroy, AfterViewInit {
     private static typeInstanceCreateCount = 0;

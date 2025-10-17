@@ -190,8 +190,4 @@ export namespace LockerScanAttachedNotificationChannelTableFieldSourceDefinition
     }
 }
 
-export namespace LockerScanAttachedNotificationChannelTableFieldSourceDefinitionModule {
-    export function initialiseStatic() {
-        LockerScanAttachedNotificationChannelTableFieldSourceDefinition.Field.initialise();
-    }
-}
+LockerScanAttachedNotificationChannelTableFieldSourceDefinition.Field.initialise();

@@ -15,7 +15,6 @@ export {
     MenuBarRootMenuNgComponent
 } from './menu-bar/ng-api';
 export * from './ng/control-component-base-ng.directive';
-export * from './ng/eager-controls-ng.module';
 export * from './ng/ng-select-overlay-ng.service';
 export * from './number/ng-api';
 export * from './string-array/ng-api';

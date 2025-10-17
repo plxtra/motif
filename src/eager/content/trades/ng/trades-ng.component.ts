@@ -4,14 +4,13 @@ import { DelayedBadnessNgComponent } from '../../delayed-badness/ng-api';
 import { ContentComponentBaseNgDirective } from '../../ng/content-component-base-ng.directive';
 import { ContentNgService } from '../../ng/content-ng.service';
 import { TradesFrame } from '../trades-frame';
-import { DelayedBadnessNgComponent as DelayedBadnessNgComponent_1 } from '../../delayed-badness/ng/delayed-badness-ng.component';
 
 @Component({
     selector: 'app-trades',
     templateUrl: './trades-ng.component.html',
     styleUrls: ['./trades-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [DelayedBadnessNgComponent_1]
+    imports: [DelayedBadnessNgComponent]
 })
 export class TradesNgComponent extends ContentComponentBaseNgDirective implements OnDestroy, AfterViewInit, TradesFrame.ComponentAccess {
     private static typeInstanceCreateCount = 0;

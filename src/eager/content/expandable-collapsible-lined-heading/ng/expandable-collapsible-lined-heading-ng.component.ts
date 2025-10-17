@@ -13,15 +13,13 @@ import {
 import { CommandRegisterNgService, SettingsNgService } from 'component-services-ng-api';
 import { IntegerEnumInputNgComponent, SvgButtonNgComponent } from 'controls-ng-api';
 import { ContentComponentBaseNgDirective } from '../../ng/content-component-base-ng.directive';
-import { IntegerEnumInputNgComponent as IntegerEnumInputNgComponent_1 } from '../../../controls/enum/integer-enum-input/ng/integer-enum-input-ng.component';
-import { SvgButtonNgComponent as SvgButtonNgComponent_1 } from '../../../controls/boolean/button/icon/svg-button/ng/svg-button-ng.component';
 
 @Component({
     selector: 'app-expandable-collapsible-lined-heading',
     templateUrl: './expandable-collapsible-lined-heading-ng.component.html',
     styleUrls: ['./expandable-collapsible-lined-heading-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [IntegerEnumInputNgComponent_1, SvgButtonNgComponent_1]
+    imports: [IntegerEnumInputNgComponent, SvgButtonNgComponent]
 })
 export class ExpandableCollapsibleLinedHeadingNgComponent extends ContentComponentBaseNgDirective implements OnDestroy, AfterViewInit {
     private static typeInstanceCreateCount = 0;

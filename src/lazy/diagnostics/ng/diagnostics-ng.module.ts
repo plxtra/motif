@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { EagerControlsNgModule } from 'controls-ng-api';
 import { DebugDiagnosticsNgComponent } from '../debug/ng-api';
 
 @NgModule({
@@ -9,7 +8,6 @@ import { DebugDiagnosticsNgComponent } from '../debug/ng-api';
     ],
     imports: [
         CommonModule,
-        EagerControlsNgModule,
         DebugDiagnosticsNgComponent,
     ]
 })

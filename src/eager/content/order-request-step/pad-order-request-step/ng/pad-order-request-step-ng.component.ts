@@ -58,27 +58,13 @@ import { Decimal } from 'decimal.js-light';
 import { ContentNgService } from '../../../ng/content-ng.service';
 import { OrderRequestStepComponentNgDirective } from '../../ng/order-request-step-component-ng.directive';
 import { PadOrderRequestStepFrame } from '../pad-order-request-step-frame';
-import { CaptionLabelNgComponent as CaptionLabelNgComponent_1 } from '../../../../controls/label/caption-label/ng/caption-label-ng.component';
-import { BrokerageAccountGroupInputNgComponent as BrokerageAccountGroupInputNgComponent_1 } from '../../../../controls/brokerage-account-group/brokerage-account-group-input/ng/brokerage-account-group-input-ng.component';
-import { BrokerageAccountGroupNameLabelNgComponent as BrokerageAccountGroupNameLabelNgComponent_1 } from '../../../../controls/brokerage-account-group/brokerage-account-group-name-label/ng/brokerage-account-group-name-label-ng.component';
-import { IntegerCaptionedRadioNgComponent as IntegerCaptionedRadioNgComponent_1 } from '../../../../controls/enum/integer-captioned-radio/ng/integer-captioned-radio-ng.component';
-import { IntegerEnumInputNgComponent as IntegerEnumInputNgComponent_1 } from '../../../../controls/enum/integer-enum-input/ng/integer-enum-input-ng.component';
-import { TradingIvemIdSelectNgComponent as TradingIvemIdSelectNgComponent_1 } from '../../../../controls/market-ivem-id/trading-ivem-id-select/ng/trading-ivem-id-select-ng.component';
-import { TradingMarketInputNgComponent as TradingMarketInputNgComponent_1 } from '../../../../controls/trading-market/trading-market-input/ng/trading-market-input-ng.component';
-import { TradingIvemIdNameLabelNgComponent as TradingIvemIdNameLabelNgComponent_1 } from '../../../../controls/market-ivem-id/trading-ivem-id-name-label/ng/trading-ivem-id-name-label-ng.component';
-import { IntegerTextInputNgComponent as IntegerTextInputNgComponent_1 } from '../../../../controls/number/integer/integer-text-input/ng/integer-text-input-ng.component';
-import { DecimalInputNgComponent as DecimalInputNgComponent_1 } from '../../../../controls/decimal/decimal-input/ng/decimal-input-ng.component';
-import { IntegerEnumCaptionNgComponent as IntegerEnumCaptionNgComponent_1 } from '../../../../controls/enum/integer-enum-caption/ng/integer-enum-caption-ng.component';
-import { DateInputNgComponent as DateInputNgComponent_1 } from '../../../../controls/date/date-input/ng/date-input-ng.component';
-import { TextInputNgComponent as TextInputNgComponent_1 } from '../../../../controls/string/text-input/ng/text-input-ng.component';
-import { IntegerLabelNgComponent as IntegerLabelNgComponent_1 } from '../../../../controls/number/integer/integer-label/ng/integer-label-ng.component';
 
 @Component({
     selector: 'app-pad-order-request-step',
     templateUrl: './pad-order-request-step-ng.component.html',
     styleUrls: ['./pad-order-request-step-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [CaptionLabelNgComponent_1, BrokerageAccountGroupInputNgComponent_1, BrokerageAccountGroupNameLabelNgComponent_1, IntegerCaptionedRadioNgComponent_1, IntegerEnumInputNgComponent_1, TradingIvemIdSelectNgComponent_1, TradingMarketInputNgComponent_1, TradingIvemIdNameLabelNgComponent_1, IntegerTextInputNgComponent_1, DecimalInputNgComponent_1, IntegerEnumCaptionNgComponent_1, DateInputNgComponent_1, TextInputNgComponent_1, IntegerLabelNgComponent_1]
+    imports: [CaptionLabelNgComponent, BrokerageAccountGroupInputNgComponent, BrokerageAccountGroupNameLabelNgComponent, IntegerCaptionedRadioNgComponent, IntegerEnumInputNgComponent, TradingIvemIdSelectNgComponent, TradingMarketInputNgComponent, TradingIvemIdNameLabelNgComponent, IntegerTextInputNgComponent, DecimalInputNgComponent, IntegerEnumCaptionNgComponent, DateInputNgComponent, TextInputNgComponent, IntegerLabelNgComponent]
 })
 export class PadOrderRequestStepNgComponent extends OrderRequestStepComponentNgDirective implements OnDestroy, AfterViewInit, PadOrderRequestStepFrame.ComponentAccess {
     private static typeInstanceCreateCount = 0;

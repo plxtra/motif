@@ -101,8 +101,4 @@ export namespace SettingsDitemFrame {
     }
 }
 
-export namespace SettingsDitemFrameModule {
-    export function initialiseStatic() {
-        SettingsDitemFrame.Group.initialise();
-    }
-}
+SettingsDitemFrame.Group.initialise();

@@ -16,7 +16,6 @@ import {
 import { RevColumnLayoutOrReferenceDefinition } from 'revgrid';
 import { ComponentBaseNgDirective } from '../../../../component/ng-api';
 import { ContentComponentBaseNgDirective } from '../../../ng/content-component-base-ng.directive';
-import { CaptionLabelNgComponent as CaptionLabelNgComponent_1 } from '../../../../controls/label/caption-label/ng/caption-label-ng.component';
 import { CheckboxInputNgComponent } from '../../../../controls/boolean/checkbox-input/ng/checkbox-input-ng.component';
 import { TextInputNgComponent } from '../../../../controls/string/text-input/ng/text-input-ng.component';
 
@@ -25,7 +24,7 @@ import { TextInputNgComponent } from '../../../../controls/string/text-input/ng/
     templateUrl: './lock-open-notification-channel-properties-ng.component.html',
     styleUrls: ['./lock-open-notification-channel-properties-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [CaptionLabelNgComponent_1, CheckboxInputNgComponent, TextInputNgComponent]
+    imports: [CaptionLabelNgComponent, CheckboxInputNgComponent, TextInputNgComponent]
 })
 export class LockOpenNotificationChannelPropertiesNgComponent extends ContentComponentBaseNgDirective implements OnDestroy, AfterViewInit {
     editGridColumnsEventer: LockOpenNotificationChannelPropertiesNgComponent.EditGridColumnsEventer | undefined;

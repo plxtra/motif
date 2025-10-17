@@ -210,8 +210,4 @@ export namespace DitemComponentFactoryNgService {
     }
 }
 
-export namespace DitemComponentFactoryNgServiceModule {
-    export function initialiseStatic() {
-        DitemComponentFactoryNgService.Builtin.initialise();
-    }
-}
+DitemComponentFactoryNgService.Builtin.initialise();

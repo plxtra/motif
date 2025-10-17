@@ -307,8 +307,4 @@ export namespace ResultOrderRequestStepFrame {
     }
 }
 
-export namespace ResultOrderRequestStepFrameModule {
-    export function initialiseStatic() {
-        ResultOrderRequestStepFrame.initialise();
-    }
-}
+ResultOrderRequestStepFrame.initialise();

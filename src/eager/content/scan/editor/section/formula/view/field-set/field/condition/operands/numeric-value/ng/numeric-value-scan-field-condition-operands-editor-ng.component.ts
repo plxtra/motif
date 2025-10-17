@@ -7,16 +7,13 @@ import { CaptionedCheckboxNgComponent, CaptionLabelNgComponent, NumberInputNgCom
 import { ScanFieldConditionOperandsEditorNgDirective } from '../../ng/ng-api';
 import { NumericValueScanFieldConditionOperandsEditorFrame } from '../numeric-value-scan-field-condition-operands-editor-frame';
 import { SvgIconComponent } from 'angular-svg-icon';
-import { CaptionedCheckboxNgComponent as CaptionedCheckboxNgComponent_1 } from '../../../../../../../../../../../../controls/boolean/captioned-checkbox/ng/captioned-checkbox-ng.component';
-import { CaptionLabelNgComponent as CaptionLabelNgComponent_1 } from '../../../../../../../../../../../../controls/label/caption-label/ng/caption-label-ng.component';
-import { NumberInputNgComponent as NumberInputNgComponent_1 } from '../../../../../../../../../../../../controls/number/number-input/ng/number-input-ng.component';
 
 @Component({
     selector: 'app-numeric-value-scan-field-condition-operands-editor',
     templateUrl: './numeric-value-scan-field-condition-operands-editor-ng.component.html',
     styleUrls: ['./numeric-value-scan-field-condition-operands-editor-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [SvgIconComponent, CaptionedCheckboxNgComponent_1, CaptionLabelNgComponent_1, NumberInputNgComponent_1]
+    imports: [SvgIconComponent, CaptionedCheckboxNgComponent, CaptionLabelNgComponent, NumberInputNgComponent]
 })
 export class NumericValueScanFieldConditionOperandsEditorNgComponent extends ScanFieldConditionOperandsEditorNgDirective implements AfterViewInit {
     declare readonly _frame: NumericValueScanFieldConditionOperandsEditorNgComponent.Frame;

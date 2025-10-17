@@ -247,8 +247,4 @@ export namespace DataMarketTableFieldSourceDefinition {
     }
 }
 
-export namespace DataMarketTableFieldSourceDefinitionModule {
-    export function initialiseStatic() {
-        DataMarketTableFieldSourceDefinition.Field.initialise();
-    }
-}
+DataMarketTableFieldSourceDefinition.Field.initialise();

@@ -5,7 +5,6 @@ import { DelayedBadnessNgComponent } from '../../../delayed-badness/ng-api';
 import { ContentComponentBaseNgDirective } from '../../../ng/content-component-base-ng.directive';
 import { ContentNgService } from '../../../ng/content-ng.service';
 import { DataMarketsWithBoardsFrame } from '../data-markets-with-boards-frame';
-import { DelayedBadnessNgComponent as DelayedBadnessNgComponent_1 } from '../../../delayed-badness/ng/delayed-badness-ng.component';
 import { NgClass } from '@angular/common';
 
 @Component({
@@ -13,7 +12,7 @@ import { NgClass } from '@angular/common';
     templateUrl: './data-markets-with-boards-ng.component.html',
     styleUrls: ['./data-markets-with-boards-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [DelayedBadnessNgComponent_1, NgClass]
+    imports: [DelayedBadnessNgComponent, NgClass]
 })
 export class DataMarketsWithBoardsNgComponent extends ContentComponentBaseNgDirective implements DataMarketsWithBoardsFrame.ComponentAccess, OnDestroy, AfterViewInit {
     private static typeInstanceCreateCount = 0;

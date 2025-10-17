@@ -6,14 +6,13 @@ import { AdvertWebPageNgComponent } from 'content-ng-api';
 import { DesktopAccessNgService } from '../../../ng/desktop-access-ng.service';
 import { WebPageDitemNgComponentBaseNgDirective } from '../../ng/web-page-ditem-ng-component-base-ng.directive';
 import { AdvertWebPageDitemFrame } from '../advert-web-page-ditem-frame';
-import { AdvertWebPageNgComponent as AdvertWebPageNgComponent_1 } from '../../../../content/advert/advert-web-page/ng/advert-web-page-ng.component';
 
 @Component({
     selector: 'app-advert-web-page-ditem',
     templateUrl: './advert-web-page-ditem-ng.component.html',
     styleUrls: ['./advert-web-page-ditem-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [AdvertWebPageNgComponent_1]
+    imports: [AdvertWebPageNgComponent]
 })
 export class AdvertWebPageDitemNgComponent extends WebPageDitemNgComponentBaseNgDirective implements AfterViewInit, AdvertWebPageDitemFrame.ComponentAccess {
     private static typeInstanceCreateCount = 0;

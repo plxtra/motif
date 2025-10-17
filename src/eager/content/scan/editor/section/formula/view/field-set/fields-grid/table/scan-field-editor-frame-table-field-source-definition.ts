@@ -176,8 +176,4 @@ export namespace ScanFieldEditorFrameTableFieldSourceDefinition {
     }
 }
 
-export namespace ScanFieldEditorFrameTableFieldSourceDefinitionModule {
-    export function initialiseStatic() {
-        ScanFieldEditorFrameTableFieldSourceDefinition.Field.initialise();
-    }
-}
+ScanFieldEditorFrameTableFieldSourceDefinition.Field.initialise();

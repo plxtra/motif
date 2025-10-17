@@ -7,16 +7,13 @@ import { CaptionedCheckboxNgComponent, CheckboxInputNgComponent, TextInputNgComp
 import { ScanFieldConditionOperandsEditorNgDirective } from '../../ng/ng-api';
 import { TextContainsScanFieldConditionOperandsEditorFrame } from '../text-contains-scan-field-condition-operands-editor-frame';
 import { SvgIconComponent } from 'angular-svg-icon';
-import { CaptionedCheckboxNgComponent as CaptionedCheckboxNgComponent_1 } from '../../../../../../../../../../../../controls/boolean/captioned-checkbox/ng/captioned-checkbox-ng.component';
-import { CheckboxInputNgComponent as CheckboxInputNgComponent_1 } from '../../../../../../../../../../../../controls/boolean/checkbox-input/ng/checkbox-input-ng.component';
-import { TextInputNgComponent as TextInputNgComponent_1 } from '../../../../../../../../../../../../controls/string/text-input/ng/text-input-ng.component';
 
 @Component({
     selector: 'app-text-value-scan-field-condition-operands-editor',
     templateUrl: './text-contains-scan-field-condition-operands-editor-ng.component.html',
     styleUrls: ['./text-contains-scan-field-condition-operands-editor-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [SvgIconComponent, CaptionedCheckboxNgComponent_1, CheckboxInputNgComponent_1, TextInputNgComponent_1]
+    imports: [SvgIconComponent, CaptionedCheckboxNgComponent, CheckboxInputNgComponent, TextInputNgComponent]
 })
 export class TextContainsScanFieldConditionOperandsEditorNgComponent extends ScanFieldConditionOperandsEditorNgDirective implements AfterViewInit {
     declare readonly _frame: TextContainsScanFieldConditionOperandsEditorNgComponent.Frame;

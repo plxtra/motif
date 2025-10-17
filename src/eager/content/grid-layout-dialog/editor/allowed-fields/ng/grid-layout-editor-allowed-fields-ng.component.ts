@@ -11,14 +11,13 @@ import { ContentNgService } from '../../../../ng/content-ng.service';
 import { allowedFieldsInjectionToken, definitionColumnListInjectionToken } from '../../../ng/grid-layout-dialog-ng-injection-tokens';
 import { ColumnLayoutEditorSearchGridNgComponent } from '../../search-grid/ng-api';
 import { ColumnLayoutEditorAllowedFieldsFrame } from '../grid-layout-editor-allowed-fields-frame';
-import { ColumnLayoutEditorSearchGridNgComponent as ColumnLayoutEditorSearchGridNgComponent_1 } from '../../search-grid/ng/grid-layout-editor-search-grid-ng.component';
 
 @Component({
     selector: 'app-grid-layout-editor-allowed-fields',
     templateUrl: './grid-layout-editor-allowed-fields-ng.component.html',
     styleUrls: ['./grid-layout-editor-allowed-fields-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [ColumnLayoutEditorSearchGridNgComponent_1]
+    imports: [ColumnLayoutEditorSearchGridNgComponent]
 })
 export class ColumnLayoutEditorAllowedFieldsNgComponent extends GridSourceNgDirective {
     private static typeInstanceCreateCount = 0;

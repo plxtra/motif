@@ -30,7 +30,6 @@ export * from './lock-open-notification-channels/ng-api';
 export * from './market-boards/ng-api';
 export * from './nameable-grid-layout-editor-dialog/ng-api';
 export * from './ng/content-component-base-ng.directive';
-export * from './ng/eager-content-ng.module';
 export * from './ng/legacy-table-record-source-definition-factory-ng.service';
 export * from './ng/table-field-source-definition-caching-factory-ng.service';
 export * from './ng/table-record-source-factory-ng.service';

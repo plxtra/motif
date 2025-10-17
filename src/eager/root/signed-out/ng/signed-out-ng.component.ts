@@ -5,14 +5,13 @@ import { ButtonUiAction, CommandRegisterService, InternalCommand, StringId, Stri
 import { ComponentBaseNgDirective } from 'component-ng-api';
 import { CommandRegisterNgService } from 'component-services-ng-api';
 import { ButtonInputNgComponent } from 'controls-ng-api';
-import { ButtonInputNgComponent as ButtonInputNgComponent_1 } from '../../../controls/boolean/button/button-input/ng/button-input-ng.component';
 
 @Component({
     selector: 'app-signed-out',
     templateUrl: './signed-out-ng.component.html',
     styleUrls: ['./signed-out-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [ButtonInputNgComponent_1]
+    imports: [ButtonInputNgComponent]
 })
 export class SignedOutNgComponent extends ComponentBaseNgDirective implements OnDestroy, AfterViewInit {
     private static typeInstanceCreateCount = 0;

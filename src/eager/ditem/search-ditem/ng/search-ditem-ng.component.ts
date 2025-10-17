@@ -20,19 +20,13 @@ import {
 import { BuiltinDitemNgComponentBaseNgDirective } from '../../ng/builtin-ditem-ng-component-base.directive';
 import { DesktopAccessNgService } from '../../ng/desktop-access-ng.service';
 import { SearchDitemFrame } from '../search-ditem-frame';
-import { IntegerEnumInputNgComponent as IntegerEnumInputNgComponent_1 } from '../../../controls/enum/integer-enum-input/ng/integer-enum-input-ng.component';
-import { ButtonInputNgComponent as ButtonInputNgComponent_1 } from '../../../controls/boolean/button/button-input/ng/button-input-ng.component';
-import { SvgButtonNgComponent as SvgButtonNgComponent_1 } from '../../../controls/boolean/button/icon/svg-button/ng/svg-button-ng.component';
-import { TextInputNgComponent as TextInputNgComponent_1 } from '../../../controls/string/text-input/ng/text-input-ng.component';
-import { CaptionLabelNgComponent as CaptionLabelNgComponent_1 } from '../../../controls/label/caption-label/ng/caption-label-ng.component';
-import { RowDataArrayGridNgComponent as RowDataArrayGridNgComponent_1 } from '../../../content/adapted-revgrid/row-data-array-grid/ng/row-data-array-grid-ng.component';
 
 @Component({
     selector: 'app-search-ditem-ng',
     templateUrl: './search-ditem-ng.component.html',
     styleUrls: ['./search-ditem-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [IntegerEnumInputNgComponent_1, ButtonInputNgComponent_1, SvgButtonNgComponent_1, TextInputNgComponent_1, CaptionLabelNgComponent_1, RowDataArrayGridNgComponent_1]
+    imports: [IntegerEnumInputNgComponent, ButtonInputNgComponent, SvgButtonNgComponent, TextInputNgComponent, CaptionLabelNgComponent, RowDataArrayGridNgComponent]
 })
 export class SearchDitemNgComponent extends BuiltinDitemNgComponentBaseNgDirective implements OnDestroy, AfterViewInit {
     private static typeInstanceCreateCount = 0;

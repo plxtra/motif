@@ -11,15 +11,13 @@ import {
 import { CommandRegisterNgService } from 'component-services-ng-api';
 import { SvgButtonNgComponent, TextInputNgComponent } from 'controls-ng-api';
 import { ContentComponentBaseNgDirective } from '../../../../ng/content-component-base-ng.directive';
-import { TextInputNgComponent as TextInputNgComponent_1 } from '../../../../../controls/string/text-input/ng/text-input-ng.component';
-import { SvgButtonNgComponent as SvgButtonNgComponent_1 } from '../../../../../controls/boolean/button/icon/svg-button/ng/svg-button-ng.component';
 
 @Component({
     selector: 'app-grid-layout-editor-search-grid',
     templateUrl: './grid-layout-editor-search-grid-ng.component.html',
     styleUrls: ['./grid-layout-editor-search-grid-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [TextInputNgComponent_1, SvgButtonNgComponent_1]
+    imports: [TextInputNgComponent, SvgButtonNgComponent]
 })
 export class ColumnLayoutEditorSearchGridNgComponent extends ContentComponentBaseNgDirective implements OnDestroy, AfterViewInit {
     private static typeInstanceCreateCount = 0;

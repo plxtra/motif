@@ -13,17 +13,13 @@ import { CaptionLabelNgComponent, IntegerCaptionedRadioNgComponent, NumberInputN
 import { ColorControlsNgComponent } from '../../color-controls/ng-api';
 import { MultiColorPickerNgComponent } from '../../multi-color-picker/ng/multi-color-picker-ng.component';
 import { ContentComponentBaseNgDirective } from '../../ng/content-component-base-ng.directive';
-import { CaptionLabelNgComponent as CaptionLabelNgComponent_1 } from '../../../controls/label/caption-label/ng/caption-label-ng.component';
-import { NumberInputNgComponent as NumberInputNgComponent_1 } from '../../../controls/number/number-input/ng/number-input-ng.component';
-import { IntegerCaptionedRadioNgComponent as IntegerCaptionedRadioNgComponent_1 } from '../../../controls/enum/integer-captioned-radio/ng/integer-captioned-radio-ng.component';
-import { ColorControlsNgComponent as ColorControlsNgComponent_1 } from '../../color-controls/ng/color-controls-ng.component';
 
 @Component({
     selector: 'app-color-scheme-item-properties',
     templateUrl: './color-scheme-item-properties-ng.component.html',
     styleUrls: ['./color-scheme-item-properties-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [CaptionLabelNgComponent_1, NumberInputNgComponent_1, IntegerCaptionedRadioNgComponent_1, ColorControlsNgComponent_1, MultiColorPickerNgComponent]
+    imports: [CaptionLabelNgComponent, NumberInputNgComponent, IntegerCaptionedRadioNgComponent, ColorControlsNgComponent, MultiColorPickerNgComponent]
 })
 export class ColorSchemeItemPropertiesNgComponent extends ContentComponentBaseNgDirective implements AfterViewInit, OnDestroy {
     private static typeInstanceCreateCount = 0;

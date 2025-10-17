@@ -195,8 +195,4 @@ export namespace LogService {
     }
 }
 
-export namespace LogServiceModule {
-    export function initialiseStatic() {
-        LogService.Level.initialise();
-    }
-}
+LogService.Level.initialise();

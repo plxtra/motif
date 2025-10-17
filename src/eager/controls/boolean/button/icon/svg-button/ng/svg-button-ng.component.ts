@@ -513,9 +513,3 @@ export namespace SvgButtonNgComponent {
         }
     }
 }
-
-export namespace SvgButtonNgComponentModule {
-    export function initialiseStatic(svgIconRegistryService: SvgIconRegistryService) {
-        SvgButtonNgComponent.Lookup.initialise(svgIconRegistryService);
-    }
-}

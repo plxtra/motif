@@ -19,9 +19,6 @@ import {
 import { NameableColumnLayoutEditorDialogNgComponent } from '../../nameable-grid-layout-editor-dialog/ng-api';
 import { ContentComponentBaseNgDirective } from '../../ng/content-component-base-ng.directive';
 import { DataMarketsGridNgComponent } from '../grid/ng-api';
-import { IntegerCaptionedRadioNgComponent as IntegerCaptionedRadioNgComponent_1 } from '../../../controls/enum/integer-captioned-radio/ng/integer-captioned-radio-ng.component';
-import { SvgButtonNgComponent as SvgButtonNgComponent_1 } from '../../../controls/boolean/button/icon/svg-button/ng/svg-button-ng.component';
-import { DataMarketsGridNgComponent as DataMarketsGridNgComponent_1 } from '../grid/ng/data-markets-grid-ng.component';
 import { DataMarketsWithBoardsNgComponent } from '../with-boards/ng/data-markets-with-boards-ng.component';
 
 @Component({
@@ -29,7 +26,7 @@ import { DataMarketsWithBoardsNgComponent } from '../with-boards/ng/data-markets
     templateUrl: './data-markets-ng.component.html',
     styleUrls: ['./data-markets-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [IntegerCaptionedRadioNgComponent_1, SvgButtonNgComponent_1, DataMarketsGridNgComponent_1, DataMarketsWithBoardsNgComponent]
+    imports: [IntegerCaptionedRadioNgComponent, SvgButtonNgComponent, DataMarketsGridNgComponent, DataMarketsWithBoardsNgComponent]
 })
 export class DataMarketsNgComponent extends ContentComponentBaseNgDirective implements OnDestroy, AfterViewInit {
     private static typeInstanceCreateCount = 0;

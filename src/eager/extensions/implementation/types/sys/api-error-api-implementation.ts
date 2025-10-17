@@ -199,8 +199,4 @@ export namespace ApiErrorImplementation {
     }
 }
 
-export namespace ApiErrorImplementationModule {
-    export function initialiseStatic() {
-        ApiErrorImplementation.Code.initialise();
-    }
-}
+ApiErrorImplementation.Code.initialise();

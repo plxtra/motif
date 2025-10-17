@@ -404,8 +404,5 @@ export namespace BuiltinDitemFrame {
         }
     }
 }
-export namespace BuiltinDitemFrameModule {
-    export function initialiseStatic(): void {
-        BuiltinDitemFrame.BuiltinType.staticConstructor();
-    }
-}
+
+BuiltinDitemFrame.BuiltinType.staticConstructor();

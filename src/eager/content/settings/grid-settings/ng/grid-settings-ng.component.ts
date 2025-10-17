@@ -11,19 +11,13 @@ import {
     TextInputNgComponent
 } from 'controls-ng-api';
 import { SettingsComponentBaseNgDirective } from '../../ng/settings-component-base-ng.directive';
-import { CaptionLabelNgComponent as CaptionLabelNgComponent_1 } from '../../../../controls/label/caption-label/ng/caption-label-ng.component';
-import { TextInputNgComponent as TextInputNgComponent_1 } from '../../../../controls/string/text-input/ng/text-input-ng.component';
-import { IntegerTextInputNgComponent as IntegerTextInputNgComponent_1 } from '../../../../controls/number/integer/integer-text-input/ng/integer-text-input-ng.component';
-import { CheckboxInputNgComponent as CheckboxInputNgComponent_1 } from '../../../../controls/boolean/checkbox-input/ng/checkbox-input-ng.component';
-import { CaptionedCheckboxNgComponent as CaptionedCheckboxNgComponent_1 } from '../../../../controls/boolean/captioned-checkbox/ng/captioned-checkbox-ng.component';
-import { NumberInputNgComponent as NumberInputNgComponent_1 } from '../../../../controls/number/number-input/ng/number-input-ng.component';
 
 @Component({
     selector: 'app-grid-settings',
     templateUrl: './grid-settings-ng.component.html',
     styleUrls: ['./grid-settings-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [CaptionLabelNgComponent_1, TextInputNgComponent_1, IntegerTextInputNgComponent_1, CheckboxInputNgComponent_1, CaptionedCheckboxNgComponent_1, NumberInputNgComponent_1]
+    imports: [CaptionLabelNgComponent, TextInputNgComponent, IntegerTextInputNgComponent, CheckboxInputNgComponent, CaptionedCheckboxNgComponent, NumberInputNgComponent]
 })
 export class GridSettingsNgComponent extends SettingsComponentBaseNgDirective implements OnDestroy, AfterViewInit {
     private static typeInstanceCreateCount = 0;

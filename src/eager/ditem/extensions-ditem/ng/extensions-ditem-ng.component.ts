@@ -7,7 +7,6 @@ import { ExtensionsSidebarNgComponent } from 'content-ng-api';
 import { BuiltinDitemNgComponentBaseNgDirective } from '../../ng/builtin-ditem-ng-component-base.directive';
 import { DesktopAccessNgService } from '../../ng/desktop-access-ng.service';
 import { ExtensionsDitemFrame } from '../extensions-ditem-frame';
-import { ExtensionsSidebarNgComponent as ExtensionsSidebarNgComponent_1 } from '../../../content/extensions/extensions-sidebar/ng/extensions-sidebar-ng.component';
 import { ExtensionDetailNgComponent } from '../../../content/extensions/extension-detail/ng/extension-detail-ng.component';
 
 @Component({
@@ -16,7 +15,7 @@ import { ExtensionDetailNgComponent } from '../../../content/extensions/extensio
     styleUrls: ['./extensions-ditem-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    imports: [SplitComponent, SplitAreaComponent, ExtensionsSidebarNgComponent_1, ExtensionDetailNgComponent]
+    imports: [SplitComponent, SplitAreaComponent, ExtensionsSidebarNgComponent, ExtensionDetailNgComponent]
 })
 export class ExtensionsDitemNgComponent extends BuiltinDitemNgComponentBaseNgDirective implements OnDestroy, AfterViewInit {
     private static typeInstanceCreateCount = 0;

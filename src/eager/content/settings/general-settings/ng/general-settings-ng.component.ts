@@ -26,21 +26,13 @@ import {
     TextInputNgComponent
 } from 'controls-ng-api';
 import { SettingsComponentBaseNgDirective } from '../../ng/settings-component-base-ng.directive';
-import { CaptionLabelNgComponent as CaptionLabelNgComponent_1 } from '../../../../controls/label/caption-label/ng/caption-label-ng.component';
-import { TextInputNgComponent as TextInputNgComponent_1 } from '../../../../controls/string/text-input/ng/text-input-ng.component';
-import { ExchangeSelectItemNgComponent as ExchangeSelectItemNgComponent_1 } from '../../../../controls/enum/exchange-select-item/ng/exchange-select-item-ng.component';
-import { CheckboxInputNgComponent as CheckboxInputNgComponent_1 } from '../../../../controls/boolean/checkbox-input/ng/checkbox-input-ng.component';
-import { IntegerTextInputNgComponent as IntegerTextInputNgComponent_1 } from '../../../../controls/number/integer/integer-text-input/ng/integer-text-input-ng.component';
-import { IntegerCaptionedRadioNgComponent as IntegerCaptionedRadioNgComponent_1 } from '../../../../controls/enum/integer-captioned-radio/ng/integer-captioned-radio-ng.component';
-import { IntegerEnumInputNgComponent as IntegerEnumInputNgComponent_1 } from '../../../../controls/enum/integer-enum-input/ng/integer-enum-input-ng.component';
-import { EnumArrayInputNgComponent as EnumArrayInputNgComponent_1 } from '../../../../controls/enum-array/enum-array-input/ng/enum-array-input-ng.component';
 
 @Component({
     selector: 'app-general-settings',
     templateUrl: './general-settings-ng.component.html',
     styleUrls: ['./general-settings-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [CaptionLabelNgComponent_1, TextInputNgComponent_1, ExchangeSelectItemNgComponent_1, CheckboxInputNgComponent_1, IntegerTextInputNgComponent_1, IntegerCaptionedRadioNgComponent_1, IntegerEnumInputNgComponent_1, EnumArrayInputNgComponent_1]
+    imports: [CaptionLabelNgComponent, TextInputNgComponent, ExchangeSelectItemNgComponent, CheckboxInputNgComponent, IntegerTextInputNgComponent, IntegerCaptionedRadioNgComponent, IntegerEnumInputNgComponent, EnumArrayInputNgComponent]
 })
 export class GeneralSettingsNgComponent extends SettingsComponentBaseNgDirective implements OnInit, OnDestroy, AfterViewInit {
     private static typeInstanceCreateCount = 0;

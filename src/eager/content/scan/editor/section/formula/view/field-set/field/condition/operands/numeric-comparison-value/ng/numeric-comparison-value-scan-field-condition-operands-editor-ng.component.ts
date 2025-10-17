@@ -7,16 +7,13 @@ import { CaptionLabelNgComponent, IntegerEnumInputNgComponent, NumberInputNgComp
 import { ScanFieldConditionOperandsEditorNgDirective } from '../../ng/ng-api';
 import { NumericComparisonValueScanFieldConditionOperandsEditorFrame } from '../numeric-comparison-value-scan-field-condition-operands-editor-frame';
 import { SvgIconComponent } from 'angular-svg-icon';
-import { IntegerEnumInputNgComponent as IntegerEnumInputNgComponent_1 } from '../../../../../../../../../../../../controls/enum/integer-enum-input/ng/integer-enum-input-ng.component';
-import { CaptionLabelNgComponent as CaptionLabelNgComponent_1 } from '../../../../../../../../../../../../controls/label/caption-label/ng/caption-label-ng.component';
-import { NumberInputNgComponent as NumberInputNgComponent_1 } from '../../../../../../../../../../../../controls/number/number-input/ng/number-input-ng.component';
 
 @Component({
     selector: 'app-numeric-comparison-value-scan-field-condition-operands-editor',
     templateUrl: './numeric-comparison-value-scan-field-condition-operands-editor-ng.component.html',
     styleUrls: ['./numeric-comparison-value-scan-field-condition-operands-editor-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [SvgIconComponent, IntegerEnumInputNgComponent_1, CaptionLabelNgComponent_1, NumberInputNgComponent_1]
+    imports: [SvgIconComponent, IntegerEnumInputNgComponent, CaptionLabelNgComponent, NumberInputNgComponent]
 })
 export class NumericComparisonValueScanFieldConditionOperandsEditorNgComponent extends ScanFieldConditionOperandsEditorNgDirective implements AfterViewInit {
     declare readonly _frame: NumericComparisonValueScanFieldConditionOperandsEditorNgComponent.Frame;

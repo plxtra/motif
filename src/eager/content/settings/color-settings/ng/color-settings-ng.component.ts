@@ -25,16 +25,13 @@ import { ColorSchemeGridNgComponent } from '../../../color-scheme-grid/ng-api';
 import { ColorSchemeItemPropertiesNgComponent } from '../../../color-scheme-item-properties/ng-api';
 import { ColorSchemePresetCodeNgComponent } from '../../../color-scheme-preset-code/ng-api';
 import { SettingsComponentBaseNgDirective } from '../../ng/settings-component-base-ng.directive';
-import { ColorSchemeGridNgComponent as ColorSchemeGridNgComponent_1 } from '../../../color-scheme-grid/ng/color-scheme-grid-ng.component';
-import { SvgButtonNgComponent as SvgButtonNgComponent_1 } from '../../../../controls/boolean/button/icon/svg-button/ng/svg-button-ng.component';
-import { ColorSchemeItemPropertiesNgComponent as ColorSchemeItemPropertiesNgComponent_1 } from '../../../color-scheme-item-properties/ng/color-scheme-item-properties-ng.component';
 
 @Component({
     selector: 'app-color-settings',
     templateUrl: './color-settings-ng.component.html',
     styleUrls: ['./color-settings-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [SplitComponent, SplitAreaComponent, ColorSchemeGridNgComponent_1, SvgButtonNgComponent_1, ColorSchemeItemPropertiesNgComponent_1]
+    imports: [SplitComponent, SplitAreaComponent, ColorSchemeGridNgComponent, SvgButtonNgComponent, ColorSchemeItemPropertiesNgComponent]
 })
 export class ColorSettingsNgComponent extends SettingsComponentBaseNgDirective implements OnDestroy, AfterViewInit {
     private static typeInstanceCreateCount = 0;

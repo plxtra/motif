@@ -10,18 +10,13 @@ import { ComponentBaseNgDirective } from '../../../../../../component/ng-api';
 import { ExpandableCollapsibleLinedHeadingNgComponent } from '../../../../../expandable-collapsible-lined-heading/ng-api';
 import { ScanEditorSectionNgDirective } from '../../scan-editor-section-ng.directive';
 import { ConditionSetScanFormulaViewNgComponent, CriteriaZenithScanFormulaViewNgComponent, RankZenithScanFormulaViewNgComponent, ScanFieldSetEditorNgComponent } from '../view/ng-api';
-import { ExpandableCollapsibleLinedHeadingNgComponent as ExpandableCollapsibleLinedHeadingNgComponent_1 } from '../../../../../expandable-collapsible-lined-heading/ng/expandable-collapsible-lined-heading-ng.component';
-import { CriteriaZenithScanFormulaViewNgComponent as CriteriaZenithScanFormulaViewNgComponent_1 } from '../view/zenith/criteria/ng/criteria-zenith-scan-formula-view-ng.component';
-import { ConditionSetScanFormulaViewNgComponent as ConditionSetScanFormulaViewNgComponent_1 } from '../view/condition-set/ng/condition-set-scan-formula-view-ng.component';
-import { ScanFieldSetEditorNgComponent as ScanFieldSetEditorNgComponent_1 } from '../view/field-set/ng/scan-field-set-editor-ng.component';
-import { RankZenithScanFormulaViewNgComponent as RankZenithScanFormulaViewNgComponent_1 } from '../view/zenith/rank/ng/rank-zenith-scan-formula-view-ng.component';
 
 @Component({
     selector: 'app-formula-scan-editor-section',
     templateUrl: './formula-scan-editor-section-ng.component.html',
     styleUrls: ['./formula-scan-editor-section-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [ExpandableCollapsibleLinedHeadingNgComponent_1, CriteriaZenithScanFormulaViewNgComponent_1, ConditionSetScanFormulaViewNgComponent_1, ScanFieldSetEditorNgComponent_1, RankZenithScanFormulaViewNgComponent_1]
+    imports: [ExpandableCollapsibleLinedHeadingNgComponent, CriteriaZenithScanFormulaViewNgComponent, ConditionSetScanFormulaViewNgComponent, ScanFieldSetEditorNgComponent, RankZenithScanFormulaViewNgComponent]
 })
 export class FormulaScanEditorSectionNgComponent extends ScanEditorSectionNgDirective implements OnInit, OnDestroy, AfterViewInit {
     private static typeInstanceCreateCount = 0;
@@ -300,8 +295,4 @@ export namespace FormulaScanEditorSectionNgComponent {
     }
 }
 
-export namespace FormulaScanPropertiesSectionNgComponentModule {
-    export function initialiseStatic() {
-        FormulaScanEditorSectionNgComponent.View.initialise();
-    }
-}
+FormulaScanEditorSectionNgComponent.View.initialise();

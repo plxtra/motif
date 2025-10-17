@@ -246,8 +246,4 @@ export namespace TradingMarketTableFieldSourceDefinition {
     }
 }
 
-export namespace TradingMarketTableFieldSourceDefinitionModule {
-    export function initialiseStatic() {
-        TradingMarketTableFieldSourceDefinition.Field.initialise();
-    }
-}
+TradingMarketTableFieldSourceDefinition.Field.initialise();

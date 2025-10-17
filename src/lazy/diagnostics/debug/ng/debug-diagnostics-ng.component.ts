@@ -4,14 +4,13 @@ import { AdiService, ButtonUiAction, CommandRegisterService, InternalCommand, St
 import { AdiNgService, CommandRegisterNgService, SessionInfoNgService } from 'component-services-ng-api';
 import { ButtonInputNgComponent } from 'controls-ng-api';
 import { DiagnosticsComponentBaseNgDirective } from '../../ng/diagnostics-component-base-ng.directive';
-import { ButtonInputNgComponent as ButtonInputNgComponent_1 } from '../../../../eager/controls/boolean/button/button-input/ng/button-input-ng.component';
 
 @Component({
     selector: 'app-debug-diagnostics-ng',
     templateUrl: './debug-diagnostics-ng.component.html',
     styleUrls: ['./debug-diagnostics-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [ButtonInputNgComponent_1]
+    imports: [ButtonInputNgComponent]
 })
 export class DebugDiagnosticsNgComponent extends DiagnosticsComponentBaseNgDirective implements OnDestroy, AfterViewInit {
     private static typeInstanceCreateCount = 0;

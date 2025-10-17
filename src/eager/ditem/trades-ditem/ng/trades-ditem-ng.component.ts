@@ -17,17 +17,13 @@ import { DataIvemIdSelectNgComponent, DateInputNgComponent, SvgButtonNgComponent
 import { BuiltinDitemNgComponentBaseNgDirective } from '../../ng/builtin-ditem-ng-component-base.directive';
 import { DesktopAccessNgService } from '../../ng/desktop-access-ng.service';
 import { TradesDitemFrame } from '../trades-ditem-frame';
-import { DataIvemIdSelectNgComponent as DataIvemIdSelectNgComponent_1 } from '../../../controls/market-ivem-id/data-ivem-id-select/ng/data-ivem-id-select-ng.component';
-import { SvgButtonNgComponent as SvgButtonNgComponent_1 } from '../../../controls/boolean/button/icon/svg-button/ng/svg-button-ng.component';
-import { DateInputNgComponent as DateInputNgComponent_1 } from '../../../controls/date/date-input/ng/date-input-ng.component';
-import { TradesNgComponent as TradesNgComponent_1 } from '../../../content/trades/ng/trades-ng.component';
 
 @Component({
     selector: 'app-trades-ditem',
     templateUrl: './trades-ditem-ng.component.html',
     styleUrls: ['./trades-ditem-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [DataIvemIdSelectNgComponent_1, SvgButtonNgComponent_1, DateInputNgComponent_1, TradesNgComponent_1]
+    imports: [DataIvemIdSelectNgComponent, SvgButtonNgComponent, DateInputNgComponent, TradesNgComponent]
 })
 export class TradesDitemNgComponent extends BuiltinDitemNgComponentBaseNgDirective implements OnDestroy, AfterViewInit, TradesDitemFrame.ComponentAccess {
     private static typeInstanceCreateCount = 0;

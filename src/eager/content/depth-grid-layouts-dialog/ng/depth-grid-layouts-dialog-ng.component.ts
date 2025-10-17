@@ -18,15 +18,13 @@ import { SvgButtonNgComponent, TabListNgComponent } from 'controls-ng-api';
 import { RevColumnLayoutDefinition } from 'revgrid';
 import { BidAskAllowedGridFields, ColumnLayoutEditorNgComponent, allowedFieldsInjectionToken, bidAskAllowedFieldsInjectionToken, definitionColumnListInjectionToken, oldBidAskLayoutDefinitionInjectionToken } from '../../grid-layout-dialog/ng-api';
 import { ContentComponentBaseNgDirective } from '../../ng/content-component-base-ng.directive';
-import { SvgButtonNgComponent as SvgButtonNgComponent_1 } from '../../../controls/boolean/button/icon/svg-button/ng/svg-button-ng.component';
-import { TabListNgComponent as TabListNgComponent_1 } from '../../../controls/tab-list/ng/tab-list-ng.component';
 
 @Component({
     selector: 'app-depth-grid-layouts-dialog',
     templateUrl: './depth-grid-layouts-dialog-ng.component.html',
     styleUrls: ['./depth-grid-layouts-dialog-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [SvgButtonNgComponent_1, TabListNgComponent_1]
+    imports: [SvgButtonNgComponent, TabListNgComponent]
 })
 export class DepthColumnLayoutsDialogNgComponent extends ContentComponentBaseNgDirective implements OnDestroy, AfterViewInit {
     private static typeInstanceCreateCount = 0;

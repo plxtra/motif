@@ -23,18 +23,13 @@ import { ScanEditorSectionNgDirective } from '../../scan-editor-section-ng.direc
 import { ScanEditorAttachedNotificationChannelsGridFrame } from '../grid/internal-api';
 import { ScanEditorAttachedNotificationChannelsGridNgComponent } from '../grid/ng-api';
 import { ScanEditorAttachedNotificationChannelPropertiesNgComponent } from '../properties/ng-api';
-import { ExpandableCollapsibleLinedHeadingNgComponent as ExpandableCollapsibleLinedHeadingNgComponent_1 } from '../../../../../expandable-collapsible-lined-heading/ng/expandable-collapsible-lined-heading-ng.component';
-import { IntegerEnumInputNgComponent as IntegerEnumInputNgComponent_1 } from '../../../../../../controls/enum/integer-enum-input/ng/integer-enum-input-ng.component';
-import { SvgButtonNgComponent as SvgButtonNgComponent_1 } from '../../../../../../controls/boolean/button/icon/svg-button/ng/svg-button-ng.component';
-import { ScanEditorAttachedNotificationChannelsGridNgComponent as ScanEditorAttachedNotificationChannelsGridNgComponent_1 } from '../grid/ng/scan-editor-attached-notification-channels-grid-ng.component';
-import { ScanEditorAttachedNotificationChannelPropertiesNgComponent as ScanEditorAttachedNotificationChannelPropertiesNgComponent_1 } from '../properties/ng/scan-editor-attached-notification-channel-properties-ng.component';
 
 @Component({
     selector: 'app-scan-editor-attached-notification-channels',
     templateUrl: './scan-editor-attached-notification-channels-ng.component.html',
     styleUrls: ['./scan-editor-attached-notification-channels-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [ExpandableCollapsibleLinedHeadingNgComponent_1, IntegerEnumInputNgComponent_1, SvgButtonNgComponent_1, ScanEditorAttachedNotificationChannelsGridNgComponent_1, ScanEditorAttachedNotificationChannelPropertiesNgComponent_1]
+    imports: [ExpandableCollapsibleLinedHeadingNgComponent, IntegerEnumInputNgComponent, SvgButtonNgComponent, ScanEditorAttachedNotificationChannelsGridNgComponent, ScanEditorAttachedNotificationChannelPropertiesNgComponent]
 })
 export class ScanEditorAttachedNotificationChannelsNgComponent extends ScanEditorSectionNgDirective implements  OnDestroy, AfterViewInit {
     editGridColumnsEventer: ScanEditorAttachedNotificationChannelsNgComponent.EditGridColumnsEventer | undefined;

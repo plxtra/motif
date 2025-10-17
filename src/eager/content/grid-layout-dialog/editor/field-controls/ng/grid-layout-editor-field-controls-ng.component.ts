@@ -16,14 +16,13 @@ import { ContentComponentBaseNgDirective } from '../../../../ng/content-componen
 import { definitionColumnListInjectionToken } from '../../../ng/grid-layout-dialog-ng-injection-tokens';
 import { ColumnLayoutEditorAllowedFieldsFrame } from '../../allowed-fields/internal-api';
 import { ColumnLayoutEditorColumnsFrame } from '../../columns/internal-api';
-import { SvgButtonNgComponent as SvgButtonNgComponent_1 } from '../../../../../controls/boolean/button/icon/svg-button/ng/svg-button-ng.component';
 
 @Component({
     selector: 'app-grid-layout-editor-field-controls',
     templateUrl: './grid-layout-editor-field-controls-ng.component.html',
     styleUrls: ['./grid-layout-editor-field-controls-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [SvgButtonNgComponent_1]
+    imports: [SvgButtonNgComponent]
 })
 export class ColumnLayoutEditorFieldControlsNgComponent extends ContentComponentBaseNgDirective implements OnDestroy, AfterViewInit {
     private static typeInstanceCreateCount = 0;

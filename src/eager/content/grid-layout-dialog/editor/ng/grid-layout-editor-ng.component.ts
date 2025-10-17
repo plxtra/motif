@@ -14,16 +14,13 @@ import { definitionColumnListInjectionToken } from '../../ng/grid-layout-dialog-
 import { ColumnLayoutEditorAllowedFieldsNgComponent } from '../allowed-fields/ng-api';
 import { ColumnLayoutEditorColumnsNgComponent } from '../columns/ng-api';
 import { ColumnLayoutEditorFieldControlsNgComponent } from '../field-controls/ng-api';
-import { ColumnLayoutEditorAllowedFieldsNgComponent as ColumnLayoutEditorAllowedFieldsNgComponent_1 } from '../allowed-fields/ng/grid-layout-editor-allowed-fields-ng.component';
-import { ColumnLayoutEditorFieldControlsNgComponent as ColumnLayoutEditorFieldControlsNgComponent_1 } from '../field-controls/ng/grid-layout-editor-field-controls-ng.component';
-import { ColumnLayoutEditorColumnsNgComponent as ColumnLayoutEditorColumnsNgComponent_1 } from '../columns/ng/grid-layout-editor-columns-ng.component';
 
 @Component({
     selector: 'app-grid-layout-editor',
     templateUrl: './grid-layout-editor-ng.component.html',
     styleUrls: ['./grid-layout-editor-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [SplitComponent, SplitAreaComponent, ColumnLayoutEditorAllowedFieldsNgComponent_1, ColumnLayoutEditorFieldControlsNgComponent_1, ColumnLayoutEditorColumnsNgComponent_1]
+    imports: [SplitComponent, SplitAreaComponent, ColumnLayoutEditorAllowedFieldsNgComponent, ColumnLayoutEditorFieldControlsNgComponent, ColumnLayoutEditorColumnsNgComponent]
 })
 export class ColumnLayoutEditorNgComponent extends ContentComponentBaseNgDirective implements OnDestroy, AfterViewInit {
     private static typeInstanceCreateCount = 0;

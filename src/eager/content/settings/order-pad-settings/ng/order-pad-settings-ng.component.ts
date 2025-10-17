@@ -9,16 +9,13 @@ import {
 } from '@plxtra/motif-core';
 import { CaptionLabelNgComponent, CheckboxInputNgComponent, IntegerEnumInputNgComponent } from 'controls-ng-api';
 import { SettingsComponentBaseNgDirective } from '../../ng/settings-component-base-ng.directive';
-import { CaptionLabelNgComponent as CaptionLabelNgComponent_1 } from '../../../../controls/label/caption-label/ng/caption-label-ng.component';
-import { CheckboxInputNgComponent as CheckboxInputNgComponent_1 } from '../../../../controls/boolean/checkbox-input/ng/checkbox-input-ng.component';
-import { IntegerEnumInputNgComponent as IntegerEnumInputNgComponent_1 } from '../../../../controls/enum/integer-enum-input/ng/integer-enum-input-ng.component';
 
 @Component({
     selector: 'app-order-pad-settings',
     templateUrl: './order-pad-settings-ng.component.html',
     styleUrls: ['./order-pad-settings-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [CaptionLabelNgComponent_1, CheckboxInputNgComponent_1, IntegerEnumInputNgComponent_1]
+    imports: [CaptionLabelNgComponent, CheckboxInputNgComponent, IntegerEnumInputNgComponent]
 })
 export class OrderPadSettingsNgComponent extends SettingsComponentBaseNgDirective implements OnInit, OnDestroy, AfterViewInit {
     private static typeInstanceCreateCount = 0;

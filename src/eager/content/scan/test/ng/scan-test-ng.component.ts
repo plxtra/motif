@@ -19,15 +19,13 @@ import { SvgButtonNgComponent } from '../../../../controls/ng-api';
 import { ContentComponentBaseNgDirective } from '../../../ng/content-component-base-ng.directive';
 import { ScanTestMatchesFrame } from '../internal-api';
 import { ScanTestMatchesNgComponent } from '../matches/ng-api';
-import { SvgButtonNgComponent as SvgButtonNgComponent_1 } from '../../../../controls/boolean/button/icon/svg-button/ng/svg-button-ng.component';
-import { ScanTestMatchesNgComponent as ScanTestMatchesNgComponent_1 } from '../matches/ng/scan-test-matches-ng.component';
 
 @Component({
     selector: 'app-scan-test',
     templateUrl: './scan-test-ng.component.html',
     styleUrls: ['./scan-test-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [SvgButtonNgComponent_1, ScanTestMatchesNgComponent_1]
+    imports: [SvgButtonNgComponent, ScanTestMatchesNgComponent]
 })
 export class ScanTestNgComponent extends ContentComponentBaseNgDirective implements OnDestroy, AfterViewInit {
     private static typeInstanceCreateCount = 0;

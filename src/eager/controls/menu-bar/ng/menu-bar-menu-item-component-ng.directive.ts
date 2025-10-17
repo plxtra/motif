@@ -229,8 +229,4 @@ export namespace MenuBarMenuItemComponentNgDirective {
     }
 }
 
-export namespace MenuBarMenuItemComponentDirectiveModule {
-    export function initialiseStatic() {
-        MenuBarMenuItemComponentNgDirective.State.initialise();
-    }
-}
+MenuBarMenuItemComponentNgDirective.State.initialise();

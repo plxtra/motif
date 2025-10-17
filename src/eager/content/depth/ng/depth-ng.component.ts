@@ -7,15 +7,13 @@ import { DepthSideNgComponent } from '../../depth-side/ng-api';
 import { ContentComponentBaseNgDirective } from '../../ng/content-component-base-ng.directive';
 import { ContentNgService } from '../../ng/content-ng.service';
 import { DepthFrame } from '../depth-frame';
-import { DelayedBadnessNgComponent as DelayedBadnessNgComponent_1 } from '../../delayed-badness/ng/delayed-badness-ng.component';
-import { DepthSideNgComponent as DepthSideNgComponent_1 } from '../../depth-side/ng/depth-side-ng.component';
 
 @Component({
     selector: 'app-depth',
     templateUrl: './depth-ng.component.html',
     styleUrls: ['./depth-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [DelayedBadnessNgComponent_1, SplitComponent, SplitAreaComponent, DepthSideNgComponent_1]
+    imports: [DelayedBadnessNgComponent, SplitComponent, SplitAreaComponent, DepthSideNgComponent]
 })
 export class DepthNgComponent extends ContentComponentBaseNgDirective implements OnDestroy, AfterViewInit, DepthFrame.ComponentAccess {
     private static typeInstanceCreateCount = 0;

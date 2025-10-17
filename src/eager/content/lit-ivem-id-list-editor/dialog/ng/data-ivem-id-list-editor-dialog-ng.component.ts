@@ -14,7 +14,6 @@ import { SvgButtonNgComponent } from 'controls-ng-api';
 import { RevColumnLayoutOrReferenceDefinition } from 'revgrid';
 import { NameableColumnLayoutEditorDialogNgComponent } from '../../../nameable-grid-layout-editor-dialog/ng-api';
 import { DataIvemIdListEditorNgDirective } from '../../ng/data-ivem-id-list-editor-ng.directive';
-import { SvgButtonNgComponent as SvgButtonNgComponent_1 } from '../../../../controls/boolean/button/icon/svg-button/ng/svg-button-ng.component';
 import { DataIvemIdSelectNgComponent } from '../../../../controls/market-ivem-id/data-ivem-id-select/ng/data-ivem-id-select-ng.component';
 import { TextInputNgComponent } from '../../../../controls/string/text-input/ng/text-input-ng.component';
 import { DataIvemIdListNgComponent } from '../../../lit-ivem-id-list/ng/data-ivem-id-list-ng.component';
@@ -25,7 +24,7 @@ import { DataIvemIdListNgComponent } from '../../../lit-ivem-id-list/ng/data-ive
     styleUrls: ['./data-ivem-id-list-editor-dialog-ng.component.scss'],
     providers: [DataIvemIdListEditorNgDirective.initialCustomGridSettingsProvider],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [SvgButtonNgComponent_1, DataIvemIdSelectNgComponent, TextInputNgComponent, DataIvemIdListNgComponent]
+    imports: [SvgButtonNgComponent, DataIvemIdSelectNgComponent, TextInputNgComponent, DataIvemIdListNgComponent]
 })
 export class DataIvemIdListEditorDialogNgComponent extends DataIvemIdListEditorNgDirective implements AfterViewInit{
     private static typeInstanceCreateCount = 0;

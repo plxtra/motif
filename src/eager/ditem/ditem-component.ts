@@ -144,8 +144,4 @@ export namespace DitemComponent {
     }
 }
 
-export namespace DitemComponentModule {
-    export function initialiseStatic() {
-        DitemComponent.ConstructionMethod.initialise();
-    }
-}
+DitemComponent.ConstructionMethod.initialise();

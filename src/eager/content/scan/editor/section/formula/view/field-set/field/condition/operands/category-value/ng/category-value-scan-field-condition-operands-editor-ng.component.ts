@@ -7,16 +7,13 @@ import { CaptionedCheckboxNgComponent, CaptionLabelNgComponent, IntegerEnumInput
 import { ScanFieldConditionOperandsEditorNgDirective } from '../../ng/ng-api';
 import { CategoryValueScanFieldConditionOperandsEditorFrame } from '../category-value-scan-field-condition-operands-editor-frame';
 import { SvgIconComponent } from 'angular-svg-icon';
-import { CaptionedCheckboxNgComponent as CaptionedCheckboxNgComponent_1 } from '../../../../../../../../../../../../controls/boolean/captioned-checkbox/ng/captioned-checkbox-ng.component';
-import { CaptionLabelNgComponent as CaptionLabelNgComponent_1 } from '../../../../../../../../../../../../controls/label/caption-label/ng/caption-label-ng.component';
-import { IntegerEnumInputNgComponent as IntegerEnumInputNgComponent_1 } from '../../../../../../../../../../../../controls/enum/integer-enum-input/ng/integer-enum-input-ng.component';
 
 @Component({
     selector: 'app-category-value-scan-field-condition-operands-editor',
     templateUrl: './category-value-scan-field-condition-operands-editor-ng.component.html',
     styleUrls: ['./category-value-scan-field-condition-operands-editor-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [SvgIconComponent, CaptionedCheckboxNgComponent_1, CaptionLabelNgComponent_1, IntegerEnumInputNgComponent_1]
+    imports: [SvgIconComponent, CaptionedCheckboxNgComponent, CaptionLabelNgComponent, IntegerEnumInputNgComponent]
 })
 export class CategoryValueScanFieldConditionOperandsEditorNgComponent extends ScanFieldConditionOperandsEditorNgDirective implements AfterViewInit {
     declare readonly _frame: CategoryValueScanFieldConditionOperandsEditorNgComponent.Frame;

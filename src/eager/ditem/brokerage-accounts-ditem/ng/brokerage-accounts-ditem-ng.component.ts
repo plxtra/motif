@@ -17,15 +17,13 @@ import { SvgButtonNgComponent } from 'controls-ng-api';
 import { BuiltinDitemNgComponentBaseNgDirective } from '../../ng/builtin-ditem-ng-component-base.directive';
 import { DesktopAccessNgService } from '../../ng/desktop-access-ng.service';
 import { BrokerageAccountsDitemFrame } from '../brokerage-accounts-ditem-frame';
-import { SvgButtonNgComponent as SvgButtonNgComponent_1 } from '../../../controls/boolean/button/icon/svg-button/ng/svg-button-ng.component';
-import { BrokerageAccountsNgComponent as BrokerageAccountsNgComponent_1 } from '../../../content/brokerage-accounts/ng/brokerage-accounts-ng.component';
 
 @Component({
     selector: 'app-brokerage-accounts-ditem',
     templateUrl: './brokerage-accounts-ditem-ng.component.html',
     styleUrls: ['./brokerage-accounts-ditem-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [SvgButtonNgComponent_1, BrokerageAccountsNgComponent_1]
+    imports: [SvgButtonNgComponent, BrokerageAccountsNgComponent]
 })
 export class BrokerageAccountsDitemNgComponent extends BuiltinDitemNgComponentBaseNgDirective implements OnDestroy, AfterViewInit {
     private static typeInstanceCreateCount = 0;

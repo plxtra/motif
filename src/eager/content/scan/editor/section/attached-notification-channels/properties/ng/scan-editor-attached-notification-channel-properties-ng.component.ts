@@ -14,16 +14,14 @@ import {
 } from 'controls-ng-api';
 import { ComponentBaseNgDirective } from '../../../../../../../component/ng-api';
 import { ContentComponentBaseNgDirective } from '../../../../../../ng/content-component-base-ng.directive';
-import { CaptionLabelNgComponent as CaptionLabelNgComponent_1 } from '../../../../../../../controls/label/caption-label/ng/caption-label-ng.component';
 import { NumberInputNgComponent } from '../../../../../../../controls/number/number-input/ng/number-input-ng.component';
-import { IntegerEnumInputNgComponent as IntegerEnumInputNgComponent_1 } from '../../../../../../../controls/enum/integer-enum-input/ng/integer-enum-input-ng.component';
 
 @Component({
     selector: 'app-scan-editor-attached-notification-channel-properties',
     templateUrl: './scan-editor-attached-notification-channel-properties-ng.component.html',
     styleUrls: ['./scan-editor-attached-notification-channel-properties-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [CaptionLabelNgComponent_1, NumberInputNgComponent, IntegerEnumInputNgComponent_1]
+    imports: [CaptionLabelNgComponent, NumberInputNgComponent, IntegerEnumInputNgComponent]
 })
 export class ScanEditorAttachedNotificationChannelPropertiesNgComponent extends ContentComponentBaseNgDirective implements  OnDestroy, AfterViewInit {
     public readonly channelNameLabel: string;

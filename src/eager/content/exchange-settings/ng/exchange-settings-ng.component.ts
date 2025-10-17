@@ -9,16 +9,13 @@ import {
 import { SettingsNgService } from 'component-services-ng-api';
 import { CaptionLabelNgComponent, EnumArrayInputNgComponent, IntegerEnumInputNgComponent } from 'controls-ng-api';
 import { ContentComponentBaseNgDirective } from '../../ng/content-component-base-ng.directive';
-import { CaptionLabelNgComponent as CaptionLabelNgComponent_1 } from '../../../controls/label/caption-label/ng/caption-label-ng.component';
-import { IntegerEnumInputNgComponent as IntegerEnumInputNgComponent_1 } from '../../../controls/enum/integer-enum-input/ng/integer-enum-input-ng.component';
-import { EnumArrayInputNgComponent as EnumArrayInputNgComponent_1 } from '../../../controls/enum-array/enum-array-input/ng/enum-array-input-ng.component';
 
 @Component({
     selector: 'app-exchange-settings',
     templateUrl: './exchange-settings-ng.component.html',
     styleUrls: ['./exchange-settings-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [CaptionLabelNgComponent_1, IntegerEnumInputNgComponent_1, EnumArrayInputNgComponent_1]
+    imports: [CaptionLabelNgComponent, IntegerEnumInputNgComponent, EnumArrayInputNgComponent]
 })
 export class ExchangeSettingsNgComponent extends ContentComponentBaseNgDirective implements OnDestroy, AfterViewInit {
     private static typeInstanceCreateCount = 0;

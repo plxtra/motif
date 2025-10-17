@@ -23,17 +23,13 @@ import { DataIvemIdSelectNgComponent, SvgButtonNgComponent, TextInputNgComponent
 import { BuiltinDitemNgComponentBaseNgDirective } from '../../ng/builtin-ditem-ng-component-base.directive';
 import { DesktopAccessNgService } from '../../ng/desktop-access-ng.service';
 import { DepthDitemFrame } from '../depth-ditem-frame';
-import { DataIvemIdSelectNgComponent as DataIvemIdSelectNgComponent_1 } from '../../../controls/market-ivem-id/data-ivem-id-select/ng/data-ivem-id-select-ng.component';
-import { SvgButtonNgComponent as SvgButtonNgComponent_1 } from '../../../controls/boolean/button/icon/svg-button/ng/svg-button-ng.component';
-import { TextInputNgComponent as TextInputNgComponent_1 } from '../../../controls/string/text-input/ng/text-input-ng.component';
-import { DepthNgComponent as DepthNgComponent_1 } from '../../../content/depth/ng/depth-ng.component';
 
 @Component({
     selector: 'app-depth-ditem',
     templateUrl: './depth-ditem-ng.component.html',
     styleUrls: ['./depth-ditem-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [DataIvemIdSelectNgComponent_1, SvgButtonNgComponent_1, TextInputNgComponent_1, DepthNgComponent_1]
+    imports: [DataIvemIdSelectNgComponent, SvgButtonNgComponent, TextInputNgComponent, DepthNgComponent]
 })
 export class DepthDitemNgComponent extends BuiltinDitemNgComponentBaseNgDirective implements OnDestroy, AfterViewInit, DepthDitemFrame.ComponentAccess {
     private static typeInstanceCreateCount = 0;

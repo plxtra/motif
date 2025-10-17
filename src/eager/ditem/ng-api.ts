@@ -11,7 +11,6 @@ export * from './news-body-ditem/ng-api';
 export * from './news-headlines-ditem/ng-api';
 export { BuiltinDitemNgComponentBaseNgDirective } from './ng/builtin-ditem-ng-component-base.directive';
 export { DesktopAccessNgService } from './ng/desktop-access-ng.service';
-export * from './ng/eager-ditem-ng.module';
 export * from './notification-channels-ditem/ng-api';
 export * from './order-authorise-ditem/ng-api';
 export * from './order-request-ditem/ng-api';
