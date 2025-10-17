@@ -109,14 +109,6 @@ export class ConfigNgService {
 }
 
 export namespace ConfigNgService {
-    export function getLoadConfigFtn(domSanitizer: DomSanitizer, configNgService: ConfigNgService) {
-        return (): Promise<boolean> => loadConfig(domSanitizer, configNgService);
-    }
-
-    function loadConfig(domSanitizer: DomSanitizer, configNgService: ConfigNgService): Promise<boolean> {
-        return configNgService.load(domSanitizer);
-    }
-
     export const acceptedConfigFormatVersion = '2';
 
     export interface ConfigJson {
