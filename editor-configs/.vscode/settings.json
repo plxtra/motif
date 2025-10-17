@@ -1,5 +1,4 @@
 {
-    "typescript.tsdk": "c:\\Dev\\paritech.motif\\Source\\Paritech.Motif.WebApp\\node_modules\\typescript\\lib",
     "files.exclude": {
         "**/releases": true,
         "lib/**/*": true
