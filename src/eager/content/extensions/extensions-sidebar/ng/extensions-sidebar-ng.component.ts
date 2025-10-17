@@ -3,13 +3,17 @@ import { MultiEvent } from '@pbkware/js-utils';
 import { ColorScheme, ColorSettings, ExtensionInfo, SettingsService } from '@plxtra/motif-core';
 import { SettingsNgService } from 'component-services-ng-api';
 import { ContentComponentBaseNgDirective } from '../../../ng/content-component-base-ng.directive';
+import { ExtensionsSearchNgComponent } from '../../extensions-search/ng/extensions-search-ng.component';
+import { SplitComponent, SplitAreaComponent } from 'angular-split';
+import { InstalledExtensionListNgComponent } from '../../installed-extension-list/ng/installed-extension-list-ng.component';
+import { AvailableExtensionListNgComponent } from '../../available-extension-list/ng/available-extension-list-ng.component';
 
 @Component({
     selector: 'app-extensions-sidebar',
     templateUrl: './extensions-sidebar-ng.component.html',
     styleUrls: ['./extensions-sidebar-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [ExtensionsSearchNgComponent, SplitComponent, SplitAreaComponent, InstalledExtensionListNgComponent, AvailableExtensionListNgComponent]
 })
 export class ExtensionsSidebarNgComponent extends ContentComponentBaseNgDirective implements OnDestroy {
     private static typeInstanceCreateCount = 0;

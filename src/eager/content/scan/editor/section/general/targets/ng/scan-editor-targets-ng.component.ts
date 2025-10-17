@@ -27,13 +27,20 @@ import {
 import { RevColumnLayoutOrReferenceDefinition } from 'revgrid';
 import { DataIvemIdListEditorNgComponent } from '../../../../../../lit-ivem-id-list-editor/ng-api';
 import { ContentComponentBaseNgDirective } from '../../../../../../ng/content-component-base-ng.directive';
+import { IntegerCaptionedRadioNgComponent as IntegerCaptionedRadioNgComponent_1 } from '../../../../../../../controls/enum/integer-captioned-radio/ng/integer-captioned-radio-ng.component';
+import { DataIvemIdSelectNgComponent as DataIvemIdSelectNgComponent_1 } from '../../../../../../../controls/market-ivem-id/data-ivem-id-select/ng/data-ivem-id-select-ng.component';
+import { DataIvemIdListEditorNgComponent as DataIvemIdListEditorNgComponent_1 } from '../../../../../../lit-ivem-id-list-editor/ng/data-ivem-id-list-editor-ng.component';
+import { IntegerEnumInputNgComponent as IntegerEnumInputNgComponent_1 } from '../../../../../../../controls/enum/integer-enum-input/ng/integer-enum-input-ng.component';
+import { EnumArrayInputNgComponent as EnumArrayInputNgComponent_1 } from '../../../../../../../controls/enum-array/enum-array-input/ng/enum-array-input-ng.component';
+import { CaptionLabelNgComponent as CaptionLabelNgComponent_1 } from '../../../../../../../controls/label/caption-label/ng/caption-label-ng.component';
+import { IntegerTextInputNgComponent as IntegerTextInputNgComponent_1 } from '../../../../../../../controls/number/integer/integer-text-input/ng/integer-text-input-ng.component';
 
 @Component({
     selector: 'app-scan-editor-targets',
     templateUrl: './scan-editor-targets-ng.component.html',
     styleUrls: ['./scan-editor-targets-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [IntegerCaptionedRadioNgComponent_1, DataIvemIdSelectNgComponent_1, DataIvemIdListEditorNgComponent_1, IntegerEnumInputNgComponent_1, EnumArrayInputNgComponent_1, CaptionLabelNgComponent_1, IntegerTextInputNgComponent_1]
 })
 export class ScanEditorTargetsNgComponent extends ContentComponentBaseNgDirective implements OnDestroy, AfterViewInit {
     private static typeInstanceCreateCount = 0;

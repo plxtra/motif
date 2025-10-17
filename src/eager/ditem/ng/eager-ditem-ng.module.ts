@@ -31,7 +31,11 @@ import { WatchlistDitemNgComponent } from '../watchlist-ditem/ng-api';
 import { AdvertWebPageDitemNgComponent, BrandingSplashWebPageDitemNgComponent } from '../web-page-ditem/ng-api';
 
 @NgModule({
-    declarations: [
+    imports: [
+        CommonModule,
+        EagerControlsNgModule,
+        EagerContentNgModule,
+        AngularSplitModule,
         AdvertWebPageDitemNgComponent,
         AlertsDitemNgComponent,
         BalancesDitemNgComponent,
@@ -58,12 +62,6 @@ import { AdvertWebPageDitemNgComponent, BrandingSplashWebPageDitemNgComponent } 
         TopShareholdersDitemNgComponent,
         TradesDitemNgComponent,
         WatchlistDitemNgComponent,
-    ],
-    imports: [
-        CommonModule,
-        EagerControlsNgModule,
-        EagerContentNgModule,
-        AngularSplitModule,
     ],
 })
 // eslint-disable-next-line @typescript-eslint/no-extraneous-class

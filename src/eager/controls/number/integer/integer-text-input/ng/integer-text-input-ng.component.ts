@@ -5,13 +5,14 @@ import { RevCellEditor, RevDataServer, RevViewCell } from 'revgrid';
 import { ControlComponentBaseNgDirective } from '../../../../ng/control-component-base-ng.directive';
 import { NumberUiActionComponentBaseNgDirective } from '../../../ng/number-ui-action-component-base-ng.directive';
 import { IntegerUiActionComponentBaseNgDirective } from '../../ng/integer-ui-action-component-base-ng.directive';
+import { NgStyle } from '@angular/common';
 
 @Component({
     selector: 'app-integer-text-input', // should be xxx-integer-input
     templateUrl: './integer-text-input-ng.component.html',
     styleUrls: ['./integer-text-input-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [NgStyle]
 })
 export class IntegerTextInputNgComponent extends IntegerUiActionComponentBaseNgDirective implements AfterViewInit, RevCellEditor<AdaptedRevgridBehavioredColumnSettings, GridField> {
     private static typeInstanceCreateCount = 0;

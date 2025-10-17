@@ -47,13 +47,28 @@ import {
 import { BuiltinDitemNgComponentBaseNgDirective } from '../../ng/builtin-ditem-ng-component-base.directive';
 import { DesktopAccessNgService } from '../../ng/desktop-access-ng.service';
 import { SearchSymbolsDitemFrame } from '../search-symbols-ditem-frame';
+import { SvgButtonNgComponent as SvgButtonNgComponent_1 } from '../../../controls/boolean/button/icon/svg-button/ng/svg-button-ng.component';
+import { CaptionLabelNgComponent as CaptionLabelNgComponent_1 } from '../../../controls/label/caption-label/ng/caption-label-ng.component';
+import { ExchangeCaptionedRadioNgComponent as ExchangeCaptionedRadioNgComponent_1 } from '../../../controls/enum/exchange-captioned-radio/ng/exchange-captioned-radio-ng.component';
+import { ExchangeSelectItemNgComponent as ExchangeSelectItemNgComponent_1 } from '../../../controls/enum/exchange-select-item/ng/exchange-select-item-ng.component';
+import { DataMarketCaptionedItemsCheckboxNgComponent as DataMarketCaptionedItemsCheckboxNgComponent_1 } from '../../../controls/enum-array/data-market-captioned-items-checkbox/ng/data-market-captioned-items-checkbox-ng.component';
+import { DataMarketSelectItemsNgComponent as DataMarketSelectItemsNgComponent_1 } from '../../../controls/enum-array/data-market-select-items/ng/data-market-select-items-ng.component';
+import { TextInputNgComponent as TextInputNgComponent_1 } from '../../../controls/string/text-input/ng/text-input-ng.component';
+import { IntegerCaptionedItemsCheckboxNgComponent as IntegerCaptionedItemsCheckboxNgComponent_1 } from '../../../controls/enum-array/captioned-enum-array-checkbox/ng/integer-captioned-items-checkbox-ng.component';
+import { EnumArrayInputNgComponent as EnumArrayInputNgComponent_1 } from '../../../controls/enum-array/enum-array-input/ng/enum-array-input-ng.component';
+import { IntegerCaptionedRadioNgComponent as IntegerCaptionedRadioNgComponent_1 } from '../../../controls/enum/integer-captioned-radio/ng/integer-captioned-radio-ng.component';
+import { CaptionedCheckboxNgComponent as CaptionedCheckboxNgComponent_1 } from '../../../controls/boolean/captioned-checkbox/ng/captioned-checkbox-ng.component';
+import { IntegerTextInputNgComponent as IntegerTextInputNgComponent_1 } from '../../../controls/number/integer/integer-text-input/ng/integer-text-input-ng.component';
+import { IntegerLabelNgComponent as IntegerLabelNgComponent_1 } from '../../../controls/number/integer/integer-label/ng/integer-label-ng.component';
+import { ButtonInputNgComponent as ButtonInputNgComponent_1 } from '../../../controls/boolean/button/button-input/ng/button-input-ng.component';
+import { SearchSymbolsNgComponent as SearchSymbolsNgComponent_1 } from '../../../content/search-symbols/ng/search-symbols-ng.component';
 
 @Component({
     selector: 'app-search-symbols-ditem',
     templateUrl: './search-symbols-ditem-ng.component.html',
     styleUrls: ['./search-symbols-ditem-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [SvgButtonNgComponent_1, CaptionLabelNgComponent_1, ExchangeCaptionedRadioNgComponent_1, ExchangeSelectItemNgComponent_1, DataMarketCaptionedItemsCheckboxNgComponent_1, DataMarketSelectItemsNgComponent_1, TextInputNgComponent_1, IntegerCaptionedItemsCheckboxNgComponent_1, EnumArrayInputNgComponent_1, IntegerCaptionedRadioNgComponent_1, CaptionedCheckboxNgComponent_1, IntegerTextInputNgComponent_1, IntegerLabelNgComponent_1, ButtonInputNgComponent_1, SearchSymbolsNgComponent_1]
 })
 export class SearchSymbolsDitemNgComponent extends BuiltinDitemNgComponentBaseNgDirective implements OnDestroy, AfterViewInit, SearchSymbolsDitemFrame.ComponentAccess {
     private static typeInstanceCreateCount = 0;

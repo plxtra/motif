@@ -8,13 +8,16 @@ import {
 import { SettingsNgService } from 'component-services-ng-api';
 import { MenuBarService } from '../../menu-bar-service';
 import { MenuBarMenuComponentNgDirective } from '../../ng/menu-bar-menu-component-ng.directive';
+import { MenuBarOverlayCommandItemNgComponent } from '../../menu-bar-overlay-item/menu-bar-overlay-command-item/ng/menu-bar-overlay-command-item-ng.component';
+import { MenuBarOverlayChildItemNgComponent } from '../../menu-bar-overlay-item/menu-bar-overlay-child-item/ng/menu-bar-overlay-child-item-ng.component';
+import { MenuBarOverlayDividerItemNgComponent } from '../../menu-bar-overlay-item/menu-bar-overlay-divider-item/ng/menu-bar-overlay-divider-item-ng.component';
 
 @Component({
     selector: 'app-menu-bar-overlay-menu',
     templateUrl: './menu-bar-overlay-menu-ng.component.html',
     styleUrls: ['./menu-bar-overlay-menu-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [MenuBarOverlayCommandItemNgComponent, MenuBarOverlayChildItemNgComponent, MenuBarOverlayDividerItemNgComponent]
 })
 export class MenuBarOverlayMenuNgComponent extends MenuBarMenuComponentNgDirective implements OnDestroy {
     private static typeInstanceCreateCount = 0;

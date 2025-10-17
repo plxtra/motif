@@ -10,7 +10,7 @@ import { EagerControlsNgModule } from 'controls-ng-api';
 import { EagerDesktopNgModule } from 'desktop-ng-api';
 import { EagerExtensionsNgModule } from 'extensions-ng-api';
 import { EagerOverlayNgModule } from 'overlay-ng-api';
-import { EagerWorkspaceNgModule } from 'workspace-ng-api';
+
 import { AuthCallbackNgComponent } from '../auth-callback/ng-api';
 import { BottomAdvertStripNgComponent } from '../bottom-advert-strip/ng/bottom-advert-strip-ng.component';
 import { NotCurrentVersionNgComponent } from '../not-current-version/ng-api';
@@ -26,31 +26,30 @@ import { CurrentVersionGuardNgService } from './current-version-guard-ng.service
 import { ErrorHandlerNgService } from './error-handler-ng.service';
 import { LogNgService } from './log-ng.service';
 
-@NgModule({
-    declarations: [
-        AuthCallbackNgComponent,
-        BottomAdvertStripNgComponent,
-        NotCurrentVersionNgComponent,
-        RootNgComponent,
-        SignedOutNgComponent,
-        StartupNgComponent,
-        UserAlertNgComponent,
-    ],
+@NgModule(/* TODO(standalone-migration): clean up removed NgModule class manually. 
+{
+    declarations: [RootNgComponent],
     bootstrap: [RootNgComponent],
     imports: [
-        AngularSvgIconModule.forRoot(),
-        AppRoutingModule,
-        BrowserModule,
-        EagerContentNgModule,
-        EagerControlsNgModule,
-        EagerDesktopNgModule,
-        EagerExtensionsNgModule,
-        EagerOverlayNgModule,
-        EagerWorkspaceNgModule,
-        FormsModule], providers: [
+    AngularSvgIconModule.forRoot(),
+    AppRoutingModule,
+    BrowserModule,
+    EagerContentNgModule,
+    EagerControlsNgModule,
+    EagerDesktopNgModule,
+    EagerExtensionsNgModule,
+    EagerOverlayNgModule,
+    FormsModule,
+    AuthCallbackNgComponent,
+    BottomAdvertStripNgComponent,
+    NotCurrentVersionNgComponent,
+    SignedOutNgComponent,
+    StartupNgComponent,
+    UserAlertNgComponent
+], providers: [
         provideAppInitializer(() => {
             const initializerFn = ((domSanitizer: DomSanitizer, _logNgService: LogNgService, // Make sure log service is started ASAP
-                configNgService: ConfigNgService) => ConfigNgService.getLoadConfigFtn(domSanitizer, configNgService))(inject(DomSanitizer), inject(LogNgService), inject(ConfigNgService));
+            configNgService: ConfigNgService) => ConfigNgService.getLoadConfigFtn(domSanitizer, configNgService))(inject(DomSanitizer), inject(LogNgService), inject(ConfigNgService));
             return initializerFn();
         }),
         AuthGuardNgService,
@@ -58,7 +57,7 @@ import { LogNgService } from './log-ng.service';
         { provide: ErrorHandler, useClass: ErrorHandlerNgService },
         provideHttpClient(withInterceptorsFromDi()),
     ]
-})
+} */)
 
 // eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export class EagerRootNgModule {

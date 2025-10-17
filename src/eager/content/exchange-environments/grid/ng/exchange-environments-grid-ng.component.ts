@@ -11,8 +11,7 @@ import { ExchangeEnvironmentsGridFrame } from '../exchange-environments-grid-fra
     selector: 'app-exchange-environments-grid',
     templateUrl: './exchange-environments-grid-ng.component.html',
     styleUrls: ['./exchange-environments-grid-ng.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ExchangeEnvironmentsGridNgComponent extends GridSourceNgDirective {
     declare frame: ExchangeEnvironmentsGridNgComponent.Frame;

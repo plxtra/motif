@@ -2,13 +2,14 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { DelayedBadnessGridSourceNgDirective } from '../../../delayed-badness-grid-source/ng-api';
 import { ContentNgService } from '../../../ng/content-ng.service';
 import { ScanListFrame } from '../scan-list-frame';
+import { DelayedBadnessNgComponent } from '../../../delayed-badness/ng/delayed-badness-ng.component';
 
 @Component({
     selector: 'app-scan-list',
     templateUrl: './scan-list-ng.component.html',
     styleUrls: ['./scan-list-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [DelayedBadnessNgComponent]
 })
 export class ScanListNgComponent extends DelayedBadnessGridSourceNgDirective {
     private static typeInstanceCreateCount = 0;

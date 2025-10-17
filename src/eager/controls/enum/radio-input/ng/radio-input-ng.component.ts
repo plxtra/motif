@@ -3,13 +3,14 @@ import { Integer } from '@pbkware/js-utils';
 import { UiAction } from '@pbkware/ui-action';
 import { ControlComponentBaseNgDirective } from '../../../ng/control-component-base-ng.directive';
 import { IntegerEnumElementComponentBaseNgDirective } from '../../ng/ng-api';
+import { NgStyle } from '@angular/common';
 
 @Component({
     selector: 'app-radio-input', // should be xxx-radio
     templateUrl: './radio-input-ng.component.html',
     styleUrls: ['./radio-input-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [NgStyle]
 })
 export class RadioInputNgComponent extends IntegerEnumElementComponentBaseNgDirective {
     private static typeInstanceCreateCount = 0;

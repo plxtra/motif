@@ -15,8 +15,7 @@ import { OverlayComponentBaseNgDirective } from '../../ng/overlay-component-base
     templateUrl: './ng-select-overlay-ng.component.html',
     styleUrls: ['./ng-select-overlay-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None,
-    standalone: false
+    encapsulation: ViewEncapsulation.None
 })
 export class NgSelectOverlayNgComponent extends OverlayComponentBaseNgDirective implements OnDestroy, AfterViewInit {
     private static typeInstanceCreateCount = 0;

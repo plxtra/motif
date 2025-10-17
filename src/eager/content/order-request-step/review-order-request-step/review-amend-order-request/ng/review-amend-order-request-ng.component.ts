@@ -9,13 +9,14 @@ import {
 } from '@plxtra/motif-core';
 import { SettingsNgService, SymbolsNgService, TextFormatterNgService } from 'component-services-ng-api';
 import { ReviewOrderRequestComponentNgDirective } from '../../ng/review-order-request-component-ng.directive';
+import { ReviewOrderRequestZenithMessageNgComponent } from '../../review-order-request-zenith-message/ng/review-order-request-zenith-message-ng.component';
 
 @Component({
     selector: 'app-review-amend-order-request',
     templateUrl: './review-amend-order-request-ng.component.html',
     styleUrls: ['./review-amend-order-request-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [ReviewOrderRequestZenithMessageNgComponent]
 })
 export class ReviewAmendOrderRequestNgComponent extends ReviewOrderRequestComponentNgDirective implements OnDestroy {
     private static typeInstanceCreateCount = 0;

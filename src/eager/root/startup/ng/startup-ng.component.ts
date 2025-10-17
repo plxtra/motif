@@ -24,8 +24,7 @@ import { SessionService } from '../../session-service';
     selector: 'app-startup',
     templateUrl: './startup-ng.component.html',
     styleUrls: ['./startup-ng.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StartupNgComponent extends ComponentBaseNgDirective implements OnInit, OnDestroy {
     private static typeInstanceCreateCount = 0;

@@ -4,13 +4,14 @@ import { CoreInjectionTokens } from 'component-services-ng-api';
 import { DelayedBadnessGridSourceNgDirective } from '../../../delayed-badness-grid-source/ng-api';
 import { ContentNgService } from '../../../ng/content-ng.service';
 import { FeedsGridFrame } from '../feeds-grid-frame';
+import { DelayedBadnessNgComponent } from '../../../delayed-badness/ng/delayed-badness-ng.component';
 
 @Component({
     selector: 'app-feeds-grid',
     templateUrl: './feeds-grid-ng.component.html',
     styleUrls: ['./feeds-grid-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [DelayedBadnessNgComponent]
 })
 export class FeedsGridNgComponent extends DelayedBadnessGridSourceNgDirective {
     private static typeInstanceCreateCount = 0;

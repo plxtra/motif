@@ -18,6 +18,12 @@ import { RevColumnLayoutOrReferenceDefinition } from 'revgrid';
 import { BuiltinDitemNgComponentBaseNgDirective } from '../../ng/builtin-ditem-ng-component-base.directive';
 import { DesktopAccessNgService } from '../../ng/desktop-access-ng.service';
 import { NotificationChannelsDitemFrame } from '../notification-channels-ditem-frame';
+import { IntegerEnumInputNgComponent as IntegerEnumInputNgComponent_1 } from '../../../controls/enum/integer-enum-input/ng/integer-enum-input-ng.component';
+import { SvgButtonNgComponent as SvgButtonNgComponent_1 } from '../../../controls/boolean/button/icon/svg-button/ng/svg-button-ng.component';
+import { SplitComponent, SplitAreaComponent } from 'angular-split';
+import { LockOpenNotificationChannelsGridNgComponent as LockOpenNotificationChannelsGridNgComponent_1 } from '../../../content/lock-open-notification-channels/grid/ng/lock-open-notification-channels-grid-ng.component';
+import { ButtonInputNgComponent as ButtonInputNgComponent_1 } from '../../../controls/boolean/button/button-input/ng/button-input-ng.component';
+import { LockOpenNotificationChannelPropertiesNgComponent as LockOpenNotificationChannelPropertiesNgComponent_1 } from '../../../content/lock-open-notification-channels/properties/ng/lock-open-notification-channel-properties-ng.component';
 
 @Component({
     selector: 'app-notifications-ditem-ng',
@@ -25,7 +31,7 @@ import { NotificationChannelsDitemFrame } from '../notification-channels-ditem-f
     styleUrls: ['./notification-channels-ditem-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [{ provide: CoreInjectionTokens.lockOpenListItemOpener, useClass: LockOpenListItemOpenerNgUseClass }],
-    standalone: false
+    imports: [IntegerEnumInputNgComponent_1, SvgButtonNgComponent_1, SplitComponent, SplitAreaComponent, LockOpenNotificationChannelsGridNgComponent_1, ButtonInputNgComponent_1, LockOpenNotificationChannelPropertiesNgComponent_1]
 })
 export class NotificationChannelsDitemNgComponent extends BuiltinDitemNgComponentBaseNgDirective implements OnDestroy, AfterViewInit {
     private static typeInstanceCreateCount = 0;

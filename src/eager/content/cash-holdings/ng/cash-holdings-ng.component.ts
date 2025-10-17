@@ -5,8 +5,7 @@ import { ContentComponentBaseNgDirective } from '../../ng/content-component-base
     selector: 'app-cash-holdings',
     templateUrl: './cash-holdings-ng.component.html',
     styleUrls: ['./cash-holdings-ng.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CashHoldingsNgComponent extends ContentComponentBaseNgDirective {
     private static typeInstanceCreateCount = 0;

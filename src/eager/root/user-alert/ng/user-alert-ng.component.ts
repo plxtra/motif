@@ -8,8 +8,7 @@ import { SettingsNgService } from 'component-services-ng-api';
     selector: 'app-user-alert',
     templateUrl: './user-alert-ng.component.html',
     styleUrls: ['./user-alert-ng.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserAlertNgComponent extends ComponentBaseNgDirective implements OnDestroy {
     private static typeInstanceCreateCount = 0;

@@ -22,6 +22,7 @@ import { ConfigNgService } from '../../ng/config-ng.service';
 import { SessionNgService } from '../../ng/session-ng.service';
 import { SessionService } from '../../session-service';
 import { UserAlertNgComponent } from '../../user-alert/ng-api';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
     selector: 'app-root',
@@ -39,7 +40,7 @@ import { UserAlertNgComponent } from '../../user-alert/ng-api';
             deps: [ConfigNgService]
         }
     ],
-    standalone: false
+    imports: [UserAlertNgComponent, OverlayOriginNgComponent, RouterOutlet, BottomAdvertStripNgComponent]
 })
 export class RootNgComponent extends ComponentBaseNgDirective implements AfterViewInit, OnDestroy {
     private static typeInstanceCreateCount = 0;

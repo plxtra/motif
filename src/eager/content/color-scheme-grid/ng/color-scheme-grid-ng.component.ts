@@ -20,8 +20,7 @@ import { ContentComponentBaseNgDirective } from '../../ng/content-component-base
     selector: 'app-color-scheme-grid',
     templateUrl: './color-scheme-grid-ng.component.html',
     styleUrls: ['./color-scheme-grid-ng.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ColorSchemeGridNgComponent extends ContentComponentBaseNgDirective implements OnDestroy {
     private static typeInstanceCreateCount = 0;

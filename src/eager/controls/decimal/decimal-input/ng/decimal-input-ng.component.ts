@@ -19,13 +19,14 @@ import { DecimalFactoryNgService } from 'component-services-ng-api';
 import { Decimal } from 'decimal.js-light';
 import { ControlComponentBaseNgDirective } from '../../../ng/control-component-base-ng.directive';
 import { DecimalComponentBaseNgDirective } from '../../ng/decimal-component-base-ng.directive';
+import { NgStyle } from '@angular/common';
 
 @Component({
     selector: 'app-decimal-input',
     templateUrl: './decimal-input-ng.component.html',
     styleUrls: ['./decimal-input-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [NgStyle]
 })
 export class DecimalInputNgComponent extends DecimalComponentBaseNgDirective implements OnInit {
     private static typeInstanceCreateCount = 0;

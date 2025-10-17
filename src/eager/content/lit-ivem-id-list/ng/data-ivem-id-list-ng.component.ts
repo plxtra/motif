@@ -5,13 +5,14 @@ import { RevColumnLayoutOrReferenceDefinition } from 'revgrid';
 import { DelayedBadnessGridSourceNgDirective } from '../../delayed-badness-grid-source/ng-api';
 import { ContentNgService } from '../../ng/content-ng.service';
 import { DataIvemIdListFrame } from '../data-ivem-id-list-frame';
+import { DelayedBadnessNgComponent } from '../../delayed-badness/ng/delayed-badness-ng.component';
 
 @Component({
     selector: 'app-data-ivem-id-list',
     templateUrl: './data-ivem-id-list-ng.component.html',
     styleUrls: ['./data-ivem-id-list-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [DelayedBadnessNgComponent]
 })
 export class DataIvemIdListNgComponent extends DelayedBadnessGridSourceNgDirective {
     private static typeInstanceCreateCount = 0;

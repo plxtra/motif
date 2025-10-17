@@ -19,13 +19,16 @@ import {
 import { NameableColumnLayoutEditorDialogNgComponent } from '../../nameable-grid-layout-editor-dialog/ng-api';
 import { ContentComponentBaseNgDirective } from '../../ng/content-component-base-ng.directive';
 import { ExchangesGridNgComponent } from '../grid/ng-api';
+import { IntegerCaptionedRadioNgComponent as IntegerCaptionedRadioNgComponent_1 } from '../../../controls/enum/integer-captioned-radio/ng/integer-captioned-radio-ng.component';
+import { SvgButtonNgComponent as SvgButtonNgComponent_1 } from '../../../controls/boolean/button/icon/svg-button/ng/svg-button-ng.component';
+import { ExchangesGridNgComponent as ExchangesGridNgComponent_1 } from '../grid/ng/exchanges-grid-ng.component';
 
 @Component({
     selector: 'app-exchanges',
     templateUrl: './exchanges-ng.component.html',
     styleUrls: ['./exchanges-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [IntegerCaptionedRadioNgComponent_1, SvgButtonNgComponent_1, ExchangesGridNgComponent_1]
 })
 export class ExchangesNgComponent extends ContentComponentBaseNgDirective implements OnDestroy, AfterViewInit {
     private static typeInstanceCreateCount = 0;

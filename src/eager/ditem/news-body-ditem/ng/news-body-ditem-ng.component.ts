@@ -9,8 +9,7 @@ import { NewsBodyDitemFrame } from '../news-body-ditem-frame';
     selector: 'app-news-body-ditem',
     templateUrl: './news-body-ditem-ng.component.html',
     styleUrls: ['./news-body-ditem-ng.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NewsBodyDitemNgComponent extends BuiltinDitemNgComponentBaseNgDirective implements OnDestroy {
     private static typeInstanceCreateCount = 0;

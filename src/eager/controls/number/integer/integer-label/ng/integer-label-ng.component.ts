@@ -1,13 +1,14 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { ControlComponentBaseNgDirective } from '../../../../ng/control-component-base-ng.directive';
 import { IntegerUiActionComponentBaseNgDirective } from '../../ng/integer-ui-action-component-base-ng.directive';
+import { NgStyle } from '@angular/common';
 
 @Component({
     selector: 'app-integer-label',
     templateUrl: './integer-label-ng.component.html',
     styleUrls: ['./integer-label-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [NgStyle]
 })
 export class IntegerLabelNgComponent extends IntegerUiActionComponentBaseNgDirective {
     private static typeInstanceCreateCount = 0;

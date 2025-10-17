@@ -21,6 +21,13 @@ import {
     TextInputNgComponent
 } from 'controls-ng-api';
 import { ContentComponentBaseNgDirective } from '../../ng/content-component-base-ng.directive';
+import { IntegerCaptionedRadioNgComponent as IntegerCaptionedRadioNgComponent_1 } from '../../../controls/enum/integer-captioned-radio/ng/integer-captioned-radio-ng.component';
+import { TextInputNgComponent as TextInputNgComponent_1 } from '../../../controls/string/text-input/ng/text-input-ng.component';
+import { CaptionedCheckboxNgComponent as CaptionedCheckboxNgComponent_1 } from '../../../controls/boolean/captioned-checkbox/ng/captioned-checkbox-ng.component';
+import { CaptionLabelNgComponent as CaptionLabelNgComponent_1 } from '../../../controls/label/caption-label/ng/caption-label-ng.component';
+import { IntegerTextInputNgComponent as IntegerTextInputNgComponent_1 } from '../../../controls/number/integer/integer-text-input/ng/integer-text-input-ng.component';
+import { NumberInputNgComponent as NumberInputNgComponent_1 } from '../../../controls/number/number-input/ng/number-input-ng.component';
+import { SvgButtonNgComponent as SvgButtonNgComponent_1 } from '../../../controls/boolean/button/icon/svg-button/ng/svg-button-ng.component';
 
 
 @Component({
@@ -28,7 +35,7 @@ import { ContentComponentBaseNgDirective } from '../../ng/content-component-base
     templateUrl: './color-controls-ng.component.html',
     styleUrls: ['./color-controls-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [IntegerCaptionedRadioNgComponent_1, TextInputNgComponent_1, CaptionedCheckboxNgComponent_1, CaptionLabelNgComponent_1, IntegerTextInputNgComponent_1, NumberInputNgComponent_1, SvgButtonNgComponent_1]
 })
 export class ColorControlsNgComponent extends ContentComponentBaseNgDirective implements OnDestroy, AfterViewInit {
     private static typeInstanceCreateCount = 0;

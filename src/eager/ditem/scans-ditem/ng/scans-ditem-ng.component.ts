@@ -19,6 +19,12 @@ import { RevColumnLayoutOrReferenceDefinition } from 'revgrid';
 import { BuiltinDitemNgComponentBaseNgDirective } from '../../ng/builtin-ditem-ng-component-base.directive';
 import { DesktopAccessNgService } from '../../ng/desktop-access-ng.service';
 import { ScansDitemFrame } from '../scans-ditem-frame';
+import { TextInputNgComponent as TextInputNgComponent_1 } from '../../../controls/string/text-input/ng/text-input-ng.component';
+import { ButtonInputNgComponent as ButtonInputNgComponent_1 } from '../../../controls/boolean/button/button-input/ng/button-input-ng.component';
+import { SvgButtonNgComponent as SvgButtonNgComponent_1 } from '../../../controls/boolean/button/icon/svg-button/ng/svg-button-ng.component';
+import { SplitComponent, SplitAreaComponent } from 'angular-split';
+import { ScanListNgComponent as ScanListNgComponent_1 } from '../../../content/scan/list/ng/scan-list-ng.component';
+import { ScanEditorNgComponent as ScanEditorNgComponent_1 } from '../../../content/scan/editor/ng/scan-editor-ng.component';
 
 @Component({
     selector: 'app-scans-ditem-ng',
@@ -26,7 +32,7 @@ import { ScansDitemFrame } from '../scans-ditem-frame';
     styleUrls: ['./scans-ditem-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [{ provide: CoreInjectionTokens.lockOpenListItemOpener, useClass: LockOpenListItemOpenerNgUseClass }],
-    standalone: false
+    imports: [TextInputNgComponent_1, ButtonInputNgComponent_1, SvgButtonNgComponent_1, SplitComponent, SplitAreaComponent, ScanListNgComponent_1, ScanEditorNgComponent_1]
 })
 export class ScansDitemNgComponent extends BuiltinDitemNgComponentBaseNgDirective implements OnDestroy, AfterViewInit {
     private static typeInstanceCreateCount = 0;

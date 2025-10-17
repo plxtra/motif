@@ -10,8 +10,7 @@ import { BrandingSplashWebPageDitemFrame } from '../branding-splash-web-page-dit
     selector: 'app-branding-splash-web-page-ditem',
     templateUrl: './branding-splash-web-page-ditem-ng.component.html',
     styleUrls: ['./branding-splash-web-page-ditem-ng.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BrandingSplashWebPageDitemNgComponent extends WebPageDitemNgComponentBaseNgDirective {
     private static typeInstanceCreateCount = 0;

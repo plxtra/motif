@@ -3,13 +3,14 @@ import { numberToPixels } from '@pbkware/js-utils';
 import { DelayedBadnessGridSourceNgDirective } from '../../delayed-badness-grid-source/ng-api';
 import { ContentNgService } from '../../ng/content-ng.service';
 import { WatchlistFrame } from '../watchlist-frame';
+import { DelayedBadnessNgComponent } from '../../delayed-badness/ng/delayed-badness-ng.component';
 
 @Component({
     selector: 'app-watchlist',
     templateUrl: './watchlist-ng.component.html',
     styleUrls: ['./watchlist-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [DelayedBadnessNgComponent]
 })
 export class WatchlistNgComponent extends DelayedBadnessGridSourceNgDirective {
     private static typeInstanceCreateCount = 0;

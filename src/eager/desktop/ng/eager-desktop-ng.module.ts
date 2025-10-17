@@ -8,15 +8,13 @@ import { LayoutNgComponent } from '../layout/ng-api';
 import { StaticInitialise } from '../static-initialise';
 
 @NgModule({
-    declarations: [
+    imports: [
+        CommonModule,
+        EagerControlsNgModule,
         DesktopNgComponent,
         DesktopBannerNgComponent,
         LayoutNgComponent,
         GoldenLayoutHostNgComponent,
-    ],
-    imports: [
-        CommonModule,
-        EagerControlsNgModule,
     ],
     exports: [
         DesktopNgComponent,

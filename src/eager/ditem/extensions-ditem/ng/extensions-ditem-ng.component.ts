@@ -1,12 +1,14 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, HostBinding, inject, OnDestroy, viewChild, ViewEncapsulation } from '@angular/core';
 import { AssertInternalError, delay1Tick, JsonElement } from '@pbkware/js-utils';
 import { ColorScheme, ExtensionId, ExtensionInfo } from '@plxtra/motif-core';
-import { SplitAreaSize, SplitComponent, SplitUnit } from 'angular-split';
+import { SplitAreaSize, SplitComponent, SplitUnit, SplitAreaComponent } from 'angular-split';
 import { AdiNgService, MarketsNgService, SymbolsNgService } from 'component-services-ng-api';
 import { ExtensionsSidebarNgComponent } from 'content-ng-api';
 import { BuiltinDitemNgComponentBaseNgDirective } from '../../ng/builtin-ditem-ng-component-base.directive';
 import { DesktopAccessNgService } from '../../ng/desktop-access-ng.service';
 import { ExtensionsDitemFrame } from '../extensions-ditem-frame';
+import { ExtensionsSidebarNgComponent as ExtensionsSidebarNgComponent_1 } from '../../../content/extensions/extensions-sidebar/ng/extensions-sidebar-ng.component';
+import { ExtensionDetailNgComponent } from '../../../content/extensions/extension-detail/ng/extension-detail-ng.component';
 
 @Component({
     selector: 'app-extensions-ditem',
@@ -14,7 +16,7 @@ import { ExtensionsDitemFrame } from '../extensions-ditem-frame';
     styleUrls: ['./extensions-ditem-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: false
+    imports: [SplitComponent, SplitAreaComponent, ExtensionsSidebarNgComponent_1, ExtensionDetailNgComponent]
 })
 export class ExtensionsDitemNgComponent extends BuiltinDitemNgComponentBaseNgDirective implements OnDestroy, AfterViewInit {
     private static typeInstanceCreateCount = 0;

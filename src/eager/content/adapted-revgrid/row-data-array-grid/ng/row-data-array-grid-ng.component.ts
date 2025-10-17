@@ -8,8 +8,7 @@ import { AdaptedRevgridComponentNgDirective } from '../../ng/adapted-revgrid-com
     templateUrl: './row-data-array-grid-ng.component.html',
     styleUrls: ['./row-data-array-grid-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None,
-    standalone: false
+    encapsulation: ViewEncapsulation.None
 })
 /** @deprecated Use RowDataArrayGrid directly - see ZenithScanFormulaViewDecodeProgressFrame */
 export class RowDataArrayGridNgComponent extends AdaptedRevgridComponentNgDirective implements OnDestroy {

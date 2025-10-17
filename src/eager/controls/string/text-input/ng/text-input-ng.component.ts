@@ -2,13 +2,14 @@ import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, input, m
 import { delay1Tick } from '@pbkware/js-utils';
 import { StringUiAction, UiAction } from '@pbkware/ui-action';
 import { ControlComponentBaseNgDirective } from '../../../ng/control-component-base-ng.directive';
+import { NgStyle } from '@angular/common';
 
 @Component({
     selector: 'app-text-input', // should be xxx-input-control
     templateUrl: './text-input-ng.component.html',
     styleUrls: ['./text-input-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [NgStyle]
 })
 export class TextInputNgComponent extends ControlComponentBaseNgDirective implements AfterViewInit {
     private static typeInstanceCreateCount = 0;

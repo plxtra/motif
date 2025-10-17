@@ -11,7 +11,7 @@ import {
     Strings,
     UiComparableList
 } from '@plxtra/motif-core';
-import { SplitAreaSize } from 'angular-split';
+import { SplitAreaSize, SplitComponent, SplitAreaComponent } from 'angular-split';
 import { CommandRegisterNgService, ToastNgService } from 'component-services-ng-api';
 import { ButtonInputNgComponent } from 'controls-ng-api';
 import { RevColumnLayoutOrReferenceDefinition } from 'revgrid';
@@ -22,13 +22,18 @@ import {
     GeneralScanEditorSectionNgComponent,
     ScanEditorAttachedNotificationChannelsNgComponent
 } from '../section/ng-api';
+import { GeneralScanEditorSectionNgComponent as GeneralScanEditorSectionNgComponent_1 } from '../section/general/ng/general-scan-editor-section-ng.component';
+import { FormulaScanEditorSectionNgComponent as FormulaScanEditorSectionNgComponent_1 } from '../section/formula/ng/formula-scan-editor-section-ng.component';
+import { ScanEditorAttachedNotificationChannelsNgComponent as ScanEditorAttachedNotificationChannelsNgComponent_1 } from '../section/attached-notification-channels/ng/scan-editor-attached-notification-channels-ng.component';
+import { ScanTestNgComponent as ScanTestNgComponent_1 } from '../../test/ng/scan-test-ng.component';
+import { ButtonInputNgComponent as ButtonInputNgComponent_1 } from '../../../../controls/boolean/button/button-input/ng/button-input-ng.component';
 
 @Component({
     selector: 'app-scan-editor',
     templateUrl: './scan-editor-ng.component.html',
     styleUrls: ['./scan-editor-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [SplitComponent, SplitAreaComponent, GeneralScanEditorSectionNgComponent_1, FormulaScanEditorSectionNgComponent_1, ScanEditorAttachedNotificationChannelsNgComponent_1, ScanTestNgComponent_1, ButtonInputNgComponent_1]
 })
 export class ScanEditorNgComponent extends ContentComponentBaseNgDirective implements OnDestroy, AfterViewInit {
     private static typeInstanceCreateCount = 0;

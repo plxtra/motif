@@ -8,13 +8,16 @@ import { DelayedBadnessNgComponent } from '../../../delayed-badness/ng-api';
 import { ContentNgService } from '../../../ng/content-ng.service';
 import { OrderRequestStepComponentNgDirective } from '../../ng/order-request-step-component-ng.directive';
 import { ResultOrderRequestStepFrame } from '../result-order-request-step-frame';
+import { DelayedBadnessNgComponent as DelayedBadnessNgComponent_1 } from '../../../delayed-badness/ng/delayed-badness-ng.component';
+import { CaptionLabelNgComponent as CaptionLabelNgComponent_1 } from '../../../../controls/label/caption-label/ng/caption-label-ng.component';
+import { TextInputNgComponent as TextInputNgComponent_1 } from '../../../../controls/string/text-input/ng/text-input-ng.component';
 
 @Component({
     selector: 'app-result-order-request-step',
     templateUrl: './result-order-request-step-ng.component.html',
     styleUrls: ['./result-order-request-step-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [DelayedBadnessNgComponent_1, CaptionLabelNgComponent_1, TextInputNgComponent_1]
 })
 export class ResultOrderRequestStepNgComponent extends OrderRequestStepComponentNgDirective implements OnDestroy, AfterViewInit, ResultOrderRequestStepFrame.ComponentAccess {
     private static typeInstanceCreateCount = 0;

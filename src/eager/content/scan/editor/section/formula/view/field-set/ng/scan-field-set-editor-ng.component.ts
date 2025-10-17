@@ -10,13 +10,17 @@ import { ScanFieldEditorNgComponent } from '../field/ng-api';
 import { ScanFieldEditorFramesGridNgComponent } from '../fields-grid/ng-api';
 import { ScanFieldEditorFramesGridFrame } from '../internal-api';
 import { ScanFieldSetEditorFrame } from '../scan-field-set-editor-frame';
+import { IntegerEnumInputNgComponent as IntegerEnumInputNgComponent_1 } from '../../../../../../../../controls/enum/integer-enum-input/ng/integer-enum-input-ng.component';
+import { CaptionLabelNgComponent as CaptionLabelNgComponent_1 } from '../../../../../../../../controls/label/caption-label/ng/caption-label-ng.component';
+import { ScanFieldEditorFramesGridNgComponent as ScanFieldEditorFramesGridNgComponent_1 } from '../fields-grid/ng/scan-field-editor-frames-grid-ng.component';
+import { ScanFieldEditorNgComponent as ScanFieldEditorNgComponent_1 } from '../field/ng/scan-field-editor-ng.component';
 
 @Component({
     selector: 'app-scan-field-set-editor',
     templateUrl: './scan-field-set-editor-ng.component.html',
     styleUrls: ['./scan-field-set-editor-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [IntegerEnumInputNgComponent_1, CaptionLabelNgComponent_1, ScanFieldEditorFramesGridNgComponent_1, ScanFieldEditorNgComponent_1]
 })
 export class ScanFieldSetEditorNgComponent extends ScanFormulaViewNgDirective implements OnDestroy, AfterViewInit {
     public gridSize: SplitAreaSize;

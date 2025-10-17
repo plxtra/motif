@@ -16,13 +16,15 @@ import {
 import { NameableColumnLayoutEditorDialogNgComponent } from '../../nameable-grid-layout-editor-dialog/ng-api';
 import { ContentComponentBaseNgDirective } from '../../ng/content-component-base-ng.directive';
 import { FeedsGridNgComponent } from '../grid/ng-api';
+import { SvgButtonNgComponent as SvgButtonNgComponent_1 } from '../../../controls/boolean/button/icon/svg-button/ng/svg-button-ng.component';
+import { FeedsGridNgComponent as FeedsGridNgComponent_1 } from '../grid/ng/feeds-grid-ng.component';
 
 @Component({
     selector: 'app-data-markets',
     templateUrl: './feeds-ng.component.html',
     styleUrls: ['./feeds-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [SvgButtonNgComponent_1, FeedsGridNgComponent_1]
 })
 export class FeedsNgComponent extends ContentComponentBaseNgDirective implements OnDestroy, AfterViewInit {
     private static typeInstanceCreateCount = 0;

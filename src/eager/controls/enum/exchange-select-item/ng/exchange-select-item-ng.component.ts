@@ -2,6 +2,8 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 import { Integer } from '@pbkware/js-utils';
 import { SelectItemUiAction } from '@pbkware/ui-action';
 import { SelectItemNgDirective } from '../../ng/ng-api';
+import { NgSelectComponent, NgOptionTemplateDirective } from '@ng-select/ng-select';
+import { FormsModule } from '@angular/forms';
 
 @Component({
     selector: 'app-exchange-select-item', // should be xxx-enum-select
@@ -9,7 +11,7 @@ import { SelectItemNgDirective } from '../../ng/ng-api';
     styleUrls: ['./exchange-select-item-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: false
+    imports: [NgSelectComponent, FormsModule, NgOptionTemplateDirective]
 })
 export class ExchangeSelectItemNgComponent extends SelectItemNgDirective<Integer> {
     private static typeInstanceCreateCount = 0;

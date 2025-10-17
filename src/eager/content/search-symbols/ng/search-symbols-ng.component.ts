@@ -2,13 +2,14 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { DelayedBadnessGridSourceNgDirective } from '../../delayed-badness-grid-source/ng-api';
 import { ContentNgService } from '../../ng/content-ng.service';
 import { SearchSymbolsFrame } from '../search-symbols-frame';
+import { DelayedBadnessNgComponent } from '../../delayed-badness/ng/delayed-badness-ng.component';
 
 @Component({
     selector: 'app-search-symbols',
     templateUrl: './search-symbols-ng.component.html',
     styleUrls: ['./search-symbols-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [DelayedBadnessNgComponent]
 })
 export class SearchSymbolsNgComponent extends DelayedBadnessGridSourceNgDirective {
     private static typeInstanceCreateCount = 0;

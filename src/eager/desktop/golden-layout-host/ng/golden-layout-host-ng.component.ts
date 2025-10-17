@@ -40,8 +40,7 @@ import { GoldenLayoutHostFrame } from '../golden-layout-host-frame';
     templateUrl: './golden-layout-host-ng.component.html',
     styleUrls: ['./golden-layout-host-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None,
-    standalone: false
+    encapsulation: ViewEncapsulation.None
 })
 export class GoldenLayoutHostNgComponent extends ComponentBaseNgDirective implements OnDestroy, AfterViewInit, GoldenLayoutHostFrame.ComponentAccess {
     private static typeInstanceCreateCount = 0;

@@ -8,8 +8,7 @@ import { MenuBarMenuItemComponentNgDirective } from '../../../ng/menu-bar-menu-i
     selector: 'app-menu-bar-overlay-child-item',
     templateUrl: './menu-bar-overlay-child-item-ng.component.html',
     styleUrls: ['./menu-bar-overlay-child-item-ng.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MenuBarOverlayChildItemNgComponent extends MenuBarChildItemComponentNgDirective implements OnInit, OnDestroy {
     private static typeInstanceCreateCount = 0;

@@ -12,8 +12,7 @@ import { ControlComponentBaseNgDirective } from '../../../ng/control-component-b
     selector: 'app-command-bar',
     templateUrl: './command-bar-ng.component.html',
     styleUrls: ['./command-bar-ng.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CommandBarNgComponent extends ControlComponentBaseNgDirective implements AfterViewInit {
     private static typeInstanceCreateCount = 0;

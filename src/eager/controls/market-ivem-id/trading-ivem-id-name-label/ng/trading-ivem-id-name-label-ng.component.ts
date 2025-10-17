@@ -4,13 +4,14 @@ import { SymbolDetailCacheService, TradingIvemId, TradingMarket } from '@plxtra/
 import { SymbolDetailCacheNgService } from 'component-services-ng-api';
 import { ControlComponentBaseNgDirective } from '../../../ng/control-component-base-ng.directive';
 import { ReadonlyMarketIvemIdNgDirective } from '../../ng/readonly-market-ivem-id-ng.directive';
+import { NgStyle } from '@angular/common';
 
 @Component({
     selector: 'app-trading-ivem-id-name-label',
     templateUrl: './trading-ivem-id-name-label-ng.component.html',
     styleUrls: ['./trading-ivem-id-name-label-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [NgStyle]
 })
 export class TradingIvemIdNameLabelNgComponent extends ReadonlyMarketIvemIdNgDirective<TradingMarket> implements OnDestroy {
     private static typeInstanceCreateCount = 0;

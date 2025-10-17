@@ -14,13 +14,16 @@ import { DataIvemIdSelectNgComponent, SvgButtonNgComponent } from 'controls-ng-a
 import { BuiltinDitemNgComponentBaseNgDirective } from '../../ng/builtin-ditem-ng-component-base.directive';
 import { DesktopAccessNgService } from '../../ng/desktop-access-ng.service';
 import { EtoPriceQuotationDitemFrame } from '../eto-price-quotation-ditem-frame';
+import { DataIvemIdSelectNgComponent as DataIvemIdSelectNgComponent_1 } from '../../../controls/market-ivem-id/data-ivem-id-select/ng/data-ivem-id-select-ng.component';
+import { SvgButtonNgComponent as SvgButtonNgComponent_1 } from '../../../controls/boolean/button/icon/svg-button/ng/svg-button-ng.component';
+import { ColumnLayoutEditorNgComponent as ColumnLayoutEditorNgComponent_1 } from '../../../content/grid-layout-dialog/editor/ng/grid-layout-editor-ng.component';
 
 @Component({
     selector: 'app-eto-price-quotation-ditem',
     templateUrl: './eto-price-quotation-ditem-ng.component.html',
     styleUrls: ['./eto-price-quotation-ditem-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [DataIvemIdSelectNgComponent_1, SvgButtonNgComponent_1, ColumnLayoutEditorNgComponent_1]
 })
 export class EtoPriceQuotationDitemNgComponent extends BuiltinDitemNgComponentBaseNgDirective implements OnDestroy, AfterViewInit {
     private static typeInstanceCreateCount = 0;

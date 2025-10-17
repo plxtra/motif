@@ -3,13 +3,14 @@ import { UiAction } from '@pbkware/ui-action';
 import { IvemId, IvemIdUiAction, MarketsService, StringId, Strings, SymbolsService } from '@plxtra/motif-core';
 import { MarketsNgService, SymbolsNgService } from 'component-services-ng-api';
 import { ControlComponentBaseNgDirective } from '../../../ng/control-component-base-ng.directive';
+import { NgStyle } from '@angular/common';
 
 @Component({
     selector: 'app-ivem-id-input',
     templateUrl: './ivem-id-input-ng.component.html',
     styleUrls: ['./ivem-id-input-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [NgStyle]
 })
 export class IvemIdInputNgComponent extends ControlComponentBaseNgDirective implements AfterViewInit {
     private static typeInstanceCreateCount = 0;

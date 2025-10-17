@@ -4,13 +4,14 @@ import { CommandRegisterService, IconButtonUiAction, InternalCommand, StringId, 
 import { CommandRegisterNgService } from 'component-services-ng-api';
 import { SvgButtonNgComponent } from 'controls-ng-api';
 import { ContentComponentBaseNgDirective } from '../../../../../../../../../../ng/content-component-base-ng.directive';
+import { SvgButtonNgComponent as SvgButtonNgComponent_1 } from '../../../../../../../../../../../controls/boolean/button/icon/svg-button/ng/svg-button-ng.component';
 
 @Component({
     selector: 'app-delete-scan-field-condition',
     templateUrl: './delete-scan-field-condition-ng.component.html',
     styleUrls: ['./delete-scan-field-condition-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [SvgButtonNgComponent_1]
 })
 export class DeleteScanFieldConditionNgComponent extends ContentComponentBaseNgDirective implements OnDestroy, AfterViewInit {
     deleteEventer: DeleteScanFieldConditionNgComponent.DeleteEventer | undefined;

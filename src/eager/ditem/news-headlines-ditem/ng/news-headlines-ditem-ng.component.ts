@@ -15,13 +15,17 @@ import { DataIvemIdSelectNgComponent, SvgButtonNgComponent, TextInputNgComponent
 import { BuiltinDitemNgComponentBaseNgDirective } from '../../ng/builtin-ditem-ng-component-base.directive';
 import { DesktopAccessNgService } from '../../ng/desktop-access-ng.service';
 import { NewsHeadlinesDitemFrame } from '../news-headlines-ditem-frame';
+import { DataIvemIdSelectNgComponent as DataIvemIdSelectNgComponent_1 } from '../../../controls/market-ivem-id/data-ivem-id-select/ng/data-ivem-id-select-ng.component';
+import { SvgButtonNgComponent as SvgButtonNgComponent_1 } from '../../../controls/boolean/button/icon/svg-button/ng/svg-button-ng.component';
+import { TextInputNgComponent as TextInputNgComponent_1 } from '../../../controls/string/text-input/ng/text-input-ng.component';
+import { RowDataArrayGridNgComponent as RowDataArrayGridNgComponent_1 } from '../../../content/adapted-revgrid/row-data-array-grid/ng/row-data-array-grid-ng.component';
 
 @Component({
     selector: 'app-news-headlines-ditem',
     templateUrl: './news-headlines-ditem-ng.component.html',
     styleUrls: ['./news-headlines-ditem-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [DataIvemIdSelectNgComponent_1, SvgButtonNgComponent_1, TextInputNgComponent_1, RowDataArrayGridNgComponent_1]
 })
 export class NewsHeadlinesDitemNgComponent extends BuiltinDitemNgComponentBaseNgDirective implements OnDestroy, AfterViewInit {
     private static typeInstanceCreateCount = 0;

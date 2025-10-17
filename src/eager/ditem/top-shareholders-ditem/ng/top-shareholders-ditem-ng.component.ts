@@ -32,13 +32,16 @@ import { DateInputNgComponent, IvemIdInputNgComponent, SvgButtonNgComponent } fr
 import { BuiltinDitemNgComponentBaseNgDirective } from '../../ng/builtin-ditem-ng-component-base.directive';
 import { DesktopAccessNgService } from '../../ng/desktop-access-ng.service';
 import { TopShareholdersDitemFrame } from '../top-shareholders-ditem-frame';
+import { IvemIdInputNgComponent as IvemIdInputNgComponent_1 } from '../../../controls/ivem-id/ivem-id-input/ng/ivem-id-input-ng.component';
+import { SvgButtonNgComponent as SvgButtonNgComponent_1 } from '../../../controls/boolean/button/icon/svg-button/ng/svg-button-ng.component';
+import { DateInputNgComponent as DateInputNgComponent_1 } from '../../../controls/date/date-input/ng/date-input-ng.component';
 
 @Component({
     selector: 'app-top-shareholders-ditem',
     templateUrl: './top-shareholders-ditem-ng.component.html',
     styleUrls: ['./top-shareholders-ditem-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [IvemIdInputNgComponent_1, SvgButtonNgComponent_1, DateInputNgComponent_1]
 })
 export class TopShareholdersDitemNgComponent extends BuiltinDitemNgComponentBaseNgDirective implements OnDestroy, AfterViewInit, TopShareholdersDitemFrame.ComponentAccess {
     private static typeInstanceCreateCount = 0;

@@ -8,8 +8,7 @@ import { ContentComponentBaseNgDirective } from '../../../../ng/content-componen
     selector: 'app-review-order-zenith-message-definition',
     templateUrl: './review-order-request-zenith-message-ng.component.html',
     styleUrls: ['./review-order-request-zenith-message-ng.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ReviewOrderRequestZenithMessageNgComponent extends ContentComponentBaseNgDirective implements OnDestroy {
     private static typeInstanceCreateCount = 0;

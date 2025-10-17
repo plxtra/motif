@@ -26,13 +26,19 @@ import { ButtonInputNgComponent, CaptionedCheckboxNgComponent, SvgButtonNgCompon
 import { BuiltinDitemNgComponentBaseNgDirective } from '../../ng/builtin-ditem-ng-component-base.directive';
 import { DesktopAccessNgService } from '../../ng/desktop-access-ng.service';
 import { OrderRequestDitemFrame } from '../order-request-ditem-frame';
+import { PadOrderRequestStepNgComponent } from '../../../content/order-request-step/pad-order-request-step/ng/pad-order-request-step-ng.component';
+import { ReviewOrderRequestStepNgComponent } from '../../../content/order-request-step/review-order-request-step/ng/review-order-request-step-ng.component';
+import { ResultOrderRequestStepNgComponent } from '../../../content/order-request-step/result-order-request-step/ng/result-order-request-step-ng.component';
+import { SvgButtonNgComponent as SvgButtonNgComponent_1 } from '../../../controls/boolean/button/icon/svg-button/ng/svg-button-ng.component';
+import { CaptionedCheckboxNgComponent as CaptionedCheckboxNgComponent_1 } from '../../../controls/boolean/captioned-checkbox/ng/captioned-checkbox-ng.component';
+import { ButtonInputNgComponent as ButtonInputNgComponent_1 } from '../../../controls/boolean/button/button-input/ng/button-input-ng.component';
 
 @Component({
     selector: 'app-order-request-ditem',
     templateUrl: './order-request-ditem-ng.component.html',
     styleUrls: ['./order-request-ditem-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [PadOrderRequestStepNgComponent, ReviewOrderRequestStepNgComponent, ResultOrderRequestStepNgComponent, SvgButtonNgComponent_1, CaptionedCheckboxNgComponent_1, ButtonInputNgComponent_1]
 })
 export class OrderRequestDitemNgComponent extends BuiltinDitemNgComponentBaseNgDirective implements OnDestroy, AfterViewInit, OrderRequestDitemFrame.ComponentAccess {
     private static typeInstanceCreateCount = 0;

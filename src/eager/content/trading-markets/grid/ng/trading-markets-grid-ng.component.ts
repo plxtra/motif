@@ -11,8 +11,7 @@ import { TradingMarketsGridFrame } from '../trading-markets-grid-frame';
     selector: 'app-trading-markets-grid',
     templateUrl: './trading-markets-grid-ng.component.html',
     styleUrls: ['./trading-markets-grid-ng.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TradingMarketsGridNgComponent extends GridSourceNgDirective {
     declare frame: TradingMarketsGridNgComponent.Frame;

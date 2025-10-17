@@ -8,8 +8,7 @@ import { MenuBarNgService } from '../../ng/menu-bar-ng.service';
     selector: 'app-menu-bar-overlay',
     templateUrl: './menu-bar-overlay-ng.component.html',
     styleUrls: ['./menu-bar-overlay-ng.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MenuBarOverlayNgComponent implements AfterViewInit {
     private readonly _cdr = inject(ChangeDetectorRef);

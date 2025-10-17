@@ -6,13 +6,17 @@ import { ComponentInstanceId } from 'component-internal-api';
 import { CaptionedCheckboxNgComponent, CaptionLabelNgComponent, StringArrayInputNgComponent } from 'controls-ng-api';
 import { ScanFieldConditionOperandsEditorNgDirective } from '../../ng/ng-api';
 import { StringOverlapsScanFieldConditionOperandsEditorFrame } from '../string-overlaps-scan-field-condition-operands-editor-frame';
+import { SvgIconComponent } from 'angular-svg-icon';
+import { CaptionedCheckboxNgComponent as CaptionedCheckboxNgComponent_1 } from '../../../../../../../../../../../../controls/boolean/captioned-checkbox/ng/captioned-checkbox-ng.component';
+import { CaptionLabelNgComponent as CaptionLabelNgComponent_1 } from '../../../../../../../../../../../../controls/label/caption-label/ng/caption-label-ng.component';
+import { StringArrayInputNgComponent as StringArrayInputNgComponent_1 } from '../../../../../../../../../../../../controls/string-array/string-array-input/ng/string-array-input-ng.component';
 
 @Component({
     selector: 'app-string-overlaps-scan-field-condition-operands-editor',
     templateUrl: './string-overlaps-scan-field-condition-operands-editor-ng.component.html',
     styleUrls: ['./string-overlaps-scan-field-condition-operands-editor-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [SvgIconComponent, CaptionedCheckboxNgComponent_1, CaptionLabelNgComponent_1, StringArrayInputNgComponent_1]
 })
 export class StringOverlapsScanFieldConditionOperandsEditorNgComponent extends ScanFieldConditionOperandsEditorNgDirective implements AfterViewInit {
     declare readonly _frame: StringOverlapsScanFieldConditionOperandsEditorNgComponent.Frame;

@@ -3,13 +3,14 @@ import { delay1Tick, Integer, isPartialIntlFormattedNumber } from '@pbkware/js-u
 import { StringId, Strings } from '@plxtra/motif-core';
 import { ControlComponentBaseNgDirective } from '../../../ng/control-component-base-ng.directive';
 import { NumberUiActionComponentBaseNgDirective } from '../../ng/number-ui-action-component-base-ng.directive';
+import { NgStyle } from '@angular/common';
 
 @Component({
     selector: 'app-number-input',
     templateUrl: './number-input-ng.component.html',
     styleUrls: ['./number-input-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [NgStyle]
 })
 export class NumberInputNgComponent extends NumberUiActionComponentBaseNgDirective implements AfterViewInit {
     private static typeInstanceCreateCount = 0;

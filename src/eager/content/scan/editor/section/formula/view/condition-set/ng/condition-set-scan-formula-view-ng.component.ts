@@ -4,13 +4,17 @@ import { BooleanUiAction, IntegerListSelectItemUiAction } from '@pbkware/ui-acti
 import { ScanConditionSet, StringId, Strings } from '@plxtra/motif-core';
 import { CaptionLabelNgComponent, CaptionedCheckboxNgComponent, IntegerCaptionedRadioNgComponent, IntegerEnumInputNgComponent } from 'controls-ng-api';
 import { ScanFormulaViewNgDirective } from '../../scan-formula-view-ng.directive';
+import { IntegerCaptionedRadioNgComponent as IntegerCaptionedRadioNgComponent_1 } from '../../../../../../../../controls/enum/integer-captioned-radio/ng/integer-captioned-radio-ng.component';
+import { CaptionedCheckboxNgComponent as CaptionedCheckboxNgComponent_1 } from '../../../../../../../../controls/boolean/captioned-checkbox/ng/captioned-checkbox-ng.component';
+import { CaptionLabelNgComponent as CaptionLabelNgComponent_1 } from '../../../../../../../../controls/label/caption-label/ng/caption-label-ng.component';
+import { IntegerEnumInputNgComponent as IntegerEnumInputNgComponent_1 } from '../../../../../../../../controls/enum/integer-enum-input/ng/integer-enum-input-ng.component';
 
 @Component({
     selector: 'app-condition-set-scan-formula-view',
     templateUrl: './condition-set-scan-formula-view-ng.component.html',
     styleUrls: ['./condition-set-scan-formula-view-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [IntegerCaptionedRadioNgComponent_1, CaptionedCheckboxNgComponent_1, CaptionLabelNgComponent_1, IntegerEnumInputNgComponent_1]
 })
 export class ConditionSetScanFormulaViewNgComponent extends ScanFormulaViewNgDirective implements OnDestroy, AfterViewInit {
     public readonly conditionCount = 0;

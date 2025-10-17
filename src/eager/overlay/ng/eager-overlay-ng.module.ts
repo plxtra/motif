@@ -5,13 +5,11 @@ import { NgSelectOverlayNgComponent } from '../ng-select-overlay/ng-api';
 import { OverlayOriginNgComponent } from '../overlay-origin/ng-api';
 
 @NgModule({
-    declarations: [
-        NgSelectOverlayNgComponent,
-        OverlayOriginNgComponent,
-    ],
     imports: [
         CommonModule,
         EagerControlsNgModule,
+        NgSelectOverlayNgComponent,
+        OverlayOriginNgComponent,
     ],
     exports: [
         OverlayOriginNgComponent,

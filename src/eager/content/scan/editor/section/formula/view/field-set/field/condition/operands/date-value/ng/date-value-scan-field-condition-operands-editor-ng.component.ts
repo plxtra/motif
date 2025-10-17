@@ -6,13 +6,17 @@ import { ComponentInstanceId } from 'component-internal-api';
 import { CaptionedCheckboxNgComponent, CaptionLabelNgComponent, DateInputNgComponent } from 'controls-ng-api';
 import { ScanFieldConditionOperandsEditorNgDirective } from '../../ng/ng-api';
 import { DateValueScanFieldConditionOperandsEditorFrame } from '../date-value-scan-field-condition-operands-editor-frame';
+import { SvgIconComponent } from 'angular-svg-icon';
+import { CaptionedCheckboxNgComponent as CaptionedCheckboxNgComponent_1 } from '../../../../../../../../../../../../controls/boolean/captioned-checkbox/ng/captioned-checkbox-ng.component';
+import { CaptionLabelNgComponent as CaptionLabelNgComponent_1 } from '../../../../../../../../../../../../controls/label/caption-label/ng/caption-label-ng.component';
+import { DateInputNgComponent as DateInputNgComponent_1 } from '../../../../../../../../../../../../controls/date/date-input/ng/date-input-ng.component';
 
 @Component({
     selector: 'app-date-value-scan-field-condition-operands-editor',
     templateUrl: './date-value-scan-field-condition-operands-editor-ng.component.html',
     styleUrls: ['./date-value-scan-field-condition-operands-editor-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [SvgIconComponent, CaptionedCheckboxNgComponent_1, CaptionLabelNgComponent_1, DateInputNgComponent_1]
 })
 export class DateValueScanFieldConditionOperandsEditorNgComponent extends ScanFieldConditionOperandsEditorNgDirective implements AfterViewInit {
     declare readonly _frame: DateValueScanFieldConditionOperandsEditorNgComponent.Frame;

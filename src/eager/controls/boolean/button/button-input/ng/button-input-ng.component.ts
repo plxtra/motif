@@ -3,13 +3,14 @@ import { AssertInternalError, delay1Tick, ModifierKey } from '@pbkware/js-utils'
 import { BooleanUiAction, UiAction } from '@pbkware/ui-action';
 import { ButtonUiAction } from '@plxtra/motif-core';
 import { ControlComponentBaseNgDirective } from '../../../../ng/control-component-base-ng.directive';
+import { NgStyle } from '@angular/common';
 
 @Component({
     selector: 'app-button-input',
     templateUrl: './button-input-ng.component.html',
     styleUrls: ['./button-input-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [NgStyle]
 })
 export class ButtonInputNgComponent extends ControlComponentBaseNgDirective implements AfterViewInit{
     private static typeInstanceCreateCount = 0;

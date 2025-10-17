@@ -1,13 +1,14 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, model, OnInit, viewChild } from '@angular/core';
 import { BooleanUiAction, UiAction } from '@pbkware/ui-action';
 import { ControlComponentBaseNgDirective } from '../../../ng/control-component-base-ng.directive';
+import { NgStyle } from '@angular/common';
 
 @Component({
     selector: 'app-checkbox-input', // should be xxx-checkbox
     templateUrl: './checkbox-input-ng.component.html',
     styleUrls: ['./checkbox-input-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [NgStyle]
 })
 export class CheckboxInputNgComponent extends ControlComponentBaseNgDirective implements OnInit, AfterViewInit {
     private static typeInstanceCreateCount = 0;

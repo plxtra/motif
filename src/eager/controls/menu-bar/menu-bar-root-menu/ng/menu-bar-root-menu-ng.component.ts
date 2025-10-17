@@ -2,13 +2,16 @@ import { ChangeDetectionStrategy, Component, OnDestroy, inject } from '@angular/
 import { MenuBarService } from '../../menu-bar-service';
 import { MenuBarMenuComponentNgDirective } from '../../ng/menu-bar-menu-component-ng.directive';
 import { MenuBarNgService } from '../../ng/menu-bar-ng.service';
+import { MenuBarRootCommandItemNgComponent } from '../../menu-bar-root-item/menu-bar-root-command-item/ng/menu-bar-root-command-item-ng.component';
+import { MenuBarRootChildItemNgComponent } from '../../menu-bar-root-item/menu-bar-root-child-item/ng/menu-bar-root-child-item-ng.component';
+import { MenuBarRootDividerItemNgComponent } from '../../menu-bar-root-item/menu-bar-root-divider-item/ng/menu-bar-root-divider-item-ng.component';
 
 @Component({
     selector: 'app-menu-bar-root-menu',
     templateUrl: './menu-bar-root-menu-ng.component.html',
     styleUrls: ['./menu-bar-root-menu-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [MenuBarRootCommandItemNgComponent, MenuBarRootChildItemNgComponent, MenuBarRootDividerItemNgComponent]
 })
 export class MenuBarRootMenuNgComponent extends MenuBarMenuComponentNgDirective implements OnDestroy {
     private readonly _menu: MenuBarService.RootMenu;

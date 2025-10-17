@@ -6,13 +6,17 @@ import { ComponentInstanceId } from 'component-internal-api';
 import { CaptionedCheckboxNgComponent, CaptionLabelNgComponent, EnumArrayInputNgComponent } from 'controls-ng-api';
 import { ScanFieldConditionOperandsEditorNgDirective } from '../../ng/ng-api';
 import { CurrencyOverlapsScanFieldConditionOperandsEditorFrame } from '../currency-overlaps-scan-field-condition-operands-editor-frame';
+import { SvgIconComponent } from 'angular-svg-icon';
+import { CaptionedCheckboxNgComponent as CaptionedCheckboxNgComponent_1 } from '../../../../../../../../../../../../controls/boolean/captioned-checkbox/ng/captioned-checkbox-ng.component';
+import { CaptionLabelNgComponent as CaptionLabelNgComponent_1 } from '../../../../../../../../../../../../controls/label/caption-label/ng/caption-label-ng.component';
+import { EnumArrayInputNgComponent as EnumArrayInputNgComponent_1 } from '../../../../../../../../../../../../controls/enum-array/enum-array-input/ng/enum-array-input-ng.component';
 
 @Component({
     selector: 'app-currency-overlaps-scan-field-condition-operands-editor',
     templateUrl: './currency-overlaps-scan-field-condition-operands-editor-ng.component.html',
     styleUrls: ['./currency-overlaps-scan-field-condition-operands-editor-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [SvgIconComponent, CaptionedCheckboxNgComponent_1, CaptionLabelNgComponent_1, EnumArrayInputNgComponent_1]
 })
 export class CurrencyOverlapsScanFieldConditionOperandsEditorNgComponent extends ScanFieldConditionOperandsEditorNgDirective implements AfterViewInit {
     declare readonly _frame: CurrencyOverlapsScanFieldConditionOperandsEditorNgComponent.Frame;

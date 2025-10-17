@@ -2,6 +2,8 @@ import { AfterViewInit, ChangeDetectionStrategy, Component, ViewEncapsulation } 
 import { DataMarket } from '@plxtra/motif-core';
 import { ControlComponentBaseNgDirective } from '../../../ng/control-component-base-ng.directive';
 import { SelectItemsNgDirective } from '../../ng/select-items-ng.directive';
+import { NgSelectComponent, NgOptionTemplateDirective } from '@ng-select/ng-select';
+import { FormsModule } from '@angular/forms';
 
 @Component({
     selector: 'app-data-market-select-items',
@@ -9,7 +11,7 @@ import { SelectItemsNgDirective } from '../../ng/select-items-ng.directive';
     styleUrls: ['./data-market-select-items-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: false
+    imports: [NgSelectComponent, FormsModule, NgOptionTemplateDirective]
 })
 export class DataMarketSelectItemsNgComponent extends SelectItemsNgDirective<DataMarket> implements AfterViewInit {
     private static typeInstanceCreateCount = 0;

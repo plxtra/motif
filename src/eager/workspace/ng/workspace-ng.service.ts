@@ -2,10 +2,9 @@ import { Injectable, inject } from '@angular/core';
 import { DesktopFrame } from 'desktop-internal-api';
 import { DesktopAccessNgService } from 'ditem-ng-api';
 import { WorkspaceService } from '../workspace-service';
-import { EagerWorkspaceNgModule } from './eager-workspace-ng.module';
 
 @Injectable({
-    providedIn: EagerWorkspaceNgModule
+    providedIn: 'root'
 })
 export class WorkspaceNgService {
     private readonly _desktopAccessNgService = inject(DesktopAccessNgService);

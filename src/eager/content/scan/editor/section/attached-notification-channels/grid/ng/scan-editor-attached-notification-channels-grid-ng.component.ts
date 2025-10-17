@@ -10,8 +10,7 @@ import { ScanEditorAttachedNotificationChannelsGridFrame } from '../scan-editor-
     selector: 'app-scan-editor-attached-notification-channels-grid',
     templateUrl: './scan-editor-attached-notification-channels-grid-ng.component.html',
     styleUrls: ['./scan-editor-attached-notification-channels-grid-ng.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ScanEditorAttachedNotificationChannelsGridNgComponent extends GridSourceNgDirective {
     declare frame: ScanEditorAttachedNotificationChannelsGridNgComponent.Frame;

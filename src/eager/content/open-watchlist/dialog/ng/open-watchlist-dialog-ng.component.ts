@@ -12,13 +12,19 @@ import { CommandRegisterNgService, CoreInjectionTokens } from 'component-service
 import { ButtonInputNgComponent, CaptionLabelNgComponent, SvgButtonNgComponent, TabListNgComponent, TextInputNgComponent } from 'controls-ng-api';
 import { ContentComponentBaseNgDirective } from '../../../ng/content-component-base-ng.directive';
 import { SymbolListDirectoryGridNgComponent } from '../../symbol-list-directory-grid/ng-api';
+import { SvgButtonNgComponent as SvgButtonNgComponent_1 } from '../../../../controls/boolean/button/icon/svg-button/ng/svg-button-ng.component';
+import { TabListNgComponent as TabListNgComponent_1 } from '../../../../controls/tab-list/ng/tab-list-ng.component';
+import { SymbolListDirectoryGridNgComponent as SymbolListDirectoryGridNgComponent_1 } from '../../symbol-list-directory-grid/ng/symbol-list-directory-grid-ng.component';
+import { CaptionLabelNgComponent as CaptionLabelNgComponent_1 } from '../../../../controls/label/caption-label/ng/caption-label-ng.component';
+import { TextInputNgComponent as TextInputNgComponent_1 } from '../../../../controls/string/text-input/ng/text-input-ng.component';
+import { ButtonInputNgComponent as ButtonInputNgComponent_1 } from '../../../../controls/boolean/button/button-input/ng/button-input-ng.component';
 
 @Component({
     selector: 'app-open-watchlist-dialog',
     templateUrl: './open-watchlist-dialog-ng.component.html',
     styleUrls: ['./open-watchlist-dialog-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [SvgButtonNgComponent_1, TabListNgComponent_1, SymbolListDirectoryGridNgComponent_1, CaptionLabelNgComponent_1, TextInputNgComponent_1, ButtonInputNgComponent_1]
 })
 export class OpenWatchlistDialogNgComponent extends ContentComponentBaseNgDirective implements OnDestroy, AfterViewInit {
     private static typeInstanceCreateCount = 0;

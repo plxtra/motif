@@ -8,8 +8,7 @@ import { SessionService } from '../../session-service';
     selector: 'app-auth-callback',
     templateUrl: './auth-callback-ng.component.html',
     styleUrls: ['./auth-callback-ng.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AuthCallbackNgComponent extends ComponentBaseNgDirective implements OnInit {
     private static typeInstanceCreateCount = 0;

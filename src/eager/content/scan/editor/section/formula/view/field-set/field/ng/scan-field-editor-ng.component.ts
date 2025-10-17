@@ -39,13 +39,17 @@ import {
 } from '../condition/ng-api';
 import { ScanFieldConditionEditorFrame } from '../internal-api';
 import { ScanFieldEditorFrame } from '../scan-field-editor-frame';
+import { CaptionLabelNgComponent as CaptionLabelNgComponent_1 } from '../../../../../../../../../controls/label/caption-label/ng/caption-label-ng.component';
+import { IntegerCaptionedRadioNgComponent as IntegerCaptionedRadioNgComponent_1 } from '../../../../../../../../../controls/enum/integer-captioned-radio/ng/integer-captioned-radio-ng.component';
+import { IntegerEnumInputNgComponent as IntegerEnumInputNgComponent_1 } from '../../../../../../../../../controls/enum/integer-enum-input/ng/integer-enum-input-ng.component';
+import { SvgButtonNgComponent as SvgButtonNgComponent_1 } from '../../../../../../../../../controls/boolean/button/icon/svg-button/ng/svg-button-ng.component';
 
 @Component({
     selector: 'app-scan-field-editor',
     templateUrl: './scan-field-editor-ng.component.html',
     styleUrls: ['./scan-field-editor-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [CaptionLabelNgComponent_1, IntegerCaptionedRadioNgComponent_1, IntegerEnumInputNgComponent_1, SvgButtonNgComponent_1]
 })
 export class ScanFieldEditorNgComponent extends ContentComponentBaseNgDirective implements OnDestroy, AfterViewInit {
     public labelColor: string;

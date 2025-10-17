@@ -4,13 +4,14 @@ import { ButtonUiAction, CommandRegisterService, InternalCommand, StringId, Stri
 import { ComponentBaseNgDirective } from 'component-ng-api';
 import { CommandRegisterNgService } from 'component-services-ng-api';
 import { ButtonInputNgComponent } from 'controls-ng-api';
+import { ButtonInputNgComponent as ButtonInputNgComponent_1 } from '../../../../controls/boolean/button/button-input/ng/button-input-ng.component';
 
 @Component({
     selector: 'app-advert-ticker',
     templateUrl: './advert-ticker-ng.component.html',
     styleUrls: ['./advert-ticker-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [ButtonInputNgComponent_1]
 })
 export class AdvertTickerNgComponent extends ComponentBaseNgDirective implements OnDestroy, AfterViewInit {
     private static typeInstanceCreateCount = 0;

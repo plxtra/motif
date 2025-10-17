@@ -33,13 +33,16 @@ import { RevColumnLayout, RevReferenceableColumnLayoutDefinition } from 'revgrid
 import { BuiltinDitemNgComponentBaseNgDirective } from '../../ng/builtin-ditem-ng-component-base.directive';
 import { DesktopAccessNgService } from '../../ng/desktop-access-ng.service';
 import { WatchlistDitemFrame } from '../watchlist-ditem-frame';
+import { DataIvemIdSelectNgComponent as DataIvemIdSelectNgComponent_1 } from '../../../controls/market-ivem-id/data-ivem-id-select/ng/data-ivem-id-select-ng.component';
+import { SvgButtonNgComponent as SvgButtonNgComponent_1 } from '../../../controls/boolean/button/icon/svg-button/ng/svg-button-ng.component';
+import { WatchlistNgComponent as WatchlistNgComponent_1 } from '../../../content/watchlist/ng/watchlist-ng.component';
 
 @Component({
     selector: 'app-watchlist-ditem',
     templateUrl: './watchlist-ditem-ng.component.html',
     styleUrls: ['./watchlist-ditem-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [DataIvemIdSelectNgComponent_1, SvgButtonNgComponent_1, WatchlistNgComponent_1]
 })
 export class WatchlistDitemNgComponent extends BuiltinDitemNgComponentBaseNgDirective implements OnDestroy, AfterViewInit {
     private static typeInstanceCreateCount = 0;

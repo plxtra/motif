@@ -8,8 +8,7 @@ import { ContentComponentBaseNgDirective } from '../../../ng/content-component-b
     selector: 'app-save-watchlist-dialog',
     templateUrl: './save-watchlist-dialog-ng.component.html',
     styleUrls: ['./save-watchlist-dialog-ng.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SaveWatchlistDialogNgComponent extends ContentComponentBaseNgDirective implements AfterViewInit, OnDestroy {
     private static typeInstanceCreateCount = 0;

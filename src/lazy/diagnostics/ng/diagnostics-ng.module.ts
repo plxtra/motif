@@ -4,15 +4,13 @@ import { EagerControlsNgModule } from 'controls-ng-api';
 import { DebugDiagnosticsNgComponent } from '../debug/ng-api';
 
 @NgModule({
-    declarations: [
-        DebugDiagnosticsNgComponent,
-    ],
     exports: [
         DebugDiagnosticsNgComponent,
     ],
     imports: [
         CommonModule,
         EagerControlsNgModule,
+        DebugDiagnosticsNgComponent,
     ]
 })
 

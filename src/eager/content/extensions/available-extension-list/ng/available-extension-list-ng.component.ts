@@ -14,6 +14,7 @@ import { SettingsNgService } from 'component-services-ng-api';
 import { ContentComponentBaseNgDirective } from '../../../ng/content-component-base-ng.directive';
 import { ExtensionsAccessService } from '../../extensions-access-service';
 import { ExtensionsAccessNgService } from '../../ng/extensions-access-ng.service';
+import { ExtensionListInfoItemNgComponent } from '../../extension-list-info-item/ng/extension-list-info-item-ng.component';
 
 @Component({
     selector: 'app-available-extension-list',
@@ -21,7 +22,7 @@ import { ExtensionsAccessNgService } from '../../ng/extensions-access-ng.service
     styleUrls: ['./available-extension-list-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: false
+    imports: [ExtensionListInfoItemNgComponent]
 })
 export class AvailableExtensionListNgComponent extends ContentComponentBaseNgDirective implements OnDestroy {
     private static typeInstanceCreateCount = 0;

@@ -9,8 +9,7 @@ import { LockOpenNotificationChannelsGridFrame } from '../lock-open-notification
     selector: 'app-lock-open-notification-channels-grid',
     templateUrl: './lock-open-notification-channels-grid-ng.component.html',
     styleUrls: ['./lock-open-notification-channels-grid-ng.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LockOpenNotificationChannelsGridNgComponent extends GridSourceNgDirective {
     declare frame: LockOpenNotificationChannelsGridNgComponent.Frame;

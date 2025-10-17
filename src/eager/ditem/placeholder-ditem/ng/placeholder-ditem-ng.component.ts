@@ -11,8 +11,7 @@ import { PlaceholderDitemFrame } from '../placeholder-ditem-frame';
     selector: 'app-placeholder-ditem',
     templateUrl: './placeholder-ditem-ng.component.html',
     styleUrls: ['./placeholder-ditem-ng.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PlaceholderDitemNgComponent extends BuiltinDitemNgComponentBaseNgDirective implements OnDestroy, AfterViewInit {
     private static typeInstanceCreateCount = 0;

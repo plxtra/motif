@@ -1,17 +1,18 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, input, viewChild } from '@angular/core';
-import { NgSelectComponent } from '@ng-select/ng-select';
+import { NgSelectComponent, NgOptionTemplateDirective } from '@ng-select/ng-select';
 import { delay1Tick, isArrayEqualUniquely } from '@pbkware/js-utils';
 import { UiAction } from '@pbkware/ui-action';
 import { StringId, Strings, TradingMarket, TradingMarketUiAction } from '@plxtra/motif-core';
 import { NgSelectUtils } from '../../../ng-select-utils';
 import { ControlComponentBaseNgDirective } from '../../../ng/control-component-base-ng.directive';
+import { FormsModule } from '@angular/forms';
 
 @Component({
     selector: 'app-trading-market-input',
     templateUrl: './trading-market-input-ng.component.html',
     styleUrls: ['./trading-market-input-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [NgSelectComponent, FormsModule, NgOptionTemplateDirective]
 })
 export class TradingMarketInputNgComponent extends ControlComponentBaseNgDirective implements AfterViewInit {
     private static typeInstanceCreateCount = 0;

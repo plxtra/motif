@@ -19,13 +19,19 @@ import { ComponentBaseNgDirective } from '../../../../../../component/ng-api';
 import { ExpandableCollapsibleLinedHeadingNgComponent } from '../../../../../expandable-collapsible-lined-heading/ng-api';
 import { ScanEditorSectionNgDirective } from '../../scan-editor-section-ng.directive';
 import { ScanEditorTargetsNgComponent } from '../targets/ng-api';
+import { ExpandableCollapsibleLinedHeadingNgComponent as ExpandableCollapsibleLinedHeadingNgComponent_1 } from '../../../../../expandable-collapsible-lined-heading/ng/expandable-collapsible-lined-heading-ng.component';
+import { CaptionLabelNgComponent as CaptionLabelNgComponent_1 } from '../../../../../../controls/label/caption-label/ng/caption-label-ng.component';
+import { CheckboxInputNgComponent as CheckboxInputNgComponent_1 } from '../../../../../../controls/boolean/checkbox-input/ng/checkbox-input-ng.component';
+import { TextInputNgComponent as TextInputNgComponent_1 } from '../../../../../../controls/string/text-input/ng/text-input-ng.component';
+import { ScanEditorTargetsNgComponent as ScanEditorTargetsNgComponent_1 } from '../targets/ng/scan-editor-targets-ng.component';
+import { CaptionedCheckboxNgComponent as CaptionedCheckboxNgComponent_1 } from '../../../../../../controls/boolean/captioned-checkbox/ng/captioned-checkbox-ng.component';
 
 @Component({
     selector: 'app-general-scan-editor-section',
     templateUrl: './general-scan-editor-section-ng.component.html',
     styleUrls: ['./general-scan-editor-section-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [ExpandableCollapsibleLinedHeadingNgComponent_1, CaptionLabelNgComponent_1, CheckboxInputNgComponent_1, TextInputNgComponent_1, ScanEditorTargetsNgComponent_1, CaptionedCheckboxNgComponent_1]
 })
 export class GeneralScanEditorSectionNgComponent extends ScanEditorSectionNgDirective implements  OnInit, OnDestroy, AfterViewInit {
     private static typeInstanceCreateCount = 0;

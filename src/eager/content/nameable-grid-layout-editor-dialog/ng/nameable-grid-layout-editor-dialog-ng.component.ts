@@ -13,6 +13,8 @@ import { SvgButtonNgComponent } from 'controls-ng-api';
 import { RevColumnLayoutOrReferenceDefinition } from 'revgrid';
 import { ColumnLayoutEditorNgComponent, allowedFieldsInjectionToken, definitionColumnListInjectionToken, oldLayoutDefinitionInjectionToken } from '../../grid-layout-dialog/ng-api';
 import { ContentComponentBaseNgDirective } from '../../ng/content-component-base-ng.directive';
+import { SvgButtonNgComponent as SvgButtonNgComponent_1 } from '../../../controls/boolean/button/icon/svg-button/ng/svg-button-ng.component';
+import { ColumnLayoutEditorNgComponent as ColumnLayoutEditorNgComponent_1 } from '../../grid-layout-dialog/editor/ng/grid-layout-editor-ng.component';
 
 @Component({
     selector: 'app-nameable-grid-layout-editor-dialog',
@@ -20,7 +22,7 @@ import { ContentComponentBaseNgDirective } from '../../ng/content-component-base
     styleUrls: ['./nameable-grid-layout-editor-dialog-ng.component.scss'],
     providers: [{ provide: definitionColumnListInjectionToken, useClass: EditableColumnLayoutDefinitionColumnList }],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [SvgButtonNgComponent_1, ColumnLayoutEditorNgComponent_1]
 })
 export class NameableColumnLayoutEditorDialogNgComponent extends ContentComponentBaseNgDirective implements OnDestroy, AfterViewInit {
     private static typeInstanceCreateCount = 0;

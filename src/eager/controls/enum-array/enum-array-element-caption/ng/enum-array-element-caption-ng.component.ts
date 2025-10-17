@@ -2,13 +2,14 @@ import { ChangeDetectionStrategy, Component, OnDestroy, input } from '@angular/c
 import { Integer } from '@pbkware/js-utils';
 import { ControlComponentBaseNgDirective } from '../../../ng/control-component-base-ng.directive';
 import { ListItemSelectItemsUiActionNgDirective } from '../../ng/list-item-select-items-ui-action-ng.directive';
+import { NgStyle } from '@angular/common';
 
 @Component({
     selector: 'app-enum-array-element-caption',
     templateUrl: './enum-array-element-caption-ng.component.html',
     styleUrls: ['./enum-array-element-caption-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [NgStyle]
 })
 export class EnumArrayElementCaptionNgComponent extends ListItemSelectItemsUiActionNgDirective<Integer> implements OnDestroy {
     private static typeInstanceCreateCount = 0;

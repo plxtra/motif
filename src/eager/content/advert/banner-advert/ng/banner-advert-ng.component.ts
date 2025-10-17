@@ -3,13 +3,14 @@ import { delay1Tick } from '@pbkware/js-utils';
 import { ButtonUiAction, CommandRegisterService, InternalCommand, StringId, Strings } from '@plxtra/motif-core';
 import { CommandRegisterNgService } from 'component-services-ng-api';
 import { ButtonInputNgComponent } from 'controls-ng-api';
+import { ButtonInputNgComponent as ButtonInputNgComponent_1 } from '../../../../controls/boolean/button/button-input/ng/button-input-ng.component';
 
 @Component({
     selector: 'app-banner-advert',
     templateUrl: './banner-advert-ng.component.html',
     styleUrls: ['./banner-advert-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [ButtonInputNgComponent_1]
 })
 export class BannerAdvertNgComponent implements OnDestroy, AfterViewInit {
     private readonly _leftContactMeButtonComponentSignal = viewChild.required<ButtonInputNgComponent>('leftContactMeButton');

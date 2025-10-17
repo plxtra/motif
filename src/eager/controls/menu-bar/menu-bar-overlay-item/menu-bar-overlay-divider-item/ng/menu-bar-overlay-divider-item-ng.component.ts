@@ -7,8 +7,7 @@ import { MenuBarRenderItemComponentNgDirective } from '../../../ng/menu-bar-rend
     selector: 'app-menu-bar-overlay-divider-item',
     templateUrl: './menu-bar-overlay-divider-item-ng.component.html',
     styleUrls: ['./menu-bar-overlay-divider-item-ng.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MenuBarOverlayDividerItemNgComponent extends MenuBarRenderItemComponentNgDirective {
     private static typeInstanceCreateCount = 0;

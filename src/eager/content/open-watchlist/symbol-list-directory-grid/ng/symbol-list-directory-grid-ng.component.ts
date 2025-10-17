@@ -9,8 +9,7 @@ import { SymbolListDirectoryGridFrame } from '../symbol-list-directory-grid-fram
     selector: 'app-symbol-list-directory-grid',
     templateUrl: './symbol-list-directory-grid-ng.component.html',
     styleUrls: ['./symbol-list-directory-grid-ng.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SymbolListDirectoryGridNgComponent extends GridSourceNgDirective {
     declare frame: SymbolListDirectoryGridNgComponent.Frame;

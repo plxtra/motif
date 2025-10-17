@@ -1,13 +1,14 @@
 import { ChangeDetectionStrategy, Component, ViewContainerRef } from '@angular/core';
 import { ExchangeSettings } from '@plxtra/motif-core';
 import { SettingsComponentBaseNgDirective } from '../../ng/settings-component-base-ng.directive';
+import { ExchangeSettingsNgComponent } from '../../../exchange-settings/ng/exchange-settings-ng.component';
 
 @Component({
     selector: 'app-exchanges-settings',
     templateUrl: './exchanges-settings-ng.component.html',
     styleUrls: ['./exchanges-settings-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [ExchangeSettingsNgComponent]
 })
 export class ExchangesSettingsNgComponent extends SettingsComponentBaseNgDirective {
     private static typeInstanceCreateCount = 0;

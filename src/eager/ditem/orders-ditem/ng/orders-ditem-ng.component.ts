@@ -23,13 +23,16 @@ import { BrokerageAccountGroupInputNgComponent, SvgButtonNgComponent } from 'con
 import { BuiltinDitemNgComponentBaseNgDirective } from '../../ng/builtin-ditem-ng-component-base.directive';
 import { DesktopAccessNgService } from '../../ng/desktop-access-ng.service';
 import { OrdersDitemFrame } from '../orders-ditem-frame';
+import { BrokerageAccountGroupInputNgComponent as BrokerageAccountGroupInputNgComponent_1 } from '../../../controls/brokerage-account-group/brokerage-account-group-input/ng/brokerage-account-group-input-ng.component';
+import { SvgButtonNgComponent as SvgButtonNgComponent_1 } from '../../../controls/boolean/button/icon/svg-button/ng/svg-button-ng.component';
+import { OrdersNgComponent as OrdersNgComponent_1 } from '../../../content/orders/ng/orders-ng.component';
 
 @Component({
     selector: 'app-orders-ditem',
     templateUrl: './orders-ditem-ng.component.html',
     styleUrls: ['./orders-ditem-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [BrokerageAccountGroupInputNgComponent_1, SvgButtonNgComponent_1, OrdersNgComponent_1]
 })
 export class OrdersDitemNgComponent extends BuiltinDitemNgComponentBaseNgDirective implements OnDestroy, AfterViewInit {
     private static typeInstanceCreateCount = 0;

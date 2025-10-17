@@ -17,8 +17,7 @@ import { ExtensionsAccessNgService } from '../../ng/extensions-access-ng.service
     selector: 'app-extension-detail',
     templateUrl: './extension-detail-ng.component.html',
     styleUrls: ['./extension-detail-ng.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ExtensionDetailNgComponent extends ContentComponentBaseNgDirective implements OnDestroy {
     private static typeInstanceCreateCount = 0;

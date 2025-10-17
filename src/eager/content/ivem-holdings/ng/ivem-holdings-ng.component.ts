@@ -5,8 +5,7 @@ import { ContentComponentBaseNgDirective } from '../../ng/content-component-base
     selector: 'app-ivem-holdings',
     templateUrl: './ivem-holdings-ng.component.html',
     styleUrls: ['./ivem-holdings-ng.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class IvemHoldingsNgComponent extends ContentComponentBaseNgDirective {
     private static typeInstanceCreateCount = 0;

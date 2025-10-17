@@ -5,6 +5,7 @@ import { CoreInjectionTokens, ToastNgService } from 'component-services-ng-api';
 import { DelayedBadnessGridSourceNgDirective } from '../../../delayed-badness-grid-source/ng-api';
 import { ContentNgService } from '../../../ng/content-ng.service';
 import { DataMarketsGridFrame } from '../data-markets-grid-frame';
+import { DelayedBadnessNgComponent } from '../../../delayed-badness/ng/delayed-badness-ng.component';
 
 
 @Component({
@@ -12,7 +13,7 @@ import { DataMarketsGridFrame } from '../data-markets-grid-frame';
     templateUrl: './data-markets-grid-ng.component.html',
     styleUrls: ['./data-markets-grid-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [DelayedBadnessNgComponent]
 })
 export class DataMarketsGridNgComponent extends DelayedBadnessGridSourceNgDirective {
     declare frame: DataMarketsGridNgComponent.Frame;

@@ -34,13 +34,18 @@ import { BuiltinDitemNgComponentBaseNgDirective, DesktopAccessNgService } from '
 import { ComponentItem } from 'golden-layout';
 import { GoldenLayoutHostNgComponent } from '../../golden-layout-host/ng-api';
 import { DesktopFrame } from '../desktop-frame';
+import { DesktopBannerNgComponent } from '../../desktop-banner/ng/desktop-banner-ng.component';
+import { MenuBarRootMenuNgComponent as MenuBarRootMenuNgComponent_1 } from '../../../controls/menu-bar/menu-bar-root-menu/ng/menu-bar-root-menu-ng.component';
+import { ButtonInputNgComponent as ButtonInputNgComponent_1 } from '../../../controls/boolean/button/button-input/ng/button-input-ng.component';
+import { CommandBarNgComponent as CommandBarNgComponent_1 } from '../../../controls/command/command-bar/ng/command-bar-ng.component';
+import { GoldenLayoutHostNgComponent as GoldenLayoutHostNgComponent_1 } from '../../golden-layout-host/ng/golden-layout-host-ng.component';
 
 @Component({
     selector: 'app-desktop',
     templateUrl: './desktop-ng.component.html',
     styleUrls: ['./desktop-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [DesktopBannerNgComponent, MenuBarRootMenuNgComponent_1, ButtonInputNgComponent_1, CommandBarNgComponent_1, GoldenLayoutHostNgComponent_1]
 })
 export class DesktopNgComponent extends ComponentBaseNgDirective implements AfterViewInit, OnDestroy {
     private static typeInstanceCreateCount = 0;

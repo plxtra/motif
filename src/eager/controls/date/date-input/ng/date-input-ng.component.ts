@@ -3,13 +3,14 @@ import { Err, Ok, Result } from '@pbkware/js-utils';
 import { DateUiAction, UiAction } from '@pbkware/ui-action';
 import { DateText, StringId, Strings } from '@plxtra/motif-core';
 import { ControlComponentBaseNgDirective } from '../../../ng/control-component-base-ng.directive';
+import { NgStyle } from '@angular/common';
 
 @Component({
     selector: 'app-date-input',
     templateUrl: './date-input-ng.component.html',
     styleUrls: ['./date-input-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [NgStyle]
 })
 export class DateInputNgComponent extends ControlComponentBaseNgDirective implements OnInit, AfterViewInit{
     private static typeInstanceCreateCount = 0;

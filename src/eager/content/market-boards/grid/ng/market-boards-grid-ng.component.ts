@@ -11,8 +11,7 @@ import { MarketBoardsGridFrame } from '../market-boards-grid-frame';
     selector: 'app-market-boards-grid',
     templateUrl: './market-boards-grid-ng.component.html',
     styleUrls: ['./market-boards-grid-ng.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MarketBoardsGridNgComponent extends GridSourceNgDirective {
     declare frame: MarketBoardsGridNgComponent.Frame;

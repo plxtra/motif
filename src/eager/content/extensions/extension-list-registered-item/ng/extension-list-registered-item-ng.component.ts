@@ -6,8 +6,7 @@ import { ContentComponentBaseNgDirective } from '../../../ng/content-component-b
     selector: 'app-extension-list-registered-item',
     templateUrl: './extension-list-registered-item-ng.component.html',
     styleUrls: ['./extension-list-registered-item-ng.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ExtensionListRegisteredItemNgComponent extends ContentComponentBaseNgDirective {
     private static typeInstanceCreateCount = 0;

@@ -10,13 +10,14 @@ import { TabListNgComponent } from '../../../controls/ng-api';
 import { BuiltinDitemNgComponentBaseNgDirective } from '../../ng/builtin-ditem-ng-component-base.directive';
 import { DesktopAccessNgService } from '../../ng/desktop-access-ng.service';
 import { StatusDitemFrame } from '../status-ditem-frame';
+import { TabListNgComponent as TabListNgComponent_1 } from '../../../controls/tab-list/ng/tab-list-ng.component';
 
 @Component({
     selector: 'app-status-ditem',
     templateUrl: './status-ditem-ng.component.html',
     styleUrls: ['./status-ditem-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [TabListNgComponent_1]
 })
 export class StatusDitemNgComponent extends BuiltinDitemNgComponentBaseNgDirective implements OnDestroy, AfterViewInit {
     private static typeInstanceCreateCount = 0;

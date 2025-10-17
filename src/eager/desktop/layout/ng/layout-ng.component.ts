@@ -5,8 +5,7 @@ import { ComponentBaseNgDirective } from 'component-ng-api';
     selector: 'app-layout',
     templateUrl: './layout-ng.component.html',
     styleUrls: ['./layout-ng.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LayoutNgComponent extends ComponentBaseNgDirective  {
     private static typeInstanceCreateCount = 0;

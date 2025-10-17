@@ -13,8 +13,7 @@ import { CommandComponentNgDirective } from '../../ng/command-component-ng.direc
     templateUrl: './command-select-ng.component.html',
     styleUrls: ['./command-select-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None,
-    standalone: false
+    encapsulation: ViewEncapsulation.None
 })
 export class CommandSelectNgComponent extends CommandComponentNgDirective implements AfterViewInit {
     private static typeInstanceCreateCount = 0;

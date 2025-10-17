@@ -8,8 +8,7 @@ import { MenuBarMenuItemComponentNgDirective } from '../../../ng/menu-bar-menu-i
     selector: 'app-menu-bar-root-command-item',
     templateUrl: './menu-bar-root-command-item-ng.component.html',
     styleUrls: ['./menu-bar-root-command-item-ng.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MenuBarRootCommandItemNgComponent extends MenuBarCommandItemComponentNgDirective implements OnInit, OnDestroy {
     private static typeInstanceCreateCount = 0;

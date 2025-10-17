@@ -9,8 +9,7 @@ import { ConfigNgService } from '../../ng/config-ng.service';
     selector: 'app-not-current-version',
     templateUrl: './not-current-version-ng.component.html',
     styleUrls: ['./not-current-version-ng.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NotCurrentVersionNgComponent extends ComponentBaseNgDirective {
     private static typeInstanceCreateCount = 0;

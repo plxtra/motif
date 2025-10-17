@@ -7,8 +7,7 @@ import { DepthSideFrame } from '../depth-side-frame';
     selector: 'app-depth-side',
     templateUrl: './depth-side-ng.component.html',
     styleUrls: ['./depth-side-ng.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DepthSideNgComponent extends ContentComponentBaseNgDirective implements OnDestroy {
     private static typeInstanceCreateCount = 0;

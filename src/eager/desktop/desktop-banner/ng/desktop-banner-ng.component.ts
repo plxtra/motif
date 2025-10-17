@@ -19,8 +19,7 @@ import { MarketsNgService, SessionInfoNgService, SettingsNgService } from 'compo
     selector: 'app-desktop-banner',
     templateUrl: './desktop-banner-ng.component.html',
     styleUrls: ['./desktop-banner-ng.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DesktopBannerNgComponent extends ComponentBaseNgDirective implements OnDestroy, AfterViewInit {
     private static typeInstanceCreateCount = 0;

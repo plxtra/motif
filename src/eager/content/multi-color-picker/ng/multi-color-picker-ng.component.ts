@@ -10,8 +10,7 @@ import { ContentComponentBaseNgDirective } from '../../ng/content-component-base
     selector: 'app-multi-color-picker',
     templateUrl: './multi-color-picker-ng.component.html',
     styleUrls: ['./multi-color-picker-ng.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MultiColorPickerNgComponent extends ContentComponentBaseNgDirective {
     private static typeInstanceCreateCount = 0;

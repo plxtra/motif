@@ -18,7 +18,7 @@ import {
     StringId,
     Strings
 } from '@plxtra/motif-core';
-import { SplitAreaSize, SplitUnit } from 'angular-split';
+import { SplitAreaSize, SplitUnit, SplitComponent, SplitAreaComponent } from 'angular-split';
 import {
     AdiNgService,
     MarketsNgService,
@@ -37,13 +37,21 @@ import {
 import { BuiltinDitemNgComponentBaseNgDirective } from '../../ng/builtin-ditem-ng-component-base.directive';
 import { DesktopAccessNgService } from '../../ng/desktop-access-ng.service';
 import { DepthAndSalesDitemFrame } from '../depth-and-sales-ditem-frame';
+import { DataIvemIdSelectNgComponent as DataIvemIdSelectNgComponent_1 } from '../../../controls/market-ivem-id/data-ivem-id-select/ng/data-ivem-id-select-ng.component';
+import { SvgButtonNgComponent as SvgButtonNgComponent_1 } from '../../../controls/boolean/button/icon/svg-button/ng/svg-button-ng.component';
+import { TextInputNgComponent as TextInputNgComponent_1 } from '../../../controls/string/text-input/ng/text-input-ng.component';
+import { DateInputNgComponent as DateInputNgComponent_1 } from '../../../controls/date/date-input/ng/date-input-ng.component';
+import { CommandBarNgComponent as CommandBarNgComponent_1 } from '../../../controls/command/command-bar/ng/command-bar-ng.component';
+import { WatchlistNgComponent as WatchlistNgComponent_1 } from '../../../content/watchlist/ng/watchlist-ng.component';
+import { DepthNgComponent as DepthNgComponent_1 } from '../../../content/depth/ng/depth-ng.component';
+import { TradesNgComponent as TradesNgComponent_1 } from '../../../content/trades/ng/trades-ng.component';
 
 @Component({
     selector: 'app-depth-and-sales-ditem',
     templateUrl: './depth-and-sales-ditem-ng.component.html',
     styleUrls: ['./depth-and-sales-ditem-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [DataIvemIdSelectNgComponent_1, SvgButtonNgComponent_1, TextInputNgComponent_1, DateInputNgComponent_1, CommandBarNgComponent_1, WatchlistNgComponent_1, SplitComponent, SplitAreaComponent, DepthNgComponent_1, TradesNgComponent_1]
 })
 export class DepthAndSalesDitemNgComponent extends BuiltinDitemNgComponentBaseNgDirective implements OnDestroy, AfterViewInit, DepthAndSalesDitemFrame.ComponentAccess {
     private static typeInstanceCreateCount = 0;

@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, InjectionToken, OnDestroy, inject }
 import { HtmlTypes, Integer, ModifierKey } from '@pbkware/js-utils';
 import { ColorScheme, ColorSettings } from '@plxtra/motif-core';
 import { ControlComponentBaseNgDirective } from '../../ng/control-component-base-ng.directive';
+import { NgStyle } from '@angular/common';
 
 @Component({
     selector: 'app-tab-list',
@@ -11,7 +12,7 @@ import { ControlComponentBaseNgDirective } from '../../ng/control-component-base
     host: {
         role: 'tablist'
     },
-    standalone: false
+    imports: [NgStyle]
 })
 export class TabListNgComponent extends ControlComponentBaseNgDirective implements OnDestroy {
     private static typeInstanceCreateCount = 0;

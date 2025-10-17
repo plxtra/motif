@@ -1,17 +1,18 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, OnInit, input, viewChild } from '@angular/core';
-import { NgSelectComponent } from '@ng-select/ng-select';
+import { NgSelectComponent, NgOptionTemplateDirective } from '@ng-select/ng-select';
 import { isArrayEqualUniquely } from '@pbkware/js-utils';
 import { UiAction } from '@pbkware/ui-action';
 import { DataMarket, DataMarketUiAction, StringId, Strings } from '@plxtra/motif-core';
 import { NgSelectUtils } from '../../../ng-select-utils';
 import { ControlComponentBaseNgDirective } from '../../../ng/control-component-base-ng.directive';
+import { FormsModule } from '@angular/forms';
 
 @Component({
     selector: 'app-data-market-route-input',
     templateUrl: './data-market-input-ng.component.html',
     styleUrls: ['./data-market-input-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [NgSelectComponent, FormsModule, NgOptionTemplateDirective]
 })
 export class DataMarketInputNgComponent extends ControlComponentBaseNgDirective implements OnInit, AfterViewInit {
     private static typeInstanceCreateCount = 0;

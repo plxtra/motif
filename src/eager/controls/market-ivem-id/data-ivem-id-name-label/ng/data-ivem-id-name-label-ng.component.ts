@@ -4,13 +4,14 @@ import { DataIvemId, DataMarket, SymbolDetailCacheService } from '@plxtra/motif-
 import { SymbolDetailCacheNgService } from 'component-services-ng-api';
 import { ControlComponentBaseNgDirective } from '../../../ng/control-component-base-ng.directive';
 import { ReadonlyMarketIvemIdNgDirective } from '../../ng/readonly-market-ivem-id-ng.directive';
+import { NgStyle } from '@angular/common';
 
 @Component({
     selector: 'app-data-ivem-id-name-label',
     templateUrl: './data-ivem-id-name-label-ng.component.html',
     styleUrls: ['./data-ivem-id-name-label-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [NgStyle]
 })
 export class DataIvemIdNameLabelNgComponent extends ReadonlyMarketIvemIdNgDirective<DataMarket> implements OnDestroy {
     private static typeInstanceCreateCount = 0;

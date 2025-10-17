@@ -17,7 +17,7 @@ import {
     StringId,
     Strings
 } from '@plxtra/motif-core';
-import { SplitAreaSize, SplitUnit } from 'angular-split';
+import { SplitAreaSize, SplitUnit, SplitComponent, SplitAreaComponent } from 'angular-split';
 import { CommandRegisterNgService } from 'component-services-ng-api';
 import { SvgButtonNgComponent } from 'controls-ng-api';
 import { RevRecordIndex } from 'revgrid';
@@ -25,13 +25,16 @@ import { ColorSchemeGridNgComponent } from '../../../color-scheme-grid/ng-api';
 import { ColorSchemeItemPropertiesNgComponent } from '../../../color-scheme-item-properties/ng-api';
 import { ColorSchemePresetCodeNgComponent } from '../../../color-scheme-preset-code/ng-api';
 import { SettingsComponentBaseNgDirective } from '../../ng/settings-component-base-ng.directive';
+import { ColorSchemeGridNgComponent as ColorSchemeGridNgComponent_1 } from '../../../color-scheme-grid/ng/color-scheme-grid-ng.component';
+import { SvgButtonNgComponent as SvgButtonNgComponent_1 } from '../../../../controls/boolean/button/icon/svg-button/ng/svg-button-ng.component';
+import { ColorSchemeItemPropertiesNgComponent as ColorSchemeItemPropertiesNgComponent_1 } from '../../../color-scheme-item-properties/ng/color-scheme-item-properties-ng.component';
 
 @Component({
     selector: 'app-color-settings',
     templateUrl: './color-settings-ng.component.html',
     styleUrls: ['./color-settings-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [SplitComponent, SplitAreaComponent, ColorSchemeGridNgComponent_1, SvgButtonNgComponent_1, ColorSchemeItemPropertiesNgComponent_1]
 })
 export class ColorSettingsNgComponent extends SettingsComponentBaseNgDirective implements OnDestroy, AfterViewInit {
     private static typeInstanceCreateCount = 0;

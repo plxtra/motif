@@ -79,7 +79,7 @@ import nounWorldSvg from './svg/noun_world_2593665.svg';
     templateUrl: './svg-button-ng.component.html',
     styleUrls: ['./svg-button-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [SvgIconComponent]
 })
 export class SvgButtonNgComponent extends ControlComponentBaseNgDirective implements OnInit, AfterViewInit {
     private static typeInstanceCreateCount = 0;

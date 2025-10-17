@@ -1,13 +1,14 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, model, OnDestroy, OnInit, viewChild } from '@angular/core';
 import { BooleanUiAction, UiAction } from '@pbkware/ui-action';
 import { ControlComponentBaseNgDirective } from '../../../ng/control-component-base-ng.directive';
+import { NgStyle } from '@angular/common';
 
 @Component({
     selector: 'app-captioned-checkbox',
     templateUrl: './captioned-checkbox-ng.component.html',
     styleUrls: ['./captioned-checkbox-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [NgStyle]
 })
 export class CaptionedCheckboxNgComponent extends ControlComponentBaseNgDirective implements OnInit, OnDestroy, AfterViewInit {
     private static typeInstanceCreateCount = 0;

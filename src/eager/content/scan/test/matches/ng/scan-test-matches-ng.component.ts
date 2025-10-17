@@ -4,13 +4,14 @@ import { CoreInjectionTokens } from 'component-services-ng-api';
 import { DelayedBadnessGridSourceNgDirective } from '../../../../delayed-badness-grid-source/ng-api';
 import { ContentNgService } from '../../../../ng/content-ng.service';
 import { ScanTestMatchesFrame } from '../scan-test-matches-frame';
+import { DelayedBadnessNgComponent } from '../../../../delayed-badness/ng/delayed-badness-ng.component';
 
 @Component({
     selector: 'app-scan-test-matches',
     templateUrl: './scan-test-matches-ng.component.html',
     styleUrls: ['./scan-test-matches-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [DelayedBadnessNgComponent]
 })
 export class ScanTestMatchesNgComponent extends DelayedBadnessGridSourceNgDirective {
     private static typeInstanceCreateCount = 0;

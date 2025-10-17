@@ -17,13 +17,15 @@ import { HoldingsDitemFrame } from 'ditem-internal-api';
 import { RevColumnLayoutDefinition } from 'revgrid';
 import { ColumnLayoutEditorNgComponent, allowedFieldsInjectionToken, definitionColumnListInjectionToken } from '../../grid-layout-dialog/ng-api';
 import { ContentComponentBaseNgDirective } from '../../ng/content-component-base-ng.directive';
+import { SvgButtonNgComponent as SvgButtonNgComponent_1 } from '../../../controls/boolean/button/icon/svg-button/ng/svg-button-ng.component';
+import { TabListNgComponent as TabListNgComponent_1 } from '../../../controls/tab-list/ng/tab-list-ng.component';
 
 @Component({
     selector: 'app-holdings-grid-layouts-dialog',
     templateUrl: './holdings-grid-layouts-dialog-ng.component.html',
     styleUrls: ['./holdings-grid-layouts-dialog-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [SvgButtonNgComponent_1, TabListNgComponent_1]
 })
 export class HoldingsColumnLayoutsDialogNgComponent extends ContentComponentBaseNgDirective implements OnDestroy, AfterViewInit {
     private static typeInstanceCreateCount = 0;

@@ -13,7 +13,7 @@ import { NgSelectOverlayNgService } from '../../../ng/ng-select-overlay-ng.servi
     styleUrls: ['./string-array-input-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: false
+    imports: [NgSelectComponent]
 })
 export class StringArrayInputNgComponent extends ItemsUiActionNgDirective<string> implements AfterViewInit {
     private static typeInstanceCreateCount = 0;

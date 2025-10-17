@@ -1,19 +1,21 @@
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnDestroy, viewChild } from '@angular/core';
 import { Integer, numberToPixels } from '@pbkware/js-utils';
 import { Badness } from '@plxtra/motif-core';
-import { SplitComponent } from 'angular-split';
+import { SplitComponent, SplitAreaComponent } from 'angular-split';
 import { DelayedBadnessNgComponent } from '../../delayed-badness/ng-api';
 import { DepthSideNgComponent } from '../../depth-side/ng-api';
 import { ContentComponentBaseNgDirective } from '../../ng/content-component-base-ng.directive';
 import { ContentNgService } from '../../ng/content-ng.service';
 import { DepthFrame } from '../depth-frame';
+import { DelayedBadnessNgComponent as DelayedBadnessNgComponent_1 } from '../../delayed-badness/ng/delayed-badness-ng.component';
+import { DepthSideNgComponent as DepthSideNgComponent_1 } from '../../depth-side/ng/depth-side-ng.component';
 
 @Component({
     selector: 'app-depth',
     templateUrl: './depth-ng.component.html',
     styleUrls: ['./depth-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [DelayedBadnessNgComponent_1, SplitComponent, SplitAreaComponent, DepthSideNgComponent_1]
 })
 export class DepthNgComponent extends ContentComponentBaseNgDirective implements OnDestroy, AfterViewInit, DepthFrame.ComponentAccess {
     private static typeInstanceCreateCount = 0;

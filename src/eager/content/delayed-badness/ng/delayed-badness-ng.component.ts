@@ -20,8 +20,7 @@ import { DelayedBadnessComponent } from '../delayed-badness-component';
     selector: 'app-delayed-badness',
     templateUrl: './delayed-badness-ng.component.html',
     styleUrls: ['./delayed-badness-ng.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DelayedBadnessNgComponent extends ContentComponentBaseNgDirective implements OnDestroy, DelayedBadnessComponent {
     private static typeInstanceCreateCount = 0;

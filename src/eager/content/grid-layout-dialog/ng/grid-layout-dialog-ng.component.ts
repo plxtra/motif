@@ -14,6 +14,7 @@ import { RevColumnLayoutDefinition } from 'revgrid';
 import { ContentComponentBaseNgDirective } from '../../ng/content-component-base-ng.directive';
 import { ColumnLayoutEditorNgComponent } from '../editor/ng-api';
 import { allowedFieldsInjectionToken, definitionColumnListInjectionToken, oldLayoutDefinitionInjectionToken } from './grid-layout-dialog-ng-injection-tokens';
+import { SvgButtonNgComponent as SvgButtonNgComponent_1 } from '../../../controls/boolean/button/icon/svg-button/ng/svg-button-ng.component';
 
 @Component({
     selector: 'app-grid-layout-dialog',
@@ -21,7 +22,7 @@ import { allowedFieldsInjectionToken, definitionColumnListInjectionToken, oldLay
     styleUrls: ['./grid-layout-dialog-ng.component.scss'],
     providers: [{ provide: definitionColumnListInjectionToken, useClass: EditableColumnLayoutDefinitionColumnList }],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [SvgButtonNgComponent_1]
 })
 export class ColumnLayoutDialogNgComponent extends ContentComponentBaseNgDirective implements OnDestroy, AfterViewInit {
     private static typeInstanceCreateCount = 0;

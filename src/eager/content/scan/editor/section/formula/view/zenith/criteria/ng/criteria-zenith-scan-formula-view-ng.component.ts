@@ -2,6 +2,9 @@ import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
 import { ScanEditor } from '@plxtra/motif-core';
 import { ComponentBaseNgDirective } from 'component-ng-api';
 import { ZenithScanFormulaViewNgDirective } from '../../ng/zenith-scan-formula-view-ng.directive';
+import { SplitComponent, SplitAreaComponent } from 'angular-split';
+import { ZenithScanFormulaViewDecodeProgressNgComponent } from '../../decode-progress/ng/zenith-scan-formula-view-decode-progress-ng.component';
+import { TextInputNgComponent } from '../../../../../../../../../controls/string/text-input/ng/text-input-ng.component';
 
 @Component({
     selector: 'app-criteria-zenith-scan-formula-view',
@@ -9,7 +12,7 @@ import { ZenithScanFormulaViewNgDirective } from '../../ng/zenith-scan-formula-v
     styleUrls: ['./criteria-zenith-scan-formula-view-ng.component.scss'],
     providers: [{ provide: ComponentBaseNgDirective.typeInstanceCreateIdInjectionToken, useValue: ++CriteriaZenithScanFormulaViewNgComponent.typeInstanceCreateCount }],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [SplitComponent, SplitAreaComponent, ZenithScanFormulaViewDecodeProgressNgComponent, TextInputNgComponent]
 })
 export class CriteriaZenithScanFormulaViewNgComponent extends ZenithScanFormulaViewNgDirective implements OnDestroy {
     protected getFormulaAsZenithText(editor: ScanEditor) {

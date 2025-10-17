@@ -1,5 +1,5 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation, inject, viewChild } from '@angular/core';
-import { NgSelectComponent } from '@ng-select/ng-select';
+import { NgSelectComponent, NgOptionTemplateDirective } from '@ng-select/ng-select';
 import { MultiEvent } from '@pbkware/js-utils';
 import { UiAction } from '@pbkware/ui-action';
 import { StringId, Strings } from '@plxtra/motif-core';
@@ -7,6 +7,7 @@ import { NgSelectUtils } from '../../../ng-select-utils';
 import { ControlComponentBaseNgDirective } from '../../../ng/control-component-base-ng.directive';
 import { NgSelectOverlayNgService } from '../../../ng/ng-select-overlay-ng.service';
 import { BrokerageAccountGroupComponentBaseNgDirective } from '../../ng/brokerage-account-group-component-base-ng.directive';
+import { FormsModule } from '@angular/forms';
 // import styles from 'out-tsc/app/src/scss/partials/ng-select/_default_var.theme.scss';
 
 @Component({
@@ -15,7 +16,7 @@ import { BrokerageAccountGroupComponentBaseNgDirective } from '../../ng/brokerag
     styleUrls: ['./brokerage-account-group-input-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: false
+    imports: [NgSelectComponent, FormsModule, NgOptionTemplateDirective]
 })
 export class BrokerageAccountGroupInputNgComponent extends BrokerageAccountGroupComponentBaseNgDirective implements OnInit, AfterViewInit {
     private static typeInstanceCreateCount = 0;

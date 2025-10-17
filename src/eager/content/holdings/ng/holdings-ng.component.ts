@@ -2,13 +2,14 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { DelayedBadnessGridSourceNgDirective } from '../../delayed-badness-grid-source/ng-api';
 import { ContentNgService } from '../../ng/content-ng.service';
 import { HoldingsFrame } from '../holdings-frame';
+import { DelayedBadnessNgComponent } from '../../delayed-badness/ng/delayed-badness-ng.component';
 
 @Component({
     selector: 'app-holdings',
     templateUrl: './holdings-ng.component.html',
     styleUrls: ['./holdings-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [DelayedBadnessNgComponent]
 })
 export class HoldingsNgComponent extends DelayedBadnessGridSourceNgDirective {
     private static typeInstanceCreateCount = 0;

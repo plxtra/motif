@@ -13,8 +13,7 @@ import { ReviewOrderRequestComponentNgDirective } from './review-order-request-c
     selector: 'app-review-order-request-step',
     templateUrl: './review-order-request-step-ng.component.html',
     styleUrls: ['./review-order-request-step-ng.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ReviewOrderRequestStepNgComponent extends OrderRequestStepComponentNgDirective implements AfterViewInit, ReviewOrderRequestStepFrame.ComponentAccess {
     private static typeInstanceCreateCount = 0;

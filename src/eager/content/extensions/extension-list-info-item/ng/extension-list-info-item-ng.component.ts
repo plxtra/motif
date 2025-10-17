@@ -15,8 +15,7 @@ import { ContentComponentBaseNgDirective } from '../../../ng/content-component-b
     selector: 'app-extension-list-info-item',
     templateUrl: './extension-list-info-item-ng.component.html',
     styleUrls: ['./extension-list-info-item-ng.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ExtensionListInfoItemNgComponent extends ContentComponentBaseNgDirective implements OnDestroy {
     private static typeInstanceCreateCount = 0;

@@ -11,8 +11,7 @@ import { ScanFieldEditorFramesGridFrame } from '../scan-field-editor-frames-grid
     selector: 'app-scan-field-editor-frames-grid',
     templateUrl: './scan-field-editor-frames-grid-ng.component.html',
     styleUrls: ['./scan-field-editor-frames-grid-ng.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ScanFieldEditorFramesGridNgComponent extends GridSourceNgDirective {
     declare frame: ScanFieldEditorFramesGridNgComponent.Frame;

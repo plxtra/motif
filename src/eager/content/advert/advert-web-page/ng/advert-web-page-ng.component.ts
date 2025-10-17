@@ -5,8 +5,7 @@ import { SafeResourceUrl } from '@angular/platform-browser';
     selector: 'app-advert-web-page',
     templateUrl: './advert-web-page-ng.component.html',
     styleUrls: ['./advert-web-page-ng.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AdvertWebPageNgComponent {
     public safeResourceUrl: SafeResourceUrl;

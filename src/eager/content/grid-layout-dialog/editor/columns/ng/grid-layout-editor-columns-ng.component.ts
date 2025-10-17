@@ -13,13 +13,15 @@ import { ContentNgService } from '../../../../ng/content-ng.service';
 import { definitionColumnListInjectionToken } from '../../../ng/grid-layout-dialog-ng-injection-tokens';
 import { ColumnLayoutEditorSearchGridNgComponent } from '../../search-grid/ng-api';
 import { ColumnLayoutEditorColumnsFrame } from '../grid-layout-editor-columns-frame';
+import { ColumnLayoutEditorSearchGridNgComponent as ColumnLayoutEditorSearchGridNgComponent_1 } from '../../search-grid/ng/grid-layout-editor-search-grid-ng.component';
+import { IntegerTextInputNgComponent as IntegerTextInputNgComponent_1 } from '../../../../../controls/number/integer/integer-text-input/ng/integer-text-input-ng.component';
 
 @Component({
     selector: 'app-grid-layout-editor-columns',
     templateUrl: './grid-layout-editor-columns-ng.component.html',
     styleUrls: ['./grid-layout-editor-columns-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [ColumnLayoutEditorSearchGridNgComponent_1, IntegerTextInputNgComponent_1]
 })
 export class ColumnLayoutEditorColumnsNgComponent extends GridSourceNgDirective {
     private static typeInstanceCreateCount = 0;

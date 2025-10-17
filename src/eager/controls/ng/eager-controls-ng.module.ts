@@ -64,7 +64,11 @@ import { TabListNgComponent } from '../tab-list/ng-api';
 import { TradingMarketInputNgComponent } from '../trading-market/ng-api';
 
 @NgModule({
-    declarations: [
+    imports: [
+        AngularSvgIconModule,
+        CommonModule,
+        FormsModule,
+        NgSelectModule,
         BrokerageAccountGroupInputNgComponent,
         BrokerageAccountGroupNameLabelNgComponent,
         ButtonInputNgComponent,
@@ -113,12 +117,6 @@ import { TradingMarketInputNgComponent } from '../trading-market/ng-api';
         TradingIvemIdInputNgComponent,
         TradingIvemIdNameLabelNgComponent,
         TradingIvemIdSelectNgComponent,
-    ],
-    imports: [
-        AngularSvgIconModule,
-        CommonModule,
-        FormsModule,
-        NgSelectModule,
     ],
     exports: [
         BrokerageAccountGroupInputNgComponent,
