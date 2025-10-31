@@ -38,9 +38,9 @@ export class FeedsGridFrame extends DelayedBadnessGridSourceFrame {
         );
     }
 
-    override createGridAndCellPainters(gridHostElement: HTMLElement) {
+    override createGridAndCellPainters(gridCanvasElement: HTMLCanvasElement) {
         const grid = this.createGrid(
-            gridHostElement,
+            gridCanvasElement,
             {},
             (columnSettings) => this.customiseSettingsForNewGridColumn(columnSettings),
             (viewCell) => this.getGridMainCellPainter(viewCell),

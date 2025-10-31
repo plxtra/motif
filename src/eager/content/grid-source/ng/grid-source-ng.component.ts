@@ -7,13 +7,13 @@ import { GridSourceFrame } from '../grid-source-frame';
 export abstract class GridSourceNgDirective extends ContentComponentBaseNgDirective implements OnDestroy, AfterViewInit, GridSourceFrame.ComponentAccess {
     protected readonly _cdr = inject(ChangeDetectorRef);
 
-    private readonly _gridHostSignal = viewChild.required<ElementRef<HTMLElement>>('gridHost', { debugName: 'gridHost' });
+    private readonly _gridCanvasElementRefSignal = viewChild.required<ElementRef<HTMLCanvasElement>>('gridCanvas', { debugName: 'gridCanvas' });
 
     constructor(typeInstanceCreateId: Integer, readonly frame: GridSourceFrame) {
         super(typeInstanceCreateId);
     }
 
-    get gridHost(): HTMLElement { return this._gridHostSignal().nativeElement; }
+    get gridCanvasElement(): HTMLCanvasElement { return this._gridCanvasElementRefSignal().nativeElement; }
     get gridRowHeight() { return this.frame.gridRowHeight; }
     get emWidth() { return this.frame.emWidth; }
 

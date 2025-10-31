@@ -43,5 +43,9 @@
     #gridHost {
         @include revgrid.hostAsColumnFlexItem;
         flex: 1 1 0;
+
+        #gridCanvas {
+            @include revgrid.canvas;
+        }
     }
 }

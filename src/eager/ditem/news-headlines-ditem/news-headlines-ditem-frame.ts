@@ -23,10 +23,9 @@ import { DitemFrame } from '../ditem-frame';
 export class NewsHeadlinesDitemFrame extends BuiltinDitemFrame {
     readonly initialised = true;
 
-    private readonly _grid: RowDataArrayGrid;
-
-    private readonly _gridHeaderCellPainter: TextHeaderCellPainter;
-    private readonly _gridMainCellPainter: TextFormattableValueRowDataArrayGridCellPainter<TextTextFormattableValueCellPainter>;
+    private _grid: RowDataArrayGrid;
+    private _gridHeaderCellPainter: TextHeaderCellPainter;
+    private _gridMainCellPainter: TextFormattableValueRowDataArrayGridCellPainter<TextTextFormattableValueCellPainter>;
 
     constructor(
         ditemComponentAccess: DitemFrame.ComponentAccess,
@@ -36,16 +35,23 @@ export class NewsHeadlinesDitemFrame extends BuiltinDitemFrame {
         desktopAccessService: DitemFrame.DesktopAccessService,
         symbolsService: SymbolsService,
         adiService: AdiService,
-        cellPainterFactoryService: CellPainterFactoryService,
-        ditemHtmlElement: HTMLElement,
     ) {
         super(BuiltinDitemFrame.BuiltinTypeId.NewsHeadlines,
             ditemComponentAccess, settingsService, marketsService, commandRegisterService, desktopAccessService, symbolsService, adiService
         );
+    }
 
+    override get builtinDitemTypeId() { return BuiltinDitemFrame.BuiltinTypeId.NewsHeadlines; }
+
+    override finalise() {
+        this._grid.destroy();
+        super.finalise();
+    }
+
+    createGrid(canvasGridElement: HTMLCanvasElement, cellPainterFactoryService: CellPainterFactoryService) {
         const grid = new RowDataArrayGrid(
             this.settingsService,
-            ditemHtmlElement,
+            canvasGridElement,
             {},
             (index, key, heading) => this.createField(index, key, heading),
             (columnSettings) => this.customiseSettingsForNewGridColumn(columnSettings),
@@ -62,13 +68,6 @@ export class NewsHeadlinesDitemFrame extends BuiltinDitemFrame {
         this._gridMainCellPainter = cellPainterFactoryService.createTextTextFormattableValueRowDataArrayGrid(grid, grid.mainDataServer);
 
         this._grid.setData(demoHeadlines.slice(), false);
-    }
-
-    override get builtinDitemTypeId() { return BuiltinDitemFrame.BuiltinTypeId.NewsHeadlines; }
-
-    override finalise() {
-        this._grid.destroy();
-        super.finalise();
     }
 
     private handleRowFocusEvent(newRowIndex: Integer | undefined) {

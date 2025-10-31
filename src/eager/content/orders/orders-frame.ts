@@ -27,9 +27,9 @@ export class OrdersFrame extends DelayedBadnessGridSourceFrame {
 
     get recordList() { return this._recordList; }
 
-    override createGridAndCellPainters(gridHostElement: HTMLElement) {
+    override createGridAndCellPainters(gridCanvasElement: HTMLCanvasElement) {
         const grid = this.createGrid(
-            gridHostElement,
+            gridCanvasElement,
             {},
             (columnSettings) => this.customiseSettingsForNewGridColumn(columnSettings),
             (viewCell) => this.getGridMainCellPainter(viewCell),

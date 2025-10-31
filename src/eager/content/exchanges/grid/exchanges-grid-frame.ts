@@ -65,9 +65,9 @@ export class ExchangesGridFrame extends GridSourceFrame {
 
     get list() { return this._list; }
 
-    override createGridAndCellPainters(gridHostElement: HTMLElement) {
+    override createGridAndCellPainters(gridCanvasElement: HTMLCanvasElement) {
         const grid = this.createGrid(
-            gridHostElement,
+            gridCanvasElement,
             {
                 fixedColumnCount: 1,
                 mouseColumnSelectionEnabled: false,

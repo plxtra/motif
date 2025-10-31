@@ -24,10 +24,9 @@ import { DitemFrame } from '../ditem-frame';
 export class SearchDitemFrame extends BuiltinDitemFrame {
     readonly initialised = true;
 
-    private readonly _grid: RowDataArrayGrid;
-
-    private readonly _gridHeaderCellPainter: TextHeaderCellPainter;
-    private readonly _gridMainCellPainter: TextFormattableValueRowDataArrayGridCellPainter<TextTextFormattableValueCellPainter>;
+    private _grid: RowDataArrayGrid;
+    private _gridHeaderCellPainter: TextHeaderCellPainter;
+    private _gridMainCellPainter: TextFormattableValueRowDataArrayGridCellPainter<TextTextFormattableValueCellPainter>;
 
     constructor(
         ditemComponentAccess: DitemFrame.ComponentAccess,
@@ -37,26 +36,33 @@ export class SearchDitemFrame extends BuiltinDitemFrame {
         desktopAccessService: DitemFrame.DesktopAccessService,
         symbolsService: SymbolsService,
         adiService: AdiService,
-        cellPainterFactoryService: CellPainterFactoryService,
-        ditemHtmlElement: HTMLElement,
     ) {
         super(BuiltinDitemFrame.BuiltinTypeId.Search,
             ditemComponentAccess, settingsService, marketsService, commandRegisterService, desktopAccessService, symbolsService, adiService
         );
+    }
 
+    override get builtinDitemTypeId() { return BuiltinDitemFrame.BuiltinTypeId.Search; }
+
+    override finalise() {
+        this._grid.destroy();
+        super.finalise();
+    }
+
+    createGrid(canvasGridElement: HTMLCanvasElement, cellPainterFactoryService: CellPainterFactoryService) {
         const customGridSettings: SourcedFieldGrid.CustomGridSettings = {
             mouseColumnSelectionEnabled: false,
             mouseRowSelectionEnabled: false,
             mouseAddToggleExtendSelectionAreaEnabled: false,
             multipleSelectionAreas: false,
             sortOnDoubleClick: false,
-            visibleColumnWidthAdjust: true,
+            viewColumnWidthAdjust: true,
             fixedColumnCount: 0,
         };
 
         const grid = new RowDataArrayGrid(
             this.settingsService,
-            ditemHtmlElement,
+            canvasGridElement,
             customGridSettings,
             (index, key, heading) => this.createField(index, key, heading),
             (columnSettings) => this.customiseSettingsForNewGridColumn(columnSettings),
@@ -73,13 +79,6 @@ export class SearchDitemFrame extends BuiltinDitemFrame {
         this._gridMainCellPainter = cellPainterFactoryService.createTextTextFormattableValueRowDataArrayGrid(grid, grid.mainDataServer);
 
         this._grid.setData(demoSearchResults.slice(), false);
-    }
-
-    override get builtinDitemTypeId() { return BuiltinDitemFrame.BuiltinTypeId.Search; }
-
-    override finalise() {
-        this._grid.destroy();
-        super.finalise();
     }
 
     private handleRowFocusEvent(newRowIndex: Integer | undefined) {

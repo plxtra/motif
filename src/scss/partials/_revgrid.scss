@@ -33,3 +33,11 @@
     min-width: 0; // by default, flex items have min-width: auto
     overflow-y: clip;
 }
+
+@mixin canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border-width: 0;
+}

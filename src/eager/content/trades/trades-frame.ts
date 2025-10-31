@@ -49,8 +49,8 @@ export class TradesFrame extends ContentFrame {
     get opened() { return this._dataItem !== undefined; }
 
     initialise(tradesFrameElement: JsonElement | undefined) {
-        const gridHost = this._componentAccess.gridHost;
-        this._grid = this.createGridAndCellPainters(gridHost);
+        const gridCanvasElement = this._componentAccess.gridCanvasElement;
+        this._grid = this.createGridAndCellPainters(gridCanvasElement);
         // this.applySettings();
         this._grid.activate();
         this._grid.rowOrderReversed = true;
@@ -182,8 +182,8 @@ export class TradesFrame extends ContentFrame {
         return this._dataItemDataCorrectnessId;
     }
 
-    private createGridAndCellPainters(gridHostElement: HTMLElement) {
-        const grid = this.createGrid(gridHostElement);
+    private createGridAndCellPainters(gridCanvasElement: HTMLCanvasElement) {
+        const grid = this.createGrid(gridCanvasElement);
 
         this._gridHeaderCellPainter = this._cellPainterFactoryService.createTextHeader(grid, grid.headerDataServer);
         this._gridMainCellPainter = this._cellPainterFactoryService.createTextTextFormattableValueRecordGrid(grid, grid.mainDataServer);
@@ -191,7 +191,7 @@ export class TradesFrame extends ContentFrame {
         return grid;
     }
 
-    private createGrid(gridHostElement: HTMLElement) {
+    private createGrid(gridCanvasElement: HTMLCanvasElement) {
         const customGridSettings: SourcedFieldGrid.CustomGridSettings = {
             sortOnClick: false,
             sortOnDoubleClick: false,
@@ -199,7 +199,7 @@ export class TradesFrame extends ContentFrame {
 
         const grid = new RecordGrid(
             this._settingsService,
-            gridHostElement,
+            gridCanvasElement,
             this._recordStore,
             customGridSettings,
             () => this.customiseSettingsForNewColumn(),
@@ -250,7 +250,7 @@ export namespace TradesFrame {
 
     export interface ComponentAccess {
         readonly id: string;
-        readonly gridHost: HTMLElement;
+        readonly gridCanvasElement: HTMLCanvasElement;
 
         setBadness(value: Badness): void;
         hideBadnessWithVisibleDelay(badness: Badness): void;

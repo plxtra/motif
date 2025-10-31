@@ -5,6 +5,8 @@
 @use './partials/centered-toolbar-group-mixin';
 @use './partials/caption-followed-by-input';
 @use './partials/horizontal-children-separator';
+@use './partials/revgrid';
+
 
 :host {
     position: absolute;
@@ -60,14 +62,13 @@
             }
         }
 
-        > #grid {
-            // required because MotifGrid component uses ViewEncapsulation.None
-            flex: 1 1 auto;
-            height: 100%;
-            position: relative;
-            min-height: 0;
-            display: block;
-            overflow-y: clip;
+        > #gridHost {
+            @include revgrid.hostAsColumnFlexItem;
+            flex: 1 1 0;
+
+            #gridCanvas {
+                @include revgrid.canvas;
+            }
         }
     }
 }

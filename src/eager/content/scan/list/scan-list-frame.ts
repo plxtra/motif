@@ -52,9 +52,9 @@ export class ScanListFrame extends DelayedBadnessGridSourceFrame {
         }
     }
 
-    override createGridAndCellPainters(gridHostElement: HTMLElement) {
+    override createGridAndCellPainters(gridCanvasElement: HTMLCanvasElement) {
         const grid = this.createGrid(
-            gridHostElement,
+            gridCanvasElement,
             { fixedColumnCount: 1, mouseRowSelectionEnabled: false },
             (columnSettings) => this.customiseSettingsForNewGridColumn(columnSettings),
             (viewCell) => this.getGridMainCellPainter(viewCell),

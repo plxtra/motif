@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, OnDestroy, effect, inject, untracked, viewChild } from '@angular/core';
 import { ContentComponentBaseNgDirective } from '../../ng/content-component-base-ng.directive';
 import { ContentNgService } from '../../ng/content-ng.service';
 import { DepthSideFrame } from '../depth-side-frame';
@@ -14,12 +14,21 @@ export class DepthSideNgComponent extends ContentComponentBaseNgDirective implem
 
     private _contentService = inject(ContentNgService);
 
-    private readonly _frame: DepthSideFrame;
+    private readonly _gridCanvasElementRefSignal = viewChild.required<ElementRef<HTMLCanvasElement>>('gridCanvas');
+
+    private _frame: DepthSideFrame;
 
     constructor() {
         super(++DepthSideNgComponent.typeInstanceCreateCount);
 
-        this._frame = this._contentService.createDepthSideFrame(this.elRef.nativeElement);
+        const effectRef = effect(() => {
+            const gridCanvasElementRef = this._gridCanvasElementRefSignal();
+            untracked(() => {
+                this._frame = this._contentService.createDepthSideFrame(gridCanvasElementRef.nativeElement);
+
+                effectRef.destroy(); // only run once
+            });
+        });
     }
 
     get frame(): DepthSideFrame { return this._frame; }

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, OnDestroy, effect, inject, untracked, viewChild } from '@angular/core';
 import { Integer } from '@pbkware/js-utils';
 import {
     CellPainterFactoryService,
@@ -29,6 +29,8 @@ export class ColorSchemeGridNgComponent extends ContentComponentBaseNgDirective 
     gridClickEventer: ColorSchemeGridNgComponent.GridClickEventer | undefined;
     columnsViewWithsChangedEventer: ColorSchemeGridNgComponent.ColumnsViewWithsChangedEventer | undefined;
 
+    private readonly _gridCanvasElementRefSignal = viewChild.required<ElementRef<HTMLCanvasElement>>('gridCanvas');
+
     private readonly _settingsService: SettingsService;
     private readonly _cellPainterFactoryService: CellPainterFactoryService;
 
@@ -48,23 +50,31 @@ export class ColorSchemeGridNgComponent extends ContentComponentBaseNgDirective 
         this._settingsService = settingsNgService.service;
         this._cellPainterFactoryService = cellPainterFactoryNgService.service;
         this._recordStore = new ColorSchemeGridRecordStore(this._settingsService);
-        this._grid = this.createGrid(this.rootHtmlElement,);
 
-        const grid = this._grid;
-        this._mainCellPainter = this._cellPainterFactoryService.createTextTextFormattableValueRecordGrid(this._grid, grid.mainDataServer);
-        this._headerCellPainter = this._cellPainterFactoryService.createTextHeader(grid, grid.headerDataServer);
+        const effectRef = effect(() => {
+            const gridCanvasElementRef = this._gridCanvasElementRefSignal();
+            untracked(() => {
+                this._grid = this.createGrid(gridCanvasElementRef.nativeElement);
 
-        grid.activate();
+                const grid = this._grid;
+                this._mainCellPainter = this._cellPainterFactoryService.createTextTextFormattableValueRecordGrid(this._grid, grid.mainDataServer);
+                this._headerCellPainter = this._cellPainterFactoryService.createTextHeader(grid, grid.headerDataServer);
 
-        this.initialiseGrid();
+                grid.activate();
 
-        this._recordStore.recordsInserted(0, this._recordStore.recordCount);
+                this.initialiseGrid();
 
-        const columnLayoutDefinition = ColorSchemeGridField.createDefaultColumnLayoutDefinition();
-        const columnLayout = new RevColumnLayout(columnLayoutDefinition);
-        grid.applyFirstUsable(undefined, undefined, columnLayout);
+                this._recordStore.recordsInserted(0, this._recordStore.recordCount);
 
-        this.applyFilter();
+                const columnLayoutDefinition = ColorSchemeGridField.createDefaultColumnLayoutDefinition();
+                const columnLayout = new RevColumnLayout(columnLayoutDefinition);
+                grid.applyFirstUsable(undefined, undefined, columnLayout);
+
+                this.applyFilter();
+
+                effectRef.destroy(); // only run once
+            });
+        });
     }
 
     get focusedRecordIndex() { return this._grid.focusedRecordIndex; }
@@ -120,21 +130,21 @@ export class ColorSchemeGridNgComponent extends ContentComponentBaseNgDirective 
         this._recordStore.invalidateRecord(recordIndex);
     }
 
-    private createGrid(gridHostElement: HTMLElement) {
+    private createGrid(gridCanvasElement: HTMLCanvasElement) {
         const customGridSettings: SourcedFieldGrid.CustomGridSettings = {
             mouseColumnSelectionEnabled: false,
             mouseRowSelectionEnabled: false,
             mouseAddToggleExtendSelectionAreaEnabled: false,
             multipleSelectionAreas: false,
             sortOnDoubleClick: false,
-            visibleColumnWidthAdjust: true,
+            viewColumnWidthAdjust: true,
             fixedColumnCount: 1,
             gridRightAligned: false,
         };
 
         const grid = new RecordGrid(
             this._settingsService,
-            gridHostElement,
+            gridCanvasElement,
             this._recordStore,
             customGridSettings,
             () => this.customiseSettingsForNewColumn(),

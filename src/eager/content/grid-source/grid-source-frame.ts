@@ -88,8 +88,8 @@ export abstract class GridSourceFrame extends ContentFrame {
         previousLayoutDefinition: RevColumnLayoutOrReferenceDefinition | undefined,
         keepPreviousLayoutIfPossible: boolean,
     ) {
-        const gridHost = this._componentAccess.gridHost;
-        this._grid = this.createGridAndCellPainters(gridHost);
+        const gridCanvasElement = this._componentAccess.gridCanvasElement;
+        this._grid = this.createGridAndCellPainters(gridCanvasElement);
         this.applySettings();
         this._grid.activate();
         this._grid.opener = opener;
@@ -865,7 +865,7 @@ export abstract class GridSourceFrame extends ContentFrame {
     }
 
     protected createGrid(
-        hostElement: HTMLElement,
+        gridCanvasElement: HTMLCanvasElement,
         customGridSettings: SourcedFieldGrid.CustomGridSettings,
         customiseSettingsForNewColumnEventer: SourcedFieldGrid.CustomiseSettingsForNewColumnEventer,
         getMainCellPainterEventer: RevSubgrid.GetCellPainterEventer<AdaptedRevgridBehavioredColumnSettings, GridField>,
@@ -878,7 +878,7 @@ export abstract class GridSourceFrame extends ContentFrame {
             this._tableRecordSourceFactory,
             this._referenceableGridSourcesService,
             this._settingsService,
-            hostElement,
+            gridCanvasElement,
             customGridSettings,
             customiseSettingsForNewColumnEventer,
             getMainCellPainterEventer,
@@ -1159,7 +1159,7 @@ export abstract class GridSourceFrame extends ContentFrame {
     //     }
     // }
 
-    protected abstract createGridAndCellPainters(gridHost: HTMLElement): TableGrid;
+    protected abstract createGridAndCellPainters(gridCanvasElement: HTMLCanvasElement): TableGrid;
     protected abstract getDefaultGridSourceOrReferenceDefinition(): DataSourceOrReferenceDefinition;
 
     protected abstract setBadness(value: Badness): void;
@@ -1195,7 +1195,7 @@ export namespace GridSourceFrame {
     }
 
     export interface ComponentAccess {
-        readonly gridHost: HTMLElement;
+        readonly gridCanvasElement: HTMLCanvasElement;
     }
 
     export interface Description {

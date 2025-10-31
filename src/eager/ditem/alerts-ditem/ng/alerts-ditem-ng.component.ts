@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, inject, OnDestroy, viewChild, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, inject, OnDestroy, viewChild, ViewContainerRef } from '@angular/core';
 import { delay1Tick, JsonElement } from '@pbkware/js-utils';
 import { StringUiAction } from '@pbkware/ui-action';
 import {
@@ -9,7 +9,6 @@ import {
     Strings
 } from '@plxtra/motif-core';
 import { AdiNgService, CellPainterFactoryNgService, MarketsNgService, SymbolsNgService } from 'component-services-ng-api';
-import { RowDataArrayGridNgComponent } from 'content-ng-api';
 import { ButtonInputNgComponent, SvgButtonNgComponent, TextInputNgComponent } from 'controls-ng-api';
 import { BuiltinDitemNgComponentBaseNgDirective } from '../../ng/builtin-ditem-ng-component-base.directive';
 import { DesktopAccessNgService } from '../../ng/desktop-access-ng.service';
@@ -28,13 +27,15 @@ export class AlertsDitemNgComponent extends BuiltinDitemNgComponentBaseNgDirecti
     public isMainMode = true;
     public isLayoutEditorMode = false;
 
+    private readonly _cellPainterFactoryService = inject(CellPainterFactoryNgService).service;
+
     private readonly _filterEditComponentSignal = viewChild.required<TextInputNgComponent>('filterInput');
     private readonly _detailsButtonComponentSignal = viewChild.required<ButtonInputNgComponent>('detailsButton');
     private readonly _acknowledgeButtonComponentSignal = viewChild.required<ButtonInputNgComponent>('acknowledgeButton');
     private readonly _deleteButtonComponentSignal = viewChild.required<ButtonInputNgComponent>('deleteButton');
     private readonly _columnsButtonComponentSignal = viewChild.required<SvgButtonNgComponent>('columnsButton');
     private readonly _autoSizeColumnWidthsButtonComponentSignal = viewChild.required<SvgButtonNgComponent>('autoSizeColumnWidthsButton');
-    private readonly _gridComponentSignal = viewChild.required(RowDataArrayGridNgComponent);
+    private readonly _gridCanvasElementRefSignal = viewChild.required<ElementRef<HTMLCanvasElement>>('gridCanvas');
     private readonly _layoutEditorContainerSignal = viewChild.required('layoutEditorContainer', { read: ViewContainerRef });
 
     private readonly _frame: AlertsDitemFrame;
@@ -52,7 +53,7 @@ export class AlertsDitemNgComponent extends BuiltinDitemNgComponentBaseNgDirecti
     private _deleteButtonComponent: ButtonInputNgComponent;
     private _columnsButtonComponent: SvgButtonNgComponent;
     private _autoSizeColumnWidthsButtonComponent: SvgButtonNgComponent;
-    private _gridComponent: RowDataArrayGridNgComponent;
+    private _gridCanvasElement: HTMLCanvasElement;
     private _layoutEditorContainer: ViewContainerRef;
 
     constructor() {
@@ -62,11 +63,9 @@ export class AlertsDitemNgComponent extends BuiltinDitemNgComponentBaseNgDirecti
         const desktopAccessNgService = inject(DesktopAccessNgService);
         const symbolsNgService = inject(SymbolsNgService);
         const adiNgService = inject(AdiNgService);
-        const cellPainterFactoryNgService = inject(CellPainterFactoryNgService);
 
         this._frame = new AlertsDitemFrame(this, this.settingsService, marketsNgService.service, this.commandRegisterService,
-            desktopAccessNgService.service, symbolsNgService.service, adiNgService.service, cellPainterFactoryNgService.service,
-            this.rootHtmlElement);
+            desktopAccessNgService.service, symbolsNgService.service, adiNgService.service);
 
         this._filterEditUiAction = this.createFilterEditUiAction();
         this._detailsUiAction = this.createDetailsUiAction();
@@ -92,7 +91,7 @@ export class AlertsDitemNgComponent extends BuiltinDitemNgComponentBaseNgDirecti
         this._deleteButtonComponent = this._deleteButtonComponentSignal();
         this._columnsButtonComponent = this._columnsButtonComponentSignal();
         this._autoSizeColumnWidthsButtonComponent = this._autoSizeColumnWidthsButtonComponentSignal();
-        this._gridComponent = this._gridComponentSignal();
+        this._gridCanvasElement = this._gridCanvasElementRefSignal().nativeElement;
         this._layoutEditorContainer = this._layoutEditorContainerSignal();
 
         delay1Tick(() => this.initialise());
@@ -102,6 +101,8 @@ export class AlertsDitemNgComponent extends BuiltinDitemNgComponentBaseNgDirecti
         // const componentStateElement = this.getInitialComponentStateJsonElement();
         // const frameElement = this.tryGetChildFrameJsonElement(componentStateElement);
         // this._frame.initialise(this._contentComponent.frame, frameElement);
+
+        this._frame.createGrid(this._gridCanvasElement, this._cellPainterFactoryService);
 
         this.initialiseComponents();
 

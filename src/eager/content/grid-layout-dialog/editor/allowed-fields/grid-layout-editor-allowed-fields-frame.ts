@@ -121,9 +121,9 @@ export class ColumnLayoutEditorAllowedFieldsFrame extends GridSourceFrame {
         this.grid.clearFilter();
     }
 
-    override createGridAndCellPainters(gridHostElement: HTMLElement) {
+    override createGridAndCellPainters(gridCanvasElement: HTMLCanvasElement) {
         const grid = this.createGrid(
-            gridHostElement,
+            gridCanvasElement,
             {
                 fixedColumnCount: 1,
                 sortOnClick: false,

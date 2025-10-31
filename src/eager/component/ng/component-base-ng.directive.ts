@@ -16,7 +16,7 @@ export abstract class ComponentBaseNgDirective implements IdentifiableComponent 
     readonly typeInstanceId: string;
 
     constructor(readonly typeInstanceCreateId: Integer, generateUniqueId = false) {
-        const elRef = inject<ElementRef<HTMLElement>>(ElementRef);
+        const elRef = inject<ElementRef<HTMLCanvasElement>>(ElementRef);
         this.elRef = elRef;
 
         this.rootHtmlElement = elRef.nativeElement;

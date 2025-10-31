@@ -94,9 +94,9 @@ export class DataIvemIdListFrame extends DelayedBadnessGridSourceFrame {
         super.finalise();
     }
 
-    override createGridAndCellPainters(gridHostElement: HTMLElement) {
+    override createGridAndCellPainters(gridCanvasElement: HTMLCanvasElement) {
         const grid = this.createGrid(
-            gridHostElement,
+            gridCanvasElement,
             this._initialCustomGridSettings,
             (columnSettings) => this.customiseSettingsForNewGridColumn(columnSettings),
             (viewCell) => this.getGridMainCellPainter(viewCell),

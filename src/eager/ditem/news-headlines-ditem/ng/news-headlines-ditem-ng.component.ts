@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, inject, OnDestroy, viewChild, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, inject, OnDestroy, viewChild, ViewContainerRef } from '@angular/core';
 import { delay1Tick, JsonElement } from '@pbkware/js-utils';
 import { StringUiAction } from '@pbkware/ui-action';
 import {
@@ -10,7 +10,6 @@ import {
     Strings
 } from '@plxtra/motif-core';
 import { AdiNgService, CellPainterFactoryNgService, MarketsNgService, SymbolsNgService } from 'component-services-ng-api';
-import { RowDataArrayGridNgComponent } from 'content-ng-api';
 import { DataIvemIdSelectNgComponent, SvgButtonNgComponent, TextInputNgComponent } from 'controls-ng-api';
 import { BuiltinDitemNgComponentBaseNgDirective } from '../../ng/builtin-ditem-ng-component-base.directive';
 import { DesktopAccessNgService } from '../../ng/desktop-access-ng.service';
@@ -21,7 +20,7 @@ import { NewsHeadlinesDitemFrame } from '../news-headlines-ditem-frame';
     templateUrl: './news-headlines-ditem-ng.component.html',
     styleUrls: ['./news-headlines-ditem-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [DataIvemIdSelectNgComponent, SvgButtonNgComponent, TextInputNgComponent, RowDataArrayGridNgComponent]
+    imports: [DataIvemIdSelectNgComponent, SvgButtonNgComponent, TextInputNgComponent]
 })
 export class NewsHeadlinesDitemNgComponent extends BuiltinDitemNgComponentBaseNgDirective implements OnDestroy, AfterViewInit {
     private static typeInstanceCreateCount = 0;
@@ -29,13 +28,15 @@ export class NewsHeadlinesDitemNgComponent extends BuiltinDitemNgComponentBaseNg
     public isMainMode = true;
     public isLayoutEditorMode = false;
 
+    private readonly _cellPainterFactoryService = inject(CellPainterFactoryNgService).service;
+
     private readonly _symbolEditComponentSignal = viewChild.required<DataIvemIdSelectNgComponent>('symbolInput');
     private readonly _symbolButtonComponentSignal = viewChild.required<SvgButtonNgComponent>('symbolButton');
     private readonly _filterEditComponentSignal = viewChild.required<TextInputNgComponent>('filterInput');
     private readonly _symbolLinkButtonComponentSignal = viewChild.required<SvgButtonNgComponent>('symbolLinkButton');
     private readonly _columnsButtonComponentSignal = viewChild.required<SvgButtonNgComponent>('columnsButton');
     private readonly _autoSizeColumnWidthsButtonComponentSignal = viewChild.required<SvgButtonNgComponent>('autoSizeColumnWidthsButton');
-    private readonly _gridComponentSignal = viewChild.required(RowDataArrayGridNgComponent);
+    private readonly _gridCanvasElementRefSignal = viewChild.required<ElementRef<HTMLCanvasElement>>('gridCanvas');
     private readonly _layoutEditorContainerSignal = viewChild.required('layoutEditorContainer', { read: ViewContainerRef });
 
     private readonly _marketsService: MarketsService;
@@ -54,7 +55,7 @@ export class NewsHeadlinesDitemNgComponent extends BuiltinDitemNgComponentBaseNg
     private _symbolLinkButtonComponent: SvgButtonNgComponent;
     private _columnsButtonComponent: SvgButtonNgComponent;
     private _autoSizeColumnWidthsButtonComponent: SvgButtonNgComponent;
-    private _gridComponent: RowDataArrayGridNgComponent;
+    private _gridCanvasElement: HTMLCanvasElement;
     private _layoutEditorContainer: ViewContainerRef;
 
     constructor() {
@@ -64,13 +65,11 @@ export class NewsHeadlinesDitemNgComponent extends BuiltinDitemNgComponentBaseNg
         const desktopAccessNgService = inject(DesktopAccessNgService);
         const symbolsNgService = inject(SymbolsNgService);
         const adiNgService = inject(AdiNgService);
-        const cellPainterFactoryNgService = inject(CellPainterFactoryNgService);
 
         this._marketsService = marketsNgService.service;
 
         this._frame = new NewsHeadlinesDitemFrame(this, this.settingsService, marketsNgService.service, this.commandRegisterService,
-            desktopAccessNgService.service, symbolsNgService.service, adiNgService.service, cellPainterFactoryNgService.service,
-            this.rootHtmlElement);
+            desktopAccessNgService.service, symbolsNgService.service, adiNgService.service);
 
         this._symbolEditUiAction = this.createSymbolEditUiAction();
         this._symbolApplyUiAction = this.createSymbolApplyUiAction();
@@ -96,7 +95,7 @@ export class NewsHeadlinesDitemNgComponent extends BuiltinDitemNgComponentBaseNg
         this._symbolLinkButtonComponent = this._symbolLinkButtonComponentSignal();
         this._columnsButtonComponent = this._columnsButtonComponentSignal();
         this._autoSizeColumnWidthsButtonComponent = this._autoSizeColumnWidthsButtonComponentSignal();
-        this._gridComponent = this._gridComponentSignal();
+        this._gridCanvasElement = this._gridCanvasElementRefSignal().nativeElement;
         this._layoutEditorContainer = this._layoutEditorContainerSignal();
 
         delay1Tick(() => this.initialise());
@@ -106,6 +105,8 @@ export class NewsHeadlinesDitemNgComponent extends BuiltinDitemNgComponentBaseNg
         // const componentStateElement = this.getInitialComponentStateJsonElement();
         // const frameElement = this.tryGetChildFrameJsonElement(componentStateElement);
         // this._frame.initialise(this._contentComponent.frame, frameElement);
+
+        this._frame.createGrid(this._gridCanvasElement, this._cellPainterFactoryService);
 
         this.initialiseComponents();
 

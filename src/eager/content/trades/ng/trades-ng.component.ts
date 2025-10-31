@@ -15,7 +15,7 @@ import { TradesFrame } from '../trades-frame';
 export class TradesNgComponent extends ContentComponentBaseNgDirective implements OnDestroy, AfterViewInit, TradesFrame.ComponentAccess {
     private static typeInstanceCreateCount = 0;
 
-    private readonly _gridHostSignal = viewChild.required<ElementRef<HTMLElement>>('gridHost');
+    private readonly _gridCanvasElementRefSignal = viewChild.required<ElementRef<HTMLCanvasElement>>('gridCanvas');
     private readonly _delayedBadnessComponentSignal = viewChild.required<DelayedBadnessNgComponent>('delayedBadness');
 
     private readonly _frame: TradesFrame;
@@ -32,7 +32,7 @@ export class TradesNgComponent extends ContentComponentBaseNgDirective implement
 
     get frame(): TradesFrame { return this._frame; }
     get id(): string { return this.typeInstanceId; }
-    get gridHost(): HTMLElement { return this._gridHostSignal().nativeElement; }
+    get gridCanvasElement(): HTMLCanvasElement { return this._gridCanvasElementRefSignal().nativeElement; }
 
     ngOnDestroy() {
         // this._onAutoAdjustColumnWidths = undefined;

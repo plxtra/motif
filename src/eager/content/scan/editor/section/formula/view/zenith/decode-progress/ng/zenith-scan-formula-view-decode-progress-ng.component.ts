@@ -31,7 +31,7 @@ export class ZenithScanFormulaViewDecodeProgressNgComponent extends ContentCompo
     private readonly _countControlComponentSignal = viewChild.required<IntegerTextInputNgComponent>('countControl');
     private readonly _depthLabelComponentSignal = viewChild.required<CaptionLabelNgComponent>('depthLabel');
     private readonly _depthControlComponentSignal = viewChild.required<IntegerTextInputNgComponent>('depthControl');
-    private readonly _gridHostElementSignal = viewChild.required<ElementRef<HTMLElement>>('gridHost');
+    private readonly _gridCanvasElementRefSignal = viewChild.required<ElementRef<HTMLCanvasElement>>('gridCanvas');
 
     private readonly _frame: ZenithScanFormulaViewDecodeProgressFrame;
     private readonly _closeUiAction: IconButtonUiAction;
@@ -43,7 +43,7 @@ export class ZenithScanFormulaViewDecodeProgressNgComponent extends ContentCompo
     private _countControlComponent: IntegerTextInputNgComponent;
     private _depthLabelComponent: CaptionLabelNgComponent;
     private _depthControlComponent: IntegerTextInputNgComponent;
-    private _gridHostElement: ElementRef<HTMLElement>;
+    private _gridCanvasElementRef: ElementRef<HTMLCanvasElement>;
 
     private _defaultWidth: number | undefined;
 
@@ -80,11 +80,11 @@ export class ZenithScanFormulaViewDecodeProgressNgComponent extends ContentCompo
         this._countControlComponent = this._countControlComponentSignal();
         this._depthLabelComponent = this._depthLabelComponentSignal();
         this._depthControlComponent = this._depthControlComponentSignal();
-        this._gridHostElement = this._gridHostElementSignal();
+        this._gridCanvasElementRef = this._gridCanvasElementRefSignal();
 
         delay1Tick(() => {
             this.initialiseComponents();
-            this._frame.setupGrid(this._gridHostElement.nativeElement);
+            this._frame.setupGrid(this._gridCanvasElementRef.nativeElement);
         });
     }
 

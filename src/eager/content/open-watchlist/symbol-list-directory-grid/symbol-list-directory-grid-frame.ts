@@ -94,9 +94,9 @@ export class SymbolListDirectoryGridFrame extends GridSourceFrame {
         return undefined;
     }
 
-    override createGridAndCellPainters(gridHostElement: HTMLElement) {
+    override createGridAndCellPainters(gridCanvasElement: HTMLCanvasElement) {
         const grid = this.createGrid(
-            gridHostElement,
+            gridCanvasElement,
             {
                 fixedColumnCount: 1,
                 mouseColumnSelectionEnabled: false,

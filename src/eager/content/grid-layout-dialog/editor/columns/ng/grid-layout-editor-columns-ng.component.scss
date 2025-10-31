@@ -23,5 +23,9 @@
             visibility: hidden;
             position: absolute;
         }
+
+        #gridCanvas {
+            @include revgrid.canvas;
+        }
     }
 }

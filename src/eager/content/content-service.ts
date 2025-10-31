@@ -408,14 +408,14 @@ export class ContentService {
         return new StatusSummaryFrame(this._adiService, sessionInfoService, componentAccess,);
     }
 
-    createDepthSideFrame(hostElement: HTMLElement) {
+    createDepthSideFrame(gridCanvasElement: HTMLCanvasElement) {
         return new DepthSideFrame(
             this._decimalFactory,
             this._settingsService,
             this._marketsService,
             this._sessionInfoService,
             this._cellPainterFactoryService,
-            hostElement
+            gridCanvasElement
         );
     }
 

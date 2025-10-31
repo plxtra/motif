@@ -5,5 +5,9 @@
 
     #gridHost {
         @include revgrid.hostAsColumnFlexItem;
+
+        #gridCanvas {
+            @include revgrid.canvas;
+        }
     }
 }

@@ -37,8 +37,8 @@ export class ZenithScanFormulaViewDecodeProgressFrame {
         this._grid.destroy();
     }
 
-    setupGrid(gridHost: HTMLElement) {
-        this._grid = this.createGridAndCellPainters(gridHost);
+    setupGrid(gridCanvasElement: HTMLCanvasElement) {
+        this._grid = this.createGridAndCellPainters(gridCanvasElement);
         this._grid.activate();
     }
 
@@ -87,8 +87,8 @@ export class ZenithScanFormulaViewDecodeProgressFrame {
         //
     }
 
-    private createGridAndCellPainters(gridHostElement: HTMLElement) {
-        const grid = this.createGrid(gridHostElement);
+    private createGridAndCellPainters(gridCanvasElement: HTMLCanvasElement) {
+        const grid = this.createGrid(gridCanvasElement);
 
         grid.rowFocusEventer = (newRowIndex) => this.handleRowFocusEvent(newRowIndex);
         grid.mainClickEventer = (fieldIndex, rowIndex) => this.handleGridClickEvent(fieldIndex, rowIndex);
@@ -99,13 +99,13 @@ export class ZenithScanFormulaViewDecodeProgressFrame {
         return grid;
     }
 
-    private createGrid(gridHostElement: HTMLElement) {
+    private createGrid(gridCanvasElement: HTMLCanvasElement) {
         const customGridSettings: SourcedFieldGrid.CustomGridSettings = {
         }
 
         const grid = new RowDataArrayGrid(
             this._settingsService,
-            gridHostElement,
+            gridCanvasElement,
             customGridSettings,
             (index, key, heading) => this.createField(key, heading),
             (columnSettings) => this.customiseSettingsForNewGridColumn(columnSettings),

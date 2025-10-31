@@ -23,6 +23,7 @@ export class RowDataArrayGridNgComponent extends AdaptedRevgridComponentNgDirect
     }
 
     createGrid(
+        canvasElement: HTMLCanvasElement,
         customGridSettings: SourcedFieldGrid.CustomGridSettings,
         createFieldEventer: RevSingleHeadingDataRowArraySourcedFieldGrid.CreateFieldEventer<GridField>,
         customiseSettingsForNewColumnEventer: SourcedFieldGrid.CustomiseSettingsForNewColumnEventer,
@@ -48,7 +49,7 @@ export class RowDataArrayGridNgComponent extends AdaptedRevgridComponentNgDirect
 
         const grid = new RowDataArrayGrid(
             this._settingsService,
-            this.rootHtmlElement,
+            canvasElement,
             customGridSettings,
             createFieldEventer,
             customiseSettingsForNewColumnEventer,

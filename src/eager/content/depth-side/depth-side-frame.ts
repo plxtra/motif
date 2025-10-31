@@ -60,7 +60,7 @@ export class DepthSideFrame extends ContentFrame {
         private readonly _marketsService: MarketsService,
         private readonly _sessionInfoService: SessionInfoService,
         private readonly _cellPainterFactoryService: CellPainterFactoryService,
-        private readonly _hostElement: HTMLElement,
+        private readonly _gridCanvasElement: HTMLCanvasElement,
     ) {
         super();
     }
@@ -413,7 +413,7 @@ export class DepthSideFrame extends ContentFrame {
 
         const grid = new RecordGrid(
             this._settingsService,
-            this._hostElement,
+            this._gridCanvasElement,
             recordStore,
             customGridSettings,
             () => this.customiseSettingsForNewColumn(),

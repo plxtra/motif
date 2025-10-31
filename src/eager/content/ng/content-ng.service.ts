@@ -172,8 +172,8 @@ export class ContentNgService {
         return this._content.createSymbolListDirectoryGridFrame(opener);
     }
 
-    createDepthSideFrame(hostElement: HTMLElement) {
-        return this._content.createDepthSideFrame(hostElement);
+    createDepthSideFrame(gridCanvasElement: HTMLCanvasElement) {
+        return this._content.createDepthSideFrame(gridCanvasElement);
     }
 
     createDepthFrame(componentAccess: DepthFrame.ComponentAccess) {

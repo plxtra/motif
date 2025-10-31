@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, inject, OnDestroy, viewChild, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, inject, OnDestroy, viewChild, ViewContainerRef } from '@angular/core';
 import { delay1Tick, JsonElement } from '@pbkware/js-utils';
 import { IntegerListSelectItemUiAction, StringUiAction } from '@pbkware/ui-action';
 import {
@@ -9,7 +9,6 @@ import {
     Strings
 } from '@plxtra/motif-core';
 import { AdiNgService, CellPainterFactoryNgService, MarketsNgService, SymbolsNgService } from 'component-services-ng-api';
-import { RowDataArrayGridNgComponent } from 'content-ng-api';
 import {
     ButtonInputNgComponent,
     CaptionLabelNgComponent,
@@ -26,13 +25,15 @@ import { SearchDitemFrame } from '../search-ditem-frame';
     templateUrl: './search-ditem-ng.component.html',
     styleUrls: ['./search-ditem-ng.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [IntegerEnumInputNgComponent, ButtonInputNgComponent, SvgButtonNgComponent, TextInputNgComponent, CaptionLabelNgComponent, RowDataArrayGridNgComponent]
+    imports: [IntegerEnumInputNgComponent, ButtonInputNgComponent, SvgButtonNgComponent, TextInputNgComponent, CaptionLabelNgComponent]
 })
 export class SearchDitemNgComponent extends BuiltinDitemNgComponentBaseNgDirective implements OnDestroy, AfterViewInit {
     private static typeInstanceCreateCount = 0;
 
     public isMainMode = true;
     public isLayoutEditorMode = false;
+
+    private readonly _cellPainterFactoryService = inject(CellPainterFactoryNgService).service;
 
     private readonly _categoryControlComponentSignal = viewChild.required<IntegerEnumInputNgComponent>('categoryControl');
     private readonly _searchButtonControlComponentSignal = viewChild.required<ButtonInputNgComponent>('searchButtonControl');
@@ -44,7 +45,7 @@ export class SearchDitemNgComponent extends BuiltinDitemNgComponentBaseNgDirecti
     private readonly _keywordsControlComponentSignal = viewChild.required<TextInputNgComponent>('keywordsControl');
     private readonly _searchDescriptionLabelComponentSignal = viewChild.required<CaptionLabelNgComponent>('searchDescriptionLabel');
     private readonly _alertButtonControlComponentSignal = viewChild.required<ButtonInputNgComponent>('alertButtonControl');
-    private readonly _gridComponentSignal = viewChild.required(RowDataArrayGridNgComponent);
+    private readonly _gridCanvasElementRefSignal = viewChild.required<ElementRef<HTMLCanvasElement>>('gridCanvas');
     private readonly _layoutEditorContainerSignal = viewChild.required('layoutEditorContainer', { read: ViewContainerRef });
 
     private readonly _frame: SearchDitemFrame;
@@ -70,7 +71,7 @@ export class SearchDitemNgComponent extends BuiltinDitemNgComponentBaseNgDirecti
     private _keywordsControlComponent: TextInputNgComponent;
     private _searchDescriptionLabelComponent: CaptionLabelNgComponent;
     private _alertButtonControlComponent: ButtonInputNgComponent;
-    private _gridComponent: RowDataArrayGridNgComponent;
+    private _gridCanvasElement: HTMLCanvasElement;
     private _layoutEditorContainer: ViewContainerRef;
 
     constructor() {
@@ -80,11 +81,9 @@ export class SearchDitemNgComponent extends BuiltinDitemNgComponentBaseNgDirecti
         const desktopAccessNgService = inject(DesktopAccessNgService);
         const symbolsNgService = inject(SymbolsNgService);
         const adiNgService = inject(AdiNgService);
-        const cellPainterFactoryNgService = inject(CellPainterFactoryNgService);
 
         this._frame = new SearchDitemFrame(this, this.settingsService, marketsNgService.service, this.commandRegisterService,
-            desktopAccessNgService.service, symbolsNgService.service, adiNgService.service, cellPainterFactoryNgService.service,
-            this.rootHtmlElement,
+            desktopAccessNgService.service, symbolsNgService.service, adiNgService.service
         );
 
         this._categoryUiAction = this.createCategoryUiAction();
@@ -119,13 +118,14 @@ export class SearchDitemNgComponent extends BuiltinDitemNgComponentBaseNgDirecti
         this._keywordsControlComponent = this._keywordsControlComponentSignal();
         this._searchDescriptionLabelComponent = this._searchDescriptionLabelComponentSignal();
         this._alertButtonControlComponent = this._alertButtonControlComponentSignal();
-        this._gridComponent = this._gridComponentSignal();
+        this._gridCanvasElement = this._gridCanvasElementRefSignal().nativeElement;
         this._layoutEditorContainer = this._layoutEditorContainerSignal();
 
         delay1Tick(() => this.initialise());
     }
 
     protected override initialise() {
+        this._frame.createGrid(this._gridCanvasElement, this._cellPainterFactoryService);
         this.initialiseComponents();
         super.initialise();
     }

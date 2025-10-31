@@ -82,9 +82,9 @@ export class LockOpenNotificationChannelsGridFrame extends GridSourceFrame {
         );
     }
 
-    override createGridAndCellPainters(gridHostElement: HTMLElement) {
+    override createGridAndCellPainters(gridCanvasElement: HTMLCanvasElement) {
         const grid = this.createGrid(
-            gridHostElement,
+            gridCanvasElement,
             {
                 fixedColumnCount: 1,
                 mouseColumnSelectionEnabled: false,
